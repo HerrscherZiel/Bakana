@@ -2,24 +2,29 @@
 
 @section('content')
     <div class="container">
-        <div><a href="{{url('/roles/create')}}" class="btn btn-success">Create Role</a></div>
         <table class="table table-striped">
             <thead>
+                <a href="{{url('/jobs/create')}}" class="btn btn-success pull-left">Create User</a>
             <tr>
                 <td>ID</td>
-                <td>Nama Role</td>
+                <td>Nama</td>
+                <td>Modul</td>
                 <td>Keterangan</td>
                 <td>Action</td>
             </tr>
             </thead>
             <tbody>
-            @foreach($role as $roles)
+            @foreach($job as $jobs)
                 <tr>
-                    <td>{{$roles->id_role}}</td>
-                    <td>{{$roles->nama_role}}</td>
-                    <td>{{$roles->keterangan}}</td>
-                    <td><a href="/projects/{{$roles->id_role}}/edit" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('roles.destroy', $roles->id_role)}}" method="post">
+                    <td>{{$jobs->id_job}}</td>
+                    <td>{{$jobs->nama_job}}</td>
+                    <td>{{$jobs->module_id}}</td>
+                    <td>{{$jobs->keterangan}}</td>
+                   
+
+                    <td><a href="/jobs/{{$jobs->id_job}}/edit" class="btn btn-primary">Edit</a>
+
+                    <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit">Delete</button>

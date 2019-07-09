@@ -4,6 +4,7 @@
     <div class="container">
         <table class="table table-striped">
             <thead>
+                <a href="{{url('/projects/create')}}" class="btn btn-success pull-left">Create Project</a>
             <tr>
                 <td>ID</td>
                 <td>Kode Project</td>
@@ -12,7 +13,7 @@
                 <td>Tanggal Selesai</td>
                 <td>Status Project</td>
                 <td>Keterangan</td>
-                <td colspan="3">Action</td>
+                <td>Action</td>
             </tr>
             </thead>
             <tbody>
@@ -26,11 +27,9 @@
                     <td>{{$projects->status}}</td>
                     <td>{{$projects->ket}}</td>
 
-                    <td><a href="{{url('/projects/create')}}" class="btn btn-success">Create Project</a></td>
+                    <td><a href="/projects/{{$projects->id_project}}/edit" class="btn btn-primary">Edit</a>
 
-                    <td><a href="/projects/{{$projects->id_project}}/edit" class="btn btn-primary">Edit</a></td>
-
-                    <td> <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
+                    <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit">Delete</button>
