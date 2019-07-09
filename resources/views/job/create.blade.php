@@ -13,18 +13,23 @@
         @endif
         <div class="row">
             <form method="post" action="{{url('/jobs/create')}}">
-                <div class="form-group">
+                {{--<div class="form-group">--}}
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <label for="id_job">ID:</label>
-                    <input type="text" class="form-control" name="id_job"/>
-                </div>
+                    {{--<label for="id_job">ID:</label>
+                    <input type="text" class="form-control" name="id_job"/>--}}
+                {{--</div>--}}
                 <div class="form-group">
                     <label for="nama_job">Nama:</label>
                     <input type="text" class="form-control" name="nama_job"/>
                 </div>
                  <div class="form-group">
-                    <label for="module_id">Modul ID:</label>
-                    <input type="text" class="form-control" name="module_id"/>
+                    <label for="module_id">Modul:</label>
+                     <select class="form-control" name="module_id">
+                         <option value="">Select Project</option>
+                         @foreach($module as $modules)
+                             <option value="{{$modules->id_module}}">{{$modules->nama_module}}</option>
+                         @endforeach
+                     </select>
                 </div>
                  <div class="form-group">
                     <label for="keterangan">Keterangan:</label>

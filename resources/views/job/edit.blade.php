@@ -20,20 +20,29 @@
                     </ul>
                 </div><br />
             @endif
-            <form method="post" action="{{ route('jobs.update', $role->id_job) }}">
+            <form method="post" action="{{ route('jobs.update', $job->id_job) }}">
                 @method('PATCH')
                 @csrf
-                <div class="form-group">
+                {{--<div class="form-group">
                     <label for="id_job">ID:</label>
                     <input type="text" class="form-control" name="id_job" value={{ $job->id_job }} />
-                </div>
+                </div>--}}
                 <div class="form-group">
                     <label for="nama_job">Nama:</label>
                     <input type="text" class="form-control" name="nama_job" value={{ $job->nama_job }} />
                 </div>
                 <div class="form-group">
                     <label for="module_id">Modul ID:</label>
-                    <input type="text" class="form-control" name="module_id" value={{ $job->module_id }} />
+                    <select class="form-control" name="module_id">
+                        <option value="">Select Project</option>
+                        @foreach($module as $modules)
+                            <option value="{{$modules->id_module}}"
+                                    @if($modules->id_module === $job->module_id)
+                                    selected
+                                    @endif
+                            >{{$modules->nama_module}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan:</label>

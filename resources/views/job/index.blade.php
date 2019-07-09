@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$jobs->id_job}}</td>
                     <td>{{$jobs->nama_job}}</td>
-                    <td>{{$jobs->module_id}}</td>
+                    <td>{{$jobs->nama_module}}</td>
                     <td>{{$jobs->keterangan}}</td>
                    
 

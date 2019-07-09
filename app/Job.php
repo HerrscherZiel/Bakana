@@ -15,6 +15,7 @@ class Job extends Model
 
     protected $fillable = [
         'nama_job',
+        'module_id',
         'keterangan',
     ];
 

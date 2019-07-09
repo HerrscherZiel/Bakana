@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Job;
+use App\Module;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -15,7 +16,12 @@ class JobController extends Controller
     public function index()
     {
         //
-        $job = Job::orderBy('id_job', 'asc')->paginate(10);
+        $job = Job::join('module','module_id','=','id_module')
+            ->select('jobs.*','module.id_module','module.nama_module')
+            ->getQuery()
+            ->get();
+
+        /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
         return view('job.index')->with('job', $job);
     }
 
@@ -27,7 +33,9 @@ class JobController extends Controller
     public function create()
     {
         //
-        return view('job.create');
+        $module = Module::all();
+
+        return view('job.create')->with('module', $module);
     }
 
     /**
@@ -46,6 +54,7 @@ class JobController extends Controller
 
         $job = new Job([
             'nama_job'   => $request->get('nama_job'),
+            'module_id'    => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
         $job->save();
@@ -74,7 +83,8 @@ class JobController extends Controller
     {
         //
         $job = Job::find($id);
-        return view('job.edit')->with('job', $job);
+        $module = Module::all();
+        return view('job.edit', compact('job','module'));
     }
 
     /**
@@ -94,6 +104,7 @@ class JobController extends Controller
 
         $job = job::find($id);
         $job->nama_job = $request->get('nama_job');
+        $job->module_id = $request->get('module_id');
         $job->keterangan = $request->get('keterangan');
         $job->save();
 
