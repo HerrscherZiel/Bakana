@@ -15,8 +15,6 @@
             <form method="post" action="{{url('/timesheets/create')}}">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <label for="id_timesheets">ID:</label>
-                    <input type="text" class="form-control" name="id_timesheets"/>
                 </div>
                 <div class="form-group">
                     <label for="tgl_timesheet">Tanggal:</label>
@@ -33,6 +31,14 @@
                 <div class="form-group">
                     <label for="keterangan_timesheet">Keterangan:</label>
                     <input type="text" class="form-control" name="keterangan_timesheet"/>
+                </div>
+                <div class="form-group">
+                    <label for="user_id">User:</label>
+                    <select name="user_id" id="" class="form-control">
+                        @foreach($user as $users)
+                            <option value="{{$users->id}}">{{$users->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>

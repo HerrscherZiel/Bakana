@@ -7,22 +7,27 @@
                 <a href="{{url('/timesheets/create')}}" class="btn btn-success pull-left">Create User</a>
             <tr>
                 <td>ID</td>
+                <td>User</td>
                 <td>Tanggal</td>
                 <td>Jam Mulai</td>
                 <td>Jam Selesai</td>
                 <td>Keterangan</td>
+
                 <td>Action</td>
             </tr>
             </thead>
             <tbody>
             @foreach($timesheet as $timesheets)
                 <tr>
+
                     <td>{{$timesheets->id_timesheets}}</td>
-                    <td>{{$timesheets->tgl_timesheets}}</td>
+                    <td>{{$timesheets->name}}</td>
+                    <td>{{$timesheets->tgl_timesheet}}</td>
                     <td>{{$timesheets->jam_mulai}}</td>
                     <td>{{$timesheets->jam_selesai}}</td>
                     <td>{{$timesheets->keterangan_timesheet}}</td>
-                   
+
+
 
                     <td><a href="/timesheets/{{$timesheets->id_timesheets}}/edit" class="btn btn-primary">Edit</a>
 

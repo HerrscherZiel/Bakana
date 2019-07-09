@@ -23,10 +23,19 @@
             <form method="post" action="{{ route('timesheets.update', $timesheet->id_timesheets) }}">
                 @method('PATCH')
                 @csrf
-                <div class="form-group">
-                    <label for="id_timesheets">ID:</label>
-                    <input type="text" class="form-control" name="id_timesheets" value={{ $timesheet->id_timesheets }} />
-                </div>
+        {{--        <div class="form-group">
+                    <label for="user_id">User:</label>
+                    <select name="user_id" id="" class="form-control" >
+                        @foreach($user as $users)
+                            <option value="{{$users->id}}"
+                                    @if ($users->id === $timesheet->user_id)
+                                    selected
+                                @endif
+                            >
+                                {{$users->name}}</option>
+                        @endforeach
+                    </select>
+                </div>--}}
                 <div class="form-group">
                     <label for="tgl_timesheet">Tanggal:</label>
                     <input type="date" class="form-control" name="tgl_timesheet" value={{ $timesheet->tgl_timesheet }} />
