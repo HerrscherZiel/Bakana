@@ -22,7 +22,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resources([
 
     'projects' => 'ProjectController',
-    'roles' => 'RoleController'
+    'roles' => 'RoleController',
+    'modules' => 'ModuleController',
+    'jobs' => 'JobController',
 
 
 ]);
@@ -30,5 +32,9 @@ Route::resources([
 Route::post('/projects/create','ProjectController@store');
 
 Route::post('/roles/create','RoleController@store');
+
+Route::post('/modules/create','ModuleController@store');
+
+Route::post('/jobs/create','JobController@store');
 
 
