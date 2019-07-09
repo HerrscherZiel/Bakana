@@ -9,8 +9,7 @@
                 <td>ID</td>
                 <td>Nama</td>
                 <td>Email</td>
-                <td>Password</td>
-                <td>Role ID</td>
+                <td>Role</td>
                 <td>Action</td>
             </tr>
             </thead>
@@ -20,8 +19,7 @@
                     <td>{{$users->id}}</td>
                     <td>{{$users->name}}</td>
                     <td>{{$users->email}}</td>
-                    <td>{{$users->password}}</td>
-                    <td>{{$users->role_id}}</td>
+                    <td>{{$users->nama_role}}</td>
                    
 
                     <td><a href="/users/{{$users->id}}/edit" class="btn btn-primary">Edit</a>

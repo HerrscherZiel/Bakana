@@ -23,6 +23,7 @@ Route::resources([
 
     'projects' => 'ProjectController',
     'roles' => 'RoleController',
+    'users' => 'UserController',
     'modules' => 'ModuleController',
     'jobs' => 'JobController',
 
@@ -32,6 +33,8 @@ Route::resources([
 Route::post('/projects/create','ProjectController@store');
 
 Route::post('/roles/create','RoleController@store');
+
+Route::post('/users/create','UserController@store');
 
 Route::post('/modules/create','ModuleController@store');
 
