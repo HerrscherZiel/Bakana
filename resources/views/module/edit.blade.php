@@ -20,12 +20,18 @@
                     </ul>
                 </div><br />
             @endif
-            <form method="post" action="{{ route('modules.update', $role->id_module) }}">
+            <form method="post" action="{{ route('modules.update', $module->id_module) }}">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
-                    <label for="id_module">ID:</label>
-                    <input type="text" class="form-control" name="id_module" value={{ $module->id_module }} />
+                    <label for="nama_project">Project:</label>
+                    {{--<input type="text" class="form-control" name="id_module" value={{ $module->id_module }} />--}}
+                    <select class="form-control" name="project_id">
+                        <option value="">Select Project</option>
+                        @foreach($project as $projects)
+                            <option value="{{$projects->id_project}}">{{$projects->nama_project}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="nama_module">Nama:</label>

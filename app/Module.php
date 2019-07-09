@@ -17,6 +17,7 @@ class Module extends Model
         'nama_module',
         'waktu',
         'status',
+        'project_id',
         'keterangan',
     ];
 

@@ -10,6 +10,7 @@
                 <td>Nama</td>
                 <td>Waktu</td>
                 <td>Status</td>
+                <td>Project Name</td>
                 <td>Keterangan</td>
                 <td>Action</td>
             </tr>
@@ -21,6 +22,7 @@
                     <td>{{$modules->nama_module}}</td>
                     <td>{{$modules->waktu}}</td>
                     <td>{{$modules->status}}</td>
+                    <td>{{$modules->nama_project}}</td>
                     <td>{{$modules->keterangan}}</td>
                    
 

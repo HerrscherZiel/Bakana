@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Module;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -16,8 +17,13 @@ class ModuleController extends Controller
     {
         //
         /*$module = Module::orderBy('id_module', 'asc')->paginate(10);*/
-        $module = Module::with('jobs')->orderBy('id_module','asc')->paginate(10);
-        return view('module.index',compact($module));
+        $module = Module::join('project','project_id','=','id_project')
+            ->select('module.*','project.id_project','project.nama_project')
+            ->getQuery()
+            ->get();
+        /*dd($module);*/
+        /*$module = Module::orderBy('id_module','asc')->paginate(10);*/
+        return view('module.index')->with('module', $module);
     }
 
     /**
@@ -28,7 +34,9 @@ class ModuleController extends Controller
     public function create()
     {
         //
-        return view('module.create');
+        $project = Project::all();
+
+        return view('module.create')->with('project', $project);
     }
 
     /**
@@ -51,8 +59,11 @@ class ModuleController extends Controller
             'nama_module'   => $request->get('nama_module'),
             'waktu'         => $request->get('waktu'),
             'status'        => $request->get('status'),
+            'project_id'    => $request->get('project_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
+
+        /*$module = Module::with('projects')->all();*/
         $module->save();
 
         return redirect('/modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
@@ -82,8 +93,10 @@ class ModuleController extends Controller
             ->where('id', $id)
             ->first();*/
 
+        $project = Project::all();
         $module = Module::find($id);
-        return view('module.edit')->with('module', $module);
+
+        return view('module.edit', compact('module', 'project'));
     }
 
     /**
@@ -107,6 +120,7 @@ class ModuleController extends Controller
         $module->nama_module = $request->get('nama_module');
         $module->waktu = $request->get('waktu');
         $module->status = $request->get('status');
+        $module->project_id = $request->get('project_id');
         $module->keterangan = $request->get('keterangan');
         $module->save();
 

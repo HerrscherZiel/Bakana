@@ -16,7 +16,7 @@ class JobController extends Controller
     {
         //
         $job = Job::orderBy('id_job', 'asc')->paginate(10);
-        return view('job.index',compact($job));
+        return view('job.index')->with('job', $job);
     }
 
     /**

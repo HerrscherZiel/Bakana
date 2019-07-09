@@ -15,8 +15,14 @@
             <form method="post" action="{{url('/modules/create')}}">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <label for="id_module">ID:</label>
-                    <input type="text" class="form-control" name="id_module"/>
+                    <label for="nama_project">Project Name:</label>
+                    {{--<input type="text" class="form-control" name="nama_project"/>--}}
+                    <select class="form-control" name="project_id">
+                        <option value="">Select Project</option>
+                        @foreach($project as $projects)
+                        <option value="{{$projects->id_project}}">{{$projects->nama_project}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="nama_module">Nama:</label>
