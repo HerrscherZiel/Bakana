@@ -25,6 +25,7 @@ Route::resources([
     'roles' => 'RoleController',
     'users' => 'UserController',
     'timesheets' => 'TimesheetController',
+    'teamprojects' => 'TeamProjectController',
     'modules' => 'ModuleController',
     'jobs' => 'JobController',
 
@@ -38,6 +39,8 @@ Route::post('/roles/create','RoleController@store');
 Route::post('/users/create','UserController@store');
 
 Route::post('/timesheets/create','TimesheetController@store');
+
+Route::post('/teamprojects/create','TeamProjectController@store');
 
 Route::post('/modules/create','ModuleController@store');
 

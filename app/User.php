@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function timesheet(){
         return $this->hasMany('App\Timesheet','user_id', 'id');
     }
+
+    public function team_project(){
+        return $this->hasMany('App\TeamProject','user_id', 'id');
+    }
 }

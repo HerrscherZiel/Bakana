@@ -85,13 +85,13 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{url('/projects')}}">Project</a>
                     <a href="{{url('/roles')}}">Role</a>
+                    <a href="{{url('/users')}}">Users</a>
+                    <a href="{{url('/teamprojects')}}">Team</a>
+                    <a href="{{url('/projects')}}">Project</a>
                     <a href="{{url('/modules')}}">Module</a>
                     <a href="{{url('/jobs')}}">Job</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{url('/timesheets')}}">Timesheet</a>
                 </div>
             </div>
         </div>
