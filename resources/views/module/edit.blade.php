@@ -29,7 +29,11 @@
                     <select class="form-control" name="project_id">
                         <option value="">Select Project</option>
                         @foreach($project as $projects)
-                            <option value="{{$projects->id_project}}">{{$projects->nama_project}}</option>
+                            <option value="{{$projects->id_project}}"
+                                    @if($projects->id_project === $module->project_id)
+                                        selected
+                                    @endif
+                            >{{$projects->nama_project}}</option>
                         @endforeach
                     </select>
                 </div>
