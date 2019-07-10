@@ -27,6 +27,8 @@
                     <td>{{$projects->status}}</td>
                     <td>{{$projects->ket}}</td>
 
+                    <td><a href="/projects/{{$projects->id_project}}" class="btn btn-success">Show</a>
+
                     <td><a href="/projects/{{$projects->id_project}}/edit" class="btn btn-primary">Edit</a>
 
                     <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">

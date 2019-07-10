@@ -8,6 +8,7 @@
             <tr>
                 <td>ID</td>
                 <td>User</td>
+                <td>Project</td>
                 <td>Tanggal</td>
                 <td>Jam Mulai</td>
                 <td>Jam Selesai</td>
@@ -22,6 +23,7 @@
 
                     <td>{{$timesheets->id_timesheets}}</td>
                     <td>{{$timesheets->name}}</td>
+                    <td>{{$timesheets->nama_project}}</td>
                     <td>{{$timesheets->tgl_timesheet}}</td>
                     <td>{{$timesheets->jam_mulai}}</td>
                     <td>{{$timesheets->jam_selesai}}</td>

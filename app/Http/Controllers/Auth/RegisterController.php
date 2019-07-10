@@ -72,6 +72,7 @@ class RegisterController extends Controller
         ]);
 
         $role = Role::all();
+
         return view('auth.register')->with('role', $role);
     }
 }

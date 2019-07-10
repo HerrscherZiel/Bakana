@@ -18,7 +18,9 @@ class TimesheetController extends Controller
     {
         //
         $timesheetView = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
-            ->select('timesheets.*', 'users.name')
+            ->join('team_projects','team_projects.user_id','=','users.id')
+            ->join('project','project.id_project','=','team_projects.project_id')
+            ->select('timesheets.*', 'users.name','project.nama_project')
             ->getQuery()
             ->get();
 
