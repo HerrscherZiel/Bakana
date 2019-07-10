@@ -61,14 +61,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        {{--<div class="form-group">
                             <label for="role_id">Role:</label>
                             <select name="role_id" id="" class="form-control">
                                 @foreach($role as $roles)
                                     <option value="{{$roles->id_role}}">{{$roles->nama_role}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div>--}}
+
+                        <input type="hidden" value="404" name="role_id">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
