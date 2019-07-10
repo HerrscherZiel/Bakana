@@ -9,6 +9,7 @@
                 <td>ID</td>
                 <td>Nama</td>
                 <td>Modul</td>
+                <td>Project</td>
                 <td>Keterangan</td>
                 <td>Action</td>
             </tr>
@@ -19,6 +20,7 @@
                     <td>{{$jobs->id_job}}</td>
                     <td>{{$jobs->nama_job}}</td>
                     <td>{{$jobs->nama_module}}</td>
+                    <td>{{$jobs->nama_project}}</td>
                     <td>{{$jobs->keterangan}}</td>
                    
 

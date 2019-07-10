@@ -8,6 +8,7 @@
             <tr>
                 <td>ID</td>
                 <td>User</td>
+                <td>Role</td>
                 <td>Project</td>
                 <td>Action</td>
             </tr>
@@ -17,6 +18,7 @@
                 <tr>
                     <td>{{$teams->id_team_projects}}</td>
                     <td>{{$teams->name}}</td>
+                    <td>{{$teams->nama_role}}</td>
                     <td>{{$teams->nama_project}}</td>
                    
 

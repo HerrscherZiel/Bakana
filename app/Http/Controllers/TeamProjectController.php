@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 use App\TeamProject;
@@ -19,7 +20,8 @@ class TeamProjectController extends Controller
         //
         $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
             ->join('project', 'project.id_project', '=', 'team_projects.project_id')
-            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project')
+            ->join('role', 'role.id_role', '=', 'users.role_id')
+            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
             ->getQuery()
             ->get();
 
@@ -36,8 +38,9 @@ class TeamProjectController extends Controller
         //
         $user = User::all();
         $project = Project::all();
+        $role = Role::all();
 
-        return view('team.create', compact('user', 'project'));
+        return view('team.create', compact('user', 'project','role'));
     }
 
     /**
@@ -83,8 +86,10 @@ class TeamProjectController extends Controller
         //
         $user = User::all();
         $project = Project::all();
+        $role = Role::all();
+
         $team_projects = TeamProject::find($id);
-        return view('team.edit', compact('team_projects','user', 'project'));
+        return view('team.edit', compact('team_projects','user', 'project', 'role'));
     }
 
     /**

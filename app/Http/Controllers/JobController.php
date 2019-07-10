@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Job;
 use App\Module;
+use App\Project;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -17,7 +18,8 @@ class JobController extends Controller
     {
         //
         $job = Job::join('module','module_id','=','id_module')
-            ->select('jobs.*','module.id_module','module.nama_module')
+            ->join('project','project_id','=','id_project')
+            ->select('jobs.*','module.id_module','module.nama_module','project.nama_project')
             ->getQuery()
             ->get();
 
@@ -34,8 +36,9 @@ class JobController extends Controller
     {
         //
         $module = Module::all();
+        $project = Project::all();
 
-        return view('job.create')->with('module', $module);
+        return view('job.create', compact('module','project'))/*->with('module', $module)*/;
     }
 
     /**
@@ -84,7 +87,8 @@ class JobController extends Controller
         //
         $job = Job::find($id);
         $module = Module::all();
-        return view('job.edit', compact('job','module'));
+        $project = Project::all();
+        return view('job.edit', compact('job','module','project'));
     }
 
     /**
