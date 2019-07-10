@@ -44,6 +44,12 @@ Route::post('/teamprojects/create','TeamProjectController@store');
 
 Route::post('/modules/create','ModuleController@store');
 
+Route::get('/module/creates/{project}','ModuleController@creates');
+
+Route::get('/module/creates/{project}/project','ModuleController@stores');
+
+Route::post('/module/creates/{project}/project','ModuleController@stores');
+
 Route::post('/jobs/create','JobController@store');
 
 

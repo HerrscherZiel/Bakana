@@ -9,6 +9,7 @@
     <div class="card uper">
         <div class="card-header">
             Show
+            <a href="/module/creates/{{$project->id_project}}" class="btn btn-success pull-right">Create Module</a>
         </div>
         <div class="card-body">
             @if ($errors->any())

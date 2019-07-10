@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Module;
 use Illuminate\Http\Request;
 use App\Project;
 
@@ -30,6 +31,14 @@ class ProjectController extends Controller
     {
         //
         return view('project.create');
+    }
+
+    public function creates($id)
+    {
+        //
+        $project = Project::all($id);
+
+        return view('project.creates')->with('project', $project);
     }
 
     /**
@@ -64,7 +73,31 @@ class ProjectController extends Controller
         return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
 
+    public function stores(Request $request, $id)
+    {
+        //
+        $request->validate( [
+            'nama_module'   =>'required',
+            'waktu'         =>'required',
+            'status'        =>'required',
+            'keterangan'    =>'nullable'
+        ]);
 
+        $project = Project::find($id);
+
+        $module = new Module([
+            'nama_module'           => $request->get('nama_module'),
+            'waktu'                 => $request->get('waktu'),
+            'status'                => $request->get('status'),
+            $project->id_project    => $request->get('project_id'),
+            'keterangan'            => $request->get('keterangan'),
+        ]);
+
+        /*$module = Module::with('projects')->all();*/
+        $module->save();
+
+        return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+    }
 
 
     /**
