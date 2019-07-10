@@ -9,11 +9,11 @@ class PMcontroller extends Controller
     //
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['user', 'Project Manager']);
+        $request->user()->authorizeRoles(['Unassigned', 'Project Manager']);
         if (Auth::user()->hasRole('Project Manager')) {
             return view('project.index');
         }
-        elseif (Auth::user()->hasRole('user')) {
+        elseif (Auth::user()->hasRole('Unassigned')) {
             return view('team.index');
         }
     }

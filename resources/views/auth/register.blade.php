@@ -70,7 +70,7 @@
                             </select>
                         </div>--}}
 
-                        <input type="hidden" value="404" name="role_id">
+                        <input type="hidden" value="2" name="role_id">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

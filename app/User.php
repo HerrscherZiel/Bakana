@@ -67,8 +67,6 @@ class User extends Authenticatable
         return null !== $this->role()->where('nama_role', $role)->first();
     }
 
-
-
     public function timesheet(){
         return $this->hasMany('App\Timesheet','user_id', 'id');
     }

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Timesheet;
 use Illuminate\Http\Request;
+use App\User;
+use App\Project;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -21,8 +26,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('welcome');
+        }
+        else{
+           // $name = auth()->user()->name;
+
+            $timesheets = Timesheet::all();
+            return view('timesheet.index')->with('timesheet', $timesheets);
+        }
+
+
     }
 }
