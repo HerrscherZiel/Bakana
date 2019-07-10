@@ -20,6 +20,14 @@ class Role extends Migration
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
+
+        DB::table('role')->insert(
+            array(
+                'id_role' => '404',
+                'nama_role' => 'Unassigned',
+                'keterangan' => 'Default Value',
+            )
+        );
     }
 
     /**

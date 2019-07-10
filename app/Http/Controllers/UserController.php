@@ -16,12 +16,17 @@ class UserController extends Controller
     public function index()
     {
         //
-        $userView = User::join('role', 'role.id_role', '=', 'users.role_id')
+        $users = User::join('role', 'role.id_role', '=', 'users.role_id')
             ->select('users.*', 'role.nama_role')
             ->getQuery()
             ->get();
 
-        return view('user.index')->with('user', $userView);
+        /*$user =  User::orderBy('id', 'asc')->paginate(10);*/
+
+        $user = $users;
+        /*dd($user);*/
+
+        return view('user.index')->with('user', $user);
     }
 
     /**
