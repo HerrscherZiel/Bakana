@@ -17,12 +17,14 @@ class TimesheetController extends Controller
     public function index()
     {
         //
-        $timesheetView = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+        $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
             ->join('team_projects','team_projects.user_id','=','users.id')
             ->join('project','project.id_project','=','team_projects.project_id')
             ->select('timesheets.*', 'users.name','project.nama_project')
             ->getQuery()
             ->get();
+
+        $timesheetView =  $timesheet;
 
         return view('timesheet.index')->with('timesheet', $timesheetView);
     }
