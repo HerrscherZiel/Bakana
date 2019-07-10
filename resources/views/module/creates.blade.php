@@ -18,10 +18,7 @@
                     <label for="nama_project">Project Name:</label>
                     {{--<input type="text" class="form-control" name="nama_project"/>--}}
                     <select class="form-control" name="project_id">
-                            <option value="">Select Project</option>
-                            @foreach($project as $projects)
-                                <option value="{{$projects->id_project}}">{{$projects->nama_project}}</option>
-                            @endforeach
+                            <option value="{{$project->id_project}}" selected>{{$project->nama_project}}</option>
                     </select>
                 </div>
                 <div class="form-group">

@@ -39,6 +39,24 @@ class ModuleController extends Controller
         return view('module.create')->with('project', $project);
     }
 
+    public function creates($id)
+    {
+        //
+        $project = Project::find($id);
+
+        /*dd($project);*/
+
+        return view('module.creates')->with('project', $project);
+    }
+
+    /*public function creates($id)
+    {
+        //
+        $project = Project::find($id);
+
+        return view('module.create')->with('project', $project);
+    }*/
+
     /**
      * Store a newly created resource in storage.
      *
@@ -68,6 +86,38 @@ class ModuleController extends Controller
 
         return redirect('/modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
+
+    public function stores(Request $request)
+    {
+        //
+        $request->validate( [
+            'nama_module'   =>'required',
+            'waktu'         =>'required',
+            'status'        =>'required',
+            'keterangan'    =>'nullable'
+        ]);
+
+        /*$project = Project::find($id);*/
+
+        /*dd($project);*/
+
+        $module = new Module([
+            'nama_module'           => $request->get('nama_module'),
+            'waktu'                 => $request->get('waktu'),
+            'status'                => $request->get('status'),
+            'project_id'            => projects()->id_project,
+            'keterangan'            => $request->get('keterangan'),
+        ]);
+
+        /*$module = Module::with('projects')->all();*/
+        $module->save();
+
+        /*dd($project);*/
+
+        return redirect('/modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+    }
+
+
 
     /**
      * Display the specified resource.
