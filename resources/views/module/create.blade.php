@@ -29,7 +29,7 @@
                     <input type="text" class="form-control" name="nama_module"/>
                 </div>
                  <div class="form-group">
-                    <label for="waktu">Waktu:</label>
+                    <label for="waktu">Durasi:</label>
                     <input type="text" class="form-control" name="waktu"/>
                 </div>
                  <div class="form-group">

@@ -4,7 +4,7 @@
     <div class="container">
         <table class="table table-striped">
             <thead>
-                <a href="{{url('/timesheets/create')}}" class="btn btn-success pull-left">Create User</a>
+                <a href="{{url('/timesheets/create')}}" class="btn btn-success pull-left">Add Timesheet</a>
             <tr>
                 <td>ID</td>
                 <td>User</td>

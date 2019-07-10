@@ -4,7 +4,7 @@
     <div class="container">
         <table class="table table-striped">
             <thead>
-                <a href="{{url('/modules/create')}}" class="btn btn-success pull-left">Create User</a>
+                <a href="{{url('/modules/create')}}" class="btn btn-primary">Create Module</a>
             <tr>
                 <td>ID</td>
                 <td>Nama</td>
@@ -25,14 +25,21 @@
                     <td>{{$modules->nama_project}}</td>
                     <td>{{$modules->keterangan}}</td>
                    
-
-                    <td><a href="/modules/{{$modules->id_module}}/edit" class="btn btn-primary">Edit</a>
-
-                    <form action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-info" href="/modules/{{$modules->id_module}}/edit">
+                                <i class="fa fa-lg fa-edit">
+                                </i>
+                            </a>
+                            <button class="btn btn-danger" >
+                                <form action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                    <i class="fa fa-lg fa-trash">
+                                    </i>
+                                </form>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             @endforeach

@@ -4,7 +4,7 @@
     <div class="container">
         <table class="table table-striped">
             <thead>
-                <a href="{{url('/jobs/create')}}" class="btn btn-success pull-left">Create User</a>
+                <a href="{{url('/jobs/create')}}" class="btn btn-success pull-left">Add Job</a>
             <tr>
                 <td>ID</td>
                 <td>Nama</td>

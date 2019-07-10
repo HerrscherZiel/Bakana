@@ -1,45 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-                <a href="{{url('/projects/create')}}" class="btn btn-success pull-left">Create Project</a>
-            <tr>
-                <td>ID</td>
-                <td>Kode Project</td>
-                <td>Nama Project</td>
-                <td>Tanggal Mulai</td>
-                <td>Tanggal Selesai</td>
-                <td>Status Project</td>
-                <td>Keterangan</td>
-                <td>Action</td>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($project as $projects)
-                <tr>
-                    <td>{{$projects->id_project}}</td>
-                    <td>{{$projects->kode_project}}</td>
-                    <td>{{$projects->nama_project}}</td>
-                    <td>{{$projects->tgl_mulai}}</td>
-                    <td>{{$projects->tgl_selesai}}</td>
-                    <td>{{$projects->status}}</td>
-                    <td>{{$projects->ket}}</td>
-
-                    <td><a href="/projects/{{$projects->id_project}}" class="btn btn-success">Show</a>
-
-                    <td><a href="/projects/{{$projects->id_project}}/edit" class="btn btn-primary">Edit</a>
-
+<a href="{{url('/projects/create')}}" class="btn btn-success mb-3">Create Project</a>
+<div class="row">
+     @foreach($project as $projects)
+        <div class="col-md-6">
+          <div class="tile">
+            <div class="tile-title-w-btn">
+              <h3 class="title">{{$projects->nama_project}}</h3>
+            <div class="btn-group">
+                <a class="btn btn-primary" href="/projects/{{$projects->id_project}}">
+                    <i class="fa fa-lg fa-eye">
+                    </i>
+                </a>
+                <a class="btn btn-primary" href="/projects/{{$projects->id_project}}/edit">
+                    <i class="fa fa-lg fa-edit">
+                    </i>
+                </a>
+                <button class="btn btn-primary" >
                     <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        <div>
+                    @csrf
+                    @method('DELETE')
+                        <i class="fa fa-lg fa-trash">
+                        </i>
+                    </form>
+                </button>
+               </div>
+            </div>
+            <div class="tile-body">
+             <ul>
+                 <li>Tanggal Mulai: {{$projects->tgl_mulai}}</li>
+                 <li>Tanggal Selesai: {{$projects->tgl_selesai}}</li>
+                 <li>Keterangan: {{$projects->ket}}</li>
+             </ul>
+              
+            </div>
+          </div>
+        </div>
+    @endforeach
+      </div>
+
 @endsection
