@@ -12,10 +12,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="docs/css/main.css">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -90,7 +88,7 @@
                       @auth
                           <a href="{{ url('/home') }}">Home</a>
                       @else
-                          <a href="{{ route('login') }}">Login</a>
+                          <a href="{{ route('home') }}">Login</a>
 
                           @if (Route::has('register'))
                               <a href="{{ route('register') }}">Register</a>
@@ -113,7 +111,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
+        <li><a class="app-menu__item" href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
         <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></i></a> 
         </li>
         <li><a class="app-menu__item" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Job</span></a></li>
@@ -138,17 +136,15 @@
             @yield('content')
         </main>
     </div>
-     <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
      <!-- Essential javascripts for application to work-->
-    <script src="docs/js/jquery-3.2.1.min.js"></script>
-    <script src="docs/js/popper.min.js"></script>
-    <script src="docs/js/bootstrap.min.js"></script>
-    <script src="docs/js/main.js"></script>
+    <script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
+    <script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
+    <script src="{{URL::asset('docs/js/main.js')}}"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="docs/js/plugins/pace.min.js"></script>
+    <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
     <!-- Page specific javascripts-->
-    <script type="text/javascript" src="docs/js/plugins/chart.js"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/chart.js')}}"></script>
     <script type="text/javascript">
       var data = {
         labels: ["Januari", "Februari", "Maret", "April", "Mei"],

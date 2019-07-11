@@ -4,96 +4,90 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Timeline</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="docs/css/main.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="{{url('/roles')}}">Role</a>
-                    <a href="{{url('/users')}}">Users</a>
-                    <a href="{{url('/teamprojects')}}">Team</a>
-                    <a href="{{url('/projects')}}">Project</a>
-                    <a href="{{url('/modules')}}">Module</a>
-                    <a href="{{url('/jobs')}}">Job</a>
-                    <a href="{{url('/timesheets')}}">Timesheet</a>
-                </div>
+        <section class="material-half-bg">
+            <div class="cover"></div>
+        </section>
+        <section class="login-content">
+            <div class="logo">
+                <h1>Timeline</h1>
             </div>
-        </div>
+          <div class="login-box">
+            <form class="login-form" method="POST" action="{{ route('home') }}">
+                @csrf
+              <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+              <div class="form-group">
+                <input  id="email" type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required autocomplete="email" autofocus>
+                 @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <input id="password" class="form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <div class="utility">
+                  <div class="animated-checkbox">
+                    <label>
+                      <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}><span class="label-text" for="remember">Stay Signed in</span>
+                    </label>
+                  </div>
+                   @if (Route::has('password.request'))
+                  <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+                  @endif
+                </div>
+              </div>
+              <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+              </div>
+            </form>
+            <form class="forget-form" method="POST" action="{{ route('password.email') }}">
+                 @csrf
+              <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+              <div class="form-group">
+                <label class="control-label">EMAIL</label>
+                <input class="form-control @error('email') is-invalid @enderror" type="email" placeholder="Email" required autocomplete="email" autofocus>
+                 @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+              <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+              </div>
+              <div class="form-group mt-3">
+                <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
+              </div>
+            </form>
+          </div>
+        </section>
+         <!-- Essential javascripts for application to work-->
+    <script src="docs/js/jquery-3.2.1.min.js"></script>
+    <script src="docs/js/popper.min.js"></script>
+    <script src="docs/js/bootstrap.min.js"></script>
+    <script src="docs/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="docs/js/plugins/pace.min.js"></script>
+    <script type="text/javascript">
+      // Login Page Flipbox control
+      $('.login-content [data-toggle="flip"]').click(function() {
+        $('.login-box').toggleClass('flipped');
+        return false;
+      });
+    </script>
     </body>
 </html>
