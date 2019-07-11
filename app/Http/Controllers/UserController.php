@@ -14,21 +14,32 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
         //
+        if (Auth::user()->hasRole('Project Manager')) {
+            $users = User::join('role', 'role.id_role', '=', 'users.role_id')
+                ->select('users.*', 'role.nama_role')
+                ->getQuery()
+                ->get();
 
-        $users = User::join('role', 'role.id_role', '=', 'users.role_id')
-            ->select('users.*', 'role.nama_role')
-            ->getQuery()
-            ->get();
+            /*$user =  User::orderBy('id', 'asc')->paginate(10);*/
 
-        /*$user =  User::orderBy('id', 'asc')->paginate(10);*/
+            $user = $users;
+            /*dd($user);*/
 
-        $user = $users;
-        /*dd($user);*/
+            return view('user.index')->with('user', $user);
+        }
 
-        return view('user.index')->with('user', $user);
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+
     }
 
     /**
@@ -111,10 +122,17 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $role = Role::all();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $role = Role::all();
 
-        $user = User::find($id);
-        return view('user.edit', compact('user','role'));
+            $user = User::find($id);
+            return view('user.edit', compact('user', 'role'));
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     /**
@@ -151,8 +169,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $user = User::find($id);
-        $user->delete();
-        return redirect('/user')->with('success', 'Post Removed');
+        if (Auth::user()->hasRole('Project Manager')) {
+            $user = User::find($id);
+            $user->delete();
+            return redirect('/user')->with('success', 'Post Removed');
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Module;
 use Illuminate\Http\Request;
 use App\Project;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProjectController extends Controller
@@ -30,15 +31,30 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return view('project.create');
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('project.create');
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     public function creates($id)
     {
         //
-        $project = Project::all($id);
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::all($id);
 
-        return view('project.creates')->with('project', $project);
+            return view('project.creates')->with('project', $project);
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     /**
@@ -97,6 +113,7 @@ class ProjectController extends Controller
         $module->save();
 
         return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+
     }
 
 
@@ -127,9 +144,15 @@ class ProjectController extends Controller
             ->where('id', $id)
             ->first();*/
 
-        $project = Project::find($id);
-        return view('project.edit')->with('project', $project);
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::find($id);
+            return view('project.edit')->with('project', $project);
+        }
 
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     /**
@@ -174,9 +197,17 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
-        $project = Project::find($id);
-        $project->delete();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::find($id);
+            $project->delete();
 
-        return redirect('/projects')->with('success', 'Stock has been deleted Successfully');
+            return redirect('/projects')->with('success', 'Stock has been deleted Successfully');
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 }

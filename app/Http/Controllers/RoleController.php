@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -16,8 +17,17 @@ class RoleController extends Controller
     {
         //
 //        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
-        $role =  Role::orderBy('id_role', 'asc')->paginate(10);
-        return view('role.index')->with('role', $role);
+        if (Auth::user()->hasRole('Project Manager')) {
+            $role = Role::orderBy('id_role', 'asc')->paginate(10);
+            return view('role.index')->with('role', $role);
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+
     }
 
     /**
@@ -28,7 +38,14 @@ class RoleController extends Controller
     public function create()
     {
         //
-        return view('role.create');
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('role.create');
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     /**
@@ -81,9 +98,16 @@ class RoleController extends Controller
         /*$ticket = Ticket::where('user_id', auth()->user()->id)
             ->where('id', $id)
             ->first();*/
+        if (Auth::user()->hasRole('Project Manager')) {
+            $role = Role::find($id);
+            return view('role.edit')->with('role', $role);
+        }
 
-        $role = Role::find($id);
-        return view('role.edit')->with('role', $role);
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
 
     }
 
@@ -110,6 +134,7 @@ class RoleController extends Controller
         $role->save();
 
         return redirect('/roles')->with('success', 'New support ticket has been updated!!');
+
     }
 
     /**
@@ -121,9 +146,17 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
-        $role = Role::find($id);
-        $role->delete();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $role = Role::find($id);
+            $role->delete();
 
-        return redirect('/roles')->with('success', 'Stock has been deleted Successfully');
+            return redirect('/roles')->with('success', 'Stock has been deleted Successfully');
+
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Module;
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ModuleController extends Controller
 {
@@ -17,13 +18,21 @@ class ModuleController extends Controller
     {
         //
         /*$module = Module::orderBy('id_module', 'asc')->paginate(10);*/
-        $module = Module::join('project','project_id','=','id_project')
-            ->select('module.*','project.id_project','project.nama_project')
-            ->getQuery()
-            ->get();
-        /*dd($module);*/
-        /*$module = Module::orderBy('id_module','asc')->paginate(10);*/
-        return view('module.index')->with('module', $module);
+        if (Auth::user()->hasRole('Project Manager')) {
+            $module = Module::join('project', 'project_id', '=', 'id_project')
+                ->select('module.*', 'project.id_project', 'project.nama_project')
+                ->getQuery()
+                ->get();
+            /*dd($module);*/
+            /*$module = Module::orderBy('id_module','asc')->paginate(10);*/
+            return view('module.index')->with('module', $module);
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     /**
@@ -34,20 +43,34 @@ class ModuleController extends Controller
     public function create()
     {
         //
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::all();
 
-        $project = Project::all();
+            return view('module.create')->with('project', $project);
+        }
 
-        return view('module.create')->with('project', $project);
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     public function creates($id)
     {
         //
-        $project = Project::find($id);
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::find($id);
 
-        /*dd($project);*/
+            /*dd($project);*/
+            return view('module.creates')->with('project', $project);
+        }
 
-        return view('module.creates')->with('project', $project);
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     /*public function creates($id)
@@ -143,11 +166,18 @@ class ModuleController extends Controller
         /*$ticket = Ticket::where('user_id', auth()->user()->id)
             ->where('id', $id)
             ->first();*/
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::all();
+            $module = Module::find($id);
 
-        $project = Project::all();
-        $module = Module::find($id);
+            return view('module.edit', compact('module', 'project'));
+        }
 
-        return view('module.edit', compact('module', 'project'));
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     /**
@@ -187,9 +217,17 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         //
-        $module = Module::find($id);
-        $module->delete();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $module = Module::find($id);
+            $module->delete();
 
-        return redirect('/modules')->with('success', 'Module has been deleted Successfully');
+            return redirect('/modules')->with('success', 'Module has been deleted Successfully');
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 }

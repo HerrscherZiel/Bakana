@@ -6,6 +6,7 @@ use App\Job;
 use App\Module;
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -17,14 +18,20 @@ class JobController extends Controller
     public function index()
     {
         //
-        $job = Job::join('module','module_id','=','id_module')
-            ->join('project','project_id','=','id_project')
-            ->select('jobs.*','module.id_module','module.nama_module','project.nama_project')
-            ->getQuery()
-            ->get();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $job = Job::join('module', 'module_id', '=', 'id_module')
+                ->join('project', 'project_id', '=', 'id_project')
+                ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
+                ->getQuery()
+                ->get();
 
-        /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
-        return view('job.index')->with('job', $job);
+            /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
+            return view('job.index')->with('job', $job);
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     /**
@@ -35,10 +42,16 @@ class JobController extends Controller
     public function create()
     {
         //
-        $module = Module::all();
-        $project = Project::all();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $module = Module::all();
+            $project = Project::all();
 
-        return view('job.create', compact('module','project'))/*->with('module', $module)*/;
+            return view('job.create', compact('module', 'project'))/*->with('module', $module)*/ ;
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     /**
@@ -63,6 +76,9 @@ class JobController extends Controller
         $job->save();
 
         return redirect('/jobs')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+
+
+
     }
 
     /**
@@ -85,10 +101,18 @@ class JobController extends Controller
     public function edit($id)
     {
         //
-        $job = Job::find($id);
-        $module = Module::all();
-        $project = Project::all();
-        return view('job.edit', compact('job','module','project'));
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            $job = Job::find($id);
+            $module = Module::all();
+            $project = Project::all();
+            return view('job.edit', compact('job', 'module', 'project'));
+
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     /**
@@ -124,9 +148,16 @@ class JobController extends Controller
     public function destroy($id)
     {
         //
-        $job = Job::find($id);
-        $job->delete();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $job = Job::find($id);
+            $job->delete();
 
-        return redirect('/jobs')->with('success', 'job has been deleted Successfully');
+            return redirect('/jobs')->with('success', 'job has been deleted Successfully');
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 }

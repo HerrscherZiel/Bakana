@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\TeamProject;
 use App\Project;
+use Illuminate\Support\Facades\Auth;
 
 class TeamProjectController extends Controller
 {
@@ -18,6 +19,7 @@ class TeamProjectController extends Controller
     public function index()
     {
         //
+
         $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
             ->join('project', 'project.id_project', '=', 'team_projects.project_id')
             ->join('role', 'role.id_role', '=', 'users.role_id')
@@ -36,11 +38,18 @@ class TeamProjectController extends Controller
     public function create()
     {
         //
-        $user = User::all();
-        $project = Project::all();
-        $role = Role::all();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $user = User::all();
+            $project = Project::all();
+            $role = Role::all();
 
-        return view('team.create', compact('user', 'project','role'));
+            return view('team.create', compact('user', 'project', 'role'));
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
     }
 
     /**
@@ -84,12 +93,22 @@ class TeamProjectController extends Controller
     public function edit($id)
     {
         //
-        $user = User::all();
-        $project = Project::all();
-        $role = Role::all();
+        if (Auth::user()->hasRole('Project Manager')) {
 
-        $team_projects = TeamProject::find($id);
-        return view('team.edit', compact('team_projects','user', 'project', 'role'));
+            $user = User::all();
+            $project = Project::all();
+            $role = Role::all();
+
+            $team_projects = TeamProject::find($id);
+            return view('team.edit', compact('team_projects', 'user', 'project', 'role'));
+
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
     }
 
     /**
@@ -123,8 +142,19 @@ class TeamProjectController extends Controller
     public function destroy($id)
     {
         //
-        $team_projects = TeamProject::find($id);
-        $team_projects->delete();
-        return redirect('/teamprojects')->with('success', 'Post Removed');
+        if (Auth::user()->hasRole('Project Manager')) {
+
+            $team_projects = TeamProject::find($id);
+            $team_projects->delete();
+            return redirect('/teamprojects')->with('success', 'Post Removed');
+
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+
     }
 }
