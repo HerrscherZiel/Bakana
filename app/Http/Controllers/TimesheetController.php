@@ -20,11 +20,12 @@ class TimesheetController extends Controller
     {
         //
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
-            ->join('team_projects','team_projects.user_id','=','users.id')
-            ->join('project','project.id_project','=','team_projects.project_id')
-            ->select('timesheets.*', 'users.name','project.nama_project')
+            /*->join('team_projects','team_projects.user_id','=','users.id')*/
+            /*->join('project','project.id_project','=','team_projects.project_id')*/
+            ->select('timesheets.*', 'users.name')
             ->getQuery()
             ->get();
+
 
         $timesheetView =  $timesheet;
 
@@ -41,19 +42,19 @@ class TimesheetController extends Controller
     public function create()
     {
         //
-        $user = User::all();
+        /*$user = User::all();*/
         /*$project = Project::all();*/
         /*$id = auth()->user()->id;*/
         $usher = User::join('team_projects','team_projects.user_id','=','users.id')
             ->join('project','project.id_project','=','team_projects.project_id')
-            ->select('project.nama_project')
+            ->select('users.*','project.nama_project')
             ->where('users.id','=',auth()->user()->id)
             ->getQuery()
             ->get();
 
         /*dd($timesheet);*/
 
-        return view('timesheet.create', compact('user','usher'));
+        return view('timesheet.create', compact(/*'user',*/'usher'));
     }
 
     /**
@@ -81,6 +82,8 @@ class TimesheetController extends Controller
             $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
             $timesheet->user_id = auth()->user()->id;
             $timesheet->save();
+
+            /*dd($timesheet);*/
             return redirect('/timesheets')->with('success', 'User Ditambahkan');
 
         }
