@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
@@ -26,7 +27,8 @@ class TimesheetController extends Controller
             ->get();
 
         $timesheetView =  $timesheet;
-        /*dd($user);*/
+
+        /*dd($timesheet);*/
 
         return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
@@ -40,8 +42,18 @@ class TimesheetController extends Controller
     {
         //
         $user = User::all();
+        /*$project = Project::all();*/
+        /*$id = auth()->user()->id;*/
+        $usher = User::join('team_projects','team_projects.user_id','=','users.id')
+            ->join('project','project.id_project','=','team_projects.project_id')
+            ->select('project.nama_project')
+            ->where('users.id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
 
-        return view('timesheet.create')->with('user', $user);
+        /*dd($timesheet);*/
+
+        return view('timesheet.create', compact('user','usher'));
     }
 
     /**
@@ -63,6 +75,7 @@ class TimesheetController extends Controller
 
             $timesheet = new Timesheet();
             $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+            $timesheet->project = $request->input('project');
             $timesheet->jam_mulai = $request->input('jam_mulai');
             $timesheet->jam_selesai = $request->input('jam_selesai');
             $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
@@ -82,6 +95,7 @@ class TimesheetController extends Controller
 
             $timesheet = new Timesheet();
             $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+            $timesheet->project = $request->input('project');
             $timesheet->jam_mulai = $request->input('jam_mulai');
             $timesheet->jam_selesai = $request->input('jam_selesai');
             $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
@@ -116,7 +130,9 @@ class TimesheetController extends Controller
         //
         $user = User::all();
 
+
         $timesheet = Timesheet::find($id);
+
         return view('timesheet.edit', compact('timesheet','user'));
     }
 
@@ -138,6 +154,7 @@ class TimesheetController extends Controller
 
         $timesheet =  Timesheet::find($id);
         $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+        $timesheet->project = $request->input('project');
         $timesheet->jam_mulai = $request->input('jam_mulai');
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');

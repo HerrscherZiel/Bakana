@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
     <div class="container">
@@ -17,9 +17,20 @@
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
                 </div>
                 <div class="form-group">
+                    <label for="project">Project:</label>
+                    <select class="form-control" name="project">
+                        <option value="">Select Project</option>
+                        @foreach($usher as $ushers)
+                            <option value="{{$ushers->nama_project}}">{{$ushers->nama_project}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="tgl_timesheet">Tanggal:</label>
                     <input type="date" class="form-control" name="tgl_timesheet"/>
                 </div>
+
                  <div class="form-group">
                     <label for="jam_mulai">Jam Mulai:</label>
                     <input type="time" class="form-control" name="jam_mulai"/>
