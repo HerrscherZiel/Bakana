@@ -34,6 +34,7 @@ class ModuleController extends Controller
     public function create()
     {
         //
+
         $project = Project::all();
 
         return view('module.create')->with('project', $project);

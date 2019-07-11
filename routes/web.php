@@ -53,3 +53,8 @@ Route::post('/module/creates/{project}/project','ModuleController@stores');
 Route::post('/jobs/create','JobController@store');
 
 
+Route::group(['prefix'=>'errors','as'=>'error.'], function(){
+    Route::get('403', ['as' => 'err403', 'uses' => 'ErrorsController@index']);
+   // Route::get('connect', ['as' => 'connect', 'uses' => 'AccountController@connect']);
+});
+

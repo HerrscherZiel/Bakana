@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
     public function index()
     {
         //
+
         $users = User::join('role', 'role.id_role', '=', 'users.role_id')
             ->select('users.*', 'role.nama_role')
             ->getQuery()
@@ -37,10 +39,15 @@ class UserController extends Controller
     public function create()
     {
         //
+        if (Auth::user()->hasRole('Project Manager')) {
+            $role = Role::all();
 
-        $role = Role::all();
-
-        return view('user.create')->with('role', $role);
+            return view('user.create')->with('role', $role);
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
 
     }
 
@@ -53,30 +60,35 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate( [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'role_id' => 'required']);
+
+        //$request->user()->authorizeRoles(['Project Manager']);
+        //if (Auth::user()->hasRole('Project Manager')) {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required',
+                'role_id' => 'required']);
 
 
-        $user = new User;
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->role_id = $request->input('role_id');
-        $user->save();
-        return redirect('/users')->with('success', 'User Ditambahkan');
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $request->input('password');
+            $user->role_id = $request->input('role_id');
+            $user->save();
+            return redirect('/users')->with('success', 'User Ditambahkan');
 
-//        // $this->user_id = auth()->user()->id;
-//        $role = new Role([
-//            'nama_role' => $request->get('nama_role'),
-//            'keterangan'=> $request->get('keterangan')
-//        ]);
-//        $role->save();
-//
-//        return redirect('/roles')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+
+       // }
+
+//        else{
+//        //Tambah warning
+//            abort(403, 'Unauthorized action.');
+//            return view('home');
+//        }
+
     }
+
 
     /**
      * Display the specified resource.
