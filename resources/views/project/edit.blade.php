@@ -44,7 +44,7 @@
                     <input type="text" class="form-control" name="status" value={{ $project->status }} />
                 </div>
                 <div class="form-group">
-                    <label for="nama_project">Nama Project :</label>
+                    <label for="ket">Keterangan</label>
                     <input type="textarea" cols="5" rows="5" class="form-control" name="ket" value={{ $project->ket }} />
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>

@@ -17,14 +17,23 @@
                     <i class="fa fa-lg fa-edit">
                     </i>
                 </a>
-                <button class="btn btn-primary" >
-                    <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
+                <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
                     @csrf
                     @method('DELETE')
-                        <i class="fa fa-lg fa-trash">
-                        </i>
-                    </form>
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-lg fa-trash">
+                    </i>
                 </button>
+                    </form>
+
+{{--                    <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">--}}
+{{--                        @csrf--}}
+{{--                        @method('DELETE')--}}
+{{--                        <button class="btn btn-danger" type="submit">Delete</button>--}}
+{{--                    </form>--}}
+
+
                </div>
             </div>
             <div class="tile-body">

@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
 
         if (Auth::user()->hasRole('Project Manager')) {
-            return view('welcome');
+            return view('home');
         }
         else{
            // $name = auth()->user()->name;

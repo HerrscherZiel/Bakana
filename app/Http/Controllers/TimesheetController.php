@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+//use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
@@ -75,10 +75,10 @@ class TimesheetController extends Controller
                 'keterangan_timesheet' => 'required']);
 
 
-            $date = Carbon::now()->format('d-m-Y');
+//            $date = Carbon::now()->format('d-m-Y');
             $timesheet = new Timesheet();
             $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
-            $timesheet->project = $request->input('project',$date);
+            $timesheet->project = $request->input('project');
             $timesheet->jam_mulai = $request->input('jam_mulai');
             $timesheet->jam_selesai = $request->input('jam_selesai');
             $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
