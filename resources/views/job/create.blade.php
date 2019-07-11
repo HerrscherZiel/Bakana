@@ -25,7 +25,7 @@
                  <div class="form-group">
                     <label for="module_id">Modul:</label>
                      <select class="form-control" name="module_id">
-                         <option value="">Select Project</option>
+                         <option value="">Select Module</option>
                          @foreach($module as $modules)
                              <option value="{{$modules->id_module}}">{{$modules->nama_module}}</option>
                          @endforeach

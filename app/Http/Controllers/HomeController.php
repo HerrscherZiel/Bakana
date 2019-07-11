@@ -19,6 +19,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -34,11 +35,12 @@ class HomeController extends Controller
         }
         else{
            // $name = auth()->user()->name;
-
-            $timesheets = Timesheet::all();
-            return view('timesheet.index')->with('timesheet', $timesheets);
+//            $user = User::find('id', 'name');
+//            $timesheetView = Timesheet::all();
+            return view('home');
         }
-
+//        , compact('user', 'timesheetView'))
+//        ->with('timesheet', $timesheetView);
 
     }
 }

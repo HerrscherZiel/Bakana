@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
+use Illuminate\Support\Facades\Auth;
 
 
 class TimesheetController extends Controller
@@ -25,8 +26,9 @@ class TimesheetController extends Controller
             ->get();
 
         $timesheetView =  $timesheet;
+        /*dd($user);*/
 
-        return view('timesheet.index')->with('timesheet', $timesheetView);
+        return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
 
     /**
@@ -51,22 +53,45 @@ class TimesheetController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate( [
-            'tgl_timesheet' => 'required',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
-            'keterangan_timesheet' => 'required',
-            'user_id' => 'required']);
+        if (Auth::user()->hasRole('Project Manager')) {
+            $request->validate([
+                'tgl_timesheet' => 'required',
+                'jam_mulai' => 'required',
+                'jam_selesai' => 'required',
+                'keterangan_timesheet' => 'required']);
 
 
-        $timesheet = new Timesheet();
-        $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
-        $timesheet->jam_mulai = $request->input('jam_mulai');
-        $timesheet->jam_selesai = $request->input('jam_selesai');
-        $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
-        $timesheet->user_id = $request->input('user_id');
-        $timesheet->save();
-        return redirect('/timesheets')->with('success', 'User Ditambahkan');
+            $timesheet = new Timesheet();
+            $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+            $timesheet->jam_mulai = $request->input('jam_mulai');
+            $timesheet->jam_selesai = $request->input('jam_selesai');
+            $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
+            $timesheet->user_id = auth()->user()->id;
+            $timesheet->save();
+            return redirect('/timesheets')->with('success', 'User Ditambahkan');
+
+        }
+
+        else  {
+            $request->validate([
+                'tgl_timesheet' => 'required',
+                'jam_mulai' => 'required',
+                'jam_selesai' => 'required',
+                'keterangan_timesheet' => 'required']);
+
+
+            $timesheet = new Timesheet();
+            $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+            $timesheet->jam_mulai = $request->input('jam_mulai');
+            $timesheet->jam_selesai = $request->input('jam_selesai');
+            $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
+            $timesheet->user_id = auth()->user()->id;
+            $timesheet->save();
+
+//            dd($timesheet);
+            return redirect('/timesheets')->with('success', 'User Ditambahkan');
+
+        }
     }
 
     /**

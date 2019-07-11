@@ -24,6 +24,7 @@
     <header class="app-header"><a class="app-header__logo" href="{{ url('/') }}">Timeline</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
+
       <ul class="app-nav">
         <li class="app-search">
           <input class="app-search__input" type="search" placeholder="Search">
@@ -73,9 +74,31 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="#"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+              @if (Route::has('login'))
+                  @auth
+            <li><a class="dropdown-item" href="{{ url('/home') }}"><i class="fa fa-cog fa-lg"></i> Home</a></li>
+                  @else
+            <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fa fa-user fa-lg"></i> Login</a></li>
+                      @if (Route::has('register'))
+            <li><a class="dropdown-item" href="{{ route('register') }}"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                      @endif
+                  @endauth
+              @endif
+
+ {{--             @if (Route::has('login'))
+                  <div class="top-right links">
+                      @auth
+                          <a href="{{ url('/home') }}">Home</a>
+                      @else
+                          <a href="{{ route('login') }}">Login</a>
+
+                          @if (Route::has('register'))
+                              <a href="{{ route('register') }}">Register</a>
+                          @endif
+                      @endauth
+                  </div>
+              @endif--}}
+
           </ul>
         </li>
       </ul>
@@ -100,6 +123,14 @@
         </li>
         <li><a class="app-menu__item" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
+          <li> <a class="dropdown-item" href="{!! url('/logout') !!}" class="btn btn-default btn-flat"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <i class="fa fa-lock"></i>Logout
+              </a>
+              <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
+          </li>
       </ul>
     </aside>
 

@@ -32,14 +32,14 @@
                     <label for="keterangan_timesheet">Keterangan:</label>
                     <input type="text" class="form-control" name="keterangan_timesheet"/>
                 </div>
-                <div class="form-group">
+{{--                <div class="form-group">
                     <label for="user_id">User:</label>
                     <select name="user_id" id="" class="form-control">
                         @foreach($user as $users)
-                            <option value="{{$users->id}}">{{$users->name}}</option>
+                            <option value="{{$users->id}}"selected>{{$users->name}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div>--}}
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>

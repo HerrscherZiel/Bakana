@@ -18,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($timesheet as $timesheets)
+            @foreach($timesheetView as $timesheets)
                 <tr>
 
                     <td>{{$timesheets->id_timesheets}}</td>
