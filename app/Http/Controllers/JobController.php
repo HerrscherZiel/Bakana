@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Job;
 use App\Module;
 use App\Project;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,14 +44,15 @@ class JobController extends Controller
     {
         //
         if (Auth::user()->hasRole('Project Manager')) {
-            $mod = Module::join('project','project_id','=','id_project')
-            ->join('team_projects','id_project','=','project_id')
-            ->join('users','user_id','=','id')
-            ->select('module.*','users.*')
+            $mod = Module::join('project','module.project_id','=','project.id_project')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
+            ->join('users','team_projects.user_id','=','users.id')
+            ->select('users.*')
+            ->distinct('users.id')
             ->getQuery()
             ->get();
 
-            dd($mod);
+            /*dd($mod);*/
             $module = Module::all();
             $project = Project::all();
 
@@ -133,7 +135,8 @@ class JobController extends Controller
             $job = Job::find($id);
             $module = Module::all();
             $project = Project::all();
-            return view('job.edit', compact('job', 'module', 'project'));
+            /*$user = \App\User::all();*/
+            return view('job.edit', compact('job', 'module', 'project'/*,'user'*/));
 
         }
         else{

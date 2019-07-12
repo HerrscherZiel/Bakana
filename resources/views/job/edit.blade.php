@@ -32,7 +32,16 @@
                     <input type="text" class="form-control" name="nama_job" value={{ $job->nama_job }} />
                 </div>
                 <div class="form-group">
-                    <label for="module_id">Modul ID:</label>
+                    <label for="user">User:</label>
+                    <select class="form-control" name="user">
+                        <option value="{{$job->user}}" selected>{{$job->user}}</option>
+                        {{--@foreach($user as $users)
+                            <option value="{{$users->name}}">{{$users->name}}</option>
+                        @endforeach--}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="module_id">Modul:</label>
                     <select class="form-control" name="module_id">
                         <option value="">Select Project</option>
                         @foreach($module as $modules)
