@@ -26,6 +26,7 @@
         <thead>
         <tr>
             <td>Nama</td>
+            <td>User</td>
             <td>Module</td>
             <td>Keterangan</td>
             <td>Action</td>

@@ -68,12 +68,20 @@ class JobController extends Controller
     {
         //
         if (Auth::user()->hasRole('Project Manager')) {
+            $mod = Module::join('project','module.project_id','=','project.id_project')
+                ->join('team_projects','project.id_project','=','team_projects.project_id')
+                ->join('users','team_projects.user_id','=','users.id')
+                ->select('users.*')
+                ->distinct('users.id')
+                ->getQuery()
+                ->get();
+
             $module = Module::find($id);
             $project = Project::all();
 
             /*dd($module);*/
 
-            return view('job.creates', compact('module', 'project'))/*->with('module', $module)*/ ;
+            return view('job.creates', compact('module', 'project','mod'))/*->with('module', $module)*/ ;
         }
         else{
             //Tambah warning
@@ -92,7 +100,7 @@ class JobController extends Controller
         //
         $request->validate( [
             'nama_job'   =>'required',
-            'user'   =>'required',
+            'user'   =>'nullable',
             'keterangan'    =>'nullable'
         ]);
 
@@ -135,8 +143,8 @@ class JobController extends Controller
             $job = Job::find($id);
             $module = Module::all();
             $project = Project::all();
-            /*$user = \App\User::all();*/
-            return view('job.edit', compact('job', 'module', 'project'/*,'user'*/));
+            $user = \App\User::all();
+            return view('job.edit', compact('job', 'module', 'project','user'));
 
         }
         else{
@@ -158,7 +166,7 @@ class JobController extends Controller
         $job = new Job();
         $request->validate( [
             'nama_job'   => 'required',
-            'user'   => 'required',
+            'user'   => 'nullable',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);

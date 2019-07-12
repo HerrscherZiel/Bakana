@@ -26,7 +26,7 @@
                     <label for="user">User:</label>
                     {{--<input type="text" class="form-control" name="user"/>--}}
                     <select class="form-control" name="user">
-                        <option value="">Select Module</option>
+                        <option value=" ">Select Module</option>
                         @foreach($mod as $mods)
                             <option value="{{$mods->name}}">{{$mods->name}}</option>
                         @endforeach

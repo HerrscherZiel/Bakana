@@ -34,10 +34,10 @@
                 <div class="form-group">
                     <label for="user">User:</label>
                     <select class="form-control" name="user">
-                        <option value="{{$job->user}}" selected>{{$job->user}}</option>
-                        {{--@foreach($user as $users)
+                        {{--<option value="{{$job->user}}" selected>{{$job->user}}</option>--}}
+                        @foreach($user as $users)
                             <option value="{{$users->name}}">{{$users->name}}</option>
-                        @endforeach--}}
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

@@ -15,7 +15,7 @@ class AddUserOnJobs extends Migration
     {
         //
         Schema::table('jobs', function($table){
-            $table->string('user')->after('id_job');
+            $table->string('user')->after('id_job')->nullable();
         });
     }
 
