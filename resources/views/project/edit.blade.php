@@ -1,54 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
-    <div class="card uper">
-        <div class="card-header">
-            Edit Share
-        </div>
-        <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br />
-            @endif
-            <form method="post" action="{{ route('projects.update', $project->id_project) }}">
-                @method('PATCH')
+    <div class="col-md-12">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
+  <div class="tile">
+    <h3 class="tile-title">Edit Project</h3>
+    <form method="post" action="{{ route('projects.update', $project->id_project) }}">
+        @method('PATCH')
                 @csrf
-                <div class="form-group">
-                    <label for="kode_project">Kode Project:</label>
-                    <input type="text" class="form-control" name="kode_project" value={{ $project->kode_project }} />
-                </div>
-                <div class="form-group">
-                    <label for="nama_project">Nama Project:</label>
-                    <input type="text" class="form-control" name="nama_project" value={{ $project->nama_project }} />
-                </div>
-                <div class="form-group">
-                    <label for="tgl_mulai">Tanggal Mulai:</label>
-                    <input type="date" class="form-control" name="tgl_mulai" value={{ $project->tgl_mulai }} />
-                </div>
-                <div class="form-group">
-                    <label for="tgl_selesai">Tanggal Selesai:</label>
-                    <input type="date" class="form-control" name="tgl_selesai" value={{ $project->tgl_selesai }} />
-                </div>
-                <div class="form-group">
-                    <label for="status">Status:</label>
-                    <input type="text" class="form-control" name="status" value={{ $project->status }} />
-                </div>
-                <div class="form-group">
-                    <label for="nama_project">Nama Project :</label>
-                    <input type="textarea" cols="5" rows="5" class="form-control" name="ket" value={{ $project->ket }} />
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+        <div class="tile-body">
+            <div class="form-group">
+                <label class="control-label">Project Code</label>
+                <input type="hidden" value="{{csrf_token()}}" name="_token" />
+                <input class="form-control" name="kode_project" type="text" value={{ $project->kode_project }}>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Project Name</label>
+              <input class="form-control" type="text" name="nama_project" value={{ $project->nama_project }}>
+            </div>
+            <div class="form-group input-group ">
+                <label class="control-label mt-2 mr-2">Start Date</label>
+                <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_mulai" value={{ $project->tgl_mulai }}>
+                <label class="control-label mt-2 ml-5 mr-2">Finish Date</label>
+                <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_selesai" value={{ $project->tgl_selesai }}>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Status</label>
+              <input class="form-control" type="text" name="status" value={{ $project->status }}>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description</label>
+              <textarea class="form-control" rows="4" name="ket">{{ $project->ket }}</textarea>
+            </div>
         </div>
-    </div>
+        <div class="tile-footer">
+          <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+          <a class="btn btn-secondary" href="/projects"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+        </div>
+    </form>
+  </div>
+</div>
+
 @endsection

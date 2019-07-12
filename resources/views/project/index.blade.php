@@ -17,13 +17,8 @@
                     <i class="fa fa-lg fa-edit">
                     </i>
                 </a>
-                <button class="btn btn-primary" >
-                    <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                        <i class="fa fa-lg fa-trash">
-                        </i>
-                    </form>
+                <button class="btn btn-primary" href="javascript:;" data-toggle="modal" onclick="deleteData({{$projects->id_project}})" data-target="#hapus" >
+                    <i class="fa fa-lg fa-trash"></i>
                 </button>
                </div>
             </div>
@@ -39,5 +34,45 @@
         </div>
     @endforeach
       </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="hapusTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form action="" id="deleteForm" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         @csrf
+          @method('POST')
+        Are you sure you want to delete this project ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger" onclick="formSubmit()">Delete</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+     function deleteData(id_project)
+     {
+         var id_project = id_project;
+         var url = '{{ route('projects.destroy', $projects->id_project)}}';
+         url = url.replace(':id', id);
+         $("#deleteForm").attr('action', url);
+     }
+
+     function formSubmit()
+     {
+         $("#deleteForm").submit();
+     }
+  </script>
 
 @endsection

@@ -145,6 +145,35 @@
     <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="{{URL::asset('docs/js/plugins/chart.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script>
+     <script type="text/javascript">
+        $('.input-daterange input').each(function() {
+            $(this).datepicker('clearDates'); 
+        });
+
+    </script>
+    <script type="text/javascript">
+      $('#sl').click(function(){
+        $('#tl').loadingBtn();
+        $('#tb').loadingBtn({ text : "Signing In"});
+      });
+      
+      $('#el').click(function(){
+        $('#tl').loadingBtnComplete();
+        $('#tb').loadingBtnComplete({ html : "Sign In"});
+      });
+      
+      $('#demoDate').datepicker({
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        todayHighlight: true
+      });
+      
+      $('#demoSelect').select2();
+    </script>
+   
     <script type="text/javascript">
       var data = {
         labels: ["Januari", "Februari", "Maret", "April", "Mei"],
