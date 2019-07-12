@@ -22,6 +22,16 @@
                     <label for="nama_job">Nama:</label>
                     <input type="text" class="form-control" name="nama_job"/>
                 </div>
+                <div class="form-group">
+                    <label for="user">User:</label>
+                    {{--<input type="text" class="form-control" name="user"/>--}}
+                    <select class="form-control" name="user">
+                        <option value="">Select Module</option>
+                        @foreach($mod as $mods)
+                            <option value="{{$mods->name}}">{{$mods->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                  <div class="form-group">
                     <label for="module_id">Modul:</label>
                      <select class="form-control" name="module_id">

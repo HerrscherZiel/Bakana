@@ -148,7 +148,7 @@ class ModuleController extends Controller
     public function show($id)
     {
         $module = Module::join('project', 'project_id', '=', 'id_project')
-            ->select('module.*', 'project.nama_project')
+            ->select('module.*','project.id_project', 'project.nama_project')
             ->where('module.id_module', '=', $id )
             ->getQuery()
             ->get();
@@ -163,7 +163,9 @@ class ModuleController extends Controller
         /*$job = Job::all();*/
         /*dd($job);*/
 
-        return view('module.show', compact('module','job'))/*->with('module',$module)*//*->with('module', $job)*/;
+        $mod = Module::find($id);
+
+        return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
     }
 
     /**

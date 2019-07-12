@@ -43,10 +43,18 @@ class JobController extends Controller
     {
         //
         if (Auth::user()->hasRole('Project Manager')) {
+            $mod = Module::join('project','project_id','=','id_project')
+            ->join('team_projects','id_project','=','project_id')
+            ->join('users','user_id','=','id')
+            ->select('module.*','users.*')
+            ->getQuery()
+            ->get();
+
+            dd($mod);
             $module = Module::all();
             $project = Project::all();
 
-            return view('job.create', compact('module', 'project'))/*->with('module', $module)*/ ;
+            return view('job.create', compact('module', 'project','mod'))/*->with('module', $module)*/ ;
         }
         else{
             //Tambah warning
@@ -82,11 +90,13 @@ class JobController extends Controller
         //
         $request->validate( [
             'nama_job'   =>'required',
+            'user'   =>'required',
             'keterangan'    =>'nullable'
         ]);
 
         $job = new Job([
             'nama_job'   => $request->get('nama_job'),
+            'user'   => $request->get('user'),
             'module_id'    => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
@@ -145,10 +155,12 @@ class JobController extends Controller
         $job = new Job();
         $request->validate( [
             'nama_job'   => 'required',
+            'user'   => 'required',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);
         $job->nama_job = $request->get('nama_job');
+        $job->user = $request->get('user');
         $job->module_id = $request->get('module_id');
         $job->keterangan = $request->get('keterangan');
         $job->save();

@@ -8,6 +8,7 @@
             <tr>
                 <td>ID</td>
                 <td>Nama</td>
+                <td>User</td>
                 <td>Modul</td>
                 <td>Project</td>
                 <td>Keterangan</td>
@@ -18,6 +19,7 @@
             @foreach($job as $jobs)
                 <tr>
                     <td>{{$jobs->id_job}}</td>
+                    <td>{{$jobs->user}}</td>
                     <td>{{$jobs->nama_job}}</td>
                     <td>{{$jobs->nama_module}}</td>
                     <td>{{$jobs->nama_project}}</td>
