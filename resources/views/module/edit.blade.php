@@ -10,7 +10,7 @@
         <div class="card-header">
             Edit User
         </div>
-        < class="card-body">
+        <div class="card-body">
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

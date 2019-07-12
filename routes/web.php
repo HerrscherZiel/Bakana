@@ -44,6 +44,8 @@ Route::post('/teamprojects/create','TeamProjectController@store');
 
 Route::post('/modules/create','ModuleController@store');
 
+/*Route::get('/module/{module}','ModuleController@show');*/
+
 Route::get('/module/creates/{project}','ModuleController@creates');
 
 Route::get('/module/creates/{project}/project','ModuleController@stores');
