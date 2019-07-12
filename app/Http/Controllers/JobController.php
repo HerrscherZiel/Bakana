@@ -54,6 +54,23 @@ class JobController extends Controller
         }
     }
 
+    public function createFromModule($id)
+    {
+        //
+        if (Auth::user()->hasRole('Project Manager')) {
+            $module = Module::find($id);
+            $project = Project::all();
+
+            /*dd($module);*/
+
+            return view('job.creates', compact('module', 'project'))/*->with('module', $module)*/ ;
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

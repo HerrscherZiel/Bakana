@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Job;
 use App\Module;
 use App\Project;
 use Illuminate\Http\Request;
@@ -146,7 +147,23 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        //
+        $module = Module::join('project', 'project_id', '=', 'id_project')
+            ->select('module.*', 'project.nama_project')
+            ->where('module.id_module', '=', $id )
+            ->getQuery()
+            ->get();
+
+        /*$modules = $module;*/
+        /*$project = Project::all();*/
+        $job = Job::join('module', 'module_id', '=', 'id_module')
+            ->select('jobs.*','module.nama_module')
+            ->where('module.id_module', '=', $id )
+            ->getQuery()
+            ->get();
+        /*$job = Job::all();*/
+        /*dd($job);*/
+
+        return view('module.show', compact('module','job'))/*->with('module',$module)*//*->with('module', $job)*/;
     }
 
     /**
@@ -164,6 +181,20 @@ class ModuleController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::all();
             $module = Module::find($id);
+
+            /*$module = Module::join('project','module.id_module','=','project.id_project')
+                ->select('module.*', 'project.id_project', 'project.nama_project')
+                ->where('module.id_module','=',4)
+                ->getQuery()
+                ->get();*/
+
+            /*$project = Project::join('module','module.id_module','=','project.id_project')
+                ->select('module.*', 'project.id_project', 'project.nama_project')
+                ->where('module.id_module','=',2)
+                ->getQuery()
+                ->get();*/
+
+            /*dd($module);*/
 
             return view('module.edit', compact('module', 'project'));
         }
