@@ -30,6 +30,27 @@ class TeamProjectController extends Controller
         return view('team.index')->with('team_projects', $team_projects);
     }
 
+    //Index from Show Project
+
+    public function indexes($id)
+    {
+        //
+        $project = Project::find($id);
+
+        $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
+            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+            ->join('role', 'role.id_role', '=', 'users.role_id')
+            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
+            ->distinct('users.name')
+            ->where('project.id_project', '=', $id )
+            ->getQuery()
+            ->get();
+
+//        dd($team_projects);
+
+        return view('team.teamindex', compact('project', 'team_projects'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -104,6 +125,7 @@ class TeamProjectController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -123,6 +145,29 @@ class TeamProjectController extends Controller
 
             $team_projects = TeamProject::find($id);
             return view('team.edit', compact('team_projects', 'user', 'project', 'role'));
+
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+    }
+
+    //Edit from TeamProject
+
+    public function editTeamProject($id)
+    {
+        //
+        if (Auth::user()->hasRole('Project Manager')) {
+
+            $user = User::all();
+            $project = Project::all();
+            $role = Role::all();
+
+            $team_projects = TeamProject::find($id);
+            return view('team.edit_team_project_index', compact('team_projects', 'user', 'project', 'role'));
 
         }
 
@@ -153,6 +198,24 @@ class TeamProjectController extends Controller
         $team_projects->project_id = $request->input('project_id');
         $team_projects->save();
         return redirect('/teamprojects')->with('success', 'User Ditambahkan');
+    }
+
+
+    //Update editTeamProject
+
+    public function updateTeamProject(Request $request, $id)
+    {
+        //
+        $request->validate( [
+            'user_id' => 'required',
+            'project_id' => 'required']);
+
+        $id_project = Project::find($id);
+        $team_projects =  TeamProject::find($id);
+        $team_projects->user_id = $request->input('user_id');
+        $team_projects->project_id = $request->input('project_id');
+        $team_projects->save();
+        return redirect('/team/'/$id_project)->with('success', 'User Ditambahkan');
     }
 
     /**

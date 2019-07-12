@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Job;
 use App\Module;
 use App\Project;
+use App\TeamProject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,6 +37,31 @@ class ModuleController extends Controller
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
+    }
+
+    public function indexes($id)
+    {
+        //
+        $project = Project::find($id);
+
+        $module = Module::join('project', 'project_id', '=', 'id_project')
+            ->select('module.*', 'project.id_project', 'project.nama_project')
+            ->where('project.id_project', '=', $id )
+            ->getQuery()
+            ->get();
+
+        /*$team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
+            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+            ->join('role', 'role.id_role', '=', 'users.role_id')
+            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
+            ->distinct('users.name')
+            ->where('project.id_project', '=', $id )
+            ->getQuery()
+            ->get();*/
+
+//        dd($team_projects);
+
+        return view('module.indexproject', compact('project', 'module'));
     }
 
 
@@ -83,9 +109,10 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         //
+        $idProject = Project::find($id);
         $request->validate( [
             'nama_module'   =>'required',
             'waktu'         =>'required',
@@ -104,7 +131,8 @@ class ModuleController extends Controller
         /*$module = Module::with('projects')->all();*/
         $module->save();
 
-        return redirect('/projects/')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+/*        return Redirect::to('projects/'.$idProject);*/
+        return redirect('/projects/'.$idProject)->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
 
 //    public function stores(Request $request, $id)
@@ -184,19 +212,6 @@ class ModuleController extends Controller
             $project = Project::all();
             $module = Module::find($id);
 
-            /*$module = Module::join('project','module.id_module','=','project.id_project')
-                ->select('module.*', 'project.id_project', 'project.nama_project')
-                ->where('module.id_module','=',4)
-                ->getQuery()
-                ->get();*/
-
-            /*$project = Project::join('module','module.id_module','=','project.id_project')
-                ->select('module.*', 'project.id_project', 'project.nama_project')
-                ->where('module.id_module','=',2)
-                ->getQuery()
-                ->get();*/
-
-            /*dd($module);*/
 
             return view('module.edit', compact('module', 'project'));
         }

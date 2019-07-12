@@ -24,8 +24,8 @@
                         <option value="" disabled>Select Project</option>
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}"
-                                    @if($projects->id_project !== $module->project_id)
-                                         disabled
+                                    @if($projects->id_project === $module->project_id)
+                                         selected
                                     @endif
                             >{{$projects->nama_project}}</option>
                         @endforeach
