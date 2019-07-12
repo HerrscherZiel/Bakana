@@ -3,12 +3,10 @@
 @section('content')
 <div class="card uper">
     <div class="card-header">
-        @foreach($module as $modules)
-        <h4>{{$modules->nama_module}}</h4>
+        {{--<h4>{{$ko}}</h4>
+        <a href="/jobs/creates/{{$module->id_module}}" class="btn btn-primary pull-right">Add Job</a>
+        <br>--}}
 
-        <a href="/jobs/create/{{$modules->id_module}}" class="btn btn-primary pull-right">Add Job</a>
-        <br>
-        @endforeach
     </div>
     <div class="card-body">
         @foreach($module as $modules)
@@ -24,7 +22,7 @@
     </div>
 
 
-    {{--<table class="table table-striped">
+    <table class="table table-striped">
         <thead>
         <tr>
             <td>Nama</td>
@@ -35,6 +33,7 @@
         </thead>
         <tbody>
         @foreach($job as $jobs)
+
         <tr>
             <td>{{$jobs->nama_job}}</td>
             <td>{{$jobs->nama_module}}</td>
@@ -62,7 +61,7 @@
         </tr>
         @endforeach
         </tbody>
-    </table>--}}
+    </table>
 
 
 </div>

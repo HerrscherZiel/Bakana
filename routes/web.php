@@ -44,13 +44,20 @@ Route::post('/teamprojects/create','TeamProjectController@store');
 
 Route::post('/modules/create','ModuleController@store');
 
-/*Route::get('/module/{module}','ModuleController@show');*/
+
 
 Route::get('/module/creates/{project}','ModuleController@creates');
 
 Route::get('/module/creates/{project}/project','ModuleController@stores');
 
 Route::post('/module/creates/{project}/project','ModuleController@stores');
+
+
+Route::get('/jobs/creates/{module}','JobController@createFromModule');
+
+Route::get('/jobs/creates/{module}/module','JobController@store');
+
+Route::post('/jobs/creates/{module}/module','JobController@store');
 
 //
 

@@ -155,15 +155,15 @@ class ModuleController extends Controller
 
         /*$modules = $module;*/
         /*$project = Project::all();*/
-        /*$job = Job::join('jobs', 'module_id', '=', 'id_module')
+        $job = Job::join('module', 'module_id', '=', 'id_module')
             ->select('jobs.*','module.nama_module')
             ->where('module.id_module', '=', $id )
             ->getQuery()
-            ->get();*/
+            ->get();
         /*$job = Job::all();*/
-        /*dd($modules);*/
+        /*dd($job);*/
 
-        return view('module.show'/*, compact('module')*/)->with('module',$module);
+        return view('module.show', compact('module','job'))/*->with('module',$module)*//*->with('module', $job)*/;
     }
 
     /**
