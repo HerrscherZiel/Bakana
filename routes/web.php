@@ -67,6 +67,14 @@ Route::get('/team/creates/{project}/project','TeamProjectController@stores');
 
 Route::post('/team/creates/{project}/project','TeamProjectController@stores');
 
+Route::get('/team/{project}','TeamProjectController@indexes');
+
+Route::get('/team/{project}/edit','TeamProjectController@editTeamProject');
+
+Route::put('/team/{project}','TeamProjectController@updateTeamProject');
+
+
+
 //
 
 Route::post('/jobs/create','JobController@store');

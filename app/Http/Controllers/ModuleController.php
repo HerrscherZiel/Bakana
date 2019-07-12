@@ -83,9 +83,10 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         //
+        $idProject = Project::find($id);
         $request->validate( [
             'nama_module'   =>'required',
             'waktu'         =>'required',
@@ -104,7 +105,8 @@ class ModuleController extends Controller
         /*$module = Module::with('projects')->all();*/
         $module->save();
 
-        return redirect('/projects/')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+/*        return Redirect::to('projects/'.$idProject);*/
+        return redirect('/projects/'.$idProject)->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
 
 //    public function stores(Request $request, $id)
@@ -184,19 +186,6 @@ class ModuleController extends Controller
             $project = Project::all();
             $module = Module::find($id);
 
-            /*$module = Module::join('project','module.id_module','=','project.id_project')
-                ->select('module.*', 'project.id_project', 'project.nama_project')
-                ->where('module.id_module','=',4)
-                ->getQuery()
-                ->get();*/
-
-            /*$project = Project::join('module','module.id_module','=','project.id_project')
-                ->select('module.*', 'project.id_project', 'project.nama_project')
-                ->where('module.id_module','=',2)
-                ->getQuery()
-                ->get();*/
-
-            /*dd($module);*/
 
             return view('module.edit', compact('module', 'project'));
         }

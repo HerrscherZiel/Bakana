@@ -23,6 +23,21 @@
             <form method="post" action="{{ route('teamprojects.update', $team_projects->id_team_projects) }}">
                 @method('PATCH')
                 @csrf
+
+                <div class="form-group">
+                    <label for="project_id">Project:</label>
+                    <select name="project_id" id="" class="form-control" >
+                        @foreach($project as $projects)
+                            <option value="{{$projects->id_project}}"
+                                    @if ($projects->id === $team_projects->project_id)
+                                    selected
+                                @endif
+                            >
+                                {{$projects->nama_project}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                         <div class="form-group">
                             <label for="user_id">User:</label>
                             <select name="user_id" id="" class="form-control" >
@@ -36,19 +51,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="project_id">Project:</label>
-                            <select name="project_id" id="" class="form-control" >
-                                @foreach($project as $projects)
-                                    <option value="{{$projects->id_project}}"
-                                            @if ($projects->id === $team_projects->project_id)
-                                            selected
-                                        @endif
-                                    >
-                                        {{$projects->nama_project}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                 
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>

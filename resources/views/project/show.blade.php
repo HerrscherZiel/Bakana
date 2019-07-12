@@ -9,6 +9,11 @@
         <br>
         <br>
         <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right">Add Team</a>
+        <br>
+        <br>
+        <br>
+        <a href="/team/{{$project->id_project}}" class="btn btn-primary pull-right">Show Team</a>
+
     </div>
     <div class="card-body">
         <h6>Kode = {{$project->kode_project}}</h6>

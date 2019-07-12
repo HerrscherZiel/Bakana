@@ -16,19 +16,21 @@
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
                 </div>
-                <div class="form-group">
-                    <label for="user_id">User:</label>
-                    <select name="user_id" id="" class="form-control">
-                        @foreach($user as $users)
-                            <option value="{{$users->id}}">{{$users->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
+
                 <div class="form-group">
                     <label for="project_id">Project:</label>
                     <select name="project_id" id="" class="form-control">
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}">{{$projects->nama_project}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_id">User:</label>
+                    <select name="user_id" id="" class="form-control">
+                        @foreach($user as $users)
+                            <option value="{{$users->id}}">{{$users->name}}</option>
                         @endforeach
                     </select>
                 </div>
