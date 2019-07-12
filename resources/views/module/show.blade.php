@@ -1,71 +1,79 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card uper">
-    <div class="card-header">
-        {{--<h4>{{$ko}}</h4>--}}
-        <a href="/jobs/creates/{{$mod->id_module}}" class="btn btn-primary pull-right">Add Job</a>
-        <br>
-
-    </div>
-    <div class="card-body">
-        @foreach($module as $modules)
-        <h6>Nama = {{$modules->nama_module}}</h6>
-        <h6>Waktu = {{$modules->waktu}}</h6>
-        <h6>Status = {{$modules->status}}</h6>
-        <h6>Project = {{$modules->nama_project}}</h6>
-        <h6>Keterangan = {{$modules->keterangan}}</h6>
-
-        <small>Written On {{$modules->created_at}}</small>
-        @endforeach
-
-    </div>
-
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <td>Nama</td>
-            <td>User</td>
-            <td>Module</td>
-            <td>Keterangan</td>
-            <td>Action</td>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($job as $jobs)
-
-        <tr>
-            <td>{{$jobs->nama_job}}</td>
-            <td>{{$jobs->user}}</td>
-            <td>{{$jobs->nama_module}}</td>
-            <td>{{$jobs->keterangan}}</td>
-
-            <td>
-                <div class="btn-group">
-                    <a class="btn btn-info" href="/jobs/{{$jobs->id_job}}/edit">
-                        <i class="fa fa-lg fa-edit">
-                        </i>
-                    </a>
-
-                    <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">
-                            <i class="fa fa-lg fa-trash">
+<div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <section class="invoice">
+          <div class="row mb-4">
+            <div class="col-9">
+                @foreach($module as $modules)
+              <h2 class="page-header">{{$modules->nama_module}}</h2>
+              @endforeach
+            </div>
+            <div class="col-3">
+                <a href="/jobs/creates/{{$mod->id_module}}" class="btn btn-primary pull-right">Add Job</a>
+            </div>
+          </div>
+          <div class="row invoice-info mb-2">
+            @foreach($module as $modules)
+            <div class="col-4">
+              <address>Project: <strong>{{$modules->nama_project}}</strong><br><br>Durasi: <strong>{{$modules->waktu}}</strong></address>
+            </div>
+            <div class="col-4">Status: <b>{{$modules->status}}</b><br>Keterangan:<br><b>{{$modules->keterangan}}</b></div>
+             @endforeach
+          </div>
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Nama</th>
+                    <th>Module</th>
+                    <th>Keterangan</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($job as $jobs)
+                  <tr>
+                    <td>{{$jobs->nama_job}}</td>
+                    <td>{{$jobs->nama_module}}</td>
+                    <td>{{$jobs->keterangan}}</td>
+                    <td>
+                        <div class="btn-group">
+                        
+                        <a class="btn btn-info" href="/jobs/{{$jobs->id_job}}/edit">
+                            <i class="fa fa-lg fa-edit">
                             </i>
-                        </button>
+                        </a>
+                            <form class="delete" action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
+                                <i class="fa fa-lg fa-trash">
+                                </i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row d-print-none mt-2">
+            @foreach($module as $modules)
+            <div class="col-12 text-right"><small>Written On {{$modules->created_at}}</small></div>
+            @endforeach
+          </div>
+        </section>
+      </div>
+    </div>
+</div> 
 
-                    </form>
 
-                </div>
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-
-</div>
 
 @endsection
