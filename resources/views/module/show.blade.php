@@ -3,9 +3,9 @@
 @section('content')
 <div class="card uper">
     <div class="card-header">
-        {{--<h4>{{$ko}}</h4>
+        <h4>{{$ko}}</h4>
         <a href="/jobs/creates/{{$module->id_module}}" class="btn btn-primary pull-right">Add Job</a>
-        <br>--}}
+        <br>
 
     </div>
     <div class="card-body">
