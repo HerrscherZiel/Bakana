@@ -92,6 +92,10 @@
 
                 <td>
                     <div class="btn-group">
+                        <a class="btn btn-primary" href="/modules/{{$modules->id_module}}">
+                            <i class="fa fa-lg fa-eye">
+                            </i>
+                        </a>
                         <a class="btn btn-info" href="/modules/{{$modules->id_module}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
