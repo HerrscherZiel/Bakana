@@ -1,56 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
-    <div class="card uper">
-        <div class="card-header">
-            Edit User
-        </div>
-        <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br />
-            @endif
-            <form method="post" action="{{ route('jobs.update', $job->id_job) }}">
-                @method('PATCH')
-                @csrf
-                {{--<div class="form-group">
-                    <label for="id_job">ID:</label>
-                    <input type="text" class="form-control" name="id_job" value={{ $job->id_job }} />
-                </div>--}}
+<div class="col-md-12">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div><br />
+    @endif
+     <div class="tile">
+        <h3 class="tile-title">Edit Job</h3>
+        <form method="post" action="{{ route('jobs.update', $job->id_job) }}">
+            @method('PATCH')
+            @csrf
+            <div class="tile-body">
                 <div class="form-group">
-                    <label for="nama_job">Nama:</label>
-                    <input type="text" class="form-control" name="nama_job" value={{ $job->nama_job }} />
-                </div>
-                <div class="form-group">
-                    <label for="module_id">Modul ID:</label>
-                    <select class="form-control" name="module_id">
-                        <option value="">Select Project</option>
-                        @foreach($module as $modules)
-                            <option value="{{$modules->id_module}}"
-                                    @if($modules->id_module === $job->module_id)
-                                    selected
-                                    @endif
-                            >{{$modules->nama_module}}</option>
+                    <input type="hidden" value="{{csrf_token()}}" name="_token" />
+                    <label class="control-label">Module</label>
+                    <select class="form-control" name="module_id" required="">
+                       @foreach($module as $modules)
+                        <option value="{{$modules->id_module}}"
+                                @if($modules->id_module === $job->module_id)
+                                selected
+                                @endif
+                        >{{$modules->nama_module}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="keterangan">Keterangan:</label>
-                    <input type="text" class="form-control" name="keterangan" value={{ $job->keterangan }} />
+                    <label class="control-label">Nama Job</label>
+                  <input class="form-control" type="text" name="nama_job" value={{ $job->nama_job }}>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Keterangan</label>
+                  <textarea class="form-control" rows="4" name="keterangan">{{ $job->keterangan }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
-    </div>
+            </div>
+            <div class="tile-footer">
+              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+              <a class="btn btn-secondary" href="/jobs"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+            </div>
+        </form>
+      </div>
+</div>
 @endsection

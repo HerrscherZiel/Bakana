@@ -148,6 +148,10 @@
     <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
      <script type="text/javascript">
         $('.input-daterange input').each(function() {
             $(this).datepicker('clearDates'); 
@@ -221,6 +225,11 @@
       var ctxp = $("#pieChartDemo").get(0).getContext("2d");
       var pieChart = new Chart(ctxp).Pie(pdata);
     </script>
+    <script>
+    $(".delete").on("submit", function(){
+        return confirm("Are you sure want to delete?");
+    });
+</script>
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {

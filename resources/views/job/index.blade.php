@@ -1,40 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <table class="table table-striped">
+<div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <table class="table table-hover table-bordered" id="sampleTable">
+            <a href="{{url('/jobs/create')}}" class="btn btn-primary mb-3">Create Job</a>
             <thead>
-                <a href="{{url('/jobs/create')}}" class="btn btn-success pull-left">Add Job</a>
-            <tr>
-                <td>ID</td>
-                <td>Nama</td>
-                <td>Modul</td>
-                <td>Project</td>
-                <td>Keterangan</td>
-                <td>Action</td>
-            </tr>
+              <tr>
+                <th>Job</th>
+                <th>Modul</th>
+                <th>Project</th>
+                <th>Keterangan</th>
+                <th>Action</th>
+              </tr>
             </thead>
             <tbody>
-            @foreach($job as $jobs)
-                <tr>
-                    <td>{{$jobs->id_job}}</td>
-                    <td>{{$jobs->nama_job}}</td>
-                    <td>{{$jobs->nama_module}}</td>
-                    <td>{{$jobs->nama_project}}</td>
-                    <td>{{$jobs->keterangan}}</td>
-                   
-
-                    <td><a href="/jobs/{{$jobs->id_job}}/edit" class="btn btn-primary">Edit</a>
-
-                    <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+              <tr>
+                @foreach($job as $jobs)
+                <td>{{$jobs->nama_job}}</td>
+                <td>{{$jobs->nama_module}}</td>
+                <td>{{$jobs->nama_project}}</td>
+                <td>{{$jobs->keterangan}}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-info" href="/jobs/{{$jobs->id_job}}/edit">
+                            <i class="fa fa-lg fa-edit">
+                            </i>
+                        </a>
+                            <form class="delete" action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
+                                <i class="fa fa-lg fa-trash">
+                                </i>
+                                </button>
+                            </form>
+                    </div>
+                </td>
+              </tr>
+               @endforeach
             </tbody>
-        </table>
-        <div>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
 @endsection

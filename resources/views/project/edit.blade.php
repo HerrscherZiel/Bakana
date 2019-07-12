@@ -23,13 +23,13 @@
                 <input class="form-control" name="kode_project" type="text" value={{ $project->kode_project }}>
             </div>
             <div class="form-group">
-                <label class="control-label">Project Name</label>
+                <label class="control-label">Nama Project</label>
               <input class="form-control" type="text" name="nama_project" value={{ $project->nama_project }}>
             </div>
             <div class="form-group input-group ">
-                <label class="control-label mt-2 mr-2">Start Date</label>
+                <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                 <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_mulai" value={{ $project->tgl_mulai }}>
-                <label class="control-label mt-2 ml-5 mr-2">Finish Date</label>
+                <label class="control-label mt-2 ml-5 mr-2">Tanggal Selesai</label>
                 <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_selesai" value={{ $project->tgl_selesai }}>
             </div>
             <div class="form-group">
@@ -37,7 +37,7 @@
               <input class="form-control" type="text" name="status" value={{ $project->status }}>
             </div>
             <div class="form-group">
-                <label class="control-label">Description</label>
+                <label class="control-label">Keterangan</label>
               <textarea class="form-control" rows="4" name="ket">{{ $project->ket }}</textarea>
             </div>
         </div>
