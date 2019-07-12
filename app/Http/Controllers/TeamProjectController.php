@@ -52,6 +52,28 @@ class TeamProjectController extends Controller
         }
     }
 
+    //Show Project Creates
+
+    public function creates($id)
+    {
+        //
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project = Project::find($id);
+            $role = Role::all();
+            $user = User::all();
+
+
+//            dd($project);
+            return view('team.creates', compact('user', 'project', 'role'));
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *

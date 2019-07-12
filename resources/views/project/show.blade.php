@@ -5,6 +5,10 @@
     <div class="card-header">
         <h4>{{$project->nama_project}}</h4>
         <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary pull-right">Add Module</a>
+        <br>
+        <br>
+        <br>
+        <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right">Add Team</a>
     </div>
     <div class="card-body">
         <h6>Kode = {{$project->kode_project}}</h6>
@@ -13,7 +17,8 @@
         <h6>Tgl Selesai = {{$project->tgl_selesai}}</h6>
         <h6>Status = {{$project->status}}</h6>
         <h6>Keterangan = {{$project->ket}}</h6>
-        <div class="accordion" id="accordionExample">
+
+{{--        <div class="accordion" id="accordionExample">
           <div class="card">
             <div class="card-header" id="headingOne">
               <h3 class="mb-0">
@@ -57,7 +62,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>--}}
         <small>Written On {{$project->created_at}}</small>
 
     </div>
