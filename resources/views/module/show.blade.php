@@ -26,6 +26,7 @@
         <thead>
         <tr>
             <td>Nama</td>
+            <td>User</td>
             <td>Module</td>
             <td>Keterangan</td>
             <td>Action</td>
@@ -36,6 +37,7 @@
 
         <tr>
             <td>{{$jobs->nama_job}}</td>
+            <td>{{$jobs->user}}</td>
             <td>{{$jobs->nama_module}}</td>
             <td>{{$jobs->keterangan}}</td>
 
