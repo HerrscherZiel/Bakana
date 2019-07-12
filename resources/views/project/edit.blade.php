@@ -16,7 +16,7 @@
     <form method="post" action="{{ route('projects.update', $project->id_project) }}">
         @method('PATCH')
                 @csrf
-        <div class="tile-body">
+<div class="tile-body">
             <div class="form-group">
                 <label class="control-label">Project Code</label>
                 <input type="hidden" value="{{csrf_token()}}" name="_token" />

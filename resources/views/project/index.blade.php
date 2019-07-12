@@ -17,9 +17,15 @@
                     <i class="fa fa-lg fa-edit">
                     </i>
                 </a>
-                <button class="btn btn-primary" href="javascript:;" data-toggle="modal" onclick="deleteData({{$projects->id_project}})" data-target="#hapus" >
-                    <i class="fa fa-lg fa-trash"></i>
+                <form action="{{ route('projects.destroy', $projects->id_project)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-lg fa-trash">
+                    </i>
                 </button>
+                    </form>
                </div>
             </div>
             <div class="tile-body">

@@ -31,19 +31,21 @@
                                 <i class="fa fa-lg fa-edit">
                                 </i>
                             </a>
-                            <button class="btn btn-danger" >
+
                                 <form action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
                                 @csrf
                                 @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">
                                     <i class="fa fa-lg fa-trash">
                                     </i>
+                                    </button>
                                 </form>
-                            </button>
+
                         </div>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        <div>
+        </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+//use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
@@ -19,14 +20,16 @@ class TimesheetController extends Controller
     {
         //
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
-            ->join('team_projects','team_projects.user_id','=','users.id')
-            ->join('project','project.id_project','=','team_projects.project_id')
-            ->select('timesheets.*', 'users.name','project.nama_project')
+            /*->join('team_projects','team_projects.user_id','=','users.id')*/
+            /*->join('project','project.id_project','=','team_projects.project_id')*/
+            ->select('timesheets.*', 'users.name')
             ->getQuery()
             ->get();
 
+
         $timesheetView =  $timesheet;
-        /*dd($user);*/
+
+        /*dd($timesheet);*/
 
         return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
@@ -39,9 +42,20 @@ class TimesheetController extends Controller
     public function create()
     {
         //
-        $user = User::all();
+        /*$user = User::all();*/
+        /*$project = Project::all();*/
+        /*$id = auth()->user()->id;*/
+        $usher = User::join('team_projects','team_projects.user_id','=','users.id')
+            ->join('project','project.id_project','=','team_projects.project_id')
+            ->select('users.*','project.nama_project')
+            ->where('users.id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
+        /*$date = Carbon::now()->format('d-m-Y');*/
 
-        return view('timesheet.create')->with('user', $user);
+        /*dd($timesheet);*/
+
+        return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
     }
 
     /**
@@ -61,13 +75,17 @@ class TimesheetController extends Controller
                 'keterangan_timesheet' => 'required']);
 
 
+//            $date = Carbon::now()->format('d-m-Y');
             $timesheet = new Timesheet();
             $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+            $timesheet->project = $request->input('project');
             $timesheet->jam_mulai = $request->input('jam_mulai');
             $timesheet->jam_selesai = $request->input('jam_selesai');
             $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
             $timesheet->user_id = auth()->user()->id;
             $timesheet->save();
+
+            /*dd($timesheet);*/
             return redirect('/timesheets')->with('success', 'User Ditambahkan');
 
         }
@@ -82,6 +100,7 @@ class TimesheetController extends Controller
 
             $timesheet = new Timesheet();
             $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+            $timesheet->project = $request->input('project');
             $timesheet->jam_mulai = $request->input('jam_mulai');
             $timesheet->jam_selesai = $request->input('jam_selesai');
             $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
@@ -116,7 +135,9 @@ class TimesheetController extends Controller
         //
         $user = User::all();
 
+
         $timesheet = Timesheet::find($id);
+
         return view('timesheet.edit', compact('timesheet','user'));
     }
 
@@ -138,6 +159,7 @@ class TimesheetController extends Controller
 
         $timesheet =  Timesheet::find($id);
         $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+        $timesheet->project = $request->input('project');
         $timesheet->jam_mulai = $request->input('jam_mulai');
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');

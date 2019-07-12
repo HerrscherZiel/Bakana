@@ -15,6 +15,7 @@ class Timesheet extends Model
 
     protected $fillable = [
         'tgl_timesheet',
+        'project',
         'jam_mulai',
         'jam_selesai',
         'keterangan_timesheet',

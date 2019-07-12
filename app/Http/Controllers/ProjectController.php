@@ -20,7 +20,11 @@ class ProjectController extends Controller
         //
 //        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
         $project =  Project::orderBy('id_project', 'asc')->paginate(10);
+
+
+
         return view('project.index')->with('project', $project);
+//        return view('project.index', compact('project', 'module'));
     }
 
     /**
@@ -41,21 +45,21 @@ class ProjectController extends Controller
         }
     }
 
-    public function creates($id)
-    {
-        //
-        if (Auth::user()->hasRole('Project Manager')) {
-            $project = Project::all($id);
-
-            return view('project.creates')->with('project', $project);
-        }
-
-        else{
-            //Tambah warning
-            return view('home')->with(abort(403, 'Unauthorized action.'));
-        }
-
-    }
+//    public function creates($id)
+//    {
+//        //
+//        if (Auth::user()->hasRole('Project Manager')) {
+//            $project = Project::all($id);
+//
+//            return view('project.creates')->with('project', $project);
+//        }
+//
+//        else{
+//            //Tambah warning
+//            return view('home')->with(abort(403, 'Unauthorized action.'));
+//        }
+//
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -89,32 +93,32 @@ class ProjectController extends Controller
         return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
 
-    public function stores(Request $request, $id)
-    {
-        //
-        $request->validate( [
-            'nama_module'   =>'required',
-            'waktu'         =>'required',
-            'status'        =>'required',
-            'keterangan'    =>'nullable'
-        ]);
-
-        $project = Project::find($id);
-
-        $module = new Module([
-            'nama_module'           => $request->get('nama_module'),
-            'waktu'                 => $request->get('waktu'),
-            'status'                => $request->get('status'),
-            $project->id_project    => $request->get('project_id'),
-            'keterangan'            => $request->get('keterangan'),
-        ]);
-
-        /*$module = Module::with('projects')->all();*/
-        $module->save();
-
-        return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
-
-    }
+//    public function stores(Request $request, $id)
+//    {
+//        //
+//        $request->validate( [
+//            'nama_module'   =>'required',
+//            'waktu'         =>'required',
+//            'status'        =>'required',
+//            'keterangan'    =>'nullable'
+//        ]);
+//
+//        $project = Project::find($id);
+//
+//        $module = new Module([
+//            'nama_module'           => $request->get('nama_module'),
+//            'waktu'                 => $request->get('waktu'),
+//            'status'                => $request->get('status'),
+//            $project->id_project    => $request->get('project_id'),
+//            'keterangan'            => $request->get('keterangan'),
+//        ]);
+//
+//        /*$module = Module::with('projects')->all();*/
+//        $module->save();
+//
+//        return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+//
+//    }
 
 
     /**
@@ -127,8 +131,15 @@ class ProjectController extends Controller
     {
         //
         $project = Project::find($id);
+        $module = Module::join('project', 'project_id', '=', 'id_project')
+            ->select('module.*')
+            ->where('project.id_project', '=', $id )
+            ->getQuery()
+            ->get();
 
-        return view('project.show')->with('project', $project);
+//        dd($module);
+
+          return view('project.show', compact('project', 'module'));
     }
 
     /**
