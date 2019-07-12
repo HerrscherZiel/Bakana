@@ -8,11 +8,18 @@
           <div class="tile">
             <div class="tile-title-w-btn">
               <h3 class="title">{{$projects->nama_project}}</h3>
+                <a href="/module/{{$projects->id_project}}" class="btn btn-primary pull-right">Show Module</a>
+                <br>
+                <a href="/team/{{$projects->id_project}}" class="btn btn-primary pull-right">Show Team</a>
             <div class="btn-group">
                 <a class="btn btn-primary" href="/projects/{{$projects->id_project}}">
                     <i class="fa fa-lg fa-eye">
                     </i>
                 </a>
+                {{--<a class="btn btn-primary" href="/projects/{{$projects->id_project}}">
+                    <i class="fa fa-lg fa-eye">
+                    </i>
+                </a>--}}
                 <a class="btn btn-primary" href="/projects/{{$projects->id_project}}/edit">
                     <i class="fa fa-lg fa-edit">
                     </i>

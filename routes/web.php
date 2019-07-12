@@ -73,7 +73,9 @@ Route::get('/team/{project}/edit','TeamProjectController@editTeamProject');
 
 Route::put('/team/{project}','TeamProjectController@updateTeamProject');
 
+//
 
+Route::get('/module/{module}','ModuleController@indexes');
 
 //
 
