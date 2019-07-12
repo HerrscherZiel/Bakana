@@ -36,6 +36,7 @@
 
         <tr>
             <td>{{$jobs->nama_job}}</td>
+            <td>{{$jobs->user}}</td>
             <td>{{$jobs->nama_module}}</td>
             <td>{{$jobs->keterangan}}</td>
 
