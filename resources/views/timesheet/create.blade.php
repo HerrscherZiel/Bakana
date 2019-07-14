@@ -1,58 +1,46 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div><br />
-        @endif
-        <div class="row">
-            <form method="post" action="{{url('/timesheets/create')}}">
-                <div class="form-group">
-                    <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                </div>
-                <div class="form-group">
-                    <label for="project">Project:</label>
-                    <select class="form-control" name="project">
-                        <option value="">Select Project</option>
+<div class="col-md-12">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
+  <div class="tile">
+    <h3 class="tile-title">Add Timesheet</h3>
+    <form method="post" action="{{url('/timesheets/create')}}">
+        <div class="tile-body">
+            <div class="form-group">
+                <input type="hidden" value="{{csrf_token()}}" name="_token" />
+                <select class="form-control" name="project" required="">
+                        <option value="" disabled="" selected="">Select Project</option>
                         @foreach($usher as $ushers)
                             <option value="{{$ushers->nama_project}}">{{$ushers->nama_project}}</option>
                         @endforeach
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="tgl_timesheet">Tanggal:</label>
-                    <input type="date" class="form-control" name="tgl_timesheet"/>
-                </div>
-
-                 <div class="form-group">
-                    <label for="jam_mulai">Jam Mulai:</label>
-                    <input type="time" class="form-control" name="jam_mulai"/>
-                </div>
-                 <div class="form-group">
-                    <label for="jam_selesai">Jam Selesai:</label>
-                    <input type="time" class="form-control" name="jam_selesai"/>
-                </div>
-                <div class="form-group">
-                    <label for="keterangan_timesheet">Keterangan:</label>
-                    <input type="text" class="form-control" name="keterangan_timesheet"/>
-                </div>
-{{--                <div class="form-group">
-                    <label for="user_id">User:</label>
-                    <select name="user_id" id="" class="form-control">
-                        @foreach($user as $users)
-                            <option value="{{$users->id}}"selected>{{$users->name}}</option>
-                        @endforeach
-                    </select>
-                </div>--}}
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
+            </div>
+            <div class="form-group">
+              <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_timesheet" placeholder="Tanggal">
+            </div>
+            <div class="form-group input-group ">
+                <input type="text" onfocus="(this.type='time')"  class="form-control" name="jam_mulai" placeholder="Jam Mulai">
+                <div class="mt-1 ml-3 mr-3">to</div>
+                <input type="text" onfocus="(this.type='time')"  class="form-control" name="jam_selesai" placeholder="Jam Selesai">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="4" name="keterangan_timesheet" placeholder="Keterangan"></textarea>
+            </div>
         </div>
-    </div>
+        <div class="tile-footer">
+          <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Create</button>
+          <a class="btn btn-secondary" href="/timesheets"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+        </div>
+    </form>
+  </div>
+</div>
 @endsection

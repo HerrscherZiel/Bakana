@@ -10,25 +10,26 @@
               <h2 class="page-header">{{$project->nama_project}}</h2>
             </div>
             <div class="col-3">
-                <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right ">Add Team</a>
-                <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary pull-right mr-2">Add Module</a>
+                <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right "><i class="fa fa-plus"></i>Add Team</a>
+                <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary pull-right mr-2"><i class="fa fa-plus"></i>Add Module</a>
             </div>
           </div>
           <div class="row invoice-info">
             <div class="col-4">Project Code
-              <address><strong>{{$project->kode_project}}</strong></address>
+              <address><strong>{{$project->kode_project}}</strong><br><br>
+                Status: <b>{{$project->status}}</b></address>
             </div>
             <div class="col-4">From
               <address><strong>{{$project->tgl_mulai}}</strong><br>to<br><strong>{{$project->tgl_selesai}}</strong></address>
             </div>
-            <div class="col-4">Status: <b>{{$project->status}}</b><br><br>Keterangan:<br><b>{{$project->ket}}</b></div>
+            <div class="col-4">Keterangan:<br><b>{{$project->ket}}</b></div>
           </div>
           <div class="row">
             <div class="col-12 table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Nama Modul</th>
+                    <th>Modul</th>
                     <th>Waktu</th>
                     <th>Status</th>
                     <th>Keterangan</th>
