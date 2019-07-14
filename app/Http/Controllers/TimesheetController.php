@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use Carbon\Carbon;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
@@ -27,7 +27,26 @@ class TimesheetController extends Controller
             ->get();
 
 
+        
         $timesheetView =  $timesheet;
+
+        $start = Timesheet::select('timesheets.jam_mulai')
+        ->getQuery()
+        ->get();
+        $end = Timesheet::select('timesheets.jam_selesai')
+        ->getQuery()
+        ->get();
+        // $starttime = $timesheet->get(jam_mulai);
+        // $stoptime = '12:59';
+        $starts = strtotime($start);
+        $ends = strtotime($end);
+        $diff = (strtotime($ends) - strtotime($starts));
+        $total = $diff/60;
+        $time = sprintf("%02dh %02dm", floor($total/60), $total%60);
+        // dd($total);
+        
+
+        // $time = Timesheet()->duration();
 
         /*dd($timesheet);*/
 
