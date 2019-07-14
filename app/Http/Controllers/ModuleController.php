@@ -50,16 +50,6 @@ class ModuleController extends Controller
             ->getQuery()
             ->get();
 
-        /*$team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
-            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
-            ->join('role', 'role.id_role', '=', 'users.role_id')
-            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
-            ->distinct('users.name')
-            ->where('project.id_project', '=', $id )
-            ->getQuery()
-            ->get();*/
-
-//        dd($team_projects);
 
         return view('module.indexproject', compact('project', 'module'));
     }
@@ -109,10 +99,9 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         //
-        $idProject = Project::find($id);
         $request->validate( [
             'nama_module'   =>'required',
             'waktu'         =>'required',
@@ -132,7 +121,7 @@ class ModuleController extends Controller
         $module->save();
 
 /*        return Redirect::to('projects/'.$idProject);*/
-        return redirect('/projects/'.$idProject)->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
 
 //    public function stores(Request $request, $id)
