@@ -20,34 +20,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                 @foreach($timesheetView as $timesheets)
-                <td>{{$timesheets->name}}</td>
-                <td>{{$timesheets->project}}</td>
-                <td>{{$timesheets->tgl_timesheet}}</td>
-                <td>{{$mulai = $timesheets->jam_mulai}}</td>
-                <td>{{$selesai = $timesheets->jam_selesai}}</td>
-                <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }}</td>
-                <td>{{$timesheets->keterangan_timesheet}}</td>
-                <td>
+            @foreach($timesheetView as $timesheets)
+                <tr>
+
+                    <td>{{$timesheets->id_timesheets}}</td>
+                    <td>{{$timesheets->name}}</td>
+                    <td>{{$timesheets->project}}</td>
+                    <td>{{date("d-m-Y", strtotime($timesheets->tgl_timesheet))}}</td>
+                    <td>{{$mulai = $timesheets->jam_mulai}}</td>
+                    <td>{{$selesai = $timesheets->jam_selesai}}</td>
+                    <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }}</td>
+                    <td>{{$timesheets->keterangan_timesheet}}</td>
+
+
+
+                    <td>
                     <div class="btn-group">
-                        <a class="btn btn-info" href="/timesheets/{{$timesheets->id_timesheets}}/edit">
-                            <i class="fa fa-lg fa-edit">
-                            </i>
-                        </a>
-                            <form class="delete" action="{{ route('timesheets.destroy', $timesheets->id_timesheets)}}" method="post">
-                                <input type="hidden" name="_method" value="DELETE">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
-                                <i class="fa fa-lg fa-trash">
-                                </i>
-                                </button>
-                            </form>
-                    </div>
-                </td>
-              </tr>
-               @endforeach
+                    <a class="btn btn-info" href="/timesheets/{{$timesheets->id_timesheets}}/edit"><i class="fa fa-lg fa-edit">
+                            </i></a>
+
+                        <form class="delete" action="{{ route('timesheets.destroy', $timesheets->id_timesheets)}}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit" style="margin-left: -2px"><i class="fa fa-lg fa-trash">
+                                </i></button>
+                        </form>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
           </table>
         </div>

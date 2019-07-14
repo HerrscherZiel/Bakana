@@ -28,6 +28,13 @@
                   <input class="form-control" type="text" name="nama_job" placeholder="Nama Job">
                 </div>
                 <div class="form-group">
+                    <select class="form-control" name="user" required="">
+                       @foreach($mod as $mods)
+                        <option value="{{$mods->name}}">{{$mods->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                   <textarea class="form-control" rows="4" name="keterangan" placeholder="Keterangan"></textarea>
                 </div>
             </div>

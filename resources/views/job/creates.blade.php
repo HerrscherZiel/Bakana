@@ -38,6 +38,13 @@
                              <option value="{{$module->id_module}}" selected>{{$module->nama_module}}</option>
                      </select>
                 </div>
+                <div class="form-group">
+                    <select class="form-control" name="user" required="">
+                       @foreach($mod as $mods)
+                        <option value="{{$mods->name}}">{{$mods->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                  <div class="form-group">
                     <label for="keterangan">Keterangan:</label>
                     <input type="text" class="form-control" name="keterangan"/>
