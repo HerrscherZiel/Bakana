@@ -1,33 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div><a href="{{url('/roles/create')}}" class="btn btn-success">Create Role</a></div>
-        <table class="table table-striped">
+<div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <table class="table table-hover table-bordered" id="sampleTable">
+            <a href="{{url('/roles/create')}}" class="btn btn-primary mb-3">Create Role</a>
             <thead>
-            <tr>
-                <td>ID</td>
-                <td>Nama Role</td>
-                <td>Keterangan</td>
-                <td>Action</td>
-            </tr>
+              <tr>
+                <th>Nama Role</th>
+                <th>Keterangan</th>
+                <th>Action</th>
+              </tr>
             </thead>
             <tbody>
-            @foreach($role as $roles)
-                <tr>
-                    <td>{{$roles->id_role}}</td>
-                    <td>{{$roles->nama_role}}</td>
-                    <td>{{$roles->keterangan}}</td>
-                    <td><a href="/projects/{{$roles->id_role}}/edit" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('roles.destroy', $roles->id_role)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+              <tr>
+                @foreach($role as $roles)
+                <td>{{$roles->nama_role}}</td>
+                <td>{{$roles->keterangan}}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-info" href="/roles/{{$roles->id_role}}/edit">
+                            <i class="fa fa-lg fa-edit">
+                            </i>
+                        </a>
+                            <form class="delete" action="{{ route('roles.destroy', $roles->id_role)}}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
+                                <i class="fa fa-lg fa-trash">
+                                </i>
+                                </button>
+                            </form>
+                    </div>
+                </td>
+              </tr>
+               @endforeach
             </tbody>
-        </table>
-        <div>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
 @endsection

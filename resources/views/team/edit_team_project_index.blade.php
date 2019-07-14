@@ -1,34 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
-    <div class="card uper">
-        <div class="card-header">
-            Edit User
-        </div>
-        <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br />
-            @endif
-            <form method="post" action="{{ route('teamprojects.update', $team_projects->id_team_projects) }}">
-                @method('PATCH')
-                @csrf
-
+<div class="col-md-12">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div><br />
+    @endif
+     <div class="tile">
+        <h3 class="tile-title">Edit Team</h3>
+        <form method="post" action="{{ route('teamprojects.update', $team_projects->id_team_projects) }}">
+            @method('PATCH')
+            @csrf
+            <div class="tile-body">
                 <div class="form-group">
-                    <label for="nama_project">Project:</label>
-                    {{--                    <input type="text" class="form-control" name="id_module" value={{ $module->id_module }} />--}}
-                    <select class="form-control" name="project_id">
-                        <option value="" disabled>Select Project</option>
+                    <input type="hidden" value="{{csrf_token()}}" name="_token" />
+                    <label class="control-label">Project</label>
+                    <select class="form-control" name="project_id" required="">
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}"
                                     @if($projects->id_project !== $team_projects->project_id)
@@ -38,25 +30,24 @@
                         @endforeach
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label for="user_id">User:</label>
-                    <select name="user_id" id="" class="form-control" >
+                 <div class="form-group">
+                    <label class="control-label">User</label>
+                    <select class="form-control" name="user_id" required="">
                         @foreach($user as $users)
                             <option value="{{$users->id}}"
                                     @if ($users->id !== $team_projects->user_id)
                                     selected
                                 @endif
-                            >
-                                {{$users->name}}</option>
+                            >{{$users->name}}</option>
                         @endforeach
                     </select>
                 </div>
-
-
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            <div class="tile-footer">
+              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+              <a class="btn btn-secondary" href="javascript:history.go(-1)"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+            </div>
         </form>
-    </div>
-    <div>
+      </div>
+</div> 
 @endsection

@@ -6,7 +6,8 @@
       <div class="tile">
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
-            <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3">Add Timesheet</a>
+            <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
+            <a href="{{url('/timesheetss')}}" class="btn btn-primary mb-3">My Timesheet</a>
             <thead>
               <tr>
                 <th>User</th>

@@ -1,60 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
-    <div class="card uper">
-        <div class="card-header">
-            Edit Timesheet
-        </div>
-        <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br />
-            @endif
-            <form method="post" action="{{ route('timesheets.update', $timesheet->id_timesheets) }}">
-                @method('PATCH')
-                @csrf
-        {{--        <div class="form-group">
-                    <label for="user_id">User:</label>
-                    <select name="user_id" id="" class="form-control" >
-                        @foreach($user as $users)
-                            <option value="{{$users->id}}"
-                                    @if ($users->id === $timesheet->user_id)
-                                    selected
-                                @endif
-                            >
-                                {{$users->name}}</option>
-                        @endforeach
-                    </select>
-                </div>--}}
-                <div class="form-group">
-                    <label for="tgl_timesheet">Tanggal:</label>
-                    <input type="date" class="form-control" name="tgl_timesheet" value={{ $timesheet->tgl_timesheet }} />
+<div class="col-md-12">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div><br />
+    @endif
+     <div class="tile">
+        <h3 class="tile-title">Edit Timesheet</h3>
+        <form method="post" action="{{ route('timesheets.update', $timesheet->id_timesheets) }}">
+            @method('PATCH')
+            @csrf
+            <div class="tile-body">
+                 <div class="form-group">
+                    <label class="control-label">Tanggal</label>
+                  <input class="form-control" type="date" name="tgl_timesheet"  value={{ $timesheet->tgl_timesheet }}>
                 </div>
-                <div class="form-group">
-                    <label for="jam_mulai">Jam Mulai:</label>
-                    <input type="time" class="form-control" name="jam_mulai" value={{ $timesheet->jam_mulai }} />
+                 <div class="form-group">
+                    <label class="control-label">Jam Mulai</label>
+                  <input class="form-control" type="time" name="jam_mulai"  value={{ $timesheet->jam_mulai }}>
                 </div>
-                <div class="form-group">
-                    <label for="jam_selesai">Jam Selesai:</label>
-                    <input type="time" class="form-control" name="jam_selesai" value={{ $timesheet->jam_selesai }} />
+                 <div class="form-group">
+                    <label class="control-label">Jam Selesai</label>
+                  <input class="form-control" type="time" name="jam_selesai"  value={{ $timesheet->jam_selesai }}>
                 </div>
-                <div class="form-group">
-                    <label for="keterangan_timesheet">Keterangan:</label>
-                    <input type="text" class="form-control" name="keterangan_timesheet" value={{ $timesheet->keterangan_timesheet }} />
+                 <div class="form-group">
+                    <label class="control-label">Keterangan</label>
+                  <textarea class="form-control" rows="4" name="keterangan_timesheet">{{ $timesheet->keterangan_timesheet }}</textarea>
                 </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
-    </div>
+            </div>
+            <div class="tile-footer">
+              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+              <a class="btn btn-secondary" href="javascript:history.go(-1)"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+            </div>
+        </form>
+      </div>
+</div>
 @endsection
