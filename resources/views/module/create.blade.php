@@ -30,9 +30,13 @@
                 <div class="form-group">
                   <input class="form-control" type="text" name="waktu" placeholder="Durasi">
                 </div>
-                <div class="form-group">
-                  <input class="form-control" type="text" name="status" placeholder="Status">
-                </div>
+                <select class="form-control" name="status" required="">
+                    <option disabled>Select Project</option>
+                    <option value=1>Ongoing</option>
+                    <option value=2>Queue</option>
+                    {{--                        <option value=3>Pending</option>--}}
+                    {{--                        <option value=4>Completed</option>--}}
+                </select>
                 <div class="form-group">
                   <textarea class="form-control" rows="4" name="keterangan" placeholder="Keterangan"></textarea>
                 </div>

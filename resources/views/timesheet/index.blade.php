@@ -14,6 +14,7 @@
                 <th>Tanggal</th>
                 <th>Jam Mulai</th>
                 <th>Jam Selesai</th>
+                <th>Total Waktu (Menit)</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -25,7 +26,8 @@
                 <td>{{$timesheets->project}}</td>
                 <td>{{$timesheets->tgl_timesheet}}</td>
                 <td>{{$timesheets->jam_mulai}}</td>
-                <td>{{$timesheets->selesai}}</td>
+                <td>{{$timesheets->jam_selesai}}</td>
+                <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }}</td>
                 <td>{{$timesheets->keterangan_timesheet}}</td>
                 <td>
                     <div class="btn-group">

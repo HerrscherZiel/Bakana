@@ -32,11 +32,22 @@
            <div class="row">
             <div class="col-md-6">
               <a>Project Code: <b>{{$projects->kode_project}}</b></a><br>
-               <a>Status: <b>{{$projects->status}}</b></a>
+               <a>Status: <b>
+               @if ($projects->status === 1 )
+                         Ongoing
+                     @elseif($projects->status === 2 )
+                         Queue
+                     @elseif($projects->status === 3 )
+                         Pending
+                     @elseif($projects->status === 4 )
+                         Completed
+                 @endif
+               </b></a>
              </div>
              <div class="col-md-6">
                <a>dari: {{$projects->tgl_mulai}}</a><br>
-               <a>sampai: {{$projects->tgl_selesai}}</a>
+               <a>sampai: {{$projects->tgl_selesai}}</a><br>
+               <a>Total Waktu (Hari): <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</b></a>
              </div>
              <div class="col-md-12">
              <a>Keterangan: <br>{{$projects->ket}}</a>

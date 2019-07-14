@@ -26,4 +26,14 @@ class Timesheet extends Model
         return $this->belongsTo('App\User','user_id');
     }
 
+    public function duration()
+    {
+        $start = Carbon::parse($this->jam_mulai);
+        $end = Carbon::parse($this->jam_selesai);
+        $hours = $end->diffInHours($start);
+        $seconds = $end->diffInSeconds($start);
+
+    return $hours . ':' . $seconds;
+    }
+
 }

@@ -17,7 +17,17 @@
           <div class="row invoice-info">
             <div class="col-4">Project Code
               <address><strong>{{$project->kode_project}}</strong><br><br>
-                Status: <b>{{$project->status}}</b></address>
+                Status: <b>
+                @if ($project->status === 1 )
+                        Ongoing
+                    @elseif($project->status === 2 )
+                        Queue
+                    @elseif($project->status === 3 )
+                        Pending
+                    @elseif($project->status === 4 )
+                        Completed
+                    @endif
+                    </b></address>
             </div>
             <div class="col-4">From
               <address><strong>{{$project->tgl_mulai}}</strong><br>to<br><strong>{{$project->tgl_selesai}}</strong></address>
@@ -41,7 +51,15 @@
                   <tr>
                     <td>{{$modules->nama_module}}</td>
                     <td>{{$modules->waktu}}</td>
-                    <td>{{$modules->status}}</td>
+                    <td> @if ($modules->status === 1 )
+                            Ongoing
+                        @elseif($modules->status === 2 )
+                            Queue
+                        @elseif($modules->status === 3 )
+                            Pending
+                        @elseif($modules->status === 4 )
+                            Completed
+                        @endif</td>
                     <td>{{$modules->keterangan}}</td>
                     <td>
                         <div class="btn-group">

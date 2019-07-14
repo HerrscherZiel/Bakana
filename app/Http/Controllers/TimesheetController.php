@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use Carbon\Carbon;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
@@ -27,11 +27,56 @@ class TimesheetController extends Controller
             ->get();
 
 
+        
         $timesheetView =  $timesheet;
+
+        $start = Timesheet::select('timesheets.jam_mulai')
+        ->getQuery()
+        ->get();
+        $end = Timesheet::select('timesheets.jam_selesai')
+        ->getQuery()
+        ->get();
+        // $starttime = $timesheet->get(jam_mulai);
+        // $stoptime = '12:59';
+        $starts = strtotime($start);
+        $ends = strtotime($end);
+        $diff = (strtotime($ends) - strtotime($starts));
+        $total = $diff/60;
+        $time = sprintf("%02dh %02dm", floor($total/60), $total%60);
+        // dd($total);
+        
+
+        // $time = Timesheet()->duration();
 
         /*dd($timesheet);*/
 
         return view('timesheet.index')->with('timesheetView', $timesheetView);
+    }
+
+
+    //Timesheets User
+
+
+    public function UserTimesheets()
+    {
+        //
+
+
+        $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+            /*->join('team_projects','team_projects.user_id','=','users.id')*/
+            /*->join('project','project.id_project','=','team_projects.project_id')*/
+            ->select('timesheets.*', 'users.name')
+            ->where('users.id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
+
+
+        $id = auth()->user()->id;
+        $timesheetView =  $timesheet;
+
+        /*dd($timesheet);*/
+
+        return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
     }
 
     /**
@@ -86,7 +131,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
             /*dd($timesheet);*/
-            return redirect('/timesheets')->with('success', 'User Ditambahkan');
+            return redirect('/timesheetss')->with('success', 'User Ditambahkan');
 
         }
 
@@ -164,7 +209,7 @@ class TimesheetController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
-        return redirect('/timesheets')->with('success', 'User Diedit');
+        return redirect('/timesheetss')->with('success', 'User Diedit');
     }
 
     /**

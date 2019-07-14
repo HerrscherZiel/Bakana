@@ -28,7 +28,17 @@
                 <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_selesai" placeholder="Finish Date">
             </div>
             <div class="form-group">
+{{--
               <input class="form-control" type="text" name="status" placeholder="Status">
+--}}
+                <select class="form-control" name="status" required="">
+                    <option disabled>Select Project</option>
+                        <option value=1>Ongoing</option>
+                        <option value=2>Queue</option>
+{{--                        <option value=3>Pending</option>--}}
+{{--                        <option value=4>Completed</option>--}}
+                </select>
+
             </div>
             <div class="form-group">
               <textarea class="form-control" rows="4" name="ket" placeholder="Description"></textarea>
