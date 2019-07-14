@@ -34,6 +34,32 @@ class TimesheetController extends Controller
         return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
 
+
+    //Timesheets User
+
+
+    public function UserTimesheets()
+    {
+        //
+
+
+        $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+            /*->join('team_projects','team_projects.user_id','=','users.id')*/
+            /*->join('project','project.id_project','=','team_projects.project_id')*/
+            ->select('timesheets.*', 'users.name')
+            ->where('users.id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
+
+
+        $id = auth()->user()->id;
+        $timesheetView =  $timesheet;
+
+        /*dd($timesheet);*/
+
+        return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -86,7 +112,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
             /*dd($timesheet);*/
-            return redirect('/timesheets')->with('success', 'User Ditambahkan');
+            return redirect('/timesheetss')->with('success', 'User Ditambahkan');
 
         }
 
@@ -164,7 +190,7 @@ class TimesheetController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
-        return redirect('/timesheets')->with('success', 'User Diedit');
+        return redirect('/timesheetss')->with('success', 'User Diedit');
     }
 
     /**

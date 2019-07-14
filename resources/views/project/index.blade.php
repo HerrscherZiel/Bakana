@@ -16,10 +16,6 @@
                     <i class="fa fa-lg fa-eye">
                     </i>
                 </a>
-                {{--<a class="btn btn-primary" href="/projects/{{$projects->id_project}}">
-                    <i class="fa fa-lg fa-eye">
-                    </i>
-                </a>--}}
                 <a class="btn btn-primary" href="/projects/{{$projects->id_project}}/edit">
                     <i class="fa fa-lg fa-edit">
                     </i>
@@ -38,6 +34,17 @@
              <ul>
                  <li>Tanggal Mulai: {{$projects->tgl_mulai}}</li>
                  <li>Tanggal Selesai: {{$projects->tgl_selesai}}</li>
+                 <li>Status Project:
+                     @if ($projects->status === 1 )
+                         Ongoing
+                     @elseif($projects->status === 2 )
+                         Queue
+                     @elseif($projects->status === 3 )
+                         Pending
+                     @elseif($projects->status === 4 )
+                         Completed
+                 @endif
+
                  <li>Keterangan: {{$projects->ket}}</li>
              </ul>
               

@@ -45,21 +45,7 @@ Route::post('/teamprojects/create','TeamProjectController@store');
 Route::post('/modules/create','ModuleController@store');
 
 
-
-Route::get('/module/creates/{project}','ModuleController@creates');
-
-Route::get('/module/creates/{project}/project','ModuleController@stores');
-
-Route::post('/module/creates/{project}/project','ModuleController@stores');
-
-
-Route::get('/jobs/creates/{module}','JobController@createFromModule');
-
-Route::get('/jobs/creates/{module}/module','JobController@store');
-
-Route::post('/jobs/creates/{module}/module','JobController@store');
-
-//
+// Team Project
 
 Route::get('/team/creates/{project}','TeamProjectController@creates');
 
@@ -73,13 +59,31 @@ Route::get('/team/{project}/edit','TeamProjectController@editTeamProject');
 
 Route::put('/team/{project}','TeamProjectController@updateTeamProject');
 
-//
+// Module
 
 Route::get('/module/{module}','ModuleController@indexes');
 
-//
+Route::get('/module/creates/{project}','ModuleController@creates');
+
+Route::get('/module/creates/{project}/project','ModuleController@stores');
+
+Route::post('/module/creates/{project}/project','ModuleController@stores');
+
+// Jobs
 
 Route::post('/jobs/create','JobController@store');
+
+Route::get('/jobs/creates/{module}','JobController@createFromModule');
+
+Route::get('/jobs/creates/{module}/module','JobController@store');
+
+Route::post('/jobs/creates/{module}/module','JobController@store');
+
+
+// Timesheets
+
+Route::get('/timesheetss','TimesheetController@UserTimesheets');
+
 
 
 Route::group(['prefix'=>'errors','as'=>'error.'], function(){
