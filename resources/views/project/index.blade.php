@@ -45,8 +45,8 @@
                </b></a>
              </div>
              <div class="col-md-6">
-               <a>dari: {{$projects->tgl_mulai}}</a><br>
-               <a>sampai: {{$projects->tgl_selesai}}</a><br>
+               <a>dari: {{$mulai = $projects->tgl_mulai}}</a><br>
+               <a>sampai: {{$selesai = $projects->tgl_selesai}}</a><br>
                <a>Total Waktu (Hari): <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</b></a>
              </div>
              <div class="col-md-12">

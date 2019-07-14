@@ -25,8 +25,8 @@
                 <td>{{$timesheets->name}}</td>
                 <td>{{$timesheets->project}}</td>
                 <td>{{$timesheets->tgl_timesheet}}</td>
-                <td>{{$timesheets->jam_mulai}}</td>
-                <td>{{$timesheets->jam_selesai}}</td>
+                <td>{{$mulai = $timesheets->jam_mulai}}</td>
+                <td>{{$selesai = $timesheets->jam_selesai}}</td>
                 <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }}</td>
                 <td>{{$timesheets->keterangan_timesheet}}</td>
                 <td>
