@@ -65,6 +65,7 @@
                             </div>
                         </div>
                     </form>
+                    <a href="/register" class="btn btn-primary pull-right">Register</a>
                 </div>
             </div>
         </div>
