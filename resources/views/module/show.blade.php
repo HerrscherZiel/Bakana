@@ -20,7 +20,16 @@
             <div class="col-4">
               <address>Project: <strong>{{$modules->nama_project}}</strong><br><br>Durasi: <strong>{{$modules->waktu}}</strong></address>
             </div>
-            <div class="col-4">Status: <b>{{$modules->status}}</b><br>Keterangan:<br><b>{{$modules->keterangan}}</b></div>
+            <div class="col-4">Status: <b>@if ($modules->status === 1 )
+                        Ongoing
+                    @elseif($modules->status === 2 )
+                        Queue
+                    @elseif($modules->status === 3 )
+                        Pending
+                    @elseif($modules->status === 4 )
+                        Completed
+                        @endif</td>
+                </b><br>Keterangan:<br><b>{{$modules->keterangan}}</b></div>
              @endforeach
           </div>
           <div class="row">

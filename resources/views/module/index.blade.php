@@ -22,7 +22,15 @@
             @foreach($module as $modules)
             <td>{{$modules->nama_module}}</td>
             <td>{{$modules->waktu}}</td>
-            <td>{{$modules->status}}</td>
+            <td>@if ($modules->status === 1 )
+                    Ongoing
+                @elseif($modules->status === 2 )
+                    Queue
+                @elseif($modules->status === 3 )
+                    Pending
+                @elseif($modules->status === 4 )
+                    Completed
+                @endif</td></td>
             <td>{{$modules->nama_project}}</td>
             <td>{{$modules->keterangan}}</td>
             <td>
