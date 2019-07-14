@@ -12,6 +12,7 @@
                 <th>Job</th>
                 <th>Modul</th>
                 <th>Project</th>
+                <th>User</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -22,6 +23,7 @@
                 <td>{{$jobs->nama_job}}</td>
                 <td>{{$jobs->nama_module}}</td>
                 <td>{{$jobs->nama_project}}</td>
+                <td>{{$jobs->user}}</td>
                 <td>{{$jobs->keterangan}}</td>
                 <td>
                     <div class="btn-group">

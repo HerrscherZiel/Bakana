@@ -35,6 +35,18 @@
                   <input class="form-control" type="text" name="nama_job" value={{ $job->nama_job }}>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">User</label>
+                    <select class="form-control" name="user" required="">
+                       @foreach($user as $users)
+                        <option value="{{$users->name}}"
+                                @if($job->user === $users->name)
+                                selected
+                                @endif
+                        >{{$users->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="control-label">Keterangan</label>
                   <textarea class="form-control" rows="4" name="keterangan">{{ $job->keterangan }}</textarea>
                 </div>
