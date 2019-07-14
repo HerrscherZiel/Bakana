@@ -9,12 +9,12 @@
           <div class="tile-title-w-btn">
             <h3 class="title">{{$projects->nama_project}}</h3>
               
-          <div class="btn-group bs-component">
+          <div class="btn-group ">
               <a class="btn btn-primary" href="/projects/{{$projects->id_project}}">
                   <i class="fa fa-lg fa-eye">
                   </i>
               </a>
-              <a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="/projects/{{$projects->id_project}}/edit">
+              <a class="btn btn-primary" href="/projects/{{$projects->id_project}}/edit">
                   <i class="fa fa-lg fa-edit">
                   </i>
               </a>
@@ -22,7 +22,7 @@
                 <input type="hidden" name="_method" value="DELETE">
                 @csrf
                 @method('DELETE')
-              <button  data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus" class="btn btn-primary" style="margin-left: -2px">
+              <button class="btn btn-primary" style="margin-left: -2px">
                   <i class="fa fa-lg fa-trash"></i>
               </button>
             </form>
@@ -45,8 +45,8 @@
                </b></a>
              </div>
              <div class="col-md-6">
-               <a>dari: {{$projects->tgl_mulai}}</a><br>
-               <a>sampai: {{$projects->tgl_selesai}}</a><br>
+               <a>dari: {{$mulai = $projects->tgl_mulai}}</a><br>
+               <a>sampai: {{$selesai = $projects->tgl_selesai}}</a><br>
                <a>Total Waktu (Hari): <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</b></a>
              </div>
              <div class="col-md-12">
