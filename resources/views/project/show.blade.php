@@ -21,7 +21,15 @@
             <div class="col-4">From
               <address><strong>{{$project->tgl_mulai}}</strong><br>to<br><strong>{{$project->tgl_selesai}}</strong></address>
             </div>
-            <div class="col-4">Status: <b>{{$project->status}}</b><br><br>Keterangan:<br><b>{{$project->ket}}</b></div>
+            <div class="col-4">Status: <b> @if ($project->status === 1 )
+                        Ongoing
+                    @elseif($project->status === 2 )
+                        Queue
+                    @elseif($project->status === 3 )
+                        Pending
+                    @elseif($project->status === 4 )
+                        Completed
+                    @endif</b><br><br>Keterangan:<br><b>{{$project->ket}}</b></div>
           </div>
           <div class="row">
             <div class="col-12 table-responsive">
@@ -40,7 +48,15 @@
                   <tr>
                     <td>{{$modules->nama_module}}</td>
                     <td>{{$modules->waktu}}</td>
-                    <td>{{$modules->status}}</td>
+                    <td> @if ($modules->status === 1 )
+                            Ongoing
+                        @elseif($modules->status === 2 )
+                            Queue
+                        @elseif($modules->status === 3 )
+                            Pending
+                        @elseif($modules->status === 4 )
+                            Completed
+                        @endif</td>
                     <td>{{$modules->keterangan}}</td>
                     <td>
                         <div class="btn-group">

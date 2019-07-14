@@ -45,6 +45,7 @@
                      @elseif($projects->status === 4 )
                          Completed
                  @endif
+                 </li>
 
                  <li>Keterangan: {{$projects->ket}}</li>
              </ul>
