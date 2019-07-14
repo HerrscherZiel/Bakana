@@ -32,8 +32,9 @@
             </div>
             <div class="tile-body">
              <ul>
-                 <li>Tanggal Mulai: {{$projects->tgl_mulai}}</li>
-                 <li>Tanggal Selesai: {{$projects->tgl_selesai}}</li>
+                 <li>Tanggal Mulai: {{$mulai = $projects->tgl_mulai}}</li>
+                 <li>Tanggal Selesai: {{$selesai = $projects->tgl_selesai}}</li>
+                 <li>Total Waktu (Hari): {{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</li>
                  <li>Status Project:
                      @if ($projects->status === 1 )
                          Ongoing
