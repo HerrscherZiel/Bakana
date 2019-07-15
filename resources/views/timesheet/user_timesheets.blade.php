@@ -23,7 +23,6 @@
             @foreach($timesheetView as $timesheets)
                 <tr>
 
-                    <td>{{$timesheets->id_timesheets}}</td>
                     <td>{{$timesheets->name}}</td>
                     <td>{{$timesheets->project}}</td>
                     <td>{{date("d-m-Y", strtotime($timesheets->tgl_timesheet))}}</td>
