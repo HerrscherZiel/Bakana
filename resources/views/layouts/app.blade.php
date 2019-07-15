@@ -24,80 +24,11 @@
       <!-- Navbar Right Menu-->
 
       <ul class="app-nav">
-        <li class="app-search">
-          <input class="app-search__input" type="search" placeholder="Search">
-          <button class="app-search__button"><i class="fa fa-search"></i></button>
-        </li>
         <!--Notification Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
-          <ul class="app-notification dropdown-menu dropdown-menu-right">
-            <li class="app-notification__title">You have 4 new notifications.</li>
-            <div class="app-notification__content">
-              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Lisa sent you a mail</p>
-                    <p class="app-notification__meta">2 min ago</p>
-                  </div></a></li>
-              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Mail server not working</p>
-                    <p class="app-notification__meta">5 min ago</p>
-                  </div></a></li>
-              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Transaction complete</p>
-                    <p class="app-notification__meta">2 days ago</p>
-                  </div></a></li>
-              <div class="app-notification__content">
-                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Lisa sent you a mail</p>
-                      <p class="app-notification__meta">2 min ago</p>
-                    </div></a></li>
-                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Mail server not working</p>
-                      <p class="app-notification__meta">5 min ago</p>
-                    </div></a></li>
-                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Transaction complete</p>
-                      <p class="app-notification__meta">2 days ago</p>
-                    </div></a></li>
-              </div>
-            </div>
-            <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
-          </ul>
-        </li>
-        <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-              @if (Route::has('login'))
-                  @auth
-            <li><a class="dropdown-item" href="{{ url('/home') }}"><i class="fa fa-cog fa-lg"></i> Home</a></li>
-                  @else
-            <li><a class="dropdown-item" href="{{ route('login') }}"><i class="fa fa-user fa-lg"></i> Login</a></li>
-                      @if (Route::has('register'))
-            <li><a class="dropdown-item" href="{{ route('register') }}"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
-                      @endif
-                  @endauth
-              @endif
-
- {{--             @if (Route::has('login'))
-                  <div class="top-right links">
-                      @auth
-                          <a href="{{ url('/home') }}">Home</a>
-                      @else
-                          <a href="{{ route('home') }}">Login</a>
-
-                          @if (Route::has('register'))
-                              <a href="{{ route('register') }}">Register</a>
-                          @endif
-                      @endauth
-                  </div>
-              @endif--}}
-
-          </ul>
+        <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none"><i class="fa fa-sign-out fa-lg"></i>  Logout</a>
+          <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
         </li>
       </ul>
     </header>
@@ -123,14 +54,6 @@
         </li>
         <li><a class="app-menu__item" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
-          <li> <a class="dropdown-item" href="{!! url('/logout') !!}" class="btn btn-default btn-flat"
-                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  <i class="fa fa-lock"></i>Logout
-              </a>
-              <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-              </form>
-          </li>
       </ul>
     </aside>
 
@@ -154,6 +77,105 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
+<!-- Calendar-->
+<script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
+ <!-- DayPilot library -->
+<script src="{{URL::asset('js/daypilot-all.min.js')}}"></script> 
+<script>
+  var dp = new DayPilot.Scheduler("dp", {
+    timeHeaders: [{"groupBy":"Month"},{"groupBy":"Day","format":"d"}],
+    scale: "Day",
+    days: DayPilot.Date.today().daysInYear(),
+    startDate: DayPilot.Date.today().firstDayOfYear(),
+    showNonBusiness: false,
+    timeRangeSelectedHandling: "Enabled",
+    onTimeRangeSelected: function (args) {
+      var dp = this;
+      DayPilot.Modal.prompt("Create a new timeline:", "Timeline 1").then(function(modal) {
+        dp.clearSelection();
+        if (!modal.result) { return; }
+        dp.events.add(new DayPilot.Event({
+          start: args.start,
+          end: args.end,
+          id: DayPilot.guid(),
+          resource: args.resource,
+          text: modal.result
+        }));
+      });
+    },
+    eventMoveHandling: "Update",
+    onEventMoved: function (args) {
+      this.message("Timeline moved: " + args.e.text());
+    },
+    eventResizeHandling: "Update",
+    onEventResized: function (args) {
+      this.message("Timeline resized: " + args.e.text());
+    },
+    eventDeleteHandling: "Update",
+    onEventDeleted: function (args) {
+      this.message("Timeline deleted: " + args.e.text());
+    },
+    eventClickHandling: "Disabled",
+    eventHoverHandling: "Bubble",
+    bubble: new DayPilot.Bubble({
+      onLoad: function(args) {
+        // if event object doesn't specify "bubbleHtml" property 
+        // this onLoad handler will be called to provide the bubble HTML
+        args.html = "Timeline details";
+      }
+    }),
+    treeEnabled: true,
+  });
+  dp.resources = [
+    {name: "Resource 1", id: "R1"},
+    {name: "Resource 2", id: "R2"}
+  ];
+  dp.events.list = [];
+  dp.init();
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  
+    $('#external-events .fc-event').each(function() {
+  
+      // store data so the calendar knows to render an event upon drop
+      $(this).data('event', {
+        title: $.trim($(this).text()), // use the element's text as the event title
+        stick: true // maintain when user navigates (see docs on the renderEvent method)
+      });
+  
+      // make the event draggable using jQuery UI
+      $(this).draggable({
+        zIndex: 999,
+        revert: true,      // will cause the event to go back to its
+        revertDuration: 0  //  original position after the drag
+      });
+  
+    });
+  
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      editable: true,
+      droppable: true, // this allows things to be dropped onto the calendar
+      drop: function() {
+        // is the "remove after drop" checkbox checked?
+        if ($('#drop-remove').is(':checked')) {
+          // if so, remove the element from the "Draggable Events" list
+          $(this).remove();
+        }
+      }
+    });
+  
+  
+  });
+</script>
 <script type="text/javascript">
     $('.input-daterange input').each(function() {
         $(this).datepicker('clearDates'); 

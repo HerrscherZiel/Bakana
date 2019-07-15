@@ -1,16 +1,10 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
-    <div class="container">
-
-                <H2>Unauthorized Action</H2>
-                <a href="{{url('/home')}}" class="btn btn-default">Redirect to Home</a>
-            </div>
-
-
-        <div class="row">
-            <a href="{{url('/projects/create')}}" class="btn btn-success">Create Project</a>
-            <a href="{{url('/projects')}}" class="btn btn-default">All Project</a>
-        </div>
-    </div>
+<div class="page-error tile">
+        <h1><i class="fa fa-exclamation-circle"></i> Error 403</h1>
+        <p>Unauthorized Action.</p>
+        <p><a class="btn btn-primary" href="{{url('/home')}}">Go to Home</a>
+        <a class="btn btn-secondary" href="javascript:window.history.back();">Go Back</a></p>
+      </div>
 @endsection

@@ -22,8 +22,6 @@
             <tbody>
             @foreach($timesheetView as $timesheets)
                 <tr>
-
-                    <td>{{$timesheets->id_timesheets}}</td>
                     <td>{{$timesheets->name}}</td>
                     <td>{{$timesheets->project}}</td>
                     <td>{{date("d-m-Y", strtotime($timesheets->tgl_timesheet))}}</td>
@@ -31,9 +29,6 @@
                     <td>{{$selesai = $timesheets->jam_selesai}}</td>
                     <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }}</td>
                     <td>{{$timesheets->keterangan_timesheet}}</td>
-
-
-
                     <td>
                     <div class="btn-group">
                     <a class="btn btn-info" href="/timesheets/{{$timesheets->id_timesheets}}/edit"><i class="fa fa-lg fa-edit">
