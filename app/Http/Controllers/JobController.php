@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Job;
 use App\Module;
 use App\Project;
+use App\Util\Utils;
+use Illuminate\Support\Facades\Session;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +20,7 @@ class JobController extends Controller
      */
     public function index()
     {
+        Session::put('title', 'Dashboard Job');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $job = Job::join('module', 'module_id', '=', 'id_module')
@@ -42,6 +45,7 @@ class JobController extends Controller
      */
     public function create()
     {
+        Session::put('title', 'Create Job');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $mod = Module::join('project','module.project_id','=','project.id_project')
@@ -66,6 +70,7 @@ class JobController extends Controller
 
     public function createFromModule($id)
     {
+        Session::put('title', 'Create Job');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $mod = Module::join('project','module.project_id','=','project.id_project')
@@ -137,6 +142,7 @@ class JobController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit Job');
         //
 
         if (Auth::user()->hasRole('Project Manager')) {

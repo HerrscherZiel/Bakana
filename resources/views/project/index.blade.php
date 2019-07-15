@@ -51,7 +51,8 @@
                <a>Sisa Waktu (Hari): <b>{{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) }}</b></a>
              </div>
              <div class="col-md-12">
-             <a>Keterangan: <br>{{$projects->ket}}</a>
+             <div class="content hideContent">Keterangan: <br><br>{{$projects->ket}}</div>
+             <div class="show-more"><a>Show more</a></div>
              </div>
            </div>
           </div>

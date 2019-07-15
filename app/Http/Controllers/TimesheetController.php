@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
+use App\Util\Utils;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -17,6 +19,7 @@ class TimesheetController extends Controller
      */
     public function index()
     {
+        Session::put('title', 'Dashboard Timesheet');
         //
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
             /*->join('team_projects','team_projects.user_id','=','users.id')*/
@@ -60,7 +63,7 @@ class TimesheetController extends Controller
     {
         //
 
-
+        Session::put('title', 'My Timesheet');
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
             /*->join('team_projects','team_projects.user_id','=','users.id')*/
             /*->join('project','project.id_project','=','team_projects.project_id')*/
@@ -85,6 +88,7 @@ class TimesheetController extends Controller
      */
     public function create()
     {
+        Session::put('title', 'Create Timesheet');
         //
         /*$user = User::all();*/
         /*$project = Project::all();*/
@@ -176,6 +180,7 @@ class TimesheetController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit Timesheet');
         //
         $user = User::all();
 

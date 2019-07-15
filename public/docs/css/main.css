@@ -15236,3 +15236,19 @@ be a descendant of the grid when it is being dragged.
 }
 .scheduler_default_corner div:nth-of-type(2) {
     display: none !important;
+  }
+.hideContent {
+    overflow: hidden;
+    line-height: 1em;
+    height: 1em;
+}
+
+.showContent {
+    line-height: 1em;
+    height: auto;
+}
+
+.show-more {
+    text-decoration: underline;
+    cursor: pointer;
+}

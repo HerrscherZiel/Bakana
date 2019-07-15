@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use App\Util\Utils;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -19,6 +21,7 @@ class UserController extends Controller
 
     public function index()
     {
+        Session::put('title', 'Dashboard User');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $users = User::join('role', 'role.id_role', '=', 'users.role_id')
@@ -121,6 +124,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit User');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $role = Role::all();

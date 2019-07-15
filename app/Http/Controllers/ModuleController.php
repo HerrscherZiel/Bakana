@@ -6,6 +6,8 @@ use App\Job;
 use App\Module;
 use App\Project;
 use App\TeamProject;
+use Illuminate\Support\Facades\Session;
+use App\Util\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +20,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        Session::put('title', 'Dashboard Modul');
         //
         /*$module = Module::orderBy('id_module', 'asc')->paginate(10);*/
         if (Auth::user()->hasRole('Project Manager')) {
@@ -62,6 +65,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
+        Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::all();
@@ -78,6 +82,7 @@ class ModuleController extends Controller
 
     public function creates($id)
     {
+        Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::find($id);
@@ -164,6 +169,7 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
+        Session::put('title', 'Detail Modul');
         $module = Module::join('project', 'project_id', '=', 'id_project')
             ->select('module.*','project.id_project', 'project.nama_project')
             ->where('module.id_module', '=', $id )
@@ -193,6 +199,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit Modul');
         //
         /*$ticket = Ticket::where('user_id', auth()->user()->id)
             ->where('id', $id)

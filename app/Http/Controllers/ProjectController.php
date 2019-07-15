@@ -6,6 +6,8 @@ use App\Module;
 use App\TeamProject;
 use Illuminate\Http\Request;
 use App\Project;
+use Illuminate\Support\Facades\Session;
+use App\Util\Utils;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -18,6 +20,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        Session::put('title', 'Dashboard Project');
         //
 //        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
         $project =  Project::orderBy('id_project', 'asc')->paginate(10);
@@ -38,6 +41,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        Session::put('title', 'Create Project');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             return view('project.create');
@@ -133,6 +137,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        Session::put('title', 'Detail Project');
         // dd($id);
         //
         $project = Project::find($id);
@@ -141,7 +146,7 @@ class ProjectController extends Controller
             ->where('project.id_project', '=', $id )
             ->getQuery()
             ->get();
-            
+
             if(count($module) <= 0){
                 exit();
             }
@@ -157,6 +162,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit Project');
         //
         /*$ticket = Ticket::where('user_id', auth()->user()->id)
             ->where('id', $id)

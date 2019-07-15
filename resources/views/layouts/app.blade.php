@@ -21,7 +21,7 @@
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
         <li>
-          <a class="app-nav__item" onclick="openFullscreen();"><i class="fa fa-expand-arrows fa-lg"></i> 
+          <a class="app-nav__item" href="#" onclick="openFullscreen();"><i class="fa fa-expand fa-lg"></i> 
           </a>
         </li>
         <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none">Logout<i class="fa fa-sign-out fa-lg ml-2"></i></a>
@@ -40,7 +40,7 @@
           <p class="app-sidebar__user-designation">Project Manager</p>
         </div>
       </div>
-      <ul class="app-menu">
+      <ul class="app-menu active">
         <li><a class="app-menu__item"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
         <li><a class="app-menu__item"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
         <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
@@ -58,6 +58,9 @@
     </aside>
 
         <main class="app-content">
+          <div class="app-title">
+            <h1><i class="fa fa-dashboard"></i>  {{ucwords(Session::get('title'))}}</h1>
+        </div>
             @yield('content')
         </main>
     </div>
@@ -66,6 +69,7 @@
 <script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/main.js')}}"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.8.18/jquery-ui.js"></script>
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
@@ -271,6 +275,23 @@
       elem.msRequestFullscreen();
     }
   }
+</script>
+<script type="text/javascript">
+  $(".show-more a").on("click", function() {
+    var $this = $(this); 
+    var $content = $this.parent().prev("div.content");
+    var linkText = $this.text().toUpperCase();    
+    
+    if(linkText === "SHOW MORE"){
+        linkText = "Show less";
+        $content.switchClass("hideContent", "showContent", 100);
+    } else {
+        linkText = "Show more";
+        $content.switchClass("showContent", "hideContent", 100);
+    };
+
+    $this.text(linkText);
+});
 </script>
     <!-- Google analytics script-->
 <script type="text/javascript">
