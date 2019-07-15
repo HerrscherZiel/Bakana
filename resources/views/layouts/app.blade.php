@@ -8,24 +8,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Timeline</title>
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="sidebar-mini rtl">
+<body class="app sidebar-mini rtl" id="fullscreen">
     <div id="app">
-    <header class="app-header"><a class="app-header__logo" href="{{ url('/') }}">Timeline</a>
-      <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
+      <!-- Sidebar toggle button-->
+      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
-
       <ul class="app-nav">
-        <!--Notification Menu-->
-        <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none"><i class="fa fa-sign-out fa-lg"></i>  Logout</a>
+        <li>
+          <a class="app-nav__item" onclick="openFullscreen();"><i class="fa fa-expand-arrows fa-lg"></i> 
+          </a>
+        </li>
+        <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none">Logout<i class="fa fa-sign-out fa-lg ml-2"></i></a>
           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}
               </form>
@@ -38,10 +37,11 @@
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">Mr. Z</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+          <p class="app-sidebar__user-designation">Project Manager</p>
         </div>
       </div>
       <ul class="app-menu">
+        <li><a class="app-menu__item"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
         <li><a class="app-menu__item"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
         <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
         </li>
@@ -257,6 +257,21 @@
   $('.bs-component [data-toggle="popover"]').popover();
   $('.bs-component [data-toggle="tooltip"]').tooltip();
     </script>
+<!-- Fullscreen -->
+<script>
+  var elem = document.getElementById("fullscreen");
+  function openFullscreen() {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+</script>
     <!-- Google analytics script-->
 <script type="text/javascript">
   if(document.location.hostname == 'pratikborsadiya.in') {

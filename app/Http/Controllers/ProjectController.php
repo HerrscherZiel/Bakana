@@ -133,6 +133,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        // dd($id);
         //
         $project = Project::find($id);
         $module = Module::join('project', 'project_id', '=', 'id_project')
@@ -140,8 +141,10 @@ class ProjectController extends Controller
             ->where('project.id_project', '=', $id )
             ->getQuery()
             ->get();
-
-//        dd($module);
+            
+            if(count($module) <= 0){
+                exit();
+            }
 
           return view('project.show', compact('project', 'module'));
     }
