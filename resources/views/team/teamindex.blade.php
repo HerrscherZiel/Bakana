@@ -16,7 +16,6 @@
              </div>
         </div>
           <table class="table table-hover table-bordered" id="sampleTable">
-            
             <thead>
               <tr>
                 <th>User</th>

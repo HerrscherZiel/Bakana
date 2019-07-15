@@ -37,7 +37,7 @@ class HomeController extends Controller
            // $name = auth()->user()->name;
 //            $user = User::find('id', 'name');
 //            $timesheetView = Timesheet::all();
-            return view('homeUser');
+            return view('home');
         }
 //        , compact('user', 'timesheetView'))
 //        ->with('timesheet', $timesheetView);
