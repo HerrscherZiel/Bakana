@@ -22,6 +22,9 @@ class ProjectController extends Controller
 //        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
         $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
+        /*$today = strtotime('today GMT');*/
+        //$sisa = date("d/m/Y", strtotime('today'));
+
 
 
         return view('project.index')->with('project', $project);
