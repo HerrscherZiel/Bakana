@@ -46,6 +46,16 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
+//        $stahp = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
+//            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+//            ->join('role', 'role.id_role', '=', 'users.role_id')
+//            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
+//            ->distinct('users.name')
+//            ->where('project.id_project', '=', $id )
+//            ->limit(1)
+//            ->getQuery()
+//            ->get();
+//
 //        dd($team_projects);
 
         return view('team.teamindex', compact('project', 'team_projects'));
