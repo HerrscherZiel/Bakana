@@ -152,7 +152,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
 //            dd($timesheet);
-            return redirect('/timesheets')->with('success', 'User Ditambahkan');
+            return redirect('/timesheetss')->with('success', 'User Ditambahkan');
 
         }
     }
