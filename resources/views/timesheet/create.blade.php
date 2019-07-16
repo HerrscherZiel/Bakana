@@ -25,7 +25,7 @@
                     </select>
             </div>
             <div class="form-group">
-              <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_timesheet" placeholder="Tanggal">
+              <input type="text" id="date" data-provide="datepicker" class="form-control" name="tgl_timesheet" placeholder="Tanggal">
             </div>
             <div class="form-group input-group ">
                 <input type="text" onfocus="(this.type='time')"  class="form-control" name="jam_mulai" placeholder="Jam Mulai">

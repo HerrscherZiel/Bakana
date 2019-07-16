@@ -59,7 +59,7 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="javascript:history.go(-1)"> <i class="fa fa-arrow-left"></i></a>  {{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="javascript:history.go(-1)"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
@@ -77,16 +77,18 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/chart.js')}}"></script>
 <!-- <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script> -->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<script type="text/javascript" src="{{URL::asset('docs/js/bootstrap-datepicker.js')}}"></script>
-<script type="text/javascript">
-   var date = new Date();
-  date.setDate(date.getDate());
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+  <script type="text/javascript" src="{{URL::asset('docs/js/bootstrap-datepicker.js')}}"></script>
+  <script type="text/javascript">
+     var date = new Date();
+    date.setDate(date.getDate());
 
-  $('#date').datepicker({ 
-      startDate: date
-  });
-</script>
+    $('#date').datepicker({ 
+        endDate: date
+    });
+    $('#date1,#date2').datepicker({ 
+    });
+  </script>
 <!-- Data table plugin-->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
@@ -149,7 +151,7 @@
   dp.events.list = [];
   dp.init();
 </script>
-
+<!-- Full Calendar -->
 <script type="text/javascript">
   $(document).ready(function() {
   
@@ -207,7 +209,7 @@
   });
   
   $('#demoDate').datepicker({
-    format: "dd/mm/yyyy",
+    format: "yyyy-mm-dd",
     autoclose: true,
     todayHighlight: true
   });
@@ -262,11 +264,45 @@
   var ctxp = $("#pieChartDemo").get(0).getContext("2d");
   var pieChart = new Chart(ctxp).Pie(pdata);
 </script>
-<script>
+<!-- Delete Alert -->
+<!-- <script>
   $(".delete").on("submit", function(){
       return confirm("Are you sure want to delete?");
   });
-</script>
+</script> -->
+<script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
+    <script type="text/javascript">
+      $('#demoNotify').click(function(){
+        $.notify({
+          title: "Update Complete : ",
+          message: "Something cool is just updated!",
+          icon: 'fa fa-check' 
+        },{
+          type: "info"
+        });
+      });
+      $('.delete').on("submit", function(){
+            
+        swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover this imaginary file!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel pls!",
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function(isConfirm) {
+          if (isConfirm) {
+            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+          } else {
+            swal("Cancelled", "Your imaginary file is safe :)", "error");
+          }
+        });
+
+      });
+    </script>
 <script>
   $('.bs-component [data-toggle="popover"]').popover();
   $('.bs-component [data-toggle="tooltip"]').tooltip();

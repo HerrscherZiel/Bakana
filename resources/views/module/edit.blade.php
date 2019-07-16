@@ -19,8 +19,8 @@
             <div class="tile-body">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <label class="control-label">Project</label>
-                    <select class="form-control" name="project_id" required="">
+                    <!-- <label class="control-label">Project</label> -->
+                    <!-- <select class="form-control" name="project_id" required="">
                         <option value="" disabled>Select Project</option>
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}"
@@ -29,7 +29,7 @@
                                     @endif
                             >{{$projects->nama_project}}</option>
                         @endforeach
-                    </select>
+                    </select> -->
                 </div>
                 <div class="form-group">
                     <label class="control-label">Nama Modul</label>
