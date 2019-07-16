@@ -30,7 +30,18 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
-        return view('team.index')->with('team_projects', $team_projects);
+//        return view('team.index')->with('team_projects', $team_projects);
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('team.index')->with('team_projects', $team_projects);
+        }
+
+        else {
+
+            return view('team.indexUser')->with('team_projects', $team_projects);
+
+        }
+
     }
 
     //Index from Show Project
@@ -62,7 +73,17 @@ class TeamProjectController extends Controller
 //
 //        dd($team_projects);
 
-        return view('team.teamindex', compact('project', 'team_projects'));
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('team.teamindex', compact('project', 'team_projects'));
+        }
+
+        else {
+
+            return view('team.teamindexUser', compact('project', 'team_projects'));
+
+        }
+
+//        return view('team.teamindex', compact('project', 'team_projects'));
     }
 
     /**
