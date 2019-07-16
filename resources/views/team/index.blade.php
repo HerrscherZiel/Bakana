@@ -6,13 +6,17 @@
       <div class="tile">
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
-            <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3">Create Team</a>
+              @if(Auth::user()->hasRole('Project Manager'))
+              <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3">Create Team</a>
+              @endif
             <thead>
               <tr>
                 <th>User</th>
                 <th>Role</th>
                 <th>Project</th>
-                <th>Action</th>
+                  @if(Auth::user()->hasRole('Project Manager'))
+                  <th>Action</th>
+                      @endif
               </tr>
             </thead>
             <tbody>
@@ -21,7 +25,8 @@
                 <td>{{$teams->name}}</td>
                 <td>{{$teams->nama_role}}</td>
                 <td>{{$teams->nama_project}}</td>
-                <td>
+                      @if(Auth::user()->hasRole('Project Manager'))
+                      <td>
                     <div class="btn-group">
                         <a class="btn btn-info" href="/teamprojects/{{$teams->id_team_projects}}/edit">
                             <i class="fa fa-lg fa-edit">
@@ -38,6 +43,7 @@
                             </form>
                     </div>
                 </td>
+                    @endif
               </tr>
                @endforeach
             </tbody>

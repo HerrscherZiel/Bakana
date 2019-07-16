@@ -26,6 +26,7 @@
                 <td>{{$jobs->user}}</td>
                 <td>{{$jobs->keterangan}}</td>
                 <td>
+                    @if(Auth::user()->hasRole('Project Manager'))
                     <div class="btn-group">
                         <a class="btn btn-info" href="/jobs/{{$jobs->id_job}}/edit">
                             <i class="fa fa-lg fa-edit">
@@ -41,6 +42,7 @@
                                 </button>
                             </form>
                     </div>
+                        @endif
                 </td>
               </tr>
                @endforeach

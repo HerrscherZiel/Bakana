@@ -42,18 +42,34 @@
       </div>
       <ul class="app-menu active">
         <li><a class="app-menu__item active"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
+
         <li><a class="app-menu__item "  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
-        <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
-        </li>
-        <li><a class="app-menu__item" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Job</span></a></li>
-        <li><a class="app-menu__item" href="{{ url('/users') }}"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">User</span></a>
-        </li>
+
+          @if(Auth::user()->hasRole('Project Manager'))
+          <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
+          </li>
+          @endif
+
+          @if(Auth::user()->hasRole('Project Manager'))
+          <li><a class="app-menu__item" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Job</span></a></li>
+          @endif
+
+          @if(Auth::user()->hasRole('Project Manager'))
+              <li><a class="app-menu__item" href="{{ url('/users') }}"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">User</span></a>
+          </li>
+          @endif
+
+          @if(Auth::user()->hasRole('Project Manager'))
           <li><a class="app-menu__item" href="{{ url('/roles') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Role</span></a>
           </li>
+          @endif
+
         <li><a class="app-menu__item" href="{{ url('/teamprojects') }}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Team</span></a>
         </li>
+
         <li><a class="app-menu__item" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
+
       </ul>
     </aside>
 

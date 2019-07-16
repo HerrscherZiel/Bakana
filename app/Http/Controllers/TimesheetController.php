@@ -53,17 +53,7 @@ class TimesheetController extends Controller
 
         /*dd($timesheet);*/
 
-        if (Auth::user()->hasRole('Project Manager')) {
-            return view('timesheet.index')->with('timesheetView', $timesheetView);
-        }
-
-        else {
-
-            return view('timesheet.indexUser')->with('timesheetView', $timesheetView);
-
-        }
-
-//        return view('timesheet.index')->with('timesheetView', $timesheetView);
+        return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
 
 
@@ -89,17 +79,8 @@ class TimesheetController extends Controller
 
         /*dd($timesheet);*/
 
-        if (Auth::user()->hasRole('Project Manager')) {
-            return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
-        }
 
-        else {
-
-            return view('timesheet.user_timesheetUser')->with('timesheetView', $timesheetView, 'id', $id);
-
-        }
-
-//        return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
+        return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
     }
 
     /**
@@ -124,17 +105,8 @@ class TimesheetController extends Controller
 
         /*dd($timesheet);*/
 
-//        return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
+        return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
 
-        if (Auth::user()->hasRole('Project Manager')) {
-            return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
-        }
-
-        else {
-
-            return view('timesheet.createUser', compact(/*'user',*/'usher'/*,'date'*/));
-
-        }
 
     }
 
@@ -230,7 +202,7 @@ class TimesheetController extends Controller
 
             if ($cek ==  auth()->user()->id ) {
 
-                return view('timesheet.editUser', compact('timesheet', 'user'));
+                return view('timesheet.edit', compact('timesheet', 'user'));
 
             }
 

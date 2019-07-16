@@ -11,9 +11,11 @@
               <h2 class="page-header">{{$modules->nama_module}}</h2>
               @endforeach
             </div>
-            <div class="col-3">
+              @if(Auth::user()->hasRole('Project Manager'))
+              <div class="col-3">
                 <a href="/jobs/creates/{{$mod->id_module}}" class="btn btn-primary pull-right">Add Job</a>
             </div>
+                  @endif
           </div>
           <div class="row invoice-info mb-2">
             @foreach($module as $modules)
@@ -40,7 +42,9 @@
                     <th>Nama</th>
                     <th>Module</th>
                     <th>Keterangan</th>
-                    <th>Action</th>
+                      @if(Auth::user()->hasRole('Project Manager'))
+                      <th>Action</th>
+                          @endif
                   </tr>
                 </thead>
                 <tbody>
@@ -49,7 +53,9 @@
                     <td>{{$jobs->nama_job}}</td>
                     <td>{{$jobs->nama_module}}</td>
                     <td>{{$jobs->keterangan}}</td>
-                    <td>
+                      @if(Auth::user()->hasRole('Project Manager'))
+                      <td>
+
                         <div class="btn-group">
                         
                         <a class="btn btn-info" href="/jobs/{{$jobs->id_job}}/edit">
@@ -67,6 +73,7 @@
                             </form>
                         </div>
                     </td>
+                      @endif
                   </tr>
                   @endforeach
                 </tbody>
