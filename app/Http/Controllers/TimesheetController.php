@@ -21,13 +21,15 @@ class TimesheetController extends Controller
     {
         Session::put('title', 'Dashboard Timesheet');
         //
+
+
+
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
             /*->join('team_projects','team_projects.user_id','=','users.id')*/
             /*->join('project','project.id_project','=','team_projects.project_id')*/
             ->select('timesheets.*', 'users.name')
             ->getQuery()
             ->get();
-
 
         
         $timesheetView =  $timesheet;
@@ -45,14 +47,23 @@ class TimesheetController extends Controller
         $diff = (strtotime($ends) - strtotime($starts));
         $total = $diff/60;
         $time = sprintf("%02dh %02dm", floor($total/60), $total%60);
-        // dd($total);
-        
+
 
         // $time = Timesheet()->duration();
 
         /*dd($timesheet);*/
 
-        return view('timesheet.index')->with('timesheetView', $timesheetView);
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('timesheet.index')->with('timesheetView', $timesheetView);
+        }
+
+        else {
+
+            return view('timesheet.indexUser')->with('timesheetView', $timesheetView);
+
+        }
+
+//        return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
 
 
@@ -78,7 +89,17 @@ class TimesheetController extends Controller
 
         /*dd($timesheet);*/
 
-        return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
+        }
+
+        else {
+
+            return view('timesheet.user_timesheetUser')->with('timesheetView', $timesheetView, 'id', $id);
+
+        }
+
+//        return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
     }
 
     /**
@@ -103,7 +124,18 @@ class TimesheetController extends Controller
 
         /*dd($timesheet);*/
 
-        return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
+//        return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
+        }
+
+        else {
+
+            return view('timesheet.createUser', compact(/*'user',*/'usher'/*,'date'*/));
+
+        }
+
     }
 
     /**
@@ -184,10 +216,33 @@ class TimesheetController extends Controller
         //
         $user = User::all();
 
+        $cek = Timesheet::find($id)->user_id;
 
         $timesheet = Timesheet::find($id);
 
-        return view('timesheet.edit', compact('timesheet','user'));
+        if (Auth::user()->hasRole('Project Manager')) {
+
+            return view('timesheet.edit', compact('timesheet','user'));
+
+        }
+
+        else {
+
+            if ($cek ==  auth()->user()->id ) {
+
+                return view('timesheet.editUser', compact('timesheet', 'user'));
+
+            }
+
+            else {
+
+                return view('home')->with(abort(403, 'Unauthorized action.'));
+
+            }
+
+        }
+
+//        return view('timesheet.edit', compact('timesheet','user'));
     }
 
     /**
@@ -225,8 +280,29 @@ class TimesheetController extends Controller
     public function destroy($id)
     {
         //
-        $timesheet = Timesheet::find($id);
-        $timesheet->delete();
-        return redirect('/timesheets')->with('success', 'Post Removed');
+
+        $timesheet = Timesheet::find($id)->user_id;
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            $timesheet = Timesheet::find($id);
+            $timesheet->delete();
+            return redirect('/timesheets')->with('success', 'Post Removed');
+        }
+
+
+        elseif ($timesheet ==  auth()->user()->id ){
+            $timesheet = Timesheet::find($id);
+            $timesheet->delete();
+            return redirect('/timesheets')->with('success', 'Post Removed');
+        }
+
+
+        else{
+
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+
+        }
+
+
     }
 }

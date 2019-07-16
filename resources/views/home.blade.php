@@ -27,10 +27,5 @@
           </div>
         </div>
       </div>
-<div class="tile">
-	  <h1>daypilot-project</h1>
-	  <div><a href="https://javascript.daypilot.org/">DayPilot for JavaScript</a> - HTML5 Calendar/Scheduling Components for JavaScript/Angular/React</div>
-	  <div id="dp"></div>
-	  <div class="generated">Generated using <a href="https://builder.daypilot.org/">DayPilot UI Builder</a>.</div>
-	</div>
+
 @endsection

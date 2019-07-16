@@ -55,7 +55,18 @@ class ModuleController extends Controller
             ->get();
 
 
-        return view('module.indexproject', compact('project', 'module'));
+//        return view('module.indexproject', compact('project', 'module'));
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('module.indexproject', compact('project', 'module'));
+        }
+
+        else {
+
+            return view('module.indexprojectUser', compact('project', 'module'));
+
+        }
+
     }
 
 
@@ -189,7 +200,17 @@ class ModuleController extends Controller
 
         $mod = Module::find($id);
 
-        return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
+        if (Auth::user()->hasRole('Project Manager')) {
+            return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
+        }
+
+        else {
+
+            return view('module.showUser', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
+
+        }
+
+//        return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
     }
 
     /**
