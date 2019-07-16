@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\TeamProject;
 use App\Project;
+use App\Util\Utils;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class TeamProjectController extends Controller
@@ -18,6 +20,7 @@ class TeamProjectController extends Controller
      */
     public function index()
     {
+        Session::put('title', 'Dashboard Team');
         //
 
         $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
@@ -34,6 +37,7 @@ class TeamProjectController extends Controller
 
     public function indexes($id)
     {
+        Session::put('title', 'Dashboard Team');
         //
         $project = Project::find($id);
 
@@ -68,6 +72,7 @@ class TeamProjectController extends Controller
      */
     public function create()
     {
+        Session::put('title', 'Create Team');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $user = User::all();
@@ -87,6 +92,7 @@ class TeamProjectController extends Controller
 
     public function creates($id)
     {
+        Session::put('title', 'Add to Team');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::find($id);
@@ -146,6 +152,7 @@ class TeamProjectController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit Team');
         //
         if (Auth::user()->hasRole('Project Manager')) {
 
@@ -169,6 +176,7 @@ class TeamProjectController extends Controller
 
     public function editTeamProject($id)
     {
+        Session::put('title', 'Edit Team');
         //
         if (Auth::user()->hasRole('Project Manager')) {
 

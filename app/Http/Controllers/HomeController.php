@@ -6,6 +6,8 @@ use App\Timesheet;
 use Illuminate\Http\Request;
 use App\User;
 use App\Project;
+use App\Util\Utils;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        Session::put('title', 'Timeline');
         if (Auth::user()->hasRole('Project Manager')) {
             return view('home');
         }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use App\Util\Utils;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
@@ -15,6 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        Session::put('title', 'Dashboard Role');
         //
 //        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
         if (Auth::user()->hasRole('Project Manager')) {
@@ -37,6 +40,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        Session::put('title', 'Create Role');
         //
         if (Auth::user()->hasRole('Project Manager')) {
             return view('role.create');
@@ -94,6 +98,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        Session::put('title', 'Edit Role');
         //
         /*$ticket = Ticket::where('user_id', auth()->user()->id)
             ->where('id', $id)
