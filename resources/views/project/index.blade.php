@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
+    @if(Auth::user()->hasRole('Project Manager'))
+        <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
+        @endif
 <div class="row">
   @foreach($project as $projects)
       <div class="col-md-6">
@@ -14,6 +16,7 @@
                   <i class="fa fa-lg fa-eye">
                   </i>
               </a>
+              @if(Auth::user()->hasRole('Project Manager'))
               <a class="btn btn-primary" href="/projects/{{$projects->id_project}}/edit">
                   <i class="fa fa-lg fa-edit">
                   </i>
@@ -26,6 +29,7 @@
                   <i class="fa fa-lg fa-trash"></i>
               </button>
             </form>
+                  @endif
              </div>
           </div>
           <div class="tile-body">

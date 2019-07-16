@@ -30,17 +30,9 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
-//        return view('team.index')->with('team_projects', $team_projects);
+        return view('team.index')->with('team_projects', $team_projects);
 
-        if (Auth::user()->hasRole('Project Manager')) {
-            return view('team.index')->with('team_projects', $team_projects);
-        }
 
-        else {
-
-            return view('team.indexUser')->with('team_projects', $team_projects);
-
-        }
 
     }
 
@@ -53,13 +45,17 @@ class TeamProjectController extends Controller
         $project = Project::find($id);
 
         $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
+            ->distinct('users.id')
             ->join('project', 'project.id_project', '=', 'team_projects.project_id')
             ->join('role', 'role.id_role', '=', 'users.role_id')
-            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
-            ->distinct('users.name')
+            ->select('team_projects.*', 'users.name' ,'users.role_id', 'project.nama_project','role.nama_role')
             ->where('project.id_project', '=', $id )
             ->getQuery()
             ->get();
+
+//        $messages = collect($team_projects::find('name')->get());
+
+//        dd($messages);
 
 //        $stahp = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
 //            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
@@ -73,17 +69,8 @@ class TeamProjectController extends Controller
 //
 //        dd($team_projects);
 
-        if (Auth::user()->hasRole('Project Manager')) {
-            return view('team.teamindex', compact('project', 'team_projects'));
-        }
 
-        else {
-
-            return view('team.teamindexUser', compact('project', 'team_projects'));
-
-        }
-
-//        return view('team.teamindex', compact('project', 'team_projects'));
+        return view('team.teamindex', compact('project', 'team_projects'));
     }
 
     /**

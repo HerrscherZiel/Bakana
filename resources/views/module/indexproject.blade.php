@@ -9,9 +9,11 @@
                 <div class="col-md-10">
                     <h3>Project : {{$project->nama_project}}</h3>
                 </div>
+                @if(Auth::user()->hasRole('Project Manager'))
                 <div class="col-md-2">
                     <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
                 </div>
+                    @endif
             </div>
           <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
@@ -48,7 +50,8 @@
                             <i class="fa fa-lg fa-edit">
                             </i>
                         </a>
-                            <form class="delete" action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
+                        @if(Auth::user()->hasRole('Project Manager'))
+                        <form class="delete" action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 @method('DELETE')
@@ -57,6 +60,7 @@
                                 </i>
                                 </button>
                             </form>
+                            @endif
                     </div>
                 </td>
               </tr>

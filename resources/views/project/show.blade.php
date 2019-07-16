@@ -9,10 +9,12 @@
             <div class="col-9">
               <h2 class="page-header">{{$project->nama_project}}</h2>
             </div>
-            <div class="col-3">
+              @if(Auth::user()->hasRole('Project Manager'))
+              <div class="col-3">
                 <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right "><i class="fa fa-plus"></i>Add Team</a>
                 <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary pull-right mr-2"><i class="fa fa-plus"></i>Add Module</a>
             </div>
+                  @endif
           </div>
           <div class="row invoice-info">
             <div class="col-4">Project Code
@@ -67,7 +69,8 @@
                             <i class="fa fa-lg fa-eye">
                             </i>
                         </a>
-                        <a class="btn btn-info" href="/modules/{{$modules->id_module}}/edit">
+                            @if(Auth::user()->hasRole('Project Manager'))
+                            <a class="btn btn-info" href="/modules/{{$modules->id_module}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
                         </a>
@@ -80,6 +83,7 @@
                                 </i>
                                 </button>
                             </form>
+                                @endif
                     </div>
                     </td>
                   </tr>

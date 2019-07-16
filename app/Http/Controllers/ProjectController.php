@@ -28,15 +28,8 @@ class ProjectController extends Controller
         /*$today = strtotime('today GMT');*/
         //$sisa = date("d/m/Y", strtotime('today'));
 
-        if (Auth::user()->hasRole('Project Manager')) {
             return view('project.index')->with('project', $project);
-        }
 
-        else {
-
-            return view('project.indexUser')->with('project', $project);
-
-        }
 
 //        return view('project.index', compact('project', 'module'));
     }
@@ -160,15 +153,8 @@ class ProjectController extends Controller
                 exit();
             }
 
-        if (Auth::user()->hasRole('Project Manager')) {
             return view('project.show', compact('project', 'module'));
-        }
 
-        else {
-
-            return view('project.showUser', compact('project', 'module'));
-
-        }
 
     }
 
