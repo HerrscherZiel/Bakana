@@ -7,9 +7,6 @@
         <div class="tile-body">
             <div class="row">
                 <div class="col-md-10">
-                {{--@foreach($team_projects as $teams)
-                    <h3>Project : {{$teams->nama_project}}</h3>
-                @endforeach--}}
                     <h3>Project : {{$project->nama_project}}</h3>
                 </div>
                 <div class="col-md-2">
@@ -21,8 +18,7 @@
               <tr>
                 <th>User</th>
                 <th>Role</th>
-                <th>Project</th>
-                <th>Action</th>
+                <th style="width: 10%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -30,7 +26,6 @@
                 @foreach($team_projects as $teams)
                 <td>{{$teams->name}}</td>
                 <td>{{$teams->nama_role}}</td>
-                <td>{{$teams->nama_project}}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-info" href="/team/{{$teams->id_team_projects}}/edit">

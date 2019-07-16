@@ -22,8 +22,8 @@
                 <div class="form-group">
                   <input class="form-control" type="text" name="nama_project" placeholder="Project Name">
                 </div>
-                <div class="form-group input-group ">
-                    <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_mulai" placeholder="Start Date">
+                <div class="form-group input-group">
+                    <input id="date" data-provide="datepicker" class="form-control" name="tgl_mulai" placeholder="Start Date">
                     <div class="mt-1 ml-3 mr-3">to</div>
                     <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_selesai" placeholder="Finish Date">
                 </div>
@@ -46,4 +46,5 @@
         </form>
       </div>
 </div>
+
 @endsection

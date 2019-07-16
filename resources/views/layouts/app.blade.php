@@ -41,8 +41,8 @@
         </div>
       </div>
       <ul class="app-menu active">
-        <li><a class="app-menu__item"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
-        <li><a class="app-menu__item"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
+        <li><a class="app-menu__item active"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
+        <li><a class="app-menu__item "  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
         <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
         </li>
         <li><a class="app-menu__item" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Job</span></a></li>
@@ -59,24 +59,34 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><i class="fa fa-dashboard"></i>  {{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="javascript:history.go(-1)"> <i class="fa fa-arrow-left"></i></a>  {{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
     </div>
  <!-- Essential javascripts for application to work-->
 <script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/main.js')}}"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.8.18/jquery-ui.js"></script>
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/chart.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script>
+<!-- <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script> -->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<script type="text/javascript" src="{{URL::asset('docs/js/bootstrap-datepicker.js')}}"></script>
+<script type="text/javascript">
+   var date = new Date();
+  date.setDate(date.getDate());
+
+  $('#date').datepicker({ 
+      startDate: date
+  });
+</script>
 <!-- Data table plugin-->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
@@ -276,6 +286,7 @@
     }
   }
 </script>
+<!-- Show more -->
 <script type="text/javascript">
   $(".show-more a").on("click", function() {
     var $this = $(this); 
@@ -291,9 +302,9 @@
     };
 
     $this.text(linkText);
-});
+  });
 </script>
-    <!-- Google analytics script-->
+<!-- Google analytics script-->
 <script type="text/javascript">
   if(document.location.hostname == 'pratikborsadiya.in') {
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

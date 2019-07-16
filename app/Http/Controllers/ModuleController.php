@@ -44,6 +44,7 @@ class ModuleController extends Controller
 
     public function indexes($id)
     {
+        Session::put('title', 'Dashboard Modul');
         //
         $project = Project::find($id);
 

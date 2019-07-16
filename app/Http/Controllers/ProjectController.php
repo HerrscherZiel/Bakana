@@ -9,7 +9,7 @@ use App\Project;
 use Illuminate\Support\Facades\Session;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -42,6 +42,8 @@ class ProjectController extends Controller
     public function create()
     {
         Session::put('title', 'Create Project');
+        // replace the point from the european date format with a dash
+        
         //
         if (Auth::user()->hasRole('Project Manager')) {
             return view('project.create');

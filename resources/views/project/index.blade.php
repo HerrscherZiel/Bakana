@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{url('/projects/create')}}" class="btn btn-primary mb-3">Create Project</a>
+<a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
 <div class="row">
   @foreach($project as $projects)
       <div class="col-md-6">

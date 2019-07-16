@@ -5,14 +5,20 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3>Project : {{$project->nama_project}}</h3>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
+                </div>
+            </div>
           <table class="table table-hover table-bordered" id="sampleTable">
-            <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3">Create Modul</a>
             <thead>
               <tr>
                 <th>Modul</th>
                 <th>Durasi</th>
                 <th>Status</th>
-                <th>Project</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -31,7 +37,6 @@
                     @elseif($modules->status === 4 )
                         Completed
                     @endif</td></td>
-                <td>{{$modules->nama_project}}</td>
                 <td>{{$modules->keterangan}}</td>
                 <td>
                     <div class="btn-group">
