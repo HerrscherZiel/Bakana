@@ -11,6 +11,7 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
     <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="app sidebar-mini rtl" id="fullscreen">
@@ -34,8 +35,8 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
-        <div>
+      <div class="app-sidebar__user">
+        <div class="ml-4">
           <p class="app-sidebar__user-name">Mr. Z</p>
           <p class="app-sidebar__user-designation">Project Manager</p>
         </div>
@@ -82,8 +83,8 @@
     </div>
  <!-- Essential javascripts for application to work-->
 <script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('docs/js/jquery-ui.js')}}"></script>
 <script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/main.js')}}"></script>
@@ -95,16 +96,50 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
   <script type="text/javascript" src="{{URL::asset('docs/js/bootstrap-datepicker.js')}}"></script>
-  <script type="text/javascript">
-     var date = new Date();
-    date.setDate(date.getDate());
+  <!-- delete -->
+<script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
+    <script type="text/javascript">
+        $('button.delete-btn').on('click', function(e){
+        event.preventDefault();
+        var self = $(this);
+        swal({
+          title: "Anda yakin?",
+          text: "Anda tidak akan bisa mengembalikannya lagi",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function(isConfirm) {
+          if (isConfirm) {
+            swal("Terhapus!", "Berhasil terhapus dari database.", "success");
+           setTimeout(function() {
+                    self.parents(".delete").submit();
+                }, 500);
+          } else {
+            swal("Batal dihapus!", "Item aman di database.", "error");
+          }
+        });
+      });
+    </script>
 
-    $('#date').datepicker({ 
-        endDate: date
-    });
-    $('#date1,#date2').datepicker({ 
-    });
-  </script>
+<script type="text/javascript">
+  var date = new Date();
+  date.setDate(date.getDate());
+
+  $('#date').datepicker({ 
+      endDate: date,
+      autoclose: true,
+      todayHighlight: true
+  });
+  $('#date1,#date2').datepicker({
+  format: "yyyy-mm-dd",
+  autoclose: true,
+  todayHighlight: true
+  });
+</script>
 <!-- Data table plugin-->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
@@ -224,12 +259,6 @@
     $('#tb').loadingBtnComplete({ html : "Sign In"});
   });
   
-  $('#demoDate').datepicker({
-    format: "yyyy-mm-dd",
-    autoclose: true,
-    todayHighlight: true
-  });
-  
   $('#demoSelect').select2();
 </script>
 
@@ -286,43 +315,7 @@
       return confirm("Are you sure want to delete?");
   });
 </script> -->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
-    <script type="text/javascript">
-      $('#demoNotify').click(function(){
-        $.notify({
-          title: "Update Complete : ",
-          message: "Something cool is just updated!",
-          icon: 'fa fa-check' 
-        },{
-          type: "info"
-        });
-      });
-      $('.delete').on("submit", function(){
-            
-        swal({
-          title: "Are you sure?",
-          text: "You will not be able to recover this imaginary file!",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel pls!",
-          closeOnConfirm: false,
-          closeOnCancel: false
-        }, function(isConfirm) {
-          if (isConfirm) {
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
-          } else {
-            swal("Cancelled", "Your imaginary file is safe :)", "error");
-          }
-        });
 
-      });
-    </script>
-<script>
-  $('.bs-component [data-toggle="popover"]').popover();
-  $('.bs-component [data-toggle="tooltip"]').tooltip();
-    </script>
 <!-- Fullscreen -->
 <script>
   var elem = document.getElementById("fullscreen");

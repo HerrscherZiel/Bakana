@@ -12,15 +12,14 @@
         </div><br />
     @endif
      <div class="tile">
-        <h3 class="tile-title">Edit Modul</h3>
+        <h3 class="tile-title">iki haruse nama project</h3>
         <form method="post" action="{{ route('modules.update', $module->id_module) }}">
             @method('PATCH')
             @csrf
             <div class="tile-body">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <!-- <label class="control-label">Project</label> -->
-                    <!-- <select class="form-control" name="project_id" required="">
+                    <select style="display: none" class="form-control" name="project_id" required="">
                         <option value="" disabled>Select Project</option>
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}"
@@ -29,11 +28,11 @@
                                     @endif
                             >{{$projects->nama_project}}</option>
                         @endforeach
-                    </select> -->
+                    </select>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Nama Modul</label>
-                  <input class="form-control" type="text" name="nama_module"  value={{ $module->nama_module }}>
+                  <input class="form-control" type="text" name="nama_module" value="{{ $module->nama_module }}"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Durasi</label>

@@ -25,7 +25,7 @@
                 <input type="hidden" name="_method" value="DELETE">
                 @csrf
                 @method('DELETE')
-              <button class="btn btn-primary" style="margin-left: -2px">
+              <button type="submit" class="btn btn-primary delete-btn" style="margin-left: -2px">
                   <i class="fa fa-lg fa-trash"></i>
               </button>
             </form>

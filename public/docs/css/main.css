@@ -9732,6 +9732,7 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
   top: 0;
   left: 0;
   padding: 4px;
+  margin-top: 50px;
 }
 
 .datepicker-dropdown:before {

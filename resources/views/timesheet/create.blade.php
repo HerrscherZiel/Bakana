@@ -33,7 +33,7 @@
                 <input type="text" onfocus="(this.type='time')"  class="form-control" name="jam_selesai" placeholder="Jam Selesai">
             </div>
             <div class="form-group">
-              <textarea class="form-control" rows="4" name="keterangan_timesheet" placeholder="Keterangan"></textarea>
+              <textarea class="form-control" rows="4" name="keterangan_timesheet" placeholder="Keterangan" required=""></textarea>
             </div>
         </div>
         <div class="tile-footer">

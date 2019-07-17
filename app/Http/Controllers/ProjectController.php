@@ -149,9 +149,11 @@ class ProjectController extends Controller
             ->getQuery()
             ->get();
 
-            if(count($module) <= 0){
-                exit();
-            }
+            // dd($project);
+
+            // if(count($module) <= 0){
+            //     exit();
+            // }
 
             return view('project.show', compact('project', 'module'));
 

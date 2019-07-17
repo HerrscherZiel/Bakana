@@ -6,13 +6,13 @@
       <div class="tile">
         <section class="invoice">
           <div class="row mb-4">
-            <div class="col-9">
+            <div class="col-8">
               <h2 class="page-header">{{$project->nama_project}}</h2>
             </div>
               @if(Auth::user()->hasRole('Project Manager'))
-              <div class="col-3">
-                <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right "><i class="fa fa-plus"></i>Add Team</a>
-                <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary pull-right mr-2"><i class="fa fa-plus"></i>Add Module</a>
+              <div class="col-4">
+                <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary pull-right  ml-2 mb-2"><i class="fa fa-plus"></i>Add Team</a>
+                <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>Add Module</a>
             </div>
                   @endif
           </div>
@@ -78,7 +78,7 @@
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
+                                <button class="btn btn-danger delete-btn" type="submit" style="margin-left: -2px">
                                 <i class="fa fa-lg fa-trash">
                                 </i>
                                 </button>

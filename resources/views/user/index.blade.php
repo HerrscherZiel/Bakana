@@ -12,7 +12,7 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Action</th>
+                <th style="width: 10%">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -27,15 +27,15 @@
                             <i class="fa fa-lg fa-edit">
                             </i>
                         </a>
-                            <form class="delete" action="{{ route('users.destroy', $users->id)}}" method="post">
-                                <input type="hidden" name="_method" value="DELETE">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
-                                <i class="fa fa-lg fa-trash">
-                                </i>
-                                </button>
-                            </form>
+                        <form class="delete" action="{{ route('users.destroy', $users->id)}}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger delete-btn" style="margin-left: -2px">
+                            <i class="fa fa-lg fa-trash">
+                            </i>
+                            </button>
+                        </form>
                     </div>
                 </td>
               </tr>

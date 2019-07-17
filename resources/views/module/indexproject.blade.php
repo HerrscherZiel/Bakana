@@ -11,7 +11,7 @@
                 </div>
                 @if(Auth::user()->hasRole('Project Manager'))
                 <div class="col-md-2">
-                    <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
+                    <a href="/module/creates/{{$project->id_project}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Add Modul</a>
                 </div>
                     @endif
             </div>
@@ -55,7 +55,7 @@
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
+                                <button class="btn btn-danger delete-btn" type="submit" style="margin-left: -2px">
                                 <i class="fa fa-lg fa-trash">
                                 </i>
                                 </button>

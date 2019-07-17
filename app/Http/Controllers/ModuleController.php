@@ -55,6 +55,7 @@ class ModuleController extends Controller
             ->get();
 
 
+
         return view('module.indexproject', compact('project', 'module'));
 
 

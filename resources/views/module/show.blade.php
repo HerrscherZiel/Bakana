@@ -62,11 +62,11 @@
                             <i class="fa fa-lg fa-edit">
                             </i>
                         </a>
-                            <form class="delete" action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
+                            <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit" style="margin-left: -2px">
+                                <button class="btn btn-danger" type="submit" onclick="archiveFunction()" style="margin-left: -2px">
                                 <i class="fa fa-lg fa-trash">
                                 </i>
                                 </button>

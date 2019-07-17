@@ -12,12 +12,12 @@
         </div><br />
     @endif
      <div class="tile">
-        <h3 class="tile-title">Add Job</h3>
+        <h3 class="tile-title">Module : {{$module->nama_module}}</h3>
         <form method="post" action="{{url('/jobs/create')}}">
             <div class="tile-body">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <select class="form-control" name="module_id" required="">
+                    <select style="display: none;" class="form-control" name="module_id" required="">
                         <option value="{{$module->id_module}}" selected>{{$module->nama_module}}</option>
                     </select>
                 </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="user" required="">
-                        <option value="" disabled>Select User</option>
+                        <option value="" disabled selected="">Select User</option>
                        @foreach($mod as $mods)
                         <option value="{{$mods->name}}">{{$mods->name}}</option>
                         @endforeach
