@@ -68,6 +68,9 @@
         <li><a class="app-menu__item" href="{{ url('/teamprojects') }}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Team</span></a>
         </li>
 
+          <li><a class="app-menu__item" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">User Info</span></a>
+          </li>
+
         <li><a class="app-menu__item" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
 

@@ -11,8 +11,8 @@
               @endif
             <thead>
               <tr>
-                <th>User</th>
-                <th>Role</th>
+{{--                <th>User</th>--}}
+{{--                <th>Role</th>--}}
                 <th>Project</th>
                   @if(Auth::user()->hasRole('Project Manager'))
                   <th>Action</th>
@@ -22,12 +22,16 @@
             <tbody>
               <tr>
                 @foreach($team_projects as $teams)
-                <td>{{$teams->name}}</td>
-                <td>{{$teams->nama_role}}</td>
+{{--                <td>{{$teams->name}}</td>--}}
+{{--                <td>{{$teams->nama_role}}</td>--}}
                 <td>{{$teams->nama_project}}</td>
                       @if(Auth::user()->hasRole('Project Manager'))
                       <td>
                     <div class="btn-group">
+
+                        <a href="/team/{{$teams->project_id}}" class="btn btn-primary">Show Team</a>
+
+
                         <a class="btn btn-info" href="/teamprojects/{{$teams->id_team_projects}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
