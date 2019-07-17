@@ -28,6 +28,7 @@ Route::resources([
     'teamprojects' => 'TeamProjectController',
     'modules' => 'ModuleController',
     'jobs' => 'JobController',
+    'userInfo' => 'UserInfoController',
 
 
 ]);
@@ -83,6 +84,14 @@ Route::post('/jobs/creates/{module}/module','JobController@store');
 // Timesheets
 
 Route::get('/timesheetss','TimesheetController@UserTimesheets');
+
+
+//
+
+Route::get('/userInfo','UserInfoController@index');
+
+Route::get('/userInfo/module/{module}','UserInfoController@moduleUser');
+
 
 
 
