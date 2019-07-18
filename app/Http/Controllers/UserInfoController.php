@@ -22,7 +22,8 @@ class UserInfoController extends Controller
      */
     public function index()
     {
-        Session::put('title', 'Dashboard User Info');
+        Session::put('title', 'Your Project'); 
+
         //
 
 
@@ -39,7 +40,6 @@ class UserInfoController extends Controller
             ->where('users.id', '=',auth()->user()->id )
             ->getQuery()
             ->get();
-
 
 
 //        $a = $info::select('id_project');

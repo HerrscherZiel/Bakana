@@ -5,6 +5,11 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
+        	<h3>
+        		@foreach($project as $pro)
+        			{{$pro->nama_project}}
+        		@endforeach
+    </h3>
           <table class="table table-hover table-bordered" id="sampleTable">
             <!-- <a href="{{url('/register')}}" class="btn btn-primary mb-3">Tambah User</a> -->
             <thead>
