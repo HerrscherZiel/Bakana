@@ -2,9 +2,18 @@
 
 @section('content')
     <div>
+        <div>
+    @foreach($project as $pro)
+
+        {{$pro->nama_project}}
+
+        @endforeach
+        </div>
+        <br>
+        <hr>
+        <br>
     @foreach($modulpro as $mod)
         <div>
-            User : {{$mod->user}} <br>
             Module : {{$mod->nama_module}}<br>
             Status : @if ($mod->status === 1 )
                 Ongoing

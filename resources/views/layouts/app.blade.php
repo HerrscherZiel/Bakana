@@ -37,8 +37,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
         <div class="ml-4">
-          <p class="app-sidebar__user-name">Mr. Z</p>
-          <p class="app-sidebar__user-designation">Project Manager</p>
+          <p class="app-sidebar__user-name">{{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</p>
+          <p class="app-sidebar__user-designation">{{{Auth::user()->email }}}</p>
         </div>
       </div>
       <ul class="app-menu active">
