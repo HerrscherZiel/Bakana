@@ -104,15 +104,17 @@ class JobController extends Controller
     {
         //
         $request->validate( [
-            'nama_job'   =>'required',
-            'user'   =>'nullable',
+            'nama_job'      =>'required',
+            'user'          =>'nullable',
+            'status'        =>'required',
             'keterangan'    =>'nullable'
         ]);
 
         $job = new Job([
-            'nama_job'   => $request->get('nama_job'),
-            'user'   => $request->get('user'),
-            'module_id'    => $request->get('module_id'),
+            'nama_job'      => $request->get('nama_job'),
+            'user'          => $request->get('user'),
+            'status'        => $request->get('status'),
+            'module_id'     => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
         $job->save();
@@ -171,15 +173,17 @@ class JobController extends Controller
         //
         $job = new Job();
         $request->validate( [
-            'nama_job'   => 'required',
-            'user'   => 'nullable',
+            'nama_job'      => 'required',
+            'user'          => 'nullable',
+            'status'        => 'required',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);
-        $job->nama_job = $request->get('nama_job');
-        $job->user = $request->get('user');
-        $job->module_id = $request->get('module_id');
-        $job->keterangan = $request->get('keterangan');
+        $job->nama_job      = $request->get('nama_job');
+        $job->user          = $request->get('user');
+        $job->status        = $request->get('status');
+        $job->module_id     = $request->get('module_id');
+        $job->keterangan    = $request->get('keterangan');
         $job->save();
 
         return redirect('/jobs')->with('success', 'New support ticket has been updated!!');

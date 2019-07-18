@@ -47,6 +47,10 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">Status</label>
+                    <input class="form-control" type="text" name="status" value={{ $job->status }}>
+                </div>
+                <div class="form-group">
                     <label class="control-label">Keterangan</label>
                   <textarea class="form-control" rows="4" name="keterangan">{{ $job->keterangan }}</textarea>
                 </div>

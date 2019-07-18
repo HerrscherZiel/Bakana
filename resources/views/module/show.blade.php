@@ -41,6 +41,7 @@
                   <tr>
                     <th>Nama</th>
                     <th>Module</th>
+                    <th>User</th>
                     <th>Keterangan</th>
                       @if(Auth::user()->hasRole('Project Manager'))
                       <th>Action</th>
@@ -52,6 +53,7 @@
                   <tr>
                     <td>{{$jobs->nama_job}}</td>
                     <td>{{$jobs->nama_module}}</td>
+                    <td>{{$jobs->user}}</td>
                     <td>{{$jobs->keterangan}}</td>
                       @if(Auth::user()->hasRole('Project Manager'))
                       <td>

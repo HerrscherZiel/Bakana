@@ -13,6 +13,7 @@
                 <th>Modul</th>
                 <th>Project</th>
                 <th>User</th>
+                <th>Status</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -24,6 +25,15 @@
                 <td>{{$jobs->nama_module}}</td>
                 <td>{{$jobs->nama_project}}</td>
                 <td>{{$jobs->user}}</td>
+                <td>@if ($jobs->status === 1 )
+                    Ongoing
+                @elseif($jobs->status === 2 )
+                   Queue
+                @elseif($jobs->status === 3 )
+                    Pending
+                @elseif($jobs->status === 4 )
+                    Completed
+                @endif</td></td>
                 <td>{{$jobs->keterangan}}</td>
                 <td>
                     @if(Auth::user()->hasRole('Project Manager'))
