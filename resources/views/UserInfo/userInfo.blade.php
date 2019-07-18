@@ -8,8 +8,17 @@
         <h3>{{$user->name}} sebagai
         {{$user->nama_role}}</h3>
         @endforeach
-        </div> -->
-        <!-- //nek iso project e option value, select pertama ning project pertama -->
+        <hr>
+            <br>
+            @foreach($timesheets as $timesheet)
+                {{$timesheet->project}}
+                {{$timesheet->tgl_timesheet}}
+                {{$timesheet->jam_mulai}}
+                {{$timesheet->jam_selesai}}
+                {{$timesheet->keterangan_timesheet}}
+                <br>
+            @endforeach
+
         @foreach($info as $infos)
   <div class="col-md-6">
         <div class="tile">
