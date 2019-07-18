@@ -32,10 +32,25 @@
                 <label class="control-label mt-2 ml-5 mr-2">Tanggal Selesai</label>
                 <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_selesai" value={{ $project->tgl_selesai }}>
             </div>
+
+
             <div class="form-group">
                 <label class="control-label">Status</label>
               <input class="form-control" type="text" name="status" value={{ $project->status }}>
             </div>
+
+{{--            <div class="form-group">--}}
+{{--                <label class="control-label">User</label>--}}
+{{--                <select class="form-control" name="status" required="">--}}
+{{--                        <option value="{{$project->id}}"--}}
+{{--                                @if ($project->id === $team_projects->user_id)--}}
+{{--                                selected--}}
+{{--                            @endif--}}
+{{--                        >{{$project->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
+
             <div class="form-group">
                 <label class="control-label">Keterangan</label>
               <textarea class="form-control" rows="4" name="ket">{{ $project->ket }}</textarea>
