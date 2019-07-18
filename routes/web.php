@@ -46,6 +46,14 @@ Route::post('/teamprojects/create','TeamProjectController@store');
 Route::post('/modules/create','ModuleController@store');
 
 
+
+// Completed Project
+
+Route::get('/completedProject','ProjectController@completedProject');
+
+
+
+
 // Team Project
 
 Route::get('/team/creates/{project}','TeamProjectController@creates');
@@ -86,7 +94,7 @@ Route::post('/jobs/creates/{module}/module','JobController@store');
 Route::get('/timesheetss','TimesheetController@UserTimesheets');
 
 
-//
+// User Info
 
 Route::get('/userInfo','UserInfoController@index');
 

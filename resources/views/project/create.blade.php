@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="status" required="">
-                        <option disabled>Select Project</option>
+                        <option disabled>Select Status</option>
                             <option value=1>Ongoing</option>
                             <option value=2>Queue</option>
                     </select>

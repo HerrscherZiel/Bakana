@@ -3,8 +3,9 @@
 @section('content')
     @if(Auth::user()->hasRole('Project Manager'))
         <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
-        @endif
-<div class="row">
+    @endif
+    <a href="{{url('/completedProject')}}" class="btn btn-primary mb-3"> Completed Project</a>
+    <div class="row">
   @foreach($project as $projects)
       <div class="col-md-6">
         <div class="tile">

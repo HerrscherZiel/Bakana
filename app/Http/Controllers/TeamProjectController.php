@@ -25,7 +25,6 @@ class TeamProjectController extends Controller
 
         $team_projects = TeamProject::join('project', 'project.id_project', '=', 'team_projects.project_id')
             ->join('users', 'users.id', '=', 'team_projects.user_id')
-//            ->join('role', 'role.id_role', '=', 'users.role_id')
             ->select('team_projects.*', /*'users.name',*/ 'project.nama_project'/*,'role.nama_role'*/)
             ->groupBy('team_projects.project_id')
             ->getQuery()
@@ -195,6 +194,7 @@ class TeamProjectController extends Controller
             $user = User::all();
             $project = Project::all();
             $role = Role::all();
+
 
             $team_projects = TeamProject::find($id);
             return view('team.edit_team_project_index', compact('team_projects', 'user', 'project', 'role'));

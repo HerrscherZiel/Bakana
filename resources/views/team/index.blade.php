@@ -31,11 +31,6 @@
 
                         <a href="/team/{{$teams->project_id}}" class="btn btn-primary">Show Team</a>
 
-
-                        <a class="btn btn-info" href="/teamprojects/{{$teams->id_team_projects}}/edit">
-                            <i class="fa fa-lg fa-edit">
-                            </i>
-                        </a>
                             <form class="delete" action="{{ route('teamprojects.destroy', $teams->id_team_projects)}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf

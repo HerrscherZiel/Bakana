@@ -22,13 +22,31 @@ class ProjectController extends Controller
     {
         Session::put('title', 'Dashboard Project');
         //
-//        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
-        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
+//        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
-        /*$today = strtotime('today GMT');*/
-        //$sisa = date("d/m/Y", strtotime('today'));
+        $project = Project::all()->where('status','!=', 4);
+
+//        dd($project);
 
             return view('project.index')->with('project', $project);
+
+
+    }
+
+
+    // Completed Project
+
+    public function completedProject()
+    {
+        Session::put('title', 'Completed Project');
+        //
+//        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
+
+        $project = Project::all()->where('status','==', 4);
+
+//        dd($project);
+
+        return view('project.projectComplete')->with('project', $project);
 
 
 //        return view('project.index', compact('project', 'module'));
@@ -55,21 +73,6 @@ class ProjectController extends Controller
         }
     }
 
-//    public function creates($id)
-//    {
-//        //
-//        if (Auth::user()->hasRole('Project Manager')) {
-//            $project = Project::all($id);
-//
-//            return view('project.creates')->with('project', $project);
-//        }
-//
-//        else{
-//            //Tambah warning
-//            return view('home')->with(abort(403, 'Unauthorized action.'));
-//        }
-//
-//    }
 
     /**
      * Store a newly created resource in storage.
