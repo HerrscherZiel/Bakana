@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Job;
 use Illuminate\Http\Request;
 use App\User;
 use App\Project;
@@ -67,12 +68,21 @@ class UserInfoController extends Controller
         $modulpro = User::join('team_projects','users.id','=','team_projects.user_id')
             ->join('project','team_projects.project_id','=','project.id_project')
             ->join('module', 'project.id_project', '=', 'module.project_id')
-            ->select('users.name', 'project.nama_project','module.nama_module')
-            ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id])
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.nama_module', 'module.status', 'jobs.nama_job', 'jobs.user', 'jobs.keterangan')
+            ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id, 'jobs.user' => auth()->user()->name])
 //            ->where('users.id', '=', auth()->user()->id)
-            ->groupBy('module.nama_module')
+//            ->groupBy('module.nama_module')
             ->getQuery()
             ->get();
+
+//        $job = Job::join('module', 'module_id', '=', 'id_module')
+//            ->select('jobs.*','module.nama_module')
+//            ->where('module.id_module', '=', $id )
+//            ->getQuery()
+//            ->get();
+
+//        dd($modulpro);
 
 
 //            dd($modulpro);
