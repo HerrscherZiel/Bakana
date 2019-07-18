@@ -64,6 +64,10 @@ class UserInfoController extends Controller
 
         Session::put('title', 'My Module');
 
+        $project = Project::select('nama_project')
+                            ->where('id_project', '=', $id )
+                            ->getQuery()
+                            ->get();
 
         $modulpro = User::join('team_projects','users.id','=','team_projects.user_id')
             ->join('project','team_projects.project_id','=','project.id_project')
@@ -72,7 +76,7 @@ class UserInfoController extends Controller
             ->select( 'module.nama_module', 'module.status', 'jobs.nama_job', 'jobs.user', 'jobs.keterangan')
             ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id, 'jobs.user' => auth()->user()->name])
 //            ->where('users.id', '=', auth()->user()->id)
-//            ->groupBy('module.nama_module')
+            ->orderBy('module.nama_module')
             ->getQuery()
             ->get();
 
@@ -86,7 +90,7 @@ class UserInfoController extends Controller
 
 
 //            dd($modulpro);
-        return view('UserInfo.userModule', compact('modulpro'));
+        return view('UserInfo.userModule', compact('modulpro', 'project'));
     }
 
     /**

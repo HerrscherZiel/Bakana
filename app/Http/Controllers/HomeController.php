@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Timesheet;
 use Illuminate\Http\Request;
 use App\User;
 use App\Project;
@@ -33,13 +32,26 @@ class HomeController extends Controller
     {
         Session::put('title', 'Timeline');
         if (Auth::user()->hasRole('Project Manager')) {
-            return view('home');
+
+            $user = User::join('role', 'users.role_id', '=', 'role.id_role')
+                ->select('users.name','role.name')
+                ->where('users.name','=',auth()->user()->name)
+                ->getQuery()
+                ->get();
+
+            return view('home')->with('user', $user);
         }
         else{
            // $name = auth()->user()->name;
 //            $user = User::find('id', 'name');
 //            $timesheetView = Timesheet::all();
-            return view('home');
+            $user = User::join('role', 'users.role_id', '=', 'role.id_role')
+                ->select('users.name','role.name')
+                ->where('users.name','=',auth()->user()->name)
+                ->getQuery()
+                ->get();
+
+            return view('home')->with('user', $user);
         }
 //        , compact('user', 'timesheetView'))
 //        ->with('timesheet', $timesheetView);
