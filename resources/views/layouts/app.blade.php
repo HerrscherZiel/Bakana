@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="app sidebar-mini rtl" id="fullscreen">
-    <div id="app">
+  <div id="app">
     <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
@@ -99,35 +99,34 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
   <script type="text/javascript" src="{{URL::asset('docs/js/bootstrap-datepicker.js')}}"></script>
-  <!-- delete -->
+<!-- delete -->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
-    <script type="text/javascript">
-        $('button.delete-btn').on('click', function(e){
-        event.preventDefault();
-        var self = $(this);
-        swal({
-          title: "Anda yakin?",
-          text: "Anda tidak akan bisa mengembalikannya lagi",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes",
-          cancelButtonText: "No",
-          closeOnConfirm: false,
-          closeOnCancel: false
-        }, function(isConfirm) {
-          if (isConfirm) {
-            swal("Terhapus!", "Berhasil terhapus dari database.", "success");
-           setTimeout(function() {
-                    self.parents(".delete").submit();
-                }, 500);
-          } else {
-            swal("Batal dihapus!", "Item aman di database.", "error");
-          }
-        });
+  <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
+  <script type="text/javascript">
+      $('button.delete-btn').on('click', function(e){
+      event.preventDefault();
+      var self = $(this);
+      swal({
+        title: "Anda yakin?",
+        text: "Anda tidak akan bisa mengembalikannya lagi",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      }, function(isConfirm) {
+        if (isConfirm) {
+          swal("Terhapus!", "Berhasil terhapus dari database.", "success");
+         setTimeout(function() {
+                  self.parents(".delete").submit();
+              }, 500);
+        } else {
+          swal("Batal dihapus!", "Item aman di database.", "error");
+        }
       });
-    </script>
-
+    });
+  </script>
 <script type="text/javascript">
   var date = new Date();
   date.setDate(date.getDate());

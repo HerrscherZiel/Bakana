@@ -2,25 +2,49 @@
 
 @section('content')
 
-    <div class="row">
-        <!-- <div class="tile">
-        @foreach($users as $user)
-        <h3>{{$user->name}} sebagai
-        {{$user->nama_role}}</h3>
-        @endforeach
-        <hr>
-            <br>
-            @foreach($timesheets as $timesheet)
-                {{$timesheet->project}}
-                {{$timesheet->tgl_timesheet}}
-                {{$timesheet->jam_mulai}}
-                {{$timesheet->jam_selesai}}
-                {{$timesheet->keterangan_timesheet}}
-                <br>
-            @endforeach
-
-        @foreach($info as $infos)
-  <div class="col-md-6">
+<div class="row">
+    <!-- <div class="tile">
+    @foreach($users as $user)
+    <h3>{{$user->name}} sebagai
+    {{$user->nama_role}}</h3>
+    @endforeach -->
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+        <table class="table table-striped">
+            <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
+            <h3>Your Last Timesheet</h3>
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Tanggal</th>
+                <th>Jam Mulai</th>
+                <th>Jam Selesai</th>
+                <th>Total Waktu</th>
+                <th>Keterangan</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                 @foreach($timesheets as $timesheet)
+                <td>{{$timesheet->project}}</td>
+                <td>{{date("d-m-Y", strtotime($timesheet->tgl_timesheet))}}</td>
+                <td>{{$mulai = $timesheet->jam_mulai}}</td>
+                <td>{{$selesai = $timesheet->jam_selesai}}</td>
+                <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }} menit</td>
+                <td>{{$timesheet->keterangan_timesheet}}</td>
+                </tr>
+               @endforeach
+            </tbody>
+          </table>
+          <div class="row d-print-none mt-2">
+             <div class="col-12 text-right"><a href="{{url('/timesheetss')}}" class="btn btn-warning pull-right">Show More</a></div>
+          </div>
+            </div>
+        </div>
+    </div>
+    @foreach($info as $infos)
+    <div class="col-md-6">
         <div class="tile">
           <div class="tile-title-w-btn">
             <h3 class="title">{{$infos->nama_project}}</h3>
@@ -55,5 +79,5 @@
         </div>
       </div>
       @endforeach
-  </div>
+    </div>
 @endsection
