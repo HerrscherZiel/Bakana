@@ -40,18 +40,19 @@ class UserInfoController extends Controller
             ->getQuery()
             ->get();
 
+        $timesheets = Timesheet::select('timesheets.project', 'timesheets.tgl_timesheet', 'timesheets.jam_mulai', 'timesheets.jam_selesai', 'timesheets.keterangan_timesheet')
+                    ->where('timesheets.user_id', '=', auth()->user()->id)
+                    ->take(3)
+                    ->orderBy('timesheets.id_timesheets', 'DESC')
+                    ->getQuery()
+                    ->get();
 
+//            dd($timesheets);
 
-//        $a = $info::select('id_project');
-
-//        dd($modulpro);
-
-
-//        $timesheetView =  $timesheet;
 //        dd($info);
 //        dd($users);
 
-        return view('UserInfo.userInfo', compact('info', 'users'))/*->with('timesheetView', $timesheetView)*/;
+        return view('UserInfo.userInfo', compact('info', 'users', 'timesheets'))/*->with('timesheetView', $timesheetView)*/;
     }
 
 
