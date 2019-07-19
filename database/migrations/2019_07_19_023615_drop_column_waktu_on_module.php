@@ -16,10 +16,10 @@ class DropColumnWaktuOnModule extends Migration
         //
         Schema::table('module', function($table) {
             $table->dropColumn('waktu');
-            $table->string('user')->after('nama_module');
+            $table->string('user')->after('nama_module')->nullable();
             $table->date('tgl_mulai')->after('user');
             $table->date('deadline')->after('tgl_mulai');
-            $table->date('tgl_user')->after('deadline');
+            $table->date('tgl_user')->after('deadline')->nullable();
         });
     }
 
