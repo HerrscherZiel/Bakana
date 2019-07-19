@@ -121,9 +121,9 @@ class TimesheetController extends Controller
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $request->validate([
-                'tgl_timesheet' => 'required',
+                'tgl_timesheet' => 'required|date',
                 'jam_mulai' => 'required',
-                'jam_selesai' => 'required',
+                'jam_selesai' => 'required|after:jam_mulai',
                 'keterangan_timesheet' => 'required']);
 
 
@@ -144,9 +144,9 @@ class TimesheetController extends Controller
 
         else  {
             $request->validate([
-                'tgl_timesheet' => 'required',
+                'tgl_timesheet' => 'required|date',
                 'jam_mulai' => 'required',
-                'jam_selesai' => 'required',
+                'jam_selesai' => 'required|after:jam_mulai',
                 'keterangan_timesheet' => 'required']);
 
 
@@ -228,9 +228,9 @@ class TimesheetController extends Controller
     {
         //
         $request->validate( [
-            'tgl_timesheet' => 'required',
+            'tgl_timesheet' => 'required|date',
             'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'jam_selesai' => 'required|after:jam_mulai',
             'keterangan_timesheet' => 'required']);
 
         $timesheet =  Timesheet::find($id);

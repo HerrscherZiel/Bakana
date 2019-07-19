@@ -9,7 +9,8 @@ use App\Project;
 use Illuminate\Support\Facades\Session;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+use App\Http\Requests\ProjectRequest;
+
 
 class ProjectController extends Controller
 {
@@ -86,11 +87,12 @@ class ProjectController extends Controller
             $request->validate( [
             'kode_project'=>'required',
             'nama_project'=>'required',
-            'tgl_mulai'=>'required',
-            'tgl_selesai'=>'required',
-            'status'=>'required',
+            'tgl_mulai'=>'required|date',
+            'tgl_selesai'=>'required|date',
+            'status'=>'required|integer',
             'ket' => 'nullable'
         ]);
+//        dd($request->all());
 
         // $this->user_id = auth()->user()->id;
         $project = new Project([
@@ -108,33 +110,6 @@ class ProjectController extends Controller
           
         
     }
-
-//    public function stores(Request $request, $id)
-//    {
-//        //
-//        $request->validate( [
-//            'nama_module'   =>'required',
-//            'waktu'         =>'required',
-//            'status'        =>'required',
-//            'keterangan'    =>'nullable'
-//        ]);
-//
-//        $project = Project::find($id);
-//
-//        $module = new Module([
-//            'nama_module'           => $request->get('nama_module'),
-//            'waktu'                 => $request->get('waktu'),
-//            'status'                => $request->get('status'),
-//            $project->id_project    => $request->get('project_id'),
-//            'keterangan'            => $request->get('keterangan'),
-//        ]);
-//
-//        /*$module = Module::with('projects')->all();*/
-//        $module->save();
-//
-//        return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
-//
-//    }
 
 
     /**
@@ -176,9 +151,6 @@ class ProjectController extends Controller
     {
         Session::put('title', 'Edit Project');
         //
-        /*$ticket = Ticket::where('user_id', auth()->user()->id)
-            ->where('id', $id)
-            ->first();*/
 
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::find($id);
@@ -203,7 +175,8 @@ class ProjectController extends Controller
         //
 
         $project = new Project();
-        $data = $this->validate($request, [
+
+        $request->validate([
             'kode_project' => 'required',
             'nama_project' => 'required',
             'tgl_mulai' => 'required|date',

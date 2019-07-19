@@ -14,9 +14,11 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
 </head>
 <body class="app sidebar-mini rtl" id="fullscreen">
-  <div id="app">
+{{--@include('flash-message')--}}
+<div id="app">
     <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
@@ -151,6 +153,7 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
+{{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
  <!-- DayPilot library -->
 <script src="{{URL::asset('js/daypilot-all.min.js')}}"></script> 
 <script>

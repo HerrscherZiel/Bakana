@@ -21,14 +21,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resources([
 
-    'projects' => 'ProjectController',
-    'roles' => 'RoleController',
-    'users' => 'UserController',
-    'timesheets' => 'TimesheetController',
-    'teamprojects' => 'TeamProjectController',
-    'modules' => 'ModuleController',
-    'jobs' => 'JobController',
-    'userInfo' => 'UserInfoController',
+    'projects'      => 'ProjectController',
+    'roles'         => 'RoleController',
+    'users'         => 'UserController',
+    'timesheets'    => 'TimesheetController',
+    'teamprojects'  => 'TeamProjectController',
+    'modules'       => 'ModuleController',
+    'jobs'          => 'JobController',
+    'userInfo'      => 'UserInfoController',
+    /*'timelines'     => 'TimelineController',*/
 
 
 ]);
@@ -99,6 +100,10 @@ Route::get('/timesheetss','TimesheetController@UserTimesheets');
 Route::get('/userInfo','UserInfoController@index');
 
 Route::get('/userInfo/module/{module}','UserInfoController@moduleUser');
+
+//Timeline
+
+Route::get('/timelines','TimelineController@index');
 
 
 
