@@ -13,6 +13,7 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
 </head>
 <body class="app sidebar-mini rtl" id="fullscreen">
   <div id="app">
@@ -150,6 +151,7 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
+{{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
  <!-- DayPilot library -->
 <script src="{{URL::asset('js/daypilot-all.min.js')}}"></script> 
 <script>

@@ -4,33 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Module extends Model implements \MaddHatter\LaravelFullcalendar\Event
+class Timeline extends Model implements \MaddHatter\LaravelFullcalendar\Event
 {
     //
-    protected $table = 'module';
+    protected $table = 'timeline';
 
-    public $primaryKey = 'id_module';
+    public $primaryKey = 'id_timeline';
 
     public $timestamps = true;
 
     protected $fillable = [
-        'nama_module',
-        'user',
+        'nama_timeline',
         'tgl_mulai',
         'deadline',
         'tgl_user',
-        'status',
-        'project_id',
-        'keterangan',
     ];
-
-    public function projects(){
-        return $this->belongsTo('App\Project','project_id','id_project');
-    }
-
-    public function jobs(){
-        return $this->belongsToMany('App\Job','id_module','module_id');
-    }
 
     public function getId() {
         return $this->id;

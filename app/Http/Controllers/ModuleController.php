@@ -6,11 +6,13 @@ use App\Job;
 use App\Module;
 use App\Project;
 use App\TeamProject;
+use App\Timeline;
 use App\User;
 use Illuminate\Support\Facades\Session;
 use App\Util\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use MaddHatter\LaravelFullcalendar\Calendar;
 
 class ModuleController extends Controller
 {
@@ -149,8 +151,16 @@ class ModuleController extends Controller
             'keterangan'    => $request->get('keterangan'),
         ]);
 
-        /*$module = Module::with('projects')->all();*/
         $module->save();
+
+//        $timeline = new Timeline([
+//            'nama_timeline'     => $request->get('nama_module'),
+//            'tgl_mulai'         => $request->get('tgl_mulai'),
+//            'deadline'          => $request->get('deadline'),
+//            'tgl_user'          => $request->get('tgl_user'),
+//        ]);
+//
+//        $timeline->save();
 
 /*        return Redirect::to('projects/'.$idProject);*/
         return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');

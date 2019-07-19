@@ -28,6 +28,13 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
 
+
+<script src="{{URL::asset('docs/js/moment.min.js')}}"></script>
+<script src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>
+
+{{--Calendar--}}
+
+
 <script type="text/javascript">
   $('#sl').click(function(){
     $('#tl').loadingBtn();
