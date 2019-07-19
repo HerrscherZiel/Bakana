@@ -28,7 +28,20 @@
                   <input class="form-control" type="text" name="nama_module" placeholder="Nama Modul">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="waktu" placeholder="Durasi">
+                    <select class="form-control" name="user" required="">
+                        <option disabled="" selected="">Select Project</option>
+                        @foreach($mod as $mods)
+                            <option value="{{$mods->name}}">{{$mods->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group input-group">
+                    <input id="date1" class="form-control" name="tgl_mulai" placeholder="Start Date">
+                    <div class="mt-1 ml-3 mr-3">to</div>
+                    <input id="date2" class="form-control" name="deadline" placeholder="Finish Date">
+                </div>
+                <div class="form-group input-group">
+                    <input id="date1" class="form-control" name="tgl_user" placeholder="Selesai pada">
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="status" required="">

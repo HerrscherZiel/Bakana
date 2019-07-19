@@ -15,7 +15,10 @@ class Module extends Model
 
     protected $fillable = [
         'nama_module',
-        'waktu',
+        'user',
+        'tgl_mulai',
+        'deadline',
+        'tgl_user',
         'status',
         'project_id',
         'keterangan',

@@ -6,6 +6,7 @@ use App\Job;
 use App\Module;
 use App\Project;
 use App\TeamProject;
+use App\User;
 use Illuminate\Support\Facades\Session;
 use App\Util\Utils;
 use Illuminate\Http\Request;
@@ -72,9 +73,16 @@ class ModuleController extends Controller
         Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
+            $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
+                ->join('users','team_projects.user_id','=','users.id')
+                ->select('users.*')
+                ->distinct('users.id')
+                ->getQuery()
+                ->get();
+
             $project = Project::all();
 
-            return view('module.create')->with('project', $project);
+            return view('module.create')->with('project', $project, 'mod', $mod);
         }
 
         else{
@@ -89,10 +97,17 @@ class ModuleController extends Controller
         Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
+            $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
+                ->join('users','team_projects.user_id','=','users.id')
+                ->select('users.*')
+                ->distinct('users.id')
+                ->getQuery()
+                ->get();
+
             $project = Project::find($id);
 
             /*dd($project);*/
-            return view('module.creates')->with('project', $project);
+            return view('module.creates')->with('project', $project, 'mod', $mod);
         }
 
         else{
@@ -113,14 +128,20 @@ class ModuleController extends Controller
         //
         $request->validate( [
             'nama_module'   =>'required',
-            'waktu'         =>'required',
+            'user'          =>'nullable',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required',
+            'tgl_user'      =>'nullable',
             'status'        =>'required',
             'keterangan'    =>'nullable'
         ]);
 
         $module = new Module([
             'nama_module'   => $request->get('nama_module'),
-            'waktu'         => $request->get('waktu'),
+            'user'          => $request->get('user'),
+            'tgl_mulai'     => $request->get('tgl_mulai'),
+            'deadline'      => $request->get('deadline'),
+            'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
             'project_id'    => $request->get('project_id'),
             'keterangan'    => $request->get('keterangan'),
@@ -212,11 +233,12 @@ class ModuleController extends Controller
             ->where('id', $id)
             ->first();*/
         if (Auth::user()->hasRole('Project Manager')) {
-            $project = Project::all();
-            $module = Module::find($id);
+            $project    = Project::all();
+            $module     = Module::find($id);
+            $user       = User::all();
 
 
-            return view('module.edit', compact('module', 'project'));
+            return view('module.edit', compact('module', 'project', 'user'));
         }
 
         else{
@@ -239,16 +261,22 @@ class ModuleController extends Controller
         $module = new Module();
         $request->validate( [
             'nama_module'   => 'required',
-            'waktu'         =>'required',
+            'user'          => 'nullable',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required',
+            'tgl_user'      =>'nullable',
             'status'        =>'required',
             'keterangan'    => 'nullable']);
 
         $module = Module::find($id);
-        $module->nama_module = $request->get('nama_module');
-        $module->waktu = $request->get('waktu');
-        $module->status = $request->get('status');
-        $module->project_id = $request->get('project_id');
-        $module->keterangan = $request->get('keterangan');
+        $module->nama_module    = $request->get('nama_module');
+        $module->user           = $request->get('user');
+        $module->tgl_mulai      = $request->get('tgl_mulai');
+        $module->deadline       = $request->get('deadline');
+        $module->tgl_user       = $request->get('tgl_user');
+        $module->status         = $request->get('status');
+        $module->project_id     = $request->get('project_id');
+        $module->keterangan     = $request->get('keterangan');
         $module->save();
 
         return redirect('/modules')->with('success', 'New support ticket has been updated!!');

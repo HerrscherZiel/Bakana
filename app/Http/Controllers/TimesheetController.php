@@ -77,7 +77,7 @@ class TimesheetController extends Controller
         $id = auth()->user()->id;
         $timesheetView =  $timesheet;
 
-        /*dd($timesheet);*/
+        $user = User::find($id);
 
 
         return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);

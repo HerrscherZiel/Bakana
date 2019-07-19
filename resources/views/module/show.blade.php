@@ -20,7 +20,11 @@
           <div class="row invoice-info mb-2">
             @foreach($module as $modules)
             <div class="col-4">
-              <address>Project: <strong>{{$modules->nama_project}}</strong><br><br>Durasi: <strong>{{$modules->waktu}}</strong></address>
+              <address>Project: <strong>{{$modules->nama_project}}</strong><br>
+
+                  <br>Tanggal Mulai: <strong>{{$modules->tgl_mulai}}</strong>
+                  <br>Deadline: <strong>{{$modules->deadline}}</strong>
+                  <br>Tanggal Selesai: <strong>{{$modules->tgl_user}}</strong></address>
             </div>
             <div class="col-4">Status: <b>@if ($modules->status === 1 )
                         Ongoing
@@ -31,7 +35,8 @@
                     @elseif($modules->status === 4 )
                         Completed
                         @endif</td>
-                </b><br>Keterangan:<br><b>{{$modules->keterangan}}</b></div>
+                </b><br>User:<br><b>{{$modules->user}}</b>
+                <br>Keterangan:<br><b>{{$modules->keterangan}}</b></div>
              @endforeach
           </div>
           <div class="row">

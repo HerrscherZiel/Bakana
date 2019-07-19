@@ -10,8 +10,11 @@
             <thead>
               <tr>
                 <th>Modul</th>
-                <th>Durasi</th>
+                <th>Tanggal Mulai</th>
+                <th>Deadline</th>
+                <th>Tanggal Selesai</th>
                 <th>Status</th>
+                <th>User</th>
                 <th>Project</th>
                 <th>Keterangan</th>
                 <th>Action</th>
@@ -21,7 +24,9 @@
               <tr>
                 @foreach($module as $modules)
                 <td>{{$modules->nama_module}}</td>
-                <td>{{$modules->waktu}}</td>
+                <td>{{$modules->tgl_mulai}}</td>
+                <td>{{$modules->deadline}}</td>
+                <td>{{$modules->tgl_user}}</td>
                 <td>@if ($modules->status === 1 )
                         Ongoing
                     @elseif($modules->status === 2 )
@@ -31,6 +36,7 @@
                     @elseif($modules->status === 4 )
                         Completed
                     @endif</td></td>
+                <td>{{$modules->user}}</td>
                 <td>{{$modules->nama_project}}</td>
                 <td>{{$modules->keterangan}}</td>
                 <td>

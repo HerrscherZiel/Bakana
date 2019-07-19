@@ -35,8 +35,24 @@
                   <input class="form-control" type="text" name="nama_module" value="{{ $module->nama_module }}"/>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Durasi</label>
-                  <input class="form-control" type="text" name="waktu" value={{ $module->waktu }}>
+                    <label class="control-label">User</label>
+                    <select class="form-control" name="user" required="">
+                        @foreach($user as $users)
+                            <option value="{{$users->name}}"
+                            @if($users->name === $module->user)
+                                selected
+                            @endif
+                            >{{$users->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group input-group">
+                    <input id="date1" class="form-control" name="tgl_mulai" value={{ $module->tgl_mulai }}>
+                    <div class="mt-1 ml-3 mr-3">to</div>
+                    <input id="date2" class="form-control" name="deadline" value={{ $module->deadline }}>
+                </div>
+                <div class="form-group input-group">
+                    <input id="date1" class="form-control" name="tgl_user" value={{ $module->tgl_user }}>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Status</label>
