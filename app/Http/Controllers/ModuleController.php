@@ -57,8 +57,6 @@ class ModuleController extends Controller
             ->getQuery()
             ->get();
 
-
-
         return view('module.indexproject', compact('project', 'module'));
 
 
@@ -130,13 +128,14 @@ class ModuleController extends Controller
     public function store(Request $request)
     {
         //
+
         $request->validate( [
             'nama_module'   =>'required',
-            'user'          =>'required',
-            'tgl_mulai'     =>'required',
-            'deadline'      =>'required',
-            'tgl_user'      =>'nullable',
-            'status'        =>'required',
+            'user'          =>'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
+            'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
 
@@ -153,48 +152,8 @@ class ModuleController extends Controller
 
         $module->save();
 
-//        $timeline = new Timeline([
-//            'nama_timeline'     => $request->get('nama_module'),
-//            'tgl_mulai'         => $request->get('tgl_mulai'),
-//            'deadline'          => $request->get('deadline'),
-//            'tgl_user'          => $request->get('tgl_user'),
-//        ]);
-//
-//        $timeline->save();
-
-/*        return Redirect::to('projects/'.$idProject);*/
         return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
-
-//    public function stores(Request $request, $id)
-//    {
-//        //
-//        $request->validate( [
-//            'nama_module'   =>'required',
-//            'waktu'         =>'required',
-//            'status'        =>'required',
-//            'keterangan'    =>'nullable'
-//        ]);
-//
-//        /*$project = Project::find($id);*/
-//
-//        /*dd($project);*/
-//
-//        $module = new Module([
-//            'nama_module'           => $request->get('nama_module'),
-//            'waktu'                 => $request->get('waktu'),
-//            'status'                => $request->get('status'),
-//            'project_id'            => projects()->id_project,
-//            'keterangan'            => $request->get('keterangan'),
-//        ]);
-//
-//        /*$module = Module::with('projects')->all();*/
-//        $module->save();
-//
-//        /*dd($project);*/
-//
-////        return redirect('/modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
-//    }
 
 
 
@@ -273,11 +232,11 @@ class ModuleController extends Controller
         $module = new Module();
         $request->validate( [
             'nama_module'   => 'required',
-            'user'          => 'required',
-            'tgl_mulai'     =>'required',
-            'deadline'      =>'required',
-            'tgl_user'      =>'nullable',
-            'status'        =>'required',
+            'user'          => 'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
+            'status'        =>'required|integer',
             'keterangan'    => 'nullable']);
 
         $module = Module::find($id);

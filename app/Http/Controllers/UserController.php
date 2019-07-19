@@ -151,8 +151,8 @@ class UserController extends Controller
         //
         $request->validate( [
             'name' => 'required',
-            'email' => 'required',
-            'role_id' => 'required'
+            'email' => 'required|email',
+            'role_id' => 'required|integer'
         ]);
 
         $user = User::find($id);

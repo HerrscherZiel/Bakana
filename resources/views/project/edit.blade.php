@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="col-md-12">
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div><br />
-@endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
   <div class="tile">
     <h3 class="tile-title">Edit Project</h3>
     <form method="post" action="{{ route('projects.update', $project->id_project) }}">

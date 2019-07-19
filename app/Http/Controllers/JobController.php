@@ -106,7 +106,7 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      =>'required',
             'user'          =>'nullable',
-            'status'        =>'required',
+            'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
 
@@ -175,7 +175,7 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      => 'required',
             'user'          => 'nullable',
-            'status'        => 'required',
+            'status'        => 'required|integer',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);

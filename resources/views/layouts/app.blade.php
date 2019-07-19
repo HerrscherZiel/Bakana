@@ -16,7 +16,8 @@
     {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
 </head>
 <body class="app sidebar-mini rtl" id="fullscreen">
-  <div id="app">
+{{--@include('flash-message')--}}
+<div id="app">
     <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
