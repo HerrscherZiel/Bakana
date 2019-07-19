@@ -80,9 +80,11 @@ class ModuleController extends Controller
                 ->getQuery()
                 ->get();
 
+//            dd($mod);
+
             $project = Project::all();
 
-            return view('module.create')->with('project', $project, 'mod', $mod);
+            return view('module.create', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
         }
 
         else{
@@ -107,7 +109,7 @@ class ModuleController extends Controller
             $project = Project::find($id);
 
             /*dd($project);*/
-            return view('module.creates')->with('project', $project, 'mod', $mod);
+            return view('module.creates', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
         }
 
         else{
@@ -128,7 +130,7 @@ class ModuleController extends Controller
         //
         $request->validate( [
             'nama_module'   =>'required',
-            'user'          =>'nullable',
+            'user'          =>'required',
             'tgl_mulai'     =>'required',
             'deadline'      =>'required',
             'tgl_user'      =>'nullable',
@@ -261,7 +263,7 @@ class ModuleController extends Controller
         $module = new Module();
         $request->validate( [
             'nama_module'   => 'required',
-            'user'          => 'nullable',
+            'user'          => 'required',
             'tgl_mulai'     =>'required',
             'deadline'      =>'required',
             'tgl_user'      =>'nullable',
