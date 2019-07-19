@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Nama Job</label>
-                  <input class="form-control" type="text" name="nama_job" value={{ $job->nama_job }}>
+                  <input class="form-control" type="text" name="nama_job" value='{{ $job->nama_job }}'/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">User</label>

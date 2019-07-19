@@ -20,11 +20,11 @@
             <div class="form-group">
                 <label class="control-label">Project Code</label>
                 <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                <input class="form-control" name="kode_project" type="text" value={{ $project->kode_project }}>
+                <input class="form-control" name="kode_project" type="text" value='{{ $project->kode_project }}'/>
             </div>
             <div class="form-group">
                 <label class="control-label">Nama Project</label>
-              <input class="form-control" type="text" name="nama_project" value={{ $project->nama_project }}>
+              <input class="form-control" type="text" name="nama_project" value='{{ $project->nama_project }}' />
             </div>
             <div class="form-group input-group ">
                 <label class="control-label mt-2 mr-2">Tanggal Mulai</label>

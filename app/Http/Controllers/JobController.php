@@ -186,7 +186,7 @@ class JobController extends Controller
         $job->keterangan    = $request->get('keterangan');
         $job->save();
 
-        return redirect('/jobs')->with('success', 'New support ticket has been updated!!');
+        return redirect('/back')->with('success', 'New support ticket has been updated!!');
     }
 
     /**

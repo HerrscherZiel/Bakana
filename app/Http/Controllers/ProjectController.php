@@ -83,7 +83,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate( [
+            $request->validate( [
             'kode_project'=>'required',
             'nama_project'=>'required',
             'tgl_mulai'=>'required',
@@ -101,9 +101,12 @@ class ProjectController extends Controller
             'status'=> $request->get('status'),
             'ket'=> $request->get('ket')
         ]);
-        $project->save();
 
-        return redirect('/projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        $project->save();
+        
+       return redirect('/back')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+          
+        
     }
 
 //    public function stores(Request $request, $id)
@@ -218,7 +221,7 @@ class ProjectController extends Controller
         $project->ket = $request->get('ket');
         $project->save();
 
-        return redirect('/projects')->with('success', 'New support ticket has been updated!!');
+        return redirect('/back')->with('success', 'New support ticket has been updated!!');
     }
 
     /**
@@ -242,5 +245,10 @@ class ProjectController extends Controller
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
+    }
+    public function back()
+    {
+        
+        return view('back');
     }
 }

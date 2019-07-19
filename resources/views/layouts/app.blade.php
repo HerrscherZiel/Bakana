@@ -9,6 +9,7 @@
 
     <title>Timeline</title>
     <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
@@ -79,7 +80,7 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="javascript:history.go(-1)"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="{!! URL::previous() !!}"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
@@ -350,6 +351,16 @@
 
     $this.text(linkText);
   });
+</script>
+<!-- autorefresh -->
+<script>
+if(location.search.indexOf('/') < 0){
+  var hash = window.location.hash;
+  var loc = window.location.href.replace(hash, '');
+  loc += (loc.indexOf('?') < 0? '?' : '&') + '/';
+  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):
+  setTimeout(function(){window.location.href = loc + hash;}, 5);
+}
 </script>
 <!-- Google analytics script-->
 <script type="text/javascript">
