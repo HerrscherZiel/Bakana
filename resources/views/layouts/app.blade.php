@@ -155,7 +155,7 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
 {{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
-{!! $calendar->script() !!}
+
  <!-- DayPilot library -->
 <script src="{{URL::asset('js/daypilot-all.min.js')}}"></script> 
 <script>
