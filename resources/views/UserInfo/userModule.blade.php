@@ -18,6 +18,7 @@
                 <th>Job</th>
                 <th>Status</th>
                 <th>Keterangan</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -35,6 +36,10 @@
 	                Completed
 	            @endif</td>
                 <td>{{$mod->keterangan}}</td>
+                <td><a class="btn btn-info" href="/module/{{$mod->id_module}}/edit">
+                        <i class="fa fa-lg fa-edit">
+                        </i>
+                    </a></td>
               </tr>
                @endforeach
             </tbody>

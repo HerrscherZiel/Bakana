@@ -13,6 +13,7 @@ use App\Util\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use MaddHatter\LaravelFullcalendar\Calendar;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
 class ModuleController extends Controller
 {
@@ -131,14 +132,17 @@ class ModuleController extends Controller
         Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
+
+            $project = Project::find($id);
+
             $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
                 ->join('users','team_projects.user_id','=','users.id')
+                ->where('project.id_project', '=', $id)
                 ->select('users.*')
                 ->distinct('users.id')
                 ->getQuery()
                 ->get();
 
-            $project = Project::find($id);
 
             /*dd($project);*/
             return view('module.creates', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
@@ -254,16 +258,57 @@ class ModuleController extends Controller
     {
         Session::put('title', 'Edit Modul');
         //
-        /*$ticket = Ticket::where('user_id', auth()->user()->id)
-            ->where('id', $id)
-            ->first();*/
+
+//        $mo = Module::join('project', 'project.id_project' , '=', 'module.project_id')
+//            ->select('module.user')
+//            ->where('user', '=', auth()->user()->name)
+//            ->getQuery()
+//            ->get();
+
+
+        $aa = Module::find($id)->user;
+
+        $as = auth()->user()->name;
+
+//        $as = $mo->user;
+
+//        dd($aa);
+
+
         if (Auth::user()->hasRole('Project Manager')) {
             $project    = Project::all();
-            $user       = User::all();
-
-
             $module     = Module::find($id);
+            $user       = User::join('team_projects','users.id','=','team_projects.user_id')
+                ->join('project', 'team_projects.project_id', '=', 'project.id_project')
+                ->join('module', 'module.project_id', '=', 'project.id_project')
+                ->select('users.*')
+                ->where('module.id_module', '=', $id )
+                ->groupBy('users.name')
+                ->getQuery()
+                ->get();
+
+
             return view('module.editShowProject', compact('module', 'project', 'user'));
+        }
+
+        elseif ( $aa === $as){
+
+
+//            $aa = Module::find($id)->user;
+//            $as = auth()->user()->name;
+            $project    = Project::all();
+            $module     = Module::find($id);
+            $user       = User::join('team_projects','users.id','=','team_projects.user_id')
+                ->join('project', 'team_projects.project_id', '=', 'project.id_project')
+                ->join('module', 'module.project_id', '=', 'project.id_project')
+                ->select('users.*')
+                ->where('module.id_module', '=', $id )
+                ->groupBy('users.name')
+                ->getQuery()
+                ->get();
+
+            return view('module.editUser', compact('module', 'project', 'user'/*, 'aa', 'as'*/));
+
         }
 
         else{
