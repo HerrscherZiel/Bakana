@@ -3,16 +3,17 @@
 @section('content')
 
 <div class="row">
-    <!-- <div class="tile">
-    @foreach($users as $user)
-    <h3>{{$user->name}} sebagai
-    {{$user->nama_role}}</h3>
-    @endforeach -->
+{{--    <!-- <div class="tile">--}}
+{{--    @foreach($users as $user)--}}
+{{--    <h3>{{$user->name}} sebagai--}}
+{{--    {{$user->nama_role}}</h3>--}}
+{{--    @endforeach -->--}}
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
         <table class="table table-striped">
             <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
+            <a href="{{url('/myCompletedProject')}}" class="btn btn-primary mb-3"> Completed Project</a>
             <h3>Your Last Timesheet</h3>
             <thead>
               <tr>

@@ -25,16 +25,14 @@ class ModuleController extends Controller
     {
         Session::put('title', 'Dashboard Modul');
         //
-        /*$module = Module::orderBy('id_module', 'asc')->paginate(10);*/
         if (Auth::user()->hasRole('Project Manager')) {
 
-//            $proj = Project::find('')
             $module = Module::join('project', 'project_id', '=', 'id_project')
                 ->select('module.*', 'project.id_project', 'project.nama_project')
+                ->where('project.status', '!=', 4)
                 ->getQuery()
                 ->get();
-            /*dd($module);*/
-            /*$module = Module::orderBy('id_module','asc')->paginate(10);*/
+//            dd($module);
             return view('module.index')->with('module', $module);
         }
 
@@ -44,6 +42,8 @@ class ModuleController extends Controller
         }
 
     }
+
+    //Module per Project
 
     public function indexes($id)
     {
@@ -57,11 +57,42 @@ class ModuleController extends Controller
             ->getQuery()
             ->get();
 
+//        dd($project);
+
         return view('module.indexproject', compact('project', 'module'));
 
 
     }
 
+
+    // Completed Module
+
+    public function completedModule()
+    {
+        Session::put('title', 'Completed Module');
+        //
+//        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
+        if (Auth::user()->hasRole('Project Manager')) {
+
+            $module = Module::join('project', 'project_id', '=', 'id_project')
+                ->select('module.*', 'project.id_project', 'project.nama_project')
+                ->where('project.status', '=', 4)
+                ->getQuery()
+                ->get();
+
+            return view('module.moduleComplete')->with('module', $module);
+        }
+
+//        dd($module);
+
+
+    else{
+        //Tambah warning
+        return view('home')->with(abort(403, 'Unauthorized action.'));
+    }
+
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -82,7 +113,8 @@ class ModuleController extends Controller
 
 //            dd($mod);
 
-            $project = Project::all();
+            $project = Project::all()->where('status', '!=', 4)
+            ;
 
             return view('module.create', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
         }
@@ -199,17 +231,39 @@ class ModuleController extends Controller
     public function edit($id)
     {
         Session::put('title', 'Edit Modul');
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            $project    = Project::all()->where('status', '!=', 4);
+            $module     = Module::find($id);
+            $user       = User::all();
+
+
+            return view('module.edit', compact('module', 'project', 'user'));
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+    }
+
+    //Edit Show Project
+
+    public function editShowProject($id)
+    {
+        Session::put('title', 'Edit Modul');
         //
         /*$ticket = Ticket::where('user_id', auth()->user()->id)
             ->where('id', $id)
             ->first();*/
         if (Auth::user()->hasRole('Project Manager')) {
             $project    = Project::all();
-            $module     = Module::find($id);
             $user       = User::all();
 
 
-            return view('module.edit', compact('module', 'project', 'user'));
+            $module     = Module::find($id);
+            return view('module.editShowProject', compact('module', 'project', 'user'));
         }
 
         else{

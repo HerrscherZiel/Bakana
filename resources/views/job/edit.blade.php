@@ -12,13 +12,17 @@
         </div><br />
     @endif
      <div class="tile">
-        <h3 class="tile-title">Edit Job</h3>
+        <h3 class="tile-title">Edit Job {{ $job->nama_job }}</h3>
         <form method="post" action="{{ route('jobs.update', $job->id_job) }}">
             @method('PATCH')
             @csrf
             <div class="tile-body">
+
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
+                </div>
+
+                <div class="form-group">
                     <label class="control-label">Module</label>
                     <select class="form-control" name="module_id" required="">
                        @foreach($module as $modules)

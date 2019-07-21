@@ -69,6 +69,9 @@ Route::get('/team/{project}/edit','TeamProjectController@editTeamProject');
 
 Route::put('/team/{project}','TeamProjectController@updateTeamProject');
 
+Route::get('/disbandedTeam','TeamProjectController@disbandedTeam');
+
+
 // Module
 
 Route::get('/module/{module}','ModuleController@indexes');
@@ -79,6 +82,13 @@ Route::get('/module/creates/{project}/project','ModuleController@stores');
 
 Route::post('/module/creates/{project}/project','ModuleController@stores');
 
+Route::get('/completedModule','ModuleController@completedModule');
+
+Route::get('/module/{project}/edit','ModuleController@editShowProject');
+
+/*Route::put('/module/{project}','ModuleController@updateTeamProject');*/
+
+
 // Jobs
 
 Route::post('/jobs/create','JobController@store');
@@ -88,6 +98,11 @@ Route::get('/jobs/creates/{module}','JobController@createFromModule');
 Route::get('/jobs/creates/{module}/module','JobController@store');
 
 Route::post('/jobs/creates/{module}/module','JobController@store');
+
+Route::get('/completedJob','JobController@completedJob');
+
+Route::get('/job/{project}/edit','JobController@editShowModule');
+
 
 
 // Timesheets
@@ -100,6 +115,9 @@ Route::get('/timesheetss','TimesheetController@UserTimesheets');
 Route::get('/userInfo','UserInfoController@index');
 
 Route::get('/userInfo/module/{module}','UserInfoController@moduleUser');
+
+Route::get('/myCompletedProject','UserInfoController@completedProjectUser');
+
 
 //Timeline
 

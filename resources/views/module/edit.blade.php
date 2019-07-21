@@ -12,14 +12,19 @@
         </div><br />
     @endif
      <div class="tile">
-        <h3 class="tile-title">iki haruse nama project</h3>
+
+
+        <h3 class="tile-title">Edit Module {{ $module->nama_module }} </h3>
+
+
         <form method="post" action="{{ route('modules.update', $module->id_module) }}">
             @method('PATCH')
             @csrf
             <div class="tile-body">
                 <div class="form-group">
+                    <label class="control-label">Project</label>
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <select style="display: none" class="form-control" name="project_id" required="">
+                    <select class="form-control" name="project_id" required="">
                         <option value="" disabled>Select Project</option>
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}"

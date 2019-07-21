@@ -26,6 +26,7 @@ class TeamProjectController extends Controller
         $team_projects = TeamProject::join('project', 'project.id_project', '=', 'team_projects.project_id')
             ->join('users', 'users.id', '=', 'team_projects.user_id')
             ->select('team_projects.*', /*'users.name',*/ 'project.nama_project'/*,'role.nama_role'*/)
+            ->where('project.status', '!=', 4)
             ->groupBy('team_projects.project_id')
             ->getQuery()
             ->get();
@@ -38,7 +39,7 @@ class TeamProjectController extends Controller
 
     }
 
-    //Index from Show Project
+    //Team from Show Project
 
     public function indexes($id)
     {
@@ -56,24 +57,32 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
-//        $messages = collect($team_projects::find('name')->get());
+        return view('team.teamindex', compact('project', 'team_projects'));
+    }
 
-//        dd($messages);
 
-//        $stahp = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
-//            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
-//            ->join('role', 'role.id_role', '=', 'users.role_id')
-//            ->select('team_projects.*', 'users.name', 'users.role_id', 'project.nama_project','role.nama_role')
-//            ->distinct('users.name')
-//            ->where('project.id_project', '=', $id )
-//            ->limit(1)
-//            ->getQuery()
-//            ->get();
-//
+
+    // Disbanded Team
+
+    public function disbandedTeam()
+    {
+        Session::put('title', 'Disbanded Team');
+        //
+
+        $team_projects = TeamProject::join('project', 'project.id_project', '=', 'team_projects.project_id')
+            ->join('users', 'users.id', '=', 'team_projects.user_id')
+            ->select('team_projects.*', /*'users.name',*/ 'project.nama_project'/*,'role.nama_role'*/)
+            ->where('project.status', '=', 4)
+            ->groupBy('team_projects.project_id')
+            ->getQuery()
+            ->get();
+
 //        dd($team_projects);
 
+        return view('team.disbandedTeam')->with('team_projects', $team_projects);
 
-        return view('team.teamindex', compact('project', 'team_projects'));
+
+
     }
 
     /**

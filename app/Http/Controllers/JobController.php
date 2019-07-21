@@ -26,6 +26,31 @@ class JobController extends Controller
             $job = Job::join('module', 'module_id', '=', 'id_module')
                 ->join('project', 'project_id', '=', 'id_project')
                 ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
+                ->where('project.status', '!=', 4)
+                ->getQuery()
+                ->get();
+
+            /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
+            return view('job.index')->with('job', $job);
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+    }
+
+
+    //Completed Job
+
+    public function completedJob()
+    {
+        Session::put('title', 'Completed Job');
+        //
+        if (Auth::user()->hasRole('Project Manager')) {
+            $job = Job::join('module', 'module_id', '=', 'id_module')
+                ->join('project', 'project_id', '=', 'id_project')
+                ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
+                ->where('project.status', '=', 4)
                 ->getQuery()
                 ->get();
 
@@ -57,7 +82,11 @@ class JobController extends Controller
             ->get();
 
             /*dd($mod);*/
-            $module = Module::all();
+            $module = Module::join('project', 'project.id_project', '=', 'module.project_id')
+                ->select('module.*')
+                ->where('project.status', '!=', 4)
+                ->getQuery()
+                ->get();;;
             $project = Project::all();
 
             return view('job.create', compact('module', 'project','mod'))/*->with('module', $module)*/ ;
@@ -149,10 +178,39 @@ class JobController extends Controller
 
         if (Auth::user()->hasRole('Project Manager')) {
             $job = Job::find($id);
-            $module = Module::all();
+            $module = Module::join('project', 'project.id_project', '=', 'module.project_id')
+                ->select('module.*')
+                ->where('project.status', '!=', 4)
+                ->getQuery()
+                ->get();;
             $project = Project::all();
             $user = \App\User::all();
+
+//            dd($module);
+
             return view('job.edit', compact('job', 'module', 'project','user'));
+
+        }
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+    }
+
+    // Edit Show Module
+
+    public function editShowModule($id)
+    {
+        Session::put('title', 'Edit Job');
+        //
+
+        if (Auth::user()->hasRole('Project Manager')) {
+            $module = Module::all();
+            $project = Project::all();
+            $job = Job::find($id);
+            $user = \App\User::all();
+
+            return view('job.editShowModule', compact('job', 'module', 'project','user'));
 
         }
         else{

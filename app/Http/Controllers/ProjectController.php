@@ -43,7 +43,7 @@ class ProjectController extends Controller
         //
 //        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
-        $project = Project::all()->where('status','==', 4);
+        $project = Project::all()->where('status','=', 4);
 
 //        dd($project);
 
@@ -134,7 +134,7 @@ class ProjectController extends Controller
 //                exit();
 //            }
 
-//        dd($project);
+//        dd($module);
 
             return view('project.show', compact('project', 'module'));
 

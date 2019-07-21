@@ -29,7 +29,9 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="user" required="">
-                       @foreach($mod as $mods)
+                        <option value="" disabled selected="">Select User</option>
+
+                    @foreach($mod as $mods)
                         <option value="{{$mods->name}}">{{$mods->name}}</option>
                         @endforeach
                     </select>

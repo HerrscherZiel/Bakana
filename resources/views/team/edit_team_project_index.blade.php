@@ -15,7 +15,6 @@
 
          <select class="form-control" name="tittle" required="" style="display: none">
          @foreach($project as $projects)
-
                  <option value="{{$projects->id_project}}"
                          @if($projects->id_project === $team_projects->project_id)
                          selected {{$tittle = $projects->nama_project}}

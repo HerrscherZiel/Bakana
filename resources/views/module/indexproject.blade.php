@@ -52,7 +52,7 @@
                             <i class="fa fa-lg fa-eye">
                             </i>
                         </a>
-                        <a class="btn btn-info" href="/modules/{{$modules->id_module}}/edit">
+                        <a class="btn btn-info" href="/module/{{$modules->id_module}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
                         </a>
