@@ -44,7 +44,7 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Nama</th>
+                    <th>Job</th>
                     <th>Module</th>
                     <th>User</th>
                     <th>Keterangan</th>
@@ -65,7 +65,7 @@
 
                         <div class="btn-group">
                         
-                        <a class="btn btn-info" href="/jobs/{{$jobs->id_job}}/edit">
+                        <a class="btn btn-info" href="/job/{{$jobs->id_job}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
                         </a>

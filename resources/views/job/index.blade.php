@@ -7,7 +7,9 @@
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
             <a href="{{url('/jobs/create')}}" class="btn btn-primary mb-3">Create Job</a>
-            <thead>
+              <a href="{{url('/completedJob')}}" class="btn btn-primary mb-3"> Completed Job</a>
+
+              <thead>
               <tr>
                 <th>Job</th>
                 <th>Modul</th>

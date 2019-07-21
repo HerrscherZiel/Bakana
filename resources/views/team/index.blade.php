@@ -9,7 +9,9 @@
               @if(Auth::user()->hasRole('Project Manager'))
               <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3">Create Team</a>
               @endif
-            <thead>
+                  <a href="{{url('/disbandedTeam')}}" class="btn btn-primary mb-3"> Disbanded Team</a>
+
+                  <thead>
               <tr>
 {{--                <th>User</th>--}}
 {{--                <th>Role</th>--}}

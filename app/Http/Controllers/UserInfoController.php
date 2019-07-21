@@ -48,8 +48,6 @@ class UserInfoController extends Controller
                     ->getQuery()
                     ->get();
 
-//            dd($timesheets);
-
 //        dd($info);
 //        dd($users);
 
@@ -57,7 +55,40 @@ class UserInfoController extends Controller
     }
 
 
-    //Timesheets User
+    //Completed Project User
+
+    public function completedProjectUser()
+    {
+        Session::put('title', 'Your Works');
+
+        //
+
+        $info = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->select('users.*', 'project.nama_project', 'project.status', 'project.tgl_mulai', 'project.tgl_selesai', 'project.id_project')
+            ->where('users.id' ,'=', auth()->user()->id )
+            ->where('project.status', '=', 4)
+            ->groupBy('project.nama_project')
+            ->getQuery()
+            ->get();
+
+        $users = User::join('role', 'users.role_id', '=', 'role.id_role')
+            ->select('users.*', 'role.nama_role')
+            ->where('users.id', '=',auth()->user()->id )
+            ->getQuery()
+            ->get();
+
+
+
+//        dd($info);
+//        dd($users);
+
+        return view('UserInfo.completedProjectUser', compact('info', 'users'));
+    }
+
+
+
+    //Detail Project User
 
 
     public function moduleUser($id)
@@ -79,6 +110,7 @@ class UserInfoController extends Controller
             ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id, 'jobs.user' => auth()->user()->name])
 //            ->where('users.id', '=', auth()->user()->id)
             ->orderBy('module.nama_module')
+            ->groupBy('jobs.nama_job')
             ->getQuery()
             ->get();
 
@@ -107,78 +139,5 @@ class UserInfoController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        Session::put('title', 'Edit Timesheet');
-        //
-        $user = User::all();
-
-        $cek = Timesheet::find($id)->user_id;
-
-        $timesheet = Timesheet::find($id);
-
-        if (Auth::user()->hasRole('Project Manager')) {
-
-            return view('timesheet.edit', compact('timesheet','user'));
-
-        }
-
-        else {
-
-            if ($cek ==  auth()->user()->id ) {
-
-                return view('timesheet.edit', compact('timesheet', 'user'));
-
-            }
-
-            else {
-
-                return view('home')->with(abort(403, 'Unauthorized action.'));
-
-            }
-
-        }
-
-//        return view('timesheet.edit', compact('timesheet','user'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-        $request->validate( [
-            'tgl_timesheet' => 'required',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
-            'keterangan_timesheet' => 'required']);
-
-        $timesheet =  Timesheet::find($id);
-        $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
-        $timesheet->project = $request->input('project');
-        $timesheet->jam_mulai = $request->input('jam_mulai');
-        $timesheet->jam_selesai = $request->input('jam_selesai');
-        $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
-        $timesheet->save();
-        return redirect('/timesheetss')->with('success', 'User Diedit');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
 }
