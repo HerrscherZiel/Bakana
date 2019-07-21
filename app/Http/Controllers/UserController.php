@@ -90,7 +90,7 @@ class UserController extends Controller
             $user->password = $request->input('password');
             $user->role_id = $request->input('role_id');
             $user->save();
-            return redirect('/users')->with('success', 'User Ditambahkan');
+            return redirect('/back')->with('success', 'User Ditambahkan');
 
 
        // }
@@ -160,7 +160,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->role_id = $request->input('role_id');
         $user->save();
-        return redirect('/users')->with('success', 'User Diedit');
+        return redirect('/back')->with('success', 'User Diedit');
 
     }
 
@@ -176,7 +176,7 @@ class UserController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $user = User::find($id);
             $user->delete();
-            return redirect('/users')->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Post Removed');
         }
 
         else{

@@ -171,7 +171,7 @@ class UserInfoController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
-        return redirect('/timesheetss')->with('success', 'User Diedit');
+        return redirect('/back')->with('success', 'User Diedit');
     }
 
     /**

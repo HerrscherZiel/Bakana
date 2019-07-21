@@ -119,7 +119,7 @@ class JobController extends Controller
         ]);
         $job->save();
 
-        return redirect('/jobs')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('/back')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
 
 
 
@@ -202,7 +202,7 @@ class JobController extends Controller
             $job = Job::find($id);
             $job->delete();
 
-            return redirect('/jobs')->with('success', 'job has been deleted Successfully');
+            return redirect()->back()->with('success', 'job has been deleted Successfully');
         }
         else{
             //Tambah warning

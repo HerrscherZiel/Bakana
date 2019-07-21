@@ -138,7 +138,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
             /*dd($timesheet);*/
-            return redirect('/timesheetss')->with('success', 'User Ditambahkan');
+            return redirect('/back')->with('success', 'User Ditambahkan');
 
         }
 
@@ -160,7 +160,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
 //            dd($timesheet);
-            return redirect('/timesheetss')->with('success', 'User Ditambahkan');
+            return redirect('/back')->with('success', 'User Ditambahkan');
 
         }
     }
@@ -240,7 +240,7 @@ class TimesheetController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
-        return redirect('/timesheetss')->with('success', 'User Diedit');
+        return redirect('/back')->with('success', 'User Diedit');
     }
 
     /**
@@ -258,14 +258,14 @@ class TimesheetController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $timesheet = Timesheet::find($id);
             $timesheet->delete();
-            return redirect('/timesheets')->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Post Removed');
         }
 
 
         elseif ($timesheet ==  auth()->user()->id ){
             $timesheet = Timesheet::find($id);
             $timesheet->delete();
-            return redirect('/timesheets')->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Post Removed');
         }
 
 

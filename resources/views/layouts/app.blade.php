@@ -82,7 +82,7 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="{!! URL::previous() !!}"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="javascript:history.go(-3)"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
@@ -357,10 +357,10 @@
 </script>
 <!-- autorefresh -->
 <script>
-if(location.search.indexOf('/') < 0){
+if(location.search.indexOf('php') < 0){
   var hash = window.location.hash;
   var loc = window.location.href.replace(hash, '');
-  loc += (loc.indexOf('?') < 0? '?' : '&') + '/';
+  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';
   // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):
   setTimeout(function(){window.location.href = loc + hash;}, 5);
 }
