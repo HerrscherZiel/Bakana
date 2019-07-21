@@ -22,9 +22,7 @@
               </div>
             </div>
             <div class="col-md-9">
-              <div id="calendar"></div>
-                {{--{!! $calendar->calendar() !!}
-                {!! $calendar->script() !!}--}}
+                {!! $calendar->calendar() !!}
             </div>
           </div>
         </div>
