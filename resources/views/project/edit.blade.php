@@ -40,8 +40,16 @@
               <select class="form-control" name="status" required="">
                             @foreach($project as $projects)
                                 <option value="{{ $project->status }}"
-                                       
-                                ></option>
+                                       @if ($project->status === 1 )
+                                        Ongoing
+                                    @elseif($project->status === 2 )
+                                        Queue
+                                    @elseif($project->status === 3 )
+                                        Pending
+                                    @elseif($project->status === 4 )
+                                        Completed
+                                    @endif
+                                >{{ $project->status }}</option>
                             @endforeach
                         </select>
             </div>

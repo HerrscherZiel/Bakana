@@ -4,14 +4,13 @@
 <div class="row">
     <div class="col-md-12">
       <div class="tile">
+        @if(Auth::user()->hasRole('Project Manager'))
+        <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Team</a>
+        @endif
+        <a href="{{url('/disbandedTeam')}}" class="btn btn-success mb-3"><i class="fa fa-flag"></i> Disbanded Team</a>
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
-              @if(Auth::user()->hasRole('Project Manager'))
-              <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3">Create Team</a>
-              @endif
-                  <a href="{{url('/disbandedTeam')}}" class="btn btn-primary mb-3"> Disbanded Team</a>
-
-                  <thead>
+            <thead>
               <tr>
 {{--                <th>User</th>--}}
 {{--                <th>Role</th>--}}

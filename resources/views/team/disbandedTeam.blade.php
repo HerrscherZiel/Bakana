@@ -7,7 +7,7 @@
                 <div class="tile-body">
                     <table class="table table-hover table-bordered" id="sampleTable">
                         @if(Auth::user()->hasRole('Project Manager'))
-                            <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3">Create Team</a>
+                            <a href="{{url('/teamprojects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Team</a>
                         @endif
                         <thead>
                         <tr>

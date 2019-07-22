@@ -6,7 +6,7 @@
       <div class="tile">
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
-            <a href="{{url('/roles/create')}}" class="btn btn-primary mb-3">Create Role</a>
+            <a href="{{url('/roles/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Role</a>
             <thead>
               <tr>
                 <th>Nama Role</th>

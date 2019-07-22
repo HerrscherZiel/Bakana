@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-md-12">
       <div class="tile">
+        <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
+          <a href="{{url('/completedModule')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Module</a>
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
-            <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3">Create Modul</a>
-              <a href="{{url('/completedModule')}}" class="btn btn-primary mb-3"> Completed Module</a>
               <thead>
               <tr>
                 <th>Modul</th>

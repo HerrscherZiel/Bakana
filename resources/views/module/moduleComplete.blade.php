@@ -6,7 +6,7 @@
             <div class="tile">
                 <div class="tile-body">
                     <table class="table table-hover table-bordered" id="sampleTable">
-                        <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3">Create Modul</a>
+                        <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
                         <thead>
                         <tr>
                             <th>Modul</th>

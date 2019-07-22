@@ -13,7 +13,7 @@
             </div>
               @if(Auth::user()->hasRole('Project Manager'))
               <div class="col-3">
-                <a href="/jobs/creates/{{$mod->id_module}}" class="btn btn-primary pull-right">Add Job</a>
+                <a href="/jobs/creates/{{$mod->id_module}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>Add Job</a>
             </div>
                   @endif
           </div>

@@ -4,11 +4,10 @@
 <div class="row">
     <div class="col-md-12">
       <div class="tile">
+        <a href="{{url('/jobs/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Job</a>
+        <a href="{{url('/completedJob')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Job</a>
         <div class="tile-body">
           <table class="table table-hover table-bordered" id="sampleTable">
-            <a href="{{url('/jobs/create')}}" class="btn btn-primary mb-3">Create Job</a>
-              <a href="{{url('/completedJob')}}" class="btn btn-primary mb-3"> Completed Job</a>
-
               <thead>
               <tr>
                 <th>Job</th>
