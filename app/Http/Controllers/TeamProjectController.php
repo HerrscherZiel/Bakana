@@ -149,7 +149,7 @@ class TeamProjectController extends Controller
         $team_projects->user_id = $request->input('user_id');
         $team_projects->project_id = $request->input('project_id');
         $team_projects->save();
-        return redirect('teamprojects')->with('success', 'User Ditambahkan');
+        return redirect('team/'.$team_projects->project_id)->with('success', 'User Ditambahkan');
     }
 
     /**
@@ -236,7 +236,7 @@ class TeamProjectController extends Controller
         $team_projects->user_id = $request->input('user_id');
         $team_projects->project_id = $request->input('project_id');
         $team_projects->save();
-        return redirect('teamprojects')->with('success', 'User Ditambahkan');
+        return redirect('team/'.$team_projects->project_id)->with('success', 'User Ditambahkan');
     }
 
 
@@ -270,7 +270,7 @@ class TeamProjectController extends Controller
 
             $team_projects = TeamProject::find($id);
             $team_projects->delete();
-            return redirect('teamprojects')->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Post Removed');
 
         }
 

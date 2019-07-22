@@ -60,9 +60,22 @@
                     <input id="date1" class="form-control" name="tgl_user" value="{{ $module->tgl_user }}" readonly>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Status</label>
-                  <input class="form-control" type="text" name="status" value={{ $module->status }}>
-                </div>
+                    <input type="hidden" value="{{ $on = 1, $que = 2 , $pen = 3, $com = 4, $can =5}}"/>
+                        <label class="control-label">Status</label>
+                         <select class="form-control" name="status" required="">
+                             <option disabled>Status</option>
+                             <option value=1 @if($module->status === $on) selected
+                                 @endif>Ongoing</option>
+                             <option value=2 @if($module->status === $que) selected
+                                 @endif>Queue</option>
+                             <option value=3 @if($module->status === $pen) selected
+                                 @endif>Pending</option>
+                             <option value=4 @if($module->status === $com) selected
+                                 @endif>Completed</option>
+                             <option value=5 @if($module->status === $can) selected
+                                 @endif>Canceled</option>
+                         </select>
+                    </div>
                 <div class="form-group">
                     <label class="control-label">Keterangan</label>
                   <textarea class="form-control" rows="4" name="keterangan">{{ $module->keterangan }}</textarea>
@@ -70,7 +83,7 @@
             </div>
             <div class="tile-footer">
               <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
-              <a class="btn btn-secondary" href="javascript:history.go(-1)"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+              <a class="btn btn-secondary" href="{{URL::previous()}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
             </div>
         </form>
       </div>

@@ -24,7 +24,7 @@
 
                   <br>Tanggal Mulai: <strong>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</strong>
                   <br>Deadline: <strong>{{date("d-m-Y", strtotime($mulai = $modules->deadline))}}</strong>
-                  <br>Tanggal Selesai: <strong>{{date("d-m-Y", strtotime($mulai = $modules->tgl_user))}}</strong></address>
+                  <br>Tanggal Selesai: <strong>{{$modules->tgl_user ? date("d-m-Y", strtotime($mulai = $modules->tgl_user)) : " "}}</strong></address>
             </div>
             <div class="col-4">Status: <b>@if ($modules->status === 1 )
                         Ongoing

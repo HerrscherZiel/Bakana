@@ -210,7 +210,7 @@ class ProjectController extends Controller
             $project = Project::find($id);
             $project->delete();
 
-            return redirect('projects')->with('success', 'Stock has been deleted Successfully');
+            return redirect()->back()->with('success', 'Stock has been deleted Successfully');
         }
 
         else{

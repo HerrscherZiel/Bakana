@@ -155,7 +155,7 @@ class RoleController extends Controller
             $role = Role::find($id);
             $role->delete();
 
-            return redirect('roles')->with('success', 'Stock has been deleted Successfully');
+            return redirect()->back()->with('success', 'Stock has been deleted Successfully');
 
         }
 

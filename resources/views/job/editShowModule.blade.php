@@ -11,6 +11,7 @@
                 </ul>
             </div><br />
         @endif
+
         <div class="tile">
 
             <select class="form-control" style="display: none" name="module_id" required="">
@@ -58,8 +59,21 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <input type="hidden" value="{{ $on = 1, $que = 2 , $pen = 3, $com = 4, $can =5}}"/>
                         <label class="control-label">Status</label>
-                        <input class="form-control" type="text" name="status" value={{ $job->status }}>
+                         <select class="form-control" name="status" required="">
+                             <option disabled>Status</option>
+                             <option value=1 @if($job->status === $on) selected
+                                 @endif>Ongoing</option>
+                             <option value=2 @if($job->status === $que) selected
+                                 @endif>Queue</option>
+                             <option value=3 @if($job->status === $pen) selected
+                                 @endif>Pending</option>
+                             <option value=4 @if($job->status === $com) selected
+                                 @endif>Completed</option>
+                             <option value=5 @if($job->status === $can) selected
+                                 @endif>Canceled</option>
+                         </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Keterangan</label>
@@ -68,7 +82,7 @@
                 </div>
                 <div class="tile-footer">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
-                    <a class="btn btn-secondary" href="/jobs"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                    <a class="btn btn-secondary" href="{{URL::previous()}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                 </div>
             </form>
         </div>

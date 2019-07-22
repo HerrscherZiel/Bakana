@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
 </head>
-<body class="app sidebar-mini rtl" id="fullscreen">
+<body class="app sidebar-mini rtl">
 {{--@include('flash-message')--}}
 <div id="app">
     <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
@@ -25,10 +25,7 @@
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
-        <li>
-          <a class="app-nav__item" href="#" onclick="openFullscreen();"><i class="fa fa-expand fa-lg"></i> 
-          </a>
-        </li>
+        
         <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none">Logout<i class="fa fa-sign-out fa-lg ml-2"></i></a>
           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}

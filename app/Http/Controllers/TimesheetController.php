@@ -250,7 +250,7 @@ class TimesheetController extends Controller
         elseif ($timesheet ==  auth()->user()->id ){
             $timesheet = Timesheet::find($id);
             $timesheet->delete();
-            return redirect('timesheets')->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Post Removed');
         }
 
 

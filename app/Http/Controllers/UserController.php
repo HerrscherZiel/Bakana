@@ -176,7 +176,7 @@ class UserController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $user = User::find($id);
             $user->delete();
-            return redirect('users')->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Post Removed');
         }
 
         else{

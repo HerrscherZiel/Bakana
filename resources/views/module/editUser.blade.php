@@ -1,4 +1,19 @@
-@extends('layouts.app')
+                <div class="form-group">
+                    <label class="control-label">Status</label>
+                     <select class="form-control" name="status" required="">
+                         <option disabled>Status</option>
+                         <option value=1 @if($job->status === $on) selected
+                             @endif>Ongoing</option>
+                         <option value=2 @if($job->status === $que) selected
+                             @endif>Queue</option>
+                         <option value=3 @if($job->status === $pen) selected
+                             @endif>Pending</option>
+                         <option value=4 @if($job->status === $com) selected
+                             @endif>Completed</option>
+                         <option value=5 @if($job->status === $can) selected
+                             @endif>Canceled</option>
+                     </select>
+                </div>@extends('layouts.app')
 
 @section('content')
     <div class="col-md-12">
@@ -59,17 +74,30 @@
                         </select>
                     </div>
                     <div class="form-group input-group">
-                        <input id="date1" type="hidden"class="form-control" name="tgl_mulai" value={{ $module->tgl_mulai }}>
+                        <input id="date1" type="hidden"class="form-control" name="tgl_mulai" value="{{ $module->tgl_mulai }}" readonly="">
 {{--                        <div class="mt-1 ml-3 mr-3">to</div>--}}
-                        <input id="date2"type="hidden" class="form-control" name="deadline" value={{ $module->deadline }}>
+                        <input id="date2"type="hidden" class="form-control" name="deadline" value="{{ $module->deadline }}" readonly="">
                     </div>
                     <div class="form-group input-group">
                                                 Target<br>
-                        <input id="date1" class="form-control" name="tgl_user" value={{ $module->tgl_user }}>
+                        <input id="date1" class="form-control" name="tgl_user" value="{{ $module->tgl_user }}" readonly="">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group">"
+                        <input type="hidden" value="{{ $on = 1, $que = 2 , $pen = 3, $com = 4, $can =5}}"/>
                         <label class="control-label">Status</label>
-                        <input class="form-control" type="text" name="status" value={{ $module->status }}>
+                         <select class="form-control" name="status" required="">
+                             <option disabled>Status</option>
+                             <option value=1 @if($module->status === $on) selected
+                                 @endif>Ongoing</option>
+                             <option value=2 @if($module->status === $que) selected
+                                 @endif>Queue</option>
+                             <option value=3 @if($module->status === $pen) selected
+                                 @endif>Pending</option>
+                             <option value=4 @if($module->status === $com) selected
+                                 @endif>Completed</option>
+                             <option value=5 @if($module->status === $can) selected
+                                 @endif>Canceled</option>
+                         </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Keterangan</label>
@@ -78,7 +106,7 @@
                 </div>
                 <div class="tile-footer">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
-                    <a class="btn btn-secondary" href="javascript:history.go(-1)"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                    <a class="btn btn-secondary" href="{{URL::previous()}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                 </div>
             </form>
         </div>

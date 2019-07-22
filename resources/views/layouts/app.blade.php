@@ -14,9 +14,7 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
-</head>
-<body class="app sidebar-mini rtl" id="fullscreen">
+<body class="app sidebar-mini rtl">
 {{--@include('flash-message')--}}
 <div id="app">
     <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
@@ -24,10 +22,6 @@
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
-        <li>
-          <a class="app-nav__item" href="#" onclick="openFullscreen();"><i class="fa fa-expand fa-lg"></i> 
-          </a>
-        </li>
         <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none">Logout<i class="fa fa-sign-out fa-lg ml-2"></i></a>
           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}
@@ -44,37 +38,37 @@
           <p class="app-sidebar__user-designation">{{{Auth::user()->email }}}</p>
         </div>
       </div>
-      <ul class="app-menu active">
-        <li><a class="app-menu__item active"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
+      <ul class="app-menu">
+        <li><a class="app-menu__item {{ request()->is('home') ? 'active' : ''  }}"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
 
-        <li><a class="app-menu__item "  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
+        <li><a class="app-menu__item {{ request()->is('projects*','completedProject*') ? 'active' : ''  }}"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
 
           @if(Auth::user()->hasRole('Project Manager'))
-          <li><a class="app-menu__item" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
+          <li><a class="app-menu__item {{ request()->is('modules*', 'module*') ? 'active' : ''  }}" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Modul</span></a>
           </li>
           @endif
 
           @if(Auth::user()->hasRole('Project Manager'))
-          <li><a class="app-menu__item" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Job</span></a></li>
+          <li><a class="app-menu__item {{ request()->is('jobs*') ? 'active' : ''  }}" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Job</span></a></li>
           @endif
 
           @if(Auth::user()->hasRole('Project Manager'))
-              <li><a class="app-menu__item" href="{{ url('/users') }}"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">User</span></a>
+              <li><a class="app-menu__item {{ request()->is('users*') ? 'active' : ''  }}" href="{{ url('/users') }}"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">User</span></a>
           </li>
           @endif
 
           @if(Auth::user()->hasRole('Project Manager'))
-          <li><a class="app-menu__item" href="{{ url('/roles') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Role</span></a>
+          <li><a class="app-menu__item {{ request()->is('roles*') ? 'active' : ''  }}" href="{{ url('/roles') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Role</span></a>
           </li>
           @endif
 
-        <li><a class="app-menu__item" href="{{ url('/teamprojects') }}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Team</span></a>
+        <li><a class="app-menu__item {{ request()->is('team*', 'teamprojects*', 'disbandedTeam*') ? 'active' : ''  }}" href="{{ url('/teamprojects') }}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Team</span></a>
         </li>
 
-          <li><a class="app-menu__item" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">User Info</span></a>
+          <li><a class="app-menu__item {{ request()->is('userInfo*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">User Info</span></a>
           </li>
 
-        <li><a class="app-menu__item" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Timesheet</span></a>
+        <li><a class="app-menu__item {{ request()->is('timesheets*') ? 'active' : ''  }}" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
 
       </ul>
@@ -82,7 +76,7 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="javascript:history.go(-3)"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="{{URL::previous()}}"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
@@ -105,7 +99,6 @@
 <!-- delete -->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
-
   <script type="text/javascript">
       $('button.delete-btn').on('click', function(e){
       event.preventDefault();
@@ -126,7 +119,7 @@
                   self.parents(".delete").submit();
               }, 500);
         } else {
-          swal("Batal dihapus!", "Item aman di database.", "error");
+          swal("Batal dihapus!", "Data aman di database.", "error");
         }
       });
     });
@@ -318,14 +311,14 @@
   var pieChart = new Chart(ctxp).Pie(pdata);
 </script>
 <!-- Delete Alert -->
-<!-- <script>
+<script>
   $(".delete").on("submit", function(){
       return confirm("Are you sure want to delete?");
   });
-</script> -->
+</script>
 
 <!-- Fullscreen -->
-<script>
+<!-- <script>
   var elem = document.getElementById("fullscreen");
   function openFullscreen() {
     if (elem.requestFullscreen) {
@@ -339,7 +332,7 @@
     }
   }
 </script>
-<!-- Show more -->
+ --><!-- Show more -->
 <script type="text/javascript">
   $(".show-more a").on("click", function() {
     var $this = $(this); 

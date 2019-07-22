@@ -35,7 +35,7 @@
                     <a class="btn btn-info" href="/timesheets/{{$timesheets->id_timesheets}}/edit"><i class="fa fa-lg fa-edit">
                             </i></a>
 
-                        <form action="{{ route('timesheets.destroy', $timesheets->id_timesheets)}}" method="post">
+                        <form class="delete" action="{{ route('timesheets.destroy', $timesheets->id_timesheets)}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             @csrf
                             @method('DELETE')

@@ -11,7 +11,7 @@
                 </div>
                 @if(Auth::user()->hasRole('Project Manager'))
                 <div class="col-md-2">
-                <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Team</a>
+                <a href="/team/creates/{{$project->id_project}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Add to Team</a>
              </div>
                     @endif
         </div>
