@@ -188,7 +188,7 @@ class ModuleController extends Controller
 
         $module->save();
 
-        return redirect('/back')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
 
 
@@ -349,7 +349,7 @@ class ModuleController extends Controller
         $module->keterangan     = $request->get('keterangan');
         $module->save();
 
-        return redirect('/back')->with('success', 'New support ticket has been updated!!');
+        return redirect('/module')->with('success', 'New support ticket has been updated!!');
     }
 
     /**
@@ -365,7 +365,7 @@ class ModuleController extends Controller
             $module = Module::find($id);
             $module->delete();
 
-            return redirect()->back()->with('success', 'Module has been deleted Successfully');
+            return redirect('module')->with('success', 'Module has been deleted Successfully');
         }
 
         else{

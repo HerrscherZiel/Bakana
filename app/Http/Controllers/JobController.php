@@ -152,7 +152,7 @@ class JobController extends Controller
         ]);
         $job->save();
 
-        return redirect('/back')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('jobs')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
 
 
 
@@ -256,7 +256,7 @@ class JobController extends Controller
         $job->keterangan    = $request->get('keterangan');
         $job->save();
 
-        return redirect('/back')->with('success', 'New support ticket has been updated!!');
+        return redirect('jobs')->with('success', 'New support ticket has been updated!!');
     }
 
     /**

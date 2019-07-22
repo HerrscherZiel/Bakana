@@ -34,22 +34,7 @@ class TimesheetController extends Controller
         
         $timesheetView =  $timesheet;
 
-//        $start = Timesheet::select('timesheets.jam_mulai')
-//        ->getQuery()
-//        ->get();
-//        $end = Timesheet::select('timesheets.jam_selesai')
-//        ->getQuery()
-//        ->get();
-//        // $starttime = $timesheet->get(jam_mulai);
-//        // $stoptime = '12:59';
-//        $starts = strtotime($start);
-//        $ends = strtotime($end);
-//        $diff = (strtotime($ends) - strtotime($starts));
-//        $total = $diff/60;
-//        $time = sprintf("%02dh %02dm", floor($total/60), $total%60);
 
-
-        // $time = Timesheet()->duration();
 
         /*dd($timesheet);*/
 
@@ -138,7 +123,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
             /*dd($timesheet);*/
-            return redirect('/back')->with('success', 'User Ditambahkan');
+            return redirect('timesheets')->with('success', 'User Ditambahkan');
 
         }
 
@@ -160,7 +145,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
 //            dd($timesheet);
-            return redirect('/back')->with('success', 'User Ditambahkan');
+            return redirect('timesheets')->with('success', 'User Ditambahkan');
 
         }
     }
@@ -240,7 +225,7 @@ class TimesheetController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
-        return redirect('/back')->with('success', 'User Diedit');
+        return redirect('timesheets')->with('success', 'User Diedit');
     }
 
     /**
@@ -265,7 +250,7 @@ class TimesheetController extends Controller
         elseif ($timesheet ==  auth()->user()->id ){
             $timesheet = Timesheet::find($id);
             $timesheet->delete();
-            return redirect()->back()->with('success', 'Post Removed');
+            return redirect('timesheets')->with('success', 'Post Removed');
         }
 
 

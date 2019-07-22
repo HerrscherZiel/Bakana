@@ -106,7 +106,7 @@ class ProjectController extends Controller
 
         $project->save();
         
-       return redirect('/back')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+       return redirect('projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
           
         
     }
@@ -194,7 +194,7 @@ class ProjectController extends Controller
         $project->ket = $request->get('ket');
         $project->save();
 
-        return redirect('/back')->with('success', 'New support ticket has been updated!!');
+        return redirect('projects')->with('success', 'New support ticket has been updated!!');
     }
 
     /**
@@ -210,7 +210,7 @@ class ProjectController extends Controller
             $project = Project::find($id);
             $project->delete();
 
-            return redirect()->back()->with('success', 'Stock has been deleted Successfully');
+            return redirect('projects')->with('success', 'Stock has been deleted Successfully');
         }
 
         else{
@@ -219,9 +219,5 @@ class ProjectController extends Controller
         }
 
     }
-    public function back()
-    {
-        
-        return view('back');
-    }
+
 }
