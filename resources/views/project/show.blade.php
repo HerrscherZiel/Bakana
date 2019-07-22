@@ -7,7 +7,10 @@
         <section class="invoice">
           <div class="row mb-4">
             <div class="col-8">
-              <h2 class="page-header">{{$project->nama_project}}</h2>
+
+
+
+                    <h2 class="page-header">{{$project->nama_project}}</h2>
             </div>
               @if(Auth::user()->hasRole('Project Manager'))
               <div class="col-4">
@@ -85,12 +88,18 @@
                             <i class="fa fa-lg fa-eye">
                             </i>
                         </a>
-                            @if(Auth::user()->hasRole('Project Manager'))
+{{--                            @if(Auth::user()->hasRole('Project Manager'))--}}
                             <a class="btn btn-info" href="/module/{{$modules->id_module}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
+                           {{--     @elseif( $aa = $as)
+                                    <a class="btn btn-info" href="/module/{{$modules->id_module}}/edit">
+                                        <i class="fa fa-lg fa-edit">
+                                        </i>
+                                @endif--}}
                         </a>
-                            <form class="delete" action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
+                                @if(Auth::user()->hasRole('Project Manager'))
+                                <form class="delete" action="{{ route('modules.destroy', $modules->id_module)}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 @method('DELETE')

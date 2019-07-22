@@ -72,6 +72,7 @@ class JobController extends Controller
     {
         Session::put('title', 'Create Job');
         //
+
         if (Auth::user()->hasRole('Project Manager')) {
             $mod = Module::join('project','module.project_id','=','project.id_project')
             ->join('team_projects','project.id_project','=','team_projects.project_id')
@@ -102,18 +103,21 @@ class JobController extends Controller
         Session::put('title', 'Create Job');
         //
         if (Auth::user()->hasRole('Project Manager')) {
+
+            $module = Module::find($id);
+
             $mod = Module::join('project','module.project_id','=','project.id_project')
                 ->join('team_projects','project.id_project','=','team_projects.project_id')
                 ->join('users','team_projects.user_id','=','users.id')
                 ->select('users.*')
+                ->where('module.id_module', '=', $id)
                 ->distinct('users.id')
                 ->getQuery()
                 ->get();
 
-            $module = Module::find($id);
             $project = Project::all();
 
-            /*dd($module);*/
+//            dd($module);
 
             return view('job.creates', compact('module', 'project','mod'))/*->with('module', $module)*/ ;
         }
@@ -208,7 +212,15 @@ class JobController extends Controller
             $module = Module::all();
             $project = Project::all();
             $job = Job::find($id);
-            $user = \App\User::all();
+            $user = Module::join('project','module.project_id','=','project.id_project')
+                ->join('team_projects','project.id_project','=','team_projects.project_id')
+                ->join('users','team_projects.user_id','=','users.id')
+                ->join('jobs', 'jobs.module_id', '=', 'module.id_module')
+                ->select('users.*')
+                ->where('jobs.id_job', '=', $id)
+                ->distinct('users.id')
+                ->getQuery()
+                ->get();
 
             return view('job.editShowModule', compact('job', 'module', 'project','user'));
 
