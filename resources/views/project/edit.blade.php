@@ -28,28 +28,23 @@
             </div>
             <div class="form-group input-group ">
                 <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
-                <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_mulai" value={{ $project->tgl_mulai }}>
+                <input id="date1" readonly="" class="form-control" name="tgl_mulai" value={{ $project->tgl_mulai }}>
                 <label class="control-label mt-2 ml-5 mr-2">Tanggal Selesai</label>
-                <input type="text" onfocus="(this.type='date')"  class="form-control" name="tgl_selesai" value={{ $project->tgl_selesai }}>
+                <input id="date2" readonly="" class="form-control" name="tgl_selesai" value={{ $project->tgl_selesai }}>
             </div>
 
 
             <div class="form-group">
                 <label class="control-label">Status</label>
-              <input class="form-control" type="text" name="status" value={{ $project->status }}>
+              <!-- <input class="form-control" type="text" name="status" value={{ $project->status }}> -->
+              <select class="form-control" name="status" required="">
+                            @foreach($project as $projects)
+                                <option value="{{ $project->status }}"
+                                       
+                                ></option>
+                            @endforeach
+                        </select>
             </div>
-
-{{--            <div class="form-group">--}}
-{{--                <label class="control-label">User</label>--}}
-{{--                <select class="form-control" name="status" required="">--}}
-{{--                        <option value="{{$project->id}}"--}}
-{{--                                @if ($project->id === $team_projects->user_id)--}}
-{{--                                selected--}}
-{{--                            @endif--}}
-{{--                        >{{$project->name}}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
 
             <div class="form-group">
                 <label class="control-label">Keterangan</label>

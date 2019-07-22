@@ -22,9 +22,9 @@
             <div class="col-4">
               <address>Project: <strong>{{$modules->nama_project}}</strong><br>
 
-                  <br>Tanggal Mulai: <strong>{{$modules->tgl_mulai}}</strong>
-                  <br>Deadline: <strong>{{$modules->deadline}}</strong>
-                  <br>Tanggal Selesai: <strong>{{$modules->tgl_user}}</strong></address>
+                  <br>Tanggal Mulai: <strong>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</strong>
+                  <br>Deadline: <strong>{{date("d-m-Y", strtotime($mulai = $modules->deadline))}}</strong>
+                  <br>Tanggal Selesai: <strong>{{date("d-m-Y", strtotime($mulai = $modules->tgl_user))}}</strong></address>
             </div>
             <div class="col-4">Status: <b>@if ($modules->status === 1 )
                         Ongoing
@@ -41,7 +41,7 @@
           </div>
           <div class="row">
             <div class="col-12 table-responsive">
-              <table class="table table-striped">
+              <table class="table table-striped" id="sampleTable">
                 <thead>
                   <tr>
                     <th>Job</th>

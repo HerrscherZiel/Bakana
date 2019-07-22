@@ -88,6 +88,7 @@
         </main>
     </div>
  <!-- Essential javascripts for application to work-->
+ 
 <script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-ui.js')}}"></script>
@@ -105,7 +106,7 @@
 <!-- delete -->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
-
+{!! $calendar->script() !!}
   <script type="text/javascript">
       $('button.delete-btn').on('click', function(e){
       event.preventDefault();
@@ -263,6 +264,6 @@ if(location.search.indexOf('php') < 0){
   setTimeout(function(){window.location.href = loc + hash;}, 5);
 }
 </script>
-{!! $calendar->script() !!}
+
 </body>
 </html>

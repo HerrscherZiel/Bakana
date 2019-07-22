@@ -35,11 +35,11 @@
                     <a class="btn btn-info" href="/timesheets/{{$timesheets->id_timesheets}}/edit"><i class="fa fa-lg fa-edit">
                             </i></a>
 
-                        <form class="delete" action="{{ route('timesheets.destroy', $timesheets->id_timesheets)}}" method="post">
+                        <form action="{{ route('timesheets.destroy', $timesheets->id_timesheets)}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger delete-btn" type="submit" style="margin-left: -2px"><i class="fa fa-lg fa-trash">
+                            <button class="btn btn-danger" type="submit" style="margin-left: -2px"><i class="fa fa-lg fa-trash">
                                 </i></button>
                         </form>
                         </div>

@@ -31,20 +31,21 @@
                     @endif
                     </b></address>
             </div>
-            <div class="col-4">From
-              <address><strong>{{$project->tgl_mulai}}</strong><br>to<br><strong>{{$project->tgl_selesai}}</strong></address>
+            <div class="col-4">Dari
+              <address><strong>{{date("d-m-Y", strtotime($mulai = $project->tgl_mulai))}}</strong><br>sampai<br><strong>{{date("d-m-Y", strtotime($mulai = $project->tgl_selesai))}}</strong></address>
             </div>
             <div class="col-4">Keterangan:<br><b>{{$project->ket}}</b></div>
           </div>
           <div class="row">
             <div class="col-12 table-responsive">
-              <table class="table table-striped">
+              <table class="table table-striped" id="sampleTable">
                 <thead>
                   <tr>
                     <th>Modul</th>
                     <th>Tanggal Mulai</th>
                     <th>Deadline</th>
                     <th>Tanggal Selesai</th>
+                    <th>Sisa Waktu</th>
                     <th>Status</th>
                     <th>User</th>
                     <th>Keterangan</th>
@@ -55,9 +56,18 @@
                 @foreach($module as $modules)
                   <tr>
                     <td>{{$modules->nama_module}}</td>
-                    <td>{{$modules->tgl_mulai}}</td>
-                    <td>{{$modules->deadline}}</td>
-                    <td>{{$modules->tgl_user}}</td>
+                    <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
+                    <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
+                    <td>{{date("d-m-Y", strtotime($modules->tgl_user))}}</td>
+                    <td>
+                     @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                           {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                           @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                           Deadline
+                           @else
+                            Melewati Deadline
+                       @endif
+                </td>
                     <td> @if ($modules->status === 1 )
                             Ongoing
                         @elseif($modules->status === 2 )

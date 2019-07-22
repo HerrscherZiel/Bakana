@@ -14,6 +14,7 @@
                             <th>Deadline</th>
                             <th>Tanggal Selesai</th>
                             <th>Status</th>
+                            <th>Sisa Waktu</th>
                             <th>User</th>
                             <th>Project</th>
                             <th>Keterangan</th>
@@ -24,9 +25,18 @@
                         <tr>
                             @foreach($module as $modules)
                                 <td>{{$modules->nama_module}}</td>
-                                <td>{{$modules->tgl_mulai}}</td>
-                                <td>{{$modules->deadline}}</td>
-                                <td>{{$modules->tgl_user}}</td>
+                                <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
+                                <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
+                                <td>{{date("d-m-Y", strtotime($modules->tgl_user))}}</td>
+                                <td>
+                                     @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                           {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                           @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                           Deadline
+                                           @else
+                                            Melewati Deadline
+                                       @endif
+                                </td>
                                 <td>@if ($modules->status === 1 )
                                         Ongoing
                                     @elseif($modules->status === 2 )

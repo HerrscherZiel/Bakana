@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('content')
 <div class="col-md-12">
@@ -52,12 +52,12 @@
                     </select>
                 </div>
                 <div class="form-group input-group">
-                    <input id="date1" class="form-control" name="tgl_mulai" value={{ $module->tgl_mulai }}>
+                    <input id="date1" class="form-control" name="tgl_mulai" value="{{ $module->tgl_mulai }}" readonly>
                     <div class="mt-1 ml-3 mr-3">to</div>
-                    <input id="date2" class="form-control" name="deadline" value={{ $module->deadline }}>
+                    <input id="date2" class="form-control" name="deadline" value="{{ $module->deadline }}" readonly>
                 </div>
                 <div class="form-group input-group">
-                    <input id="date1" class="form-control" name="tgl_user" value={{ $module->tgl_user }}>
+                    <input id="date1" class="form-control" name="tgl_user" value="{{ $module->tgl_user }}" readonly>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Status</label>

@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="col-md-9">
-                {!! $calendar->calendar() !!}
+                <div id="calendar"></div>
             </div>
           </div>
         </div>

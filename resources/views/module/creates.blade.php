@@ -33,12 +33,12 @@
                     </select>
                 </div>
                 <div class="form-group input-group">
-                    <input id="date1" class="form-control" name="tgl_mulai" placeholder="Start Date">
+                    <input id="date1" class="form-control" name="tgl_mulai" placeholder="Start Date" readonly="">
                     <div class="mt-1 ml-3 mr-3">to</div>
-                    <input id="date2" class="form-control" name="deadline" placeholder="Finish Date">
+                    <input id="date2" class="form-control" name="deadline" placeholder="Finish Date" readonly="">
                 </div>
                 <div class="form-group input-group">
-                    <input id="date1" class="form-control" name="tgl_user" placeholder="Selesai pada">
+                    <input id="date1" class="form-control" name="tgl_user" placeholder="Selesai pada" readonly="">
                 </div>
                 <div class="form-group">
                 <select class="form-control" name="status" required="">
