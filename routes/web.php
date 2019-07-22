@@ -78,15 +78,20 @@ Route::get('/module/{module}','ModuleController@indexes');
 
 Route::get('/module/creates/{project}','ModuleController@creates');
 
-Route::get('/module/creates/{project}/project','ModuleController@stores');
+Route::post('/module/creates/{project}','ModuleController@stores');
 
-Route::post('/module/creates/{project}/project','ModuleController@stores');
+Route::post('/module/{project}','ModuleController@stores');
 
 Route::get('/completedModule','ModuleController@completedModule');
 
 Route::get('/module/{project}/edit','ModuleController@editShowProject');
 
-/*Route::put('/module/{project}','ModuleController@updateTeamProject');*/
+Route::put('/module/{project}','ModuleController@updates');
+
+Route::match(array('PUT', 'PATCH'), "/module/{projects}", array(
+    'uses' => 'ModuleController@updates',
+    'as' => 'module.updates'
+));
 
 
 // Jobs
@@ -95,14 +100,18 @@ Route::post('/jobs/create','JobController@store');
 
 Route::get('/jobs/creates/{module}','JobController@createFromModule');
 
-Route::get('/jobs/creates/{module}/module','JobController@store');
+Route::post('/jobs/creates/{module}','JobController@storeFromModule');
 
-Route::post('/jobs/creates/{module}/module','JobController@store');
+Route::post('/jobs/{module}','JobController@storeFromModule');
 
 Route::get('/completedJob','JobController@completedJob');
 
 Route::get('/job/{project}/edit','JobController@editShowModule');
 
+Route::match(array('PUT', 'PATCH'), "/job/{modules}", array(
+    'uses' => 'JobController@updateShowModule',
+    'as' => 'job.update'
+));
 
 
 // Timesheets

@@ -190,6 +190,39 @@ class ModuleController extends Controller
 
         return redirect('modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
     }
+
+
+    // stores
+
+    public function stores(Request $request)
+    {
+        //
+
+        $request->validate( [
+            'nama_module'   =>'required',
+            'user'          =>'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
+            'status'        =>'required|integer',
+            'keterangan'    =>'nullable'
+        ]);
+
+        $module = new Module([
+            'nama_module'   => $request->get('nama_module'),
+            'user'          => $request->get('user'),
+            'tgl_mulai'     => $request->get('tgl_mulai'),
+            'deadline'      => $request->get('deadline'),
+            'tgl_user'      => $request->get('tgl_user'),
+            'status'        => $request->get('status'),
+            'project_id'    => $request->get('project_id'),
+            'keterangan'    => $request->get('keterangan'),
+        ]);
+
+        $module->save();
+
+        return redirect('projects/'.$module->project_id)->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+    }
     /**
      * Display the specified resource.
      *
@@ -263,12 +296,6 @@ class ModuleController extends Controller
     {
         Session::put('title', 'Edit Modul');
         //
-
-//        $mo = Module::join('project', 'project.id_project' , '=', 'module.project_id')
-//            ->select('module.user')
-//            ->where('user', '=', auth()->user()->name)
-//            ->getQuery()
-//            ->get();
 
 
         $aa = Module::findOrFail($id)->user;
@@ -354,6 +381,36 @@ class ModuleController extends Controller
         $module->keterangan     = $request->get('keterangan');
         $module->save();
         
+        return redirect('/module/'/*.$module->project_id*/)->with('success', 'New support ticket has been updated!!');
+    }
+
+
+    // updates
+
+    public function updates(Request $request, $id)
+    {
+        //
+        $module = new Module();
+        $request->validate( [
+            'nama_module'   => 'required',
+            'user'          => 'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
+            'status'        =>'required|integer',
+            'keterangan'    => 'nullable']);
+
+        $module = Module::find($id);
+        $module->nama_module    = $request->get('nama_module');
+        $module->user           = $request->get('user');
+        $module->tgl_mulai      = $request->get('tgl_mulai');
+        $module->deadline       = $request->get('deadline');
+        $module->tgl_user       = $request->get('tgl_user');
+        $module->status         = $request->get('status');
+        $module->project_id     = $request->get('project_id');
+        $module->keterangan     = $request->get('keterangan');
+        $module->save();
+
         return redirect('/projects/'.$module->project_id)->with('success', 'New support ticket has been updated!!');
     }
 

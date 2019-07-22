@@ -25,7 +25,7 @@
             </select>
 
             <h3 class="tile-title">Project {{$tittle}}</h3>
-            <form method="post" action="{{ route('modules.update', $module->id_module) }}">
+            <form method="post" action="{{ route('module.updates', $module->id_module) }}">
                 @method('PATCH')
                 @csrf
                 <div class="tile-body">

@@ -13,7 +13,7 @@
     @endif
      <div class="tile">
         <h3 class="tile-title">Project {{$project->nama_project}}</h3>
-        <form method="post" action="{{url('/modules/create')}}">
+        <form method="post" action="{{url('/module/creates/$project->id_project')}}">
             <div class="tile-body">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />

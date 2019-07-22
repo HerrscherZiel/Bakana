@@ -26,7 +26,7 @@
 
             <h3 class="tile-title">Module {{$tittle}}</h3>
 
-            <form method="post" action="{{ route('jobs.update', $job->id_job) }}">
+            <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
                 @csrf
                 <div class="tile-body">
