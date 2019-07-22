@@ -31,6 +31,9 @@ class HomeController extends Controller
     public function index()
     {
         Session::put('title', 'Timeline');
+
+
+
         if (Auth::user()->hasRole('Project Manager')) {
 
 //            $user = User::join('role', 'users.role_id', '=', 'role.id_role')

@@ -45,7 +45,7 @@ class TeamProjectController extends Controller
     {
         Session::put('title', 'Dashboard Team');
         //
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
             ->distinct('users.id')
@@ -96,7 +96,7 @@ class TeamProjectController extends Controller
         //
         if (Auth::user()->hasRole('Project Manager')) {
             $user = User::all();
-            $project = Project::all();
+            $project = Project::all()->where('status', '!=', 4);
             $role = Role::all();
 
             return view('team.create', compact('user', 'project', 'role'));
@@ -180,7 +180,7 @@ class TeamProjectController extends Controller
             $project = Project::all();
             $role = Role::all();
 
-            $team_projects = TeamProject::find($id);
+            $team_projects = TeamProject::findOrFail($id);
             return view('team.edit', compact('team_projects', 'user', 'project', 'role'));
 
         }
@@ -205,7 +205,7 @@ class TeamProjectController extends Controller
             $role = Role::all();
 
 
-            $team_projects = TeamProject::find($id);
+            $team_projects = TeamProject::findOrFail($id);
             return view('team.edit_team_project_index', compact('team_projects', 'user', 'project', 'role'));
 
         }

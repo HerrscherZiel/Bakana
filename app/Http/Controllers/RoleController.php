@@ -104,7 +104,7 @@ class RoleController extends Controller
             ->where('id', $id)
             ->first();*/
         if (Auth::user()->hasRole('Project Manager')) {
-            $role = Role::find($id);
+            $role = Role::findOrFail($id);
             return view('role.edit')->with('role', $role);
         }
 
