@@ -84,6 +84,7 @@ class TimesheetController extends Controller
             ->join('project','project.id_project','=','team_projects.project_id')
             ->select('users.*','project.nama_project')
             ->where('users.id','=',auth()->user()->id)
+            ->groupBy('project.nama_project')
             ->getQuery()
             ->get();
         /*$date = Carbon::now()->format('d-m-Y');*/
@@ -111,8 +112,6 @@ class TimesheetController extends Controller
                 'jam_selesai' => 'required|after:jam_mulai',
                 'keterangan_timesheet' => 'required']);
 
-
-//            $date = Carbon::now()->format('d-m-Y');
             $timesheet = new Timesheet();
             $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
             $timesheet->project = $request->input('project');
@@ -123,7 +122,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
             /*dd($timesheet);*/
-            return redirect('timesheets')->with('success', 'User Ditambahkan');
+            return redirect('timesheetss')->with('success', 'User Ditambahkan');
 
         }
 
@@ -145,7 +144,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
 //            dd($timesheet);
-            return redirect('timesheets')->with('success', 'User Ditambahkan');
+            return redirect('timesheetss')->with('success', 'User Ditambahkan');
 
         }
     }
@@ -173,9 +172,9 @@ class TimesheetController extends Controller
         //
         $user = User::all();
 
-        $cek = Timesheet::find($id)->user_id;
+        $cek = Timesheet::findOrFail($id)->user_id;
 
-        $timesheet = Timesheet::find($id);
+        $timesheet = Timesheet::findOrFail($id);
 
         if (Auth::user()->hasRole('Project Manager')) {
 

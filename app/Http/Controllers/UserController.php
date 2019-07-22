@@ -129,7 +129,7 @@ class UserController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $role = Role::all();
 
-            $user = User::find($id);
+            $user = User::findOrFail($id);
             return view('user.edit', compact('user', 'role'));
         }
         else{

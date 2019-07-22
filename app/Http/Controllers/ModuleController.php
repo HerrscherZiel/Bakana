@@ -50,7 +50,7 @@ class ModuleController extends Controller
     {
         Session::put('title', 'Dashboard Modul');
         //
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
 
         $module = Module::join('project', 'project_id', '=', 'id_project')
             ->select('module.*', 'project.id_project', 'project.nama_project')
@@ -218,7 +218,12 @@ class ModuleController extends Controller
         /*$job = Job::all();*/
         /*dd($job);*/
 
-        $mod = Module::find($id);
+        $mod = Module::findOrFail($id);
+//
+//        if($mod < 1){
+//            return view('home')->with(abort(404, 'Unauthorized action.'));
+//
+//        }
 
             return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
 
@@ -238,10 +243,13 @@ class ModuleController extends Controller
 
         if (Auth::user()->hasRole('Project Manager')) {
             $project    = Project::all()->where('status', '!=', 4);
-            $module     = Module::find($id);
+            $module     = Module::findOrFail($id);
             $user       = User::all();
 
-
+//            if($module < 1){
+//                return view('home')->with(abort(404, 'Unauthorized action.'));
+//
+//            }
             return view('module.edit', compact('module', 'project', 'user'));
         }
 
@@ -266,7 +274,7 @@ class ModuleController extends Controller
 //            ->get();
 
 
-        $aa = Module::find($id)->user;
+        $aa = Module::findOrFail($id)->user;
 
         $as = auth()->user()->name;
 
@@ -349,7 +357,7 @@ class ModuleController extends Controller
         $module->keterangan     = $request->get('keterangan');
         $module->save();
 
-        return redirect('/module')->with('success', 'New support ticket has been updated!!');
+        return redirect('/modules')->with('success', 'New support ticket has been updated!!');
     }
 
     /**
@@ -365,7 +373,7 @@ class ModuleController extends Controller
             $module = Module::find($id);
             $module->delete();
 
-            return redirect('module')->with('success', 'Module has been deleted Successfully');
+            return redirect('modules')->with('success', 'Module has been deleted Successfully');
         }
 
         else{

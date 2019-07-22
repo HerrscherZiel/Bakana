@@ -25,6 +25,7 @@ class ProjectController extends Controller
         //
 //        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
+
         $project = Project::all()->where('status','!=', 4);
 
 //        dd($project);
@@ -130,6 +131,15 @@ class ProjectController extends Controller
             ->getQuery()
             ->get();
 
+
+
+//        dd($a);
+
+        if(count($module) < 1){
+            return view('home')->with(abort(404, 'Unauthorized action.'));
+
+        }
+
 //            if(count($module) <= 0){
 //                exit();
 //            }
@@ -151,9 +161,21 @@ class ProjectController extends Controller
     {
         Session::put('title', 'Edit Project');
         //
-
+        $a = false;
         if (Auth::user()->hasRole('Project Manager')) {
-            $project = Project::find($id);
+            $project = Project::findOrFail($id);
+
+//            $aa = Project::findOrFail($id)->id_project;
+
+//            dd($aa);
+
+//            $b = 0;
+//            if($aa < $b){ $a = true;}
+
+//            if($aa <= $b){
+//                return view('home')->with(abort(404, 'Unauthorized action.'));
+//
+//            }
             return view('project.edit')->with('project', $project);
         }
 

@@ -181,7 +181,7 @@ class JobController extends Controller
         //
 
         if (Auth::user()->hasRole('Project Manager')) {
-            $job = Job::find($id);
+            $job = Job::findOrFail($id);
             $module = Module::join('project', 'project.id_project', '=', 'module.project_id')
                 ->select('module.*')
                 ->where('project.status', '!=', 4)
@@ -211,7 +211,7 @@ class JobController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $module = Module::all();
             $project = Project::all();
-            $job = Job::find($id);
+            $job = Job::findOrFail($id);
             $user = Module::join('project','module.project_id','=','project.id_project')
                 ->join('team_projects','project.id_project','=','team_projects.project_id')
                 ->join('users','team_projects.user_id','=','users.id')
