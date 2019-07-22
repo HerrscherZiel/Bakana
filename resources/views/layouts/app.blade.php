@@ -358,15 +358,15 @@
   });
 </script>
 <!-- autorefresh -->
-<script>
-if(location.search.indexOf('php') < 0){
-  var hash = window.location.hash;
-  var loc = window.location.href.replace(hash, '');
-  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';
-  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):
-  setTimeout(function(){window.location.href = loc + hash;}, 5);
-}
-</script>
+{{--<script>--}}
+{{--if(location.search.indexOf('php') < 0){--}}
+{{--  var hash = window.location.hash;--}}
+{{--  var loc = window.location.href.replace(hash, '');--}}
+{{--  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';--}}
+{{--  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):--}}
+{{--  setTimeout(function(){window.location.href = loc + hash;}, 5);--}}
+{{--}--}}
+{{--</script>--}}
 <!-- Google analytics script-->
 <script type="text/javascript">
   if(document.location.hostname == 'pratikborsadiya.in') {

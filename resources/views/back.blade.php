@@ -8,7 +8,7 @@
 	<script type="text/javascript">
 	setTimeout(function () {
    //Redirect with JavaScript
-   window.history.go(-4);	
+   window.history.go(-2);
    // window.location = document.href="{!! URL::previous() !!}"; 
 }, 10);	
 	</script>
