@@ -14,6 +14,10 @@
                 <th>Modul</th>
                 <th>Project</th>
                 <th>User</th>
+                  <th>Tanggal Mulai</th>
+                  <th>Deadline</th>
+                  <th>Tanggal Target</th>
+                  <th>Sisa Waktu</th>
                 <th>Status</th>
                 <th>Keterangan</th>
                 <th>Action</th>
@@ -26,6 +30,18 @@
                 <td>{{$jobs->nama_module}}</td>
                 <td>{{$jobs->nama_project}}</td>
                 <td>{{$jobs->user}}</td>
+                      <td>{{date("d-m-Y", strtotime($mulai = $jobs->tgl_mulai))}}</td>
+                      <td>{{date("d-m-Y", strtotime($selesai = $jobs->deadline))}}</td>
+                      <td>{{$jobs->tgl_user ? date("d-m-Y", strtotime($jobs->tgl_user)) : ''}}</td>
+                      <td>
+                          @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                              {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                          @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                              Deadline
+                          @else
+                              Melewati Deadline
+                          @endif
+                      </td>
                 <td>@if ($jobs->status === 1 )
                     <span class="badge badge-primary">Ongoing </span>
                 @elseif($jobs->status === 2 )

@@ -16,6 +16,9 @@ class Job extends Model
     protected $fillable = [
         'nama_job',
         'user',
+        'tgl_mulai',
+        'deadline',
+        'tgl_user',
         'status',
         'module_id',
         'keterangan',

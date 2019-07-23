@@ -58,6 +58,16 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group input-group">
+                        <input id="date1" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
+                        <div class="mt-1 ml-3 mr-3">to</div>
+                        <input id="date2" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
+                    </div>
+                    <div class="form-group input-group">
+                        <input id="date1" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
+                    </div>
+
                     <div class="form-group">
                         <input type="hidden" value="{{ $on = 1, $que = 2 , $pen = 3, $com = 4, $can =5}}"/>
                         <label class="control-label">Status</label>

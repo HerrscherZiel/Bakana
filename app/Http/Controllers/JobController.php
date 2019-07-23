@@ -104,7 +104,7 @@ class JobController extends Controller
         //
         if (Auth::user()->hasRole('Project Manager')) {
 
-            $module = Module::find($id);
+            $module = Module::findOrFail($id);
 
             $mod = Module::join('project','module.project_id','=','project.id_project')
                 ->join('team_projects','project.id_project','=','team_projects.project_id')
@@ -139,6 +139,9 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      =>'required',
             'user'          =>'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
@@ -146,6 +149,9 @@ class JobController extends Controller
         $job = new Job([
             'nama_job'      => $request->get('nama_job'),
             'user'          => $request->get('user'),
+            'tgl_mulai'     => $request->get('tgl_mulai'),
+            'deadline'      => $request->get('deadline'),
+            'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
             'module_id'     => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
@@ -166,6 +172,9 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      =>'required',
             'user'          =>'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
@@ -173,6 +182,9 @@ class JobController extends Controller
         $job = new Job([
             'nama_job'      => $request->get('nama_job'),
             'user'          => $request->get('user'),
+            'tgl_mulai'     => $request->get('tgl_mulai'),
+            'deadline'      => $request->get('deadline'),
+            'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
             'module_id'     => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
@@ -272,12 +284,18 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      => 'required',
             'user'          => 'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
             'status'        => 'required|integer',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);
         $job->nama_job      = $request->get('nama_job');
         $job->user          = $request->get('user');
+        $job->tgl_mulai      = $request->get('tgl_mulai');
+        $job->deadline       = $request->get('deadline');
+        $job->tgl_user       = $request->get('tgl_user');
         $job->status        = $request->get('status');
         $job->module_id     = $request->get('module_id');
         $job->keterangan    = $request->get('keterangan');
@@ -295,12 +313,18 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      => 'required',
             'user'          => 'nullable',
+            'tgl_mulai'     =>'required|date',
+            'deadline'      =>'required|date',
+            'tgl_user'      =>'nullable|date',
             'status'        => 'required|integer',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);
         $job->nama_job      = $request->get('nama_job');
         $job->user          = $request->get('user');
+        $job->tgl_mulai      = $request->get('tgl_mulai');
+        $job->deadline       = $request->get('deadline');
+        $job->tgl_user       = $request->get('tgl_user');
         $job->status        = $request->get('status');
         $job->module_id     = $request->get('module_id');
         $job->keterangan    = $request->get('keterangan');
