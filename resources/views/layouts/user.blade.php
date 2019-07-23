@@ -18,7 +18,6 @@
     {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
 </head>
 <body class="app sidebar-mini rtl">
-{{--@include('flash-message')--}}
 <div id="app">
     <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
       <!-- Sidebar toggle button-->
@@ -88,10 +87,22 @@
  <!-- Essential javascripts for application to work-->
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
 {!! $calendar->script() !!}
+<script type="text/javascript">
+    var events = [];
+  $.get('/events/get', function(result){
+      events = result;
+  });    
+  $('#calendar').fullCalendar({
+      events: function (start, end, timezone, callback) {
+          callback(events);
+      }
+  });
+</script>
 <!-- Calendar-->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/main.js')}}"></script>
+
 </body>
 </html>

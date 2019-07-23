@@ -381,7 +381,7 @@ class ModuleController extends Controller
         $module->keterangan     = $request->get('keterangan');
         $module->save();
         
-        return redirect('/module/'/*.$module->project_id*/)->with('success', 'New support ticket has been updated!!');
+        return redirect('/modules')->with('success', 'New support ticket has been updated!!');
     }
 
 
@@ -427,7 +427,7 @@ class ModuleController extends Controller
             $module = Module::find($id);
             $module->delete();
 
-
+            return redirect()->back()->with('success', 'job has been deleted Successfully');
         }
 
         else{

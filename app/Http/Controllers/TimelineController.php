@@ -48,7 +48,8 @@ class TimelineController extends Controller
 
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        /*dd($event_list);*/
+       
+                /*dd($event_list);*/
 
         /*Dudumdumdudumdum*/
 

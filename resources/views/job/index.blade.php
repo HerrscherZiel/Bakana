@@ -27,7 +27,7 @@
                 <td>{{$jobs->nama_project}}</td>
                 <td>{{$jobs->user}}</td>
                 <td>@if ($jobs->status === 1 )
-                    Ongoing
+                    <span class="badge badge-primary">Ongoing </span>
                 @elseif($jobs->status === 2 )
                    Queue
                 @elseif($jobs->status === 3 )
