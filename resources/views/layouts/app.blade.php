@@ -20,7 +20,7 @@
 <body class="app sidebar-mini rtl">
 {{--@include('flash-message')--}}
 <div id="app">
-    <header class="app-header"><a class="app-header__logo" href="{{ url('/home') }}">Timeline</a>
+    <header class="app-header"><a class="app-header__logo" href="{{ url('/timelines') }}">Timeline</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
@@ -42,7 +42,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item {{ request()->is('home') ? 'active' : ''  }}"  href="{{ url('/home') }}"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Timeline</span></a></li>
+        <li><a class="app-menu__item {{ request()->is('home') ? 'active' : ''  }}"  href="{{ url('/timelines') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
 
         <li><a class="app-menu__item {{ request()->is('projects*','completedProject*') ? 'active' : ''  }}"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
 

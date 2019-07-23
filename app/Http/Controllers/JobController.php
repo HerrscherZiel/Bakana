@@ -26,7 +26,13 @@ class JobController extends Controller
             $job = Job::join('module', 'module_id', '=', 'id_module')
                 ->join('project', 'project_id', '=', 'id_project')
                 ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
+//                ->where(function($q) {
+//                    $q->where('jobs.status', !4);
+////                        ->orWhere('project.status', !4);
+//                })
                 ->where('project.status', '!=', 4)
+                ->where('module.status', '!=', 4)
+                ->where('jobs.status', '!=', 4)
                 ->getQuery()
                 ->get();
                 
@@ -50,10 +56,16 @@ class JobController extends Controller
             $job = Job::join('module', 'module_id', '=', 'id_module')
                 ->join('project', 'project_id', '=', 'id_project')
                 ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
-                ->where('project.status', '=', 4)
+//                ->where('jobs.status', '=', 4)
+                ->where(function($q) {
+                    $q->where('jobs.status', 4)
+                        ->orWhere('project.status', 4)
+                        ->orWhere('module.status', 4);
+                })
                 ->getQuery()
                 ->get();
 
+//            dd($job);
             /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
             return view('job.jobComplete')->with('job', $job);
         }

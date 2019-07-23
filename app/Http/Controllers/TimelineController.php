@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Job;
 use App\Module;
+use App\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-//use MaddHatter\LaravelFullcalendar\Calendar;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use MaddHatter\LaravelFullcalendar\Calendar;
+//use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class TimelineController extends Controller
 {
@@ -27,6 +29,7 @@ class TimelineController extends Controller
             ->get();*/
 
         /*Dudumdumdudumdum*/
+        $val = Project::all();
 
         $events = Module::all();
         $event_list = [];
@@ -35,7 +38,8 @@ class TimelineController extends Controller
                 $event->nama_module,
                 true,
                 $event->tgl_mulai,
-                $event->deadline
+                $event->deadline,
+                $event->id_module
             );
         }
 
@@ -68,19 +72,94 @@ class TimelineController extends Controller
                 $module->tgl_mulai,
                 $module->deadline
             );
-        }
+        }*/
 
-        $calendar = Calendar::addEvents($event) //add an array with addEvents
-        ->setOptions([ //set fullcalendar options
+//        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list) //add an array with addEvents
+//        ->setOptions([ //set fullcalendar options
+//            'firstDay' => 1
+//        ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+//            'viewRender' => 'function() {alert("Callbacks!");}',
+//            'eventClick' => 'function() {showModal();}'
+//        ]);
+
+        /*$calendar = \Calendar::addEvents($events) //add an array with addEvents
+        ->addEvent($eloquentEvent, [ //set custom color fo this event
+            'color' => '#800',
+        ])->setOptions([ //set fullcalendar options
             'firstDay' => 1
         ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-            'viewRender' => 'function() {alert("Callbacks!");}'
+            'eventClick' => 'function() {showModal();}'
         ]);*/
 
 
-        return view('timeline.index')->with('calendar', $calendar);
+        return view('timeline.index', compact('calendar','val'))/*->with('calendar', $calendar, 'val', $val)*/;
 
 //        return view('home', compact( 'module', 'calendar'));
+    }
+
+    public function indexProject(){
+
+        $events = Project::all();
+        $event_list = [];
+        foreach ($events as $key => $event) {
+            $event_list[] = Calendar::event(
+                $event->nama_project,
+                true,
+                $event->tgl_mulai,
+                $event->tgl_selesai,
+                $event->id_project
+            );
+        }
+
+        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
+
+        return view('timeline.indexOfProjects')->with('calendar', $calendar);
+
+    }
+
+    public function dropProject($id){
+
+        $events = Project::join('module','project.id_project','=','module.project_id')
+            ->select('module.*')
+            ->where('project.id_project','=',$id)
+            ->getQuery()
+            ->get();
+
+        $event_list = [];
+        foreach ($events as $key => $event) {
+            $event_list[] = Calendar::event(
+                $event->nama_module,
+                true,
+                $event->tgl_mulai,
+                $event->deadline,
+                $event->id_module
+            );
+        }
+
+        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
+
+        return view('timeline.index')->with('calendar', $calendar);
+
+    }
+
+    public function indexJob(){
+
+        $events = Job::all();
+        $event_list = [];
+        foreach ($events as $key => $event) {
+            $event_list[] = Calendar::event(
+                $event->nama_job,
+                true,
+                $event->tgl_mulai,
+                $event->deadline,
+                $event->id_job
+            );
+        }
+
+        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
+
+        return view('timeline.indexOfJobs')->with('calendar', $calendar);
+
     }
 
     /*public function addEvent(Request $request)

@@ -1,19 +1,20 @@
-                <div class="form-group">
-                    <label class="control-label">Status</label>
-                     <select class="form-control" name="status" required="">
-                         <option disabled>Status</option>
-                         <option value=1 @if($job->status === $on) selected
-                             @endif>Ongoing</option>
-                         <option value=2 @if($job->status === $que) selected
-                             @endif>Queue</option>
-                         <option value=3 @if($job->status === $pen) selected
-                             @endif>Pending</option>
-                         <option value=4 @if($job->status === $com) selected
-                             @endif>Completed</option>
-                         <option value=5 @if($job->status === $can) selected
-                             @endif>Canceled</option>
-                     </select>
-                </div>@extends('layouts.app')
+{{--                <div class="form-group">--}}
+{{--                    <label class="control-label">Status</label>--}}
+{{--                     <select class="form-control" name="status" required="">--}}
+{{--                         <option disabled>Status</option>--}}
+{{--                         <option value=1 @if($job->status === $on) selected--}}
+{{--                             @endif>Ongoing</option>--}}
+{{--                         <option value=2 @if($job->status === $que) selected--}}
+{{--                             @endif>Queue</option>--}}
+{{--                         <option value=3 @if($job->status === $pen) selected--}}
+{{--                             @endif>Pending</option>--}}
+{{--                         <option value=4 @if($job->status === $com) selected--}}
+{{--                             @endif>Completed</option>--}}
+{{--                         <option value=5 @if($job->status === $can) selected--}}
+{{--                             @endif>Canceled</option>--}}
+{{--                     </select>--}}
+{{--                </div>--}}
+                @extends('layouts.app')
 
 @section('content')
     <div class="col-md-12">

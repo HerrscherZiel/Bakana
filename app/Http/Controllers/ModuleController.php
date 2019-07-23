@@ -31,6 +31,7 @@ class ModuleController extends Controller
             $module = Module::join('project', 'project_id', '=', 'id_project')
                 ->select('module.*', 'project.id_project', 'project.nama_project')
                 ->where('project.status', '!=', 4)
+                ->where('module.status', '!=', 4)
                 ->getQuery()
                 ->get();
 //            dd($module);
@@ -77,7 +78,10 @@ class ModuleController extends Controller
 
             $module = Module::join('project', 'project_id', '=', 'id_project')
                 ->select('module.*', 'project.id_project', 'project.nama_project')
-                ->where('project.status', '=', 4)
+                ->where(function($q) {
+                    $q->where('module.status', 4)
+                        ->orWhere('project.status', 4);
+                })
                 ->getQuery()
                 ->get();
 

@@ -60,7 +60,7 @@ class UserInfoController extends Controller
 
     public function completedProjectUser()
     {
-        Session::put('title', 'Your Works');
+        Session::put('title', 'My Works');
 
         //
 
@@ -96,7 +96,7 @@ class UserInfoController extends Controller
     {
         //
 
-        Session::put('title', 'My Module');
+        Session::put('title', 'My Jobs');
          
 
         $project = Project::select('nama_project')
@@ -108,13 +108,33 @@ class UserInfoController extends Controller
             ->join('project','team_projects.project_id','=','project.id_project')
             ->join('module', 'project.id_project', '=', 'module.project_id')
             ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
-            ->select( 'module.nama_module', 'module.status', 'jobs.nama_job', 'jobs.user', 'jobs.keterangan', 'module.id_module')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                        , 'jobs.module_id')
+            ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id, 'jobs.user' => auth()->user()->name])
+//            ->where('users.id', '=', auth()->user()->id)
+            ->orderBy('module.nama_module')
+            ->groupBy('module.nama_module')
+            ->getQuery()
+            ->get();
+
+        $jobs = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->join('module', 'project.id_project', '=', 'module.project_id')
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                , 'jobs.module_id')
             ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id, 'jobs.user' => auth()->user()->name])
 //            ->where('users.id', '=', auth()->user()->id)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
             ->get();
+
+//
+//            $jobs = Job::all()->select('jobs.user', '=', auth()->user()->name );
+//
+//            $a = auth()->user()->name;
+//        dd($jobs);
 
 //        $job = Job::join('module', 'module_id', '=', 'id_module')
 //            ->select('jobs.*','module.nama_module')
@@ -126,7 +146,7 @@ class UserInfoController extends Controller
 
 
 //            dd($modulpro);
-        return view('UserInfo.userModule', compact('modulpro', 'project'));
+        return view('UserInfo.userModule', compact('modulpro', 'project', 'jobs'));
     }
 
 
