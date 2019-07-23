@@ -132,6 +132,12 @@ Route::get('/myCompletedProject','UserInfoController@completedProjectUser');
 
 Route::get('/timelines','TimelineController@index');
 
+Route::get('/timelines/project','TimelineController@indexProject');
+
+Route::get('/timelines/job','TimelineController@indexJob');
+
+Route::post('/timelines/{project}','TimelineController@dropProject');
+
 
 
 

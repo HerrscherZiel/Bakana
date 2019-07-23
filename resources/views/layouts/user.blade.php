@@ -100,6 +100,28 @@
 <script src="{{URL::asset('docs/js/main.js')}}"></script>
 {{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
 
+<!-- Option Ajax  -->
+<script type="text/javascript">
+
+    $('#project').on('change', function() {
+        if ($("#project").val() != "") {
+            $.ajax({
+                url: '/timelines/'+$(this).val(),
+                type: 'POST',
+                data: {id},
+                success: function (response){
+                    // $("#calendar").replaceWith(response);
+                    console.log('success');
+                },
+                error: function (xhr) {
+                    alert("Something went wrong, please try again");
+                }
+            });
+        }
+
+    });
+
+</script>
 
 <!-- Full Calendar -->
 <script type="text/javascript">
