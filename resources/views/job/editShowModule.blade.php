@@ -60,12 +60,12 @@
                     </div>
 
                     <div class="form-group input-group">
-                        <input id="date1" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
+                        <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
                         <div class="mt-1 ml-3 mr-3">to</div>
-                        <input id="date2" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
+                        <input id="date4" data-provide="datepicker" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
                     </div>
                     <div class="form-group input-group">
-                        <input id="date1" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
+                        <input id="date5" data-provide="datepicker" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
                     </div>
 
                     <div class="form-group">

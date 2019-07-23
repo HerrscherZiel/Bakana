@@ -39,13 +39,13 @@
               <a>Project Code: <b>{{$projects->kode_project}}</b></a><br>
                <a>Status: <b>
                @if ($projects->status === 1 )
-                         Ongoing
+                         <span class="badge badge-pill badge-primary">Ongoing</span>
                      @elseif($projects->status === 2 )
-                         Queue
+                         <span class="badge badge-pill badge-secondary">Queue</span>
                      @elseif($projects->status === 3 )
-                         Pending
+                         <span class="badge badge-pill badge-warning">Pending</span>
                      @elseif($projects->status === 4 )
-                         Completed
+                         <span class="badge badge-pill badge-success">Completed</span>
                  @endif
                </b></a>
              </div>
@@ -58,9 +58,9 @@
                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
                            @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
-                           Deadline
+                           <span class="badge badge-warning">Deadline</span>
                            @else
-                            Melewati Deadline
+                            <span class="badge badge-danger">Melewati Deadline</span>
                        @endif
 
                    </b></a>

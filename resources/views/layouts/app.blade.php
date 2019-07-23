@@ -138,6 +138,11 @@
   autoclose: true,
   todayHighlight: true
   });
+  $('#date3,#date4,#date5').datepicker({
+  startDate: date,
+  autoclose: true,
+  todayHighlight: true
+  });
 </script>
 <!-- Data table plugin-->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>

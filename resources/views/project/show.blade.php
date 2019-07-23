@@ -24,13 +24,13 @@
               <address><strong>{{$project->kode_project}}</strong><br><br>
                 Status: <b>
                 @if ($project->status === 1 )
-                        Ongoing
+                        <span class="badge badge-pill badge-primary">Ongoing</span>
                     @elseif($project->status === 2 )
-                        Queue
+                        <span class="badge badge-pill badge-secondary">Queue</span>
                     @elseif($project->status === 3 )
-                        Pending
+                        <span class="badge badge-pill badge-warning">Pending</span>
                     @elseif($project->status === 4 )
-                        Completed
+                        <span class="badge badge-pill badge-success">Completed</span>
                     @endif
                     </b></address>
             </div>
@@ -72,13 +72,13 @@
                        @endif
                 </td>
                     <td> @if ($modules->status === 1 )
-                            Ongoing
+                             <span class="badge badge-pill badge-primary">Ongoing</span>
                         @elseif($modules->status === 2 )
-                            Queue
+                            <span class="badge badge-pill badge-secondary">Queue</span>
                         @elseif($modules->status === 3 )
-                            Pending
+                            <span class="badge badge-pill badge-warning">Pending</span>
                         @elseif($modules->status === 4 )
-                            Completed
+                            <span class="badge badge-pill badge-success">Completed</span>
                         @endif</td>
                     <td>{{$modules->user}}</td>
                     <td>{{$modules->keterangan}}</td>

@@ -37,19 +37,19 @@
                           @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                               {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
                           @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
-                              Deadline
+                              <span class="badge badge-warning">Deadline</span>
                           @else
-                              Melewati Deadline
+                              <span class="badge badge-danger">Melewati Deadline</span>
                           @endif
                       </td>
                 <td>@if ($jobs->status === 1 )
-                    <span class="badge badge-primary">Ongoing </span>
+                    <span class="badge badge-pill badge-primary">Ongoing</span>
                 @elseif($jobs->status === 2 )
-                   Queue
+                   <span class="badge badge-pill badge-secondary">Queue</span>
                 @elseif($jobs->status === 3 )
-                    Pending
+                    <span class="badge badge-pill badge-warning">Pending</span>
                 @elseif($jobs->status === 4 )
-                    Completed
+                    <span class="badge badge-pill badge-success">Completed</span>
                 @endif</td></td>
                 <td>{{$jobs->keterangan}}</td>
                 <td>

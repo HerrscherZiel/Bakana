@@ -55,13 +55,13 @@
             <div class="col-md-6">
                <a>Status: <b>
               @if ($infos->status === 1 )
-                    Ongoing
+                    <span class="badge badge-pill badge-primary">Ongoing</span>
                 @elseif($infos->status === 2 )
-                    Queue
+                    <span class="badge badge-pill badge-secondary">Queue</span>
                 @elseif($infos->status === 3 )
-                    Pending
+                    <span class="badge badge-pill badge-warning">Pending</span>
                 @elseif($infos->status === 4 )
-                    Completed
+                    <span class="badge badge-pill badge-success">Completed</span>
                 @endif
                </b></a><br>
                <a>dari: {{ date("d-m-Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>

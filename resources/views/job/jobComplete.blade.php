@@ -26,13 +26,13 @@
                                 <td>{{$jobs->nama_project}}</td>
                                 <td>{{$jobs->user}}</td>
                                 <td>@if ($jobs->status === 1 )
-                                        Ongoing
+                                        <span class="badge badge-pill badge-primary">Ongoing</span>
                                     @elseif($jobs->status === 2 )
-                                        Queue
+                                        <span class="badge badge-pill badge-secondary">Queue</span>
                                     @elseif($jobs->status === 3 )
-                                        Pending
+                                        <span class="badge badge-pill badge-warning">Pending</span>
                                     @elseif($jobs->status === 4 )
-                                        Completed
+                                        <span class="badge badge-pill badge-success">Completed</span>
                                     @endif</td></td>
                                 <td>{{$jobs->keterangan}}</td>
                                 <td>
