@@ -51,8 +51,8 @@
                             <div class="col-md-6">
                                 <a>dari: {{ date("d-m-Y", strtotime($mulai = $projects->tgl_mulai))}}</a><br>
                                 <a>sampai: {{date("d-m-Y", strtotime($selesai = $projects->tgl_selesai))}}</a><br>
-                                <a>Total Waktu (Hari): <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</b></a><br>
-                                <a>Sisa Waktu (Hari): <b>
+                                <a>Total Waktu: <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} hari</b></a><br>
+                                <!-- <a>Sisa Waktu (Hari): <b>
 
 
                                         @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
@@ -60,10 +60,10 @@
                                         @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
                                             <span class="badge badge-warning">Deadline</span>
                                         @else
-                                            <span class="badge badge-danger">Melewati Deadline</span>
+                                            <span class="badge badge-danger">Melewati<br>Deadline</span>
                                         @endif
 
-                                    </b></a>
+                                    </b></a> -->
                             </div>
                             <div class="col-md-12">
                                 <div class="content hideContent">Keterangan: <br><br>{{$projects->ket}}</div>

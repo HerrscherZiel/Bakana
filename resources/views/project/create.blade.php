@@ -19,12 +19,7 @@
             <div class="tile-body">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <input class="form-control  @error('kode_project') is-invalid @enderror" name="kode_project" type="text" placeholder="Project Code">
-                    @error('kode_project')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    <input class="form-control" name="kode_project" type="text" placeholder="Project Code">
                 </div>
                 <div class="form-group">
                   <input class="form-control" type="text" name="nama_project" placeholder="Project Name">

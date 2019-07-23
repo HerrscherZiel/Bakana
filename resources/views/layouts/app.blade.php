@@ -10,6 +10,9 @@
     <title>Timeline</title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/app.css')}}">
+    
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('js/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('js/jquery.ui.timepicker.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
@@ -44,12 +47,12 @@
         <li><a class="app-menu__item {{ request()->is('projects*','completedProject*') ? 'active' : ''  }}"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
 
           @if(Auth::user()->hasRole('Project Manager'))
-          <li><a class="app-menu__item {{ request()->is('modules*', 'module*') ? 'active' : ''  }}" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Modul</span></a>
+          <li><a class="app-menu__item {{ request()->is('modules*', 'module*','completedModule*') ? 'active' : ''  }}" href="{{ url('/modules') }}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Modul</span></a>
           </li>
           @endif
 
           @if(Auth::user()->hasRole('Project Manager'))
-          <li><a class="app-menu__item {{ request()->is('jobs*') ? 'active' : ''  }}" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Job</span></a></li>
+          <li><a class="app-menu__item {{ request()->is('jobs*','completedJob*') ? 'active' : ''  }}" href="{{ url('/jobs') }}"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Job</span></a></li>
           @endif
 
           @if(Auth::user()->hasRole('Project Manager'))
@@ -91,7 +94,13 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/chart.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.core.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.widget.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.tabs.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.position.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/jquery.ui.timepicker.js?v=0.3.3')}}"></script>
+
 <!-- <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script> -->
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
@@ -154,60 +163,7 @@
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
 {{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
 
- <!-- DayPilot library -->
-<script src="{{URL::asset('js/daypilot-all.min.js')}}"></script> 
-<script>
-  var dp = new DayPilot.Scheduler("dp", {
-    timeHeaders: [{"groupBy":"Month"},{"groupBy":"Day","format":"d"}],
-    scale: "Day",
-    days: DayPilot.Date.today().daysInYear(),
-    startDate: DayPilot.Date.today().firstDayOfYear(),
-    showNonBusiness: false,
-    timeRangeSelectedHandling: "Enabled",
-    onTimeRangeSelected: function (args) {
-      var dp = this;
-      DayPilot.Modal.prompt("Create a new timeline:", "Timeline 1").then(function(modal) {
-        dp.clearSelection();
-        if (!modal.result) { return; }
-        dp.events.add(new DayPilot.Event({
-          start: args.start,
-          end: args.end,
-          id: DayPilot.guid(),
-          resource: args.resource,
-          text: modal.result
-        }));
-      });
-    },
-    eventMoveHandling: "Update",
-    onEventMoved: function (args) {
-      this.message("Timeline moved: " + args.e.text());
-    },
-    eventResizeHandling: "Update",
-    onEventResized: function (args) {
-      this.message("Timeline resized: " + args.e.text());
-    },
-    eventDeleteHandling: "Update",
-    onEventDeleted: function (args) {
-      this.message("Timeline deleted: " + args.e.text());
-    },
-    eventClickHandling: "Disabled",
-    eventHoverHandling: "Bubble",
-    bubble: new DayPilot.Bubble({
-      onLoad: function(args) {
-        // if event object doesn't specify "bubbleHtml" property 
-        // this onLoad handler will be called to provide the bubble HTML
-        args.html = "Timeline details";
-      }
-    }),
-    treeEnabled: true,
-  });
-  dp.resources = [
-    {name: "Resource 1", id: "R1"},
-    {name: "Resource 2", id: "R2"}
-  ];
-  dp.events.list = [];
-  dp.init();
-</script>
+
 <!-- Full Calendar -->
 <script type="text/javascript">
   $(document).ready(function() {
@@ -314,6 +270,51 @@
   
   var ctxp = $("#pieChartDemo").get(0).getContext("2d");
   var pieChart = new Chart(ctxp).Pie(pdata);
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#timepicker_start').timepicker({
+            showLeadingZero: false,
+            onSelect: tpStartSelect,
+            maxTime: {
+                hour: 17, minute: 30
+            },
+            showCloseButton: true
+        });
+        $('#timepicker_end').timepicker({
+            
+            showLeadingZero: false,
+            onSelect: tpEndSelect,
+            minTime: {
+                hour: 8, minute: 00
+            },
+            showNowButton: true,
+            defaultTime: '',  // removes the highlighted time for when the input is empty.
+            showCloseButton: true
+        });
+    });
+
+    // when start time change, update minimum for end timepicker
+    function tpStartSelect( time, endTimePickerInst ) {
+        $('#timepicker_end').timepicker('option', {
+            minTime: {
+                hour: endTimePickerInst.hours,
+                minute: endTimePickerInst.minutes
+            }
+        });
+    }
+
+    // when end time change, update maximum for start timepicker
+    function tpEndSelect( time, startTimePickerInst ) {
+        $('#timepicker_start').timepicker('option', {
+            maxTime: {
+                hour: startTimePickerInst.hours,
+                minute: startTimePickerInst.minutes
+            }
+        });
+    }
+    
 </script>
 <!-- Delete Alert -->
 <!-- <script>

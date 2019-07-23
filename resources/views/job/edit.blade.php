@@ -52,12 +52,14 @@
                 </div>
 
                 <div class="form-group input-group">
+                    <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                     <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
-                    <div class="mt-1 ml-3 mr-3">to</div>
+                    <label class="control-label mt-2 ml-5 mr-2">Tanggal Deadline</label>
                     <input id="date4" data-provide="datepicker" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
                 </div>
-                <div class="form-group input-group">
-                    <input id="date5" data-provide="datepicker" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
+                <div class="form-group">
+                  <label class="control-label">Target Selesai</label>
+                  <input id="date5" data-provide="datepicker" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
                 </div>
 
                 <div class="form-group">

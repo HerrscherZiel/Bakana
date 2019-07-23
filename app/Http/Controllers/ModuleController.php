@@ -168,9 +168,9 @@ class ModuleController extends Controller
         $request->validate( [
             'nama_module'   =>'required',
             'user'          =>'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
@@ -201,9 +201,9 @@ class ModuleController extends Controller
         $request->validate( [
             'nama_module'   =>'required',
             'user'          =>'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
@@ -364,9 +364,9 @@ class ModuleController extends Controller
         $request->validate( [
             'nama_module'   => 'required',
             'user'          => 'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    => 'nullable']);
 
@@ -394,9 +394,9 @@ class ModuleController extends Controller
         $request->validate( [
             'nama_module'   => 'required',
             'user'          => 'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    => 'nullable']);
 

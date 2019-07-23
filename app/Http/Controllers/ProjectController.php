@@ -88,8 +88,8 @@ class ProjectController extends Controller
             $request->validate( [
             'kode_project'=>'required',
             'nama_project'=>'required',
-            'tgl_mulai'=>'required|date',
-            'tgl_selesai'=>'required|date',
+            'tgl_mulai'=>'required',
+            'tgl_selesai'=>'required|after:tgl_mulai',
             'status'=>'required|integer',
             'ket' => 'nullable'
         ]);
@@ -201,8 +201,8 @@ class ProjectController extends Controller
         $request->validate([
             'kode_project' => 'required',
             'nama_project' => 'required',
-            'tgl_mulai' => 'required|date',
-            'tgl_selesai' => 'required|date',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required|after:tgl_mulai',
             'status' => 'required|integer',
             'ket' => 'nullable']);
 

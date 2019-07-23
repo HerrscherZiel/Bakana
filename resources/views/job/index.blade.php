@@ -14,10 +14,10 @@
                 <th>Modul</th>
                 <th>Project</th>
                 <th>User</th>
-                  <th>Tanggal Mulai</th>
-                  <th>Deadline</th>
-                  <th>Tanggal Target</th>
-                  <th>Sisa Waktu</th>
+                <th>Tanggal Mulai</th>
+                <th>Deadline</th>
+                <th>Tanggal Target</th>
+                <th>Sisa Waktu</th>
                 <th>Status</th>
                 <th>Keterangan</th>
                 <th>Action</th>
@@ -30,18 +30,18 @@
                 <td>{{$jobs->nama_module}}</td>
                 <td>{{$jobs->nama_project}}</td>
                 <td>{{$jobs->user}}</td>
-                      <td>{{date("d-m-Y", strtotime($mulai = $jobs->tgl_mulai))}}</td>
-                      <td>{{date("d-m-Y", strtotime($selesai = $jobs->deadline))}}</td>
-                      <td>{{$jobs->tgl_user ? date("d-m-Y", strtotime($jobs->tgl_user)) : ''}}</td>
-                      <td>
-                          @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
-                              {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
-                          @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
-                              <span class="badge badge-warning">Deadline</span>
-                          @else
-                              <span class="badge badge-danger">Melewati Deadline</span>
-                          @endif
-                      </td>
+                <td>{{date("d-m-Y", strtotime($mulai = $jobs->tgl_mulai))}}</td>
+                <td>{{date("d-m-Y", strtotime($selesai = $jobs->deadline))}}</td>
+                <td>{{$jobs->tgl_user ? date("d-m-Y", strtotime($jobs->tgl_user)) : ''}}</td>
+                <td>
+                    @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                        {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                    @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                        <span class="badge badge-warning">Deadline</span>
+                    @else
+                        <span class="badge badge-danger">Melewati<br>Deadline</span>
+                    @endif
+                </td>
                 <td>@if ($jobs->status === 1 )
                     <span class="badge badge-pill badge-primary">Ongoing</span>
                 @elseif($jobs->status === 2 )
@@ -50,7 +50,7 @@
                     <span class="badge badge-pill badge-warning">Pending</span>
                 @elseif($jobs->status === 4 )
                     <span class="badge badge-pill badge-success">Completed</span>
-                @endif</td></td>
+                @endif</td>
                 <td>{{$jobs->keterangan}}</td>
                 <td>
                     @if(Auth::user()->hasRole('Project Manager'))

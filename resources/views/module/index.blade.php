@@ -35,7 +35,7 @@
                            @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
                            <span class="badge badge-warning">Deadline</span>
                            @else
-                            <span class="badge badge-danger">Melewati Deadline</span>
+                            <span class="badge badge-danger">Melewati<br>Deadline</span>
                        @endif
                 </td>
                 <td>@if ($modules->status === 1 )

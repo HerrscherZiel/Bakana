@@ -95,7 +95,7 @@ return [
     'numeric' => 'The :attribute must be a number.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => ' :attribute harus diisi.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -145,6 +145,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'kode_project' => 'Project Code',
+        'nama_project' => 'Nama Project',
+        'tgl_mulai' => 'Tanggal Mulai',
+        'tgl_selesai' => 'Tanggal Selesai',
+        'tgl_timesheet' => 'Tanggal Timesheet',
+        'jam_mulai' => 'Jam Mulai',
+        'jam_selesai' => 'Jam Selesai',
+        'nama_module' => 'Nama Modul',
+        'deadline' => 'Tanggal Deadline',
+        'nama_job' => 'Nama Job',
+        'nama_role' => 'Role'
+    ],
 
 ];

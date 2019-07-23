@@ -68,7 +68,7 @@
                            @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
                            Deadline
                            @else
-                            Melewati Deadline
+                            Melewati<br>Deadline
                        @endif
                 </td>
                     <td> @if ($modules->status === 1 )

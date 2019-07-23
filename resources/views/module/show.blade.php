@@ -51,6 +51,7 @@
                     <th>Deadline</th>
                     <th>Tanggal Target</th>
                     <th>Sisa Waktu</th>
+                    <th>Status</th>
                     <th>Keterangan</th>
                       <th>Action</th>
 
@@ -71,9 +72,18 @@
                           @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
                               <span class="badge badge-warning">Deadline</span>
                           @else
-                              <span class="badge badge-danger">Melewati Deadline</span>
+                              <span class="badge badge-danger">Melewati<br>Deadline</span>
                           @endif
                       </td>
+                      <td>@if ($jobs->status === 1 )
+                    <span class="badge badge-pill badge-primary">Ongoing</span>
+                      @elseif($jobs->status === 2 )
+                         <span class="badge badge-pill badge-secondary">Queue</span>
+                      @elseif($jobs->status === 3 )
+                          <span class="badge badge-pill badge-warning">Pending</span>
+                      @elseif($jobs->status === 4 )
+                          <span class="badge badge-pill badge-success">Completed</span>
+                      @endif</td>
                     <td>{{$jobs->keterangan}}</td>
                       <td>
 

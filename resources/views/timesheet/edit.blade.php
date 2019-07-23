@@ -13,21 +13,21 @@
     @endif
      <div class="tile">
         <h3 class="tile-title">Edit Timesheet</h3>
-        <form method="post" action="{{ route('timesheets.update', $timesheet->id_timesheets) }}">
+        <form method="post" action="{{ route('timesheets.update', $timesheet->id_timesheets) }}" autocomplete="off">
             @method('PATCH')
             @csrf
             <div class="tile-body">
                  <div class="form-group">
                     <label class="control-label">Tanggal</label>
-                  <input class="form-control" type="date" name="tgl_timesheet"  value="{{ $timesheet->tgl_timesheet }}" readonly="">
+                  <input id="date" data-provide="datepicker" class="form-control" name="tgl_timesheet"  value="{{ $timesheet->tgl_timesheet }}" readonly="">
                 </div>
                  <div class="form-group">
                     <label class="control-label">Jam Mulai</label>
-                  <input class="form-control" type="time" name="jam_mulai"  value={{ $timesheet->jam_mulai }}>
+                  <input id="timepicker_start"  class="form-control" name="jam_mulai"  value={{ $timesheet->jam_mulai }}>
                 </div>
                  <div class="form-group">
                     <label class="control-label">Jam Selesai</label>
-                  <input class="form-control" type="time" name="jam_selesai"  value={{ $timesheet->jam_selesai }}>
+                  <input id="timepicker_end" class="form-control" name="jam_selesai"  value={{ $timesheet->jam_selesai }}>
                 </div>
                  <div class="form-group">
                     <label class="control-label">Keterangan</label>

@@ -13,11 +13,11 @@
 @endif
   <div class="tile">
     <h3 class="tile-title">Add Timesheet</h3>
-    <form method="post" action="{{url('/timesheets/create')}}">
+    <form method="post" action="{{url('/timesheets/create')}}" autocomplete="off">
         <div class="tile-body">
             <div class="form-group">
                 <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                <select class="form-control" name="project" required="">
+                <select class="form-control" name="project">
                         <option value="" disabled="" selected="">Select Project</option>
                         @foreach($usher as $ushers)
                             <option value="{{$ushers->nama_project}}">{{$ushers->nama_project}}</option>
@@ -25,15 +25,15 @@
                     </select>
             </div>
             <div class="form-group">
-              <input type="text" id="date" data-provide="datepicker" class="form-control" name="tgl_timesheet" placeholder="Tanggal">
+              <input type="text" id="date" data-provide="datepicker" class="form-control" name="tgl_timesheet" placeholder="Tanggal" readonly="">
             </div>
             <div class="form-group input-group ">
-                <input type="text" onfocus="(this.type='time')"  class="form-control" name="jam_mulai" placeholder="Jam Mulai">
-                <div class="mt-1 ml-3 mr-3">to</div>
-                <input type="text" onfocus="(this.type='time')"  class="form-control" name="jam_selesai" placeholder="Jam Selesai">
+                <input type="text" id="timepicker_start"  class="form-control" name="jam_mulai" placeholder="Jam Mulai">
+                <div class="mt-2 ml-3 mr-2">sampai</div>
+                <input type="text" id="timepicker_end"  class="form-control" name="jam_selesai" placeholder="Jam Selesai">
             </div>
             <div class="form-group">
-              <textarea class="form-control" rows="4" name="keterangan_timesheet" placeholder="Keterangan" required=""></textarea>
+              <textarea class="form-control" rows="4" name="keterangan_timesheet" placeholder="Keterangan"></textarea>
             </div>
         </div>
         <div class="tile-footer">

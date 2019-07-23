@@ -29,7 +29,7 @@ class JobController extends Controller
                 ->where('project.status', '!=', 4)
                 ->getQuery()
                 ->get();
-
+                
             /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
             return view('job.index')->with('job', $job);
         }
@@ -55,7 +55,7 @@ class JobController extends Controller
                 ->get();
 
             /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
-            return view('job.index')->with('job', $job);
+            return view('job.jobComplete')->with('job', $job);
         }
         else{
             //Tambah warning
@@ -139,9 +139,9 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      =>'required',
             'user'          =>'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
@@ -172,9 +172,9 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      =>'required',
             'user'          =>'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_',
+            'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
         ]);
@@ -314,9 +314,9 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      => 'required',
             'user'          => 'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        => 'required|integer',
             'keterangan'    => 'nullable']);
 
@@ -343,9 +343,9 @@ class JobController extends Controller
         $request->validate( [
             'nama_job'      => 'required',
             'user'          => 'nullable',
-            'tgl_mulai'     =>'required|date',
-            'deadline'      =>'required|date',
-            'tgl_user'      =>'nullable|date',
+            'tgl_mulai'     =>'required',
+            'deadline'      =>'required|after:tgl_mulai',
+            'tgl_user'      =>'nullable',
             'status'        => 'required|integer',
             'keterangan'    => 'nullable']);
 
