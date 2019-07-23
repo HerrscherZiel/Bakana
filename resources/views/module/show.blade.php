@@ -52,9 +52,8 @@
                     <th>Tanggal Target</th>
                     <th>Sisa Waktu</th>
                     <th>Keterangan</th>
-                      @if(Auth::user()->hasRole('Project Manager'))
                       <th>Action</th>
-                          @endif
+
                   </tr>
                 </thead>
                 <tbody>
@@ -76,16 +75,16 @@
                           @endif
                       </td>
                     <td>{{$jobs->keterangan}}</td>
-                      @if(Auth::user()->hasRole('Project Manager'))
                       <td>
 
-                        <div class="btn-group">
-                        
-                        <a class="btn btn-info" href="/job/{{$jobs->id_job}}/edit">
-                            <i class="fa fa-lg fa-edit">
-                            </i>
-                        </a>
-                            <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
+                          <div class="btn-group">
+
+                              <a class="btn btn-info" href="/job/{{$jobs->id_job}}/edit">
+                                  <i class="fa fa-lg fa-edit">
+                                  </i>
+                              </a>
+                              @if(Auth::user()->hasRole('Project Manager'))
+                              <form action="{{ route('jobs.destroy', $jobs->id_job)}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 @method('DELETE')
@@ -94,9 +93,9 @@
                                 </i>
                                 </button>
                             </form>
-                        </div>
-                    </td>
-                      @endif
+                              @endif
+                          </div>
+                      </td>
                   </tr>
                   @endforeach
                 </tbody>

@@ -219,6 +219,7 @@ class JobController extends Controller
         Session::put('title', 'Edit Job');
         //
 
+
         if (Auth::user()->hasRole('Project Manager')) {
             $job = Job::findOrFail($id);
             $module = Module::join('project', 'project.id_project', '=', 'module.project_id')
@@ -234,6 +235,8 @@ class JobController extends Controller
             return view('job.edit', compact('job', 'module', 'project','user'));
 
         }
+
+
         else{
             //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
@@ -246,6 +249,11 @@ class JobController extends Controller
     {
         Session::put('title', 'Edit Job');
         //
+        $aa = Job::findOrFail($id)->user;
+
+        $as = auth()->user()->name;
+
+//        dd($aa);
 
         if (Auth::user()->hasRole('Project Manager')) {
             $module = Module::all();
@@ -262,6 +270,28 @@ class JobController extends Controller
                 ->get();
 
             return view('job.editShowModule', compact('job', 'module', 'project','user'));
+
+        }
+
+        elseif ( $aa === $as){
+
+
+//            $aa = Module::find($id)->user;
+//            $as = auth()->user()->name;
+            $module = Module::all();
+            $project    = Project::all();
+            $job     = Job::find($id);
+            $user       = \App\User::join('team_projects','users.id','=','team_projects.user_id')
+                ->join('project', 'team_projects.project_id', '=', 'project.id_project')
+                ->join('module', 'module.project_id', '=', 'project.id_project')
+                ->join('jobs', 'jobs.module_id', '=', 'module.id_module')
+                ->select('users.*')
+                ->where('jobs.id_job', '=', $id )
+                ->groupBy('users.name')
+                ->getQuery()
+                ->get();
+
+            return view('job.editUser', compact('job', 'project', 'user', 'module'/*, 'aa', 'as'*/));
 
         }
         else{
