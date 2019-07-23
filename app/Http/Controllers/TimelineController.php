@@ -6,8 +6,8 @@ use App\Module;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-//use MaddHatter\LaravelFullcalendar\Calendar;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use MaddHatter\LaravelFullcalendar\Calendar;
+//use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class TimelineController extends Controller
 {
@@ -35,7 +35,8 @@ class TimelineController extends Controller
                 $event->nama_module,
                 true,
                 $event->tgl_mulai,
-                $event->deadline
+                $event->deadline,
+                $event->id_module
             );
         }
 
@@ -67,13 +68,23 @@ class TimelineController extends Controller
                 $module->tgl_mulai,
                 $module->deadline
             );
-        }
+        }*/
 
-        $calendar = Calendar::addEvents($event) //add an array with addEvents
-        ->setOptions([ //set fullcalendar options
+//        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list) //add an array with addEvents
+//        ->setOptions([ //set fullcalendar options
+//            'firstDay' => 1
+//        ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+//            'viewRender' => 'function() {alert("Callbacks!");}',
+//            'eventClick' => 'function() {showModal();}'
+//        ]);
+
+        /*$calendar = \Calendar::addEvents($events) //add an array with addEvents
+        ->addEvent($eloquentEvent, [ //set custom color fo this event
+            'color' => '#800',
+        ])->setOptions([ //set fullcalendar options
             'firstDay' => 1
         ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-            'viewRender' => 'function() {alert("Callbacks!");}'
+            'eventClick' => 'function() {showModal();}'
         ]);*/
 
 

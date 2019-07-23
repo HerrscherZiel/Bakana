@@ -15,7 +15,8 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{--<link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar.min.css')}}">--}}
+    <link rel="stylesheet" href="{{URL::asset('docs/css/mhfullcalendar.min.css')}}"/>
+{{--    <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/fullcalendar420.main.css')}}">--}}
 </head>
 <body class="app sidebar-mini rtl">
 {{--@include('flash-message')--}}
@@ -25,7 +26,7 @@
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
-        
+
         <li><a class="app-nav__item" href="{!! url('/logout') !!}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="text-decoration: none">Logout<i class="fa fa-sign-out fa-lg ml-2"></i></a>
           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
@@ -86,12 +87,126 @@
         </main>
     </div>
  <!-- Essential javascripts for application to work-->
+
+{{--<script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>--}}
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
 {!! $calendar->script() !!}
 <!-- Calendar-->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
+{{--<script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>--}}
+{{--<script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>--}}
+<script src="{{URL::asset('docs/js/mhmoment.min.js')}}"></script>
+<script src="{{URL::asset('docs/js/mhfullcalendar.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/main.js')}}"></script>
+{{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
+
+
+<!-- Full Calendar -->
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#external-events .fc-event').each(function() {
+
+      // store data so the calendar knows to render an event upon drop
+      $(this).data('event', {
+        title: $.trim($(this).text()), // use the element's text as the event title
+        stick: true // maintain when user navigates (see docs on the renderEvent method)
+      });
+
+      // make the event draggable using jQuery UI
+      $(this).draggable({
+        zIndex: 999,
+        revert: true,      // will cause the event to go back to its
+        revertDuration: 0  //  original position after the drag
+      });
+
+    });
+
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      editable: true,
+      droppable: true, // this allows things to be dropped onto the calendar
+      drop: function() {
+        // is the "remove after drop" checkbox checked?
+        if ($('#drop-remove').is(':checked')) {
+          // if so, remove the element from the "Draggable Events" list
+          $(this).remove();
+        }
+      }
+    });
+
+
+  });
+</script>
+<script type="text/javascript">
+    $('.input-daterange input').each(function() {
+        $(this).datepicker('clearDates');
+    });
+</script>
+
+<script type="text/javascript">
+  var data = {
+    labels: ["Januari", "Februari", "Maret", "April", "Mei"],
+    datasets: [
+        {
+            label: "My First timeline",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56]
+        },
+        {
+            label: "My Second timeline",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 86]
+        }
+    ]
+  };
+  var pdata = [
+    {
+        value: 300,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Complete"
+    },
+    {
+        value: 50,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "In-Progress"
+    }
+  ]
+
+  var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+  var lineChart = new Chart(ctxl).Line(data);
+
+  var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+  var pieChart = new Chart(ctxp).Pie(pdata);
+</script>
+
+
+<!-- autorefresh -->
+{{--<script>--}}
+{{--if(location.search.indexOf('php') < 0){--}}
+{{--  var hash = window.location.hash;--}}
+{{--  var loc = window.location.href.replace(hash, '');--}}
+{{--  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';--}}
+{{--  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):--}}
+{{--  setTimeout(function(){window.location.href = loc + hash;}, 5);--}}
+{{--}--}}
+{{--</script>--}}
+
 </body>
 </html>
