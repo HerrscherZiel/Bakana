@@ -9,7 +9,7 @@
         @endif
         <a href="{{url('/disbandedTeam')}}" class="btn btn-success mb-3"><i class="fa fa-flag"></i> Disbanded Team</a>
         <div class="tile-body">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
             <thead>
               <tr>
 {{--                <th>User</th>--}}

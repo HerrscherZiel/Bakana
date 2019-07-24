@@ -15,7 +15,7 @@
              </div>
                     @endif
         </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
             <thead>
               <tr>
                 <th>User</th>

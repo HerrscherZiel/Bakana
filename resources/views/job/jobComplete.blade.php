@@ -6,7 +6,7 @@
             <div class="tile">
                 <a href="{{url('/jobs/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Job</a>
                 <div class="tile-body">
-                    <table class="table table-hover table-bordered" id="sampleTable">
+                    <table class="table table-hover table-bordered table-responsive" id="sampleTable">
                         <thead>
                         <tr>
                             <th>Job</th>
@@ -33,6 +33,9 @@
                                         <span class="badge badge-pill badge-warning">Pending</span>
                                     @elseif($jobs->status === 4 )
                                         <span class="badge badge-pill badge-success">Completed</span>
+                                    @elseif($jobs->status === 5 )
+                                        <span class="badge badge-pill badge-dark">Canceled</span>    
+
                                     @endif</td></td>
                                 <td>{{$jobs->keterangan}}</td>
                                 <td>

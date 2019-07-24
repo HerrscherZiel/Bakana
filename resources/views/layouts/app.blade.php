@@ -42,7 +42,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item {{ request()->is('home') ? 'active' : ''  }}"  href="{{ url('/timelines') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Timeline</span></a></li>
+        <li><a class="app-menu__item {{ request()->is('home') ? 'active' : ''  }}"  href="{{ url('/timelines') }}"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Timeline</span></a></li>
 
         <li><a class="app-menu__item {{ request()->is('projects*','completedProject*') ? 'active' : ''  }}"  href="{{ url('/projects') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Project</span></a></li>
 
@@ -68,25 +68,26 @@
         <li><a class="app-menu__item {{ request()->is('team*', 'teamprojects*', 'disbandedTeam*') ? 'active' : ''  }}" href="{{ url('/teamprojects') }}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Team</span></a>
         </li>
 
-          <li><a class="app-menu__item {{ request()->is('userInfo*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-info-circle"></i><span class="app-menu__label">User Info</span></a>
+          <li><a class="app-menu__item {{ request()->is('userInfo*','myCompletedProject*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-info-circle"></i><span class="app-menu__label">User Info</span></a>
           </li>
 
         <li><a class="app-menu__item {{ request()->is('timesheets*') ? 'active' : ''  }}" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-calendar-plus-o"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
-
       </ul>
     </aside>
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="{{URL::previous()}}"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="javascript:history.back()"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
     </div>
  <!-- Essential javascripts for application to work-->
 <script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
+
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-ui.js')}}"></script>
 <script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
 <script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
@@ -94,7 +95,7 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
-<script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
+
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.core.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.widget.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.tabs.min.js')}}"></script>

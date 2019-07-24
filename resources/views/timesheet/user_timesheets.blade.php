@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
 {{--              <h3>{{$user->name}}</h3><br>--}}
             <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
             <thead>
@@ -15,7 +15,7 @@
                 <th>Tanggal</th>
                 <th>Jam Mulai</th>
                 <th>Jam Selesai</th>
-                <th>Total Waktu </th>
+                <th>Total Waktu</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -28,7 +28,7 @@
                     <td>{{date("d-m-Y", strtotime($timesheets->tgl_timesheet))}}</td>
                     <td>{{$mulai = $timesheets->jam_mulai}}</td>
                     <td>{{$selesai = $timesheets->jam_selesai}}</td>
-                    <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }} Menit</td>
+                    <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }} menit</td>
                     <td>{{$timesheets->keterangan_timesheet}}</td>
                     <td>
                     <div class="btn-group">

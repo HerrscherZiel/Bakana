@@ -46,6 +46,8 @@
                          <span class="badge badge-pill badge-warning">Pending</span>
                      @elseif($projects->status === 4 )
                          <span class="badge badge-pill badge-success">Completed</span>
+                      @elseif($projects->status === 5 )
+                         <span class="badge badge-pill badge-dark">Canceled</span>
                  @endif
                </b></a>
              </div>
@@ -60,7 +62,7 @@
                            @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
                            <span class="badge badge-warning">Deadline</span>
                            @else
-                            <span class="badge badge-danger">Melewati<br>Deadline</span>
+                            <span class="badge badge-danger">Melewati Deadline</span>
                        @endif
 
                    </b></a>

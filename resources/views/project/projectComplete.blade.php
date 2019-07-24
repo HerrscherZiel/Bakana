@@ -45,6 +45,8 @@
                                             <span class="badge badge-pill badge-warning">Pending</span>
                                         @elseif($projects->status === 4 )
                                             <span class="badge badge-pill badge-success">Completed</span>
+                                        @elseif($projects->status === 5 )
+                                            <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif
                                     </b></a>
                             </div>

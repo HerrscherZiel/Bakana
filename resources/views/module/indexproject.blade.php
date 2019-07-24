@@ -15,7 +15,7 @@
                 </div>
                     @endif
             </div>
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
             <thead>
               <tr>
                 <th>Modul</th>
@@ -53,6 +53,8 @@
                         <span class="badge badge-pill badge-warning">Pending</span>
                     @elseif($modules->status === 4 )
                         <span class="badge badge-pill badge-success">Completed</span>
+                    @elseif($modules->status === 5 )
+                        <span class="badge badge-pill badge-dark">Canceled</span>
                     @endif</td></td>
                 <td>{{$modules->user}}</td>
                 <td>{{$modules->keterangan}}</td>

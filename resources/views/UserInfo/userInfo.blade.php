@@ -62,6 +62,8 @@
                     <span class="badge badge-pill badge-warning">Pending</span>
                 @elseif($infos->status === 4 )
                     <span class="badge badge-pill badge-success">Completed</span>
+                @elseif($infos->status === 5 )
+                    <span class="badge badge-pill badge-dark">Canceled</span>
                 @endif
                </b></a><br>
                <a>dari: {{ date("d-m-Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
@@ -69,8 +71,8 @@
              </div>
              <div class="col-md-6">
                
-               <a>Total Waktu (Hari): <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</b></a><br>
-               <a>Sisa Waktu (Hari): <b>{{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) }}</b></a>
+               <a>Total Waktu: <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} hari</b></a><br>
+               <a>Sisa Waktu: <b>{{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) }} hari</b></a>
              </div>
             </div>
           </div>

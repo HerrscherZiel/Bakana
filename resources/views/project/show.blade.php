@@ -31,6 +31,8 @@
                         <span class="badge badge-pill badge-warning">Pending</span>
                     @elseif($project->status === 4 )
                         <span class="badge badge-pill badge-success">Completed</span>
+                    @elseif($project->status === 5 )
+                        <span class="badge badge-pill badge-dark">Canceled</span>
                     @endif
                     </b></address>
             </div>
@@ -79,6 +81,8 @@
                             <span class="badge badge-pill badge-warning">Pending</span>
                         @elseif($modules->status === 4 )
                             <span class="badge badge-pill badge-success">Completed</span>
+                        @elseif($modules->status === 5 )
+                            <span class="badge badge-pill badge-dark">Canceled</span>
                         @endif</td>
                     <td>{{$modules->user}}</td>
                     <td>{{$modules->keterangan}}</td>
@@ -116,9 +120,6 @@
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="row d-print-none mt-2">
-            <div class="col-12 text-right"><small>Written On {{$project->created_at}}</small></div>
           </div>
         </section>
       </div>

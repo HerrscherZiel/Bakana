@@ -34,6 +34,8 @@
                         <span class="badge badge-pill badge-warning">Pending</span>
                     @elseif($modules->status === 4 )
                         <span class="badge badge-pill badge-success">Completed</span>
+                     @elseif($modules->status === 5 )
+                        <span class="badge badge-pill badge-dark">Canceled</span>
                         @endif</td>
                 </b><br>User:<br><b>{{$modules->user}}</b>
                 <br>Keterangan:<br><b>{{$modules->keterangan}}</b></div>

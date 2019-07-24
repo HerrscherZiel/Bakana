@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
             <!-- <a href="{{url('/register')}}" class="btn btn-primary mb-3">Tambah User</a> -->
             <thead>
               <tr>
