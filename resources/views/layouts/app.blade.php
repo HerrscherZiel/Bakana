@@ -81,6 +81,7 @@
           <div class="app-title">
             <h1><a href="{{URL::previous()}}"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
+
             @yield('content')
         </main>
     </div>
