@@ -136,9 +136,16 @@ class TimelineController extends Controller
             );
         }
 
+//        dd($event_list);
+
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        return view('timeline.index')->with('calendar', $calendar);
+        return response()->json([
+            'error' => false,
+            'calendar'  => $calendar,
+        ], 200);
+
+//        return view('timeline.index,')->with('calendar', $calendar);
 
     }
 

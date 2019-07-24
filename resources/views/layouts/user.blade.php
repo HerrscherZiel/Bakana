@@ -111,24 +111,65 @@
 
 <!-- Option Ajax  -->
 <script type="text/javascript">
+    {{--$(document).ready(function($){--}}
+    {{--    $('#project').change(function(){--}}
+    {{--        $.get("{{ url('timelines/{id}')}}",--}}
+    {{--            { option: $(this).val() },--}}
+    {{--            function(data) {--}}
+    {{--                var model = $('#model');--}}
+    {{--                model.empty();--}}
 
-    $('#project').on('change', function() {
-        if ($("#project").val() != "") {
-            $.ajax({
-                url: '/timelines/'+$(this).val(),
-                type: 'POST',
-                data: {id},
-                success: function (response){
-                    // $("#calendar").replaceWith(response);
-                    console.log('success');
-                },
-                error: function (xhr) {
-                    alert("Something went wrong, please try again");
+    {{--                $.each(data, function(index, element) {--}}
+    {{--                    model.append("<option value='"+ element.id +"'>" + element.name + "</option>");--}}
+    {{--                });--}}
+    {{--            });--}}
+    {{--    });--}}
+    {{--});--}}
+
+    // $('#project').on('change', function() {
+    //     if ($("#project").val() != "") {
+    //         $.ajax({
+    //             url: '/timelines/'+$(this).val(),
+    //             type: 'POST',
+    //             // data: {},
+    //             success: function (response){
+    //                 // $("#calendar").replaceWith(response);
+    //                 console.log('success');
+    //             },
+    //             error: function (xhr) {
+    //                 alert("Something went wrong, please try again");
+    //             }
+    //         });
+    //     }
+    //
+    // });
+
+    // var id = $("#project option:selected").val();
+
+    $(document).ready(function($){
+        $('#project').on('change', function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        }
-
+            if ($("#project").val() != "") {
+                $.ajax({
+                    type: "POST",
+                    url: '/timelines/' + $("#project option:selected").val(),
+                    data: { id: $("#project").val() },
+                    dataType: "json",
+                    success: function (data){
+                        console.log('success');
+                    },
+                    error: function (xhr) {
+                        alert("Something went wrong, please try again");
+                    }
+                })}
+        });
     });
+
+
 
 </script>
 
