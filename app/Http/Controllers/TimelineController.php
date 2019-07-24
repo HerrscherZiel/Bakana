@@ -21,14 +21,7 @@ class TimelineController extends Controller
     public function index()
     {
         //
-        /*Session::put('title', 'Timeline');
 
-        $module = Module::join('project', 'project_id', '=', 'id_project')
-            ->select('module.*', 'project.id_project', 'project.nama_project')
-            ->getQuery()
-            ->get();*/
-
-        /*Dudumdumdudumdum*/
         $val = Project::all();
 
         $events = Module::all();
@@ -42,55 +35,7 @@ class TimelineController extends Controller
                 $event->id_module
             );
         }
-
-        /*$event_list = Calendar::event(
-            'dumdum',
-            true,
-            new \DateTime('2015-02-14'),
-            new \DateTime('2019-08-30')
-        );*/
-
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
-
-       
-                /*dd($event_list);*/
-
-        /*Dudumdumdudumdum*/
-
-        /*$event = [];
-        if (!($module->tgl_user == NULL)){
-            $event[] = Calendar::event(
-                $module->nama_module,
-                true,
-                $module->tgl_mulai,
-                $module->tgl_user
-            );
-        }else{
-            $event[] = Calendar::event(
-                $module->nama_module,
-                true,
-                $module->tgl_mulai,
-                $module->deadline
-            );
-        }*/
-
-//        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list) //add an array with addEvents
-//        ->setOptions([ //set fullcalendar options
-//            'firstDay' => 1
-//        ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-//            'viewRender' => 'function() {alert("Callbacks!");}',
-//            'eventClick' => 'function() {showModal();}'
-//        ]);
-
-        /*$calendar = \Calendar::addEvents($events) //add an array with addEvents
-        ->addEvent($eloquentEvent, [ //set custom color fo this event
-            'color' => '#800',
-        ])->setOptions([ //set fullcalendar options
-            'firstDay' => 1
-        ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-            'eventClick' => 'function() {showModal();}'
-        ]);*/
-
 
         return view('timeline.index', compact('calendar','val'))/*->with('calendar', $calendar, 'val', $val)*/;
 
