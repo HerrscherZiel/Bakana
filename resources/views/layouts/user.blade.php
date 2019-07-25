@@ -159,15 +159,17 @@
                     url: '/timelines/' + $("#project option:selected").val(),
                     data: { id: $("#project").val() },
                     dataType: "json",
-                    success: function (response){
-                        console.log(response);
+                    success: function (data){
+                        console.log(data);
+
                     },
                     error: function (xhr) {
                         alert("Something went wrong, please try again");
                     }
                 }).done(function(response) { //successful response from the server
-                    $('#calendar').fullCalendar('renderEvent', data, true); //add the newly created event into fullCalendar
-                    $('#calendar').fullCalendar("unselect"); //clear the selection
+                    $('#calendar').fullCalendar('renderEvent', data, true);
+                    $('#calendar').fullCalendar("unselect");
+                    // window.location.reload();
                 });
             }
         });
