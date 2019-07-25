@@ -241,5 +241,12 @@ class ProjectController extends Controller
         }
 
     }
+    public function back()
+    {
+
+            return view('back');
+
+
+    }
 
 }

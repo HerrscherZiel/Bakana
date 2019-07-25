@@ -1,20 +1,4 @@
-{{--                <div class="form-group">--}}
-{{--                    <label class="control-label">Status</label>--}}
-{{--                     <select class="form-control" name="status" required="">--}}
-{{--                         <option disabled>Status</option>--}}
-{{--                         <option value=1 @if($job->status === $on) selected--}}
-{{--                             @endif>Ongoing</option>--}}
-{{--                         <option value=2 @if($job->status === $que) selected--}}
-{{--                             @endif>Queue</option>--}}
-{{--                         <option value=3 @if($job->status === $pen) selected--}}
-{{--                             @endif>Pending</option>--}}
-{{--                         <option value=4 @if($job->status === $com) selected--}}
-{{--                             @endif>Completed</option>--}}
-{{--                         <option value=5 @if($job->status === $can) selected--}}
-{{--                             @endif>Canceled</option>--}}
-{{--                     </select>--}}
-{{--                </div>--}}
-                @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="col-md-12">
@@ -59,11 +43,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-{{--                        <label class="control-label">Nama Modul</label>--}}
+                      <h5 class="control-label text-muted">Modul: {{ $module->nama_module }}</h5>
+                      <h5 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($module->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($module->deadline))}}</h5>
                         <input class="form-control" type="hidden" name="nama_module" value="{{ $module->nama_module }}"/>
                     </div>
                     <div class="form-group">
-{{--                        <label class="control-label">User</label>--}}
                         <select class="form-control" style="display: none" name="user" required="">
                             @foreach($user as $users)
                                 <option value="{{$users->name}}"
@@ -75,9 +59,7 @@
                         </select>
                     </div>
                     <div class="form-group input-group">
-                        <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
-                        <input id="date3" data-provide="datepicker" type="hidden"class="form-control" name="tgl_mulai" value="{{ $module->tgl_mulai }}" readonly="">
-{{--                    <label class="control-label mt-2 ml-5 mr-2">Tanggal Deadline</label>
+                        <input id="date3" data-provide="datepicker" type="hidden" class="form-control" name="tgl_mulai" value="{{ $module->tgl_mulai }}" readonly="">
                         <input id="date4" data-provide="datepicker" type="hidden" class="form-control" name="deadline" value="{{ $module->deadline }}" readonly="">
                     </div>
                     <div class="form-group">

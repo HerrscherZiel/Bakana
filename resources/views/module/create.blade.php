@@ -48,12 +48,13 @@
                         <option disabled>Status</option>
                         <option value=1>Ongoing</option>
                         <option value=2>Queue</option>
-                        {{--                        <option value=3>Pending</option>--}}
-                        {{--                        <option value=4>Completed</option>--}}
                     </select>
                 </div>
                 <div class="form-group">
                   <textarea class="form-control" rows="4" name="keterangan" placeholder="Keterangan"></textarea>
+                </div>
+                <div class="form-group">
+                <input type="color" value="#009688">
                 </div>
             </div>
             <div class="tile-footer">
