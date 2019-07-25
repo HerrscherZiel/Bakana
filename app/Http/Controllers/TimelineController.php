@@ -32,7 +32,13 @@ class TimelineController extends Controller
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
-                $event->id_module
+                $event->id_module,
+                [
+                    'color' => $event->colors,
+                    'url' => '/modules/'. $event->id_module,
+                    'description' => $event->keterangan,
+                    'textColor' => '#0A0A0A'
+                ]
             );
         }
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
