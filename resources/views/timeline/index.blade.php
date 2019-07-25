@@ -14,6 +14,13 @@
                 @endforeach
             </select>
 
+{{--            <select class="form-control" id="project" name="project">--}}
+{{--                <option disabled="" selected="">Select Project</option>--}}
+{{--                @foreach($val as $vals)--}}
+{{--                    <option value="{{$vals->id_project}}"><a href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a></option>--}}
+{{--                @endforeach--}}
+{{--            </select>--}}
+
             <br>
 
 

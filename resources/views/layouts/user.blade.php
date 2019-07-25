@@ -161,14 +161,15 @@
                     dataType: "json",
                     success: function (data){
                         console.log(data);
-
+                        $('#calendar').fullCalendar( 'addEventSource', {{ $calendar->script() }} );
+                        $('#calendar').fullCalendar("unselect");
                     },
                     error: function (xhr) {
                         alert("Something went wrong, please try again");
                     }
-                }).done(function(response) { //successful response from the server
-                    $('#calendar').fullCalendar('renderEvent', data, true);
-                    $('#calendar').fullCalendar("unselect");
+                // }).done(function(response) { //successful response from the server
+                    // $('#calendar').fullCalendar('renderEvent', data, true);
+                    // $('#calendar').fullCalendar("unselect");
                     // window.location.reload();
                 });
             }
