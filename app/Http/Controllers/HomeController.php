@@ -23,6 +23,13 @@ class HomeController extends Controller
 
     }
 
+    public function error404(){
+
+
+        return view('layouts.err404');
+
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -56,4 +63,6 @@ class HomeController extends Controller
 //        ->with('timesheet', $timesheetView);
 
     }
+
+
 }

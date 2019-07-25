@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+//Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+//Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+//Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -146,12 +152,18 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 Route::group(['prefix'=>'errors','as'=>'error.'], function(){
+    Route::get('419', ['as' => 'err400', 'uses' => 'ErrorsController@err400']);
     Route::get('403', ['as' => 'err403', 'uses' => 'ErrorsController@index']);
+    Route::get('404', ['as' => 'err404', 'uses' => 'ErrorsController@err404']);
+    Route::get('419', ['as' => 'err419', 'uses' => 'ErrorsController@err419']);
+    Route::get('500', ['as' => 'err500', 'uses' => 'ErrorsController@err500']);
+
     // Route::get('connect', ['as' => 'connect', 'uses' => 'AccountController@connect']);
 });
 
 
 
+Route::get('/{any}','HomeController@error404');
 
 
 //Route::resources([
@@ -276,7 +288,12 @@ Route::group(['prefix'=>'errors','as'=>'error.'], function(){
 //Route::post('/timelines/{project}','TimelineController@dropProject');
 
 
+//Route::get('500', function()
+//{
+//    abort(500);
+//});
 
+//Route::get('/{any}','ErrorsController@err404');
 
 //Route::get('419', function()
 //{
