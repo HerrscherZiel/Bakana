@@ -29,6 +29,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
     // your routes
+
+    Route::get('password', 'Auth\PasswordController@change')->name('password.change');
+    Route::put('password', 'Auth\PasswordController@update')->name('password.update');
+
     Route::resources([
 
         'projects'      => 'ProjectController',
