@@ -176,6 +176,7 @@ class ModuleController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
+            'color'         =>'nullable',
             'keterangan'    =>'nullable'
         ]);
 
@@ -186,6 +187,7 @@ class ModuleController extends Controller
             'deadline'      => $request->get('deadline'),
             'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
+            'color'         => $request->get('color'),
             'project_id'    => $request->get('project_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
@@ -209,6 +211,7 @@ class ModuleController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
+            'color'         =>'nullable',
             'keterangan'    =>'nullable'
         ]);
 
@@ -219,6 +222,7 @@ class ModuleController extends Controller
             'deadline'      => $request->get('deadline'),
             'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
+            'color'         => $request->get('color'),
             'project_id'    => $request->get('project_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
@@ -372,6 +376,7 @@ class ModuleController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
+            'color'         =>'nullable',
             'keterangan'    => 'nullable']);
 
         $module = Module::find($id);
@@ -381,6 +386,7 @@ class ModuleController extends Controller
         $module->deadline       = $request->get('deadline');
         $module->tgl_user       = $request->get('tgl_user');
         $module->status         = $request->get('status');
+        $module->color          = $request->get('color');
         $module->project_id     = $request->get('project_id');
         $module->keterangan     = $request->get('keterangan');
         $module->save();
@@ -402,6 +408,7 @@ class ModuleController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
+            'color'         =>'nullable',
             'keterangan'    => 'nullable']);
 
         $module = Module::find($id);
@@ -411,6 +418,7 @@ class ModuleController extends Controller
         $module->deadline       = $request->get('deadline');
         $module->tgl_user       = $request->get('tgl_user');
         $module->status         = $request->get('status');
+        $module->color          = $request->get('color');
         $module->project_id     = $request->get('project_id');
         $module->keterangan     = $request->get('keterangan');
         $module->save();

@@ -20,6 +20,7 @@ class Job extends Model implements \MaddHatter\LaravelFullcalendar\Event
         'deadline',
         'tgl_user',
         'status',
+        'color',
         'module_id',
         'keterangan',
     ];

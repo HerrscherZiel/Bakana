@@ -34,7 +34,7 @@ class TimelineController extends Controller
                 $event->deadline,
                 $event->id_module,
                 [
-                    'color' => $event->colors,
+                    'color' => $event->color,
                     'url' => '/modules/'. $event->id_module,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'
@@ -87,7 +87,7 @@ class TimelineController extends Controller
                 $event->deadline,
                 $event->id_module,
                 [
-                    'color' => $event->colors,
+                    'color' => $event->color,
                     'url' => '/modules/'. $event->id_module,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'
@@ -120,7 +120,7 @@ class TimelineController extends Controller
                 $event->deadline,
                 $event->id_job,
                 [
-                    'color' => $event->colors,
+                    'color' => $event->color,
                     'url' => '/modules/'. $event->id_job,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'

@@ -155,6 +155,7 @@ class JobController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
+            'color'         =>'nullable',
             'keterangan'    =>'nullable'
         ]);
 
@@ -165,6 +166,7 @@ class JobController extends Controller
             'deadline'      => $request->get('deadline'),
             'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
+            'color'         => $request->get('color'),
             'module_id'     => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
@@ -198,6 +200,7 @@ class JobController extends Controller
             'deadline'      => $request->get('deadline'),
             'tgl_user'      => $request->get('tgl_user'),
             'status'        => $request->get('status'),
+            'color'         => $request->get('color'),
             'module_id'     => $request->get('module_id'),
             'keterangan'    => $request->get('keterangan'),
         ]);
@@ -330,6 +333,7 @@ class JobController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        => 'required|integer',
+            'color'         => 'nullable',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);
@@ -339,6 +343,7 @@ class JobController extends Controller
         $job->deadline       = $request->get('deadline');
         $job->tgl_user       = $request->get('tgl_user');
         $job->status        = $request->get('status');
+        $job->color         = $request->get('color');
         $job->module_id     = $request->get('module_id');
         $job->keterangan    = $request->get('keterangan');
         $job->save();
@@ -359,15 +364,17 @@ class JobController extends Controller
             'deadline'      =>'required|after:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        => 'required|integer',
+            'color'         => 'nullable',
             'keterangan'    => 'nullable']);
 
         $job = job::find($id);
         $job->nama_job      = $request->get('nama_job');
         $job->user          = $request->get('user');
-        $job->tgl_mulai      = $request->get('tgl_mulai');
-        $job->deadline       = $request->get('deadline');
-        $job->tgl_user       = $request->get('tgl_user');
+        $job->tgl_mulai     = $request->get('tgl_mulai');
+        $job->deadline      = $request->get('deadline');
+        $job->tgl_user      = $request->get('tgl_user');
         $job->status        = $request->get('status');
+        $job->color         = $request->get('color');
         $job->module_id     = $request->get('module_id');
         $job->keterangan    = $request->get('keterangan');
         $job->save();

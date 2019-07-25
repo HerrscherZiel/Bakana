@@ -157,12 +157,15 @@
                 $.ajax({
                     type: "POST",
                     url: '/timelines/' + $("#project option:selected").val(),
-                    data: { id: $("#project").val() },
+                    data: {
+                        id: $("#project").val() ,
+{{--                        {{ $calendar->script() }}--}}
+                    },
                     dataType: "json",
                     success: function (data){
                         console.log(data);
-                        $('#calendar').fullCalendar( 'addEventSource', {{ $calendar->script() }} );
-                        $('#calendar').fullCalendar("unselect");
+                        $('#calendar').fullCalendar( 'refetchEvents');
+                        // $('#calendar').fullCalendar("unselect");
                     },
                     error: function (xhr) {
                         alert("Something went wrong, please try again");
