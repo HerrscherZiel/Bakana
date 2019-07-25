@@ -78,7 +78,7 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="javascript:history.go(-3)"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="javascript:history.back()"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
@@ -87,7 +87,7 @@
 
 {{--<script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>--}}
 <script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
-{!! $calendar->script() !!}
+
 <script type="text/javascript">
     var events = [];
   $.get('/events/get', function(result){
@@ -172,7 +172,7 @@
 
 
 </script>
-
+{!! $calendar->script() !!}
 <!-- Full Calendar -->
 <script type="text/javascript">
   $(document).ready(function() {
@@ -267,18 +267,6 @@
   var ctxp = $("#pieChartDemo").get(0).getContext("2d");
   var pieChart = new Chart(ctxp).Pie(pdata);
 </script>
-
-
-<!-- autorefresh -->
-{{--<script>--}}
-{{--if(location.search.indexOf('php') < 0){--}}
-{{--  var hash = window.location.hash;--}}
-{{--  var loc = window.location.href.replace(hash, '');--}}
-{{--  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';--}}
-{{--  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):--}}
-{{--  setTimeout(function(){window.location.href = loc + hash;}, 5);--}}
-{{--}--}}
-{{--</script>--}}
 
 </body>
 </html>

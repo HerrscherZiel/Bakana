@@ -173,7 +173,7 @@ class ModuleController extends Controller
             'nama_module'   =>'required',
             'user'          =>'nullable',
             'tgl_mulai'     =>'required',
-            'deadline'      =>'required|after:tgl_mulai',
+            'deadline'      =>'required|after_or_equal:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
@@ -206,7 +206,7 @@ class ModuleController extends Controller
             'nama_module'   =>'required',
             'user'          =>'nullable',
             'tgl_mulai'     =>'required',
-            'deadline'      =>'required|after:tgl_mulai',
+            'deadline'      =>'required|after_or_equal:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
@@ -369,7 +369,7 @@ class ModuleController extends Controller
             'nama_module'   => 'required',
             'user'          => 'nullable',
             'tgl_mulai'     =>'required',
-            'deadline'      =>'required|after:tgl_mulai',
+            'deadline'      =>'required|after_or_equal:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    => 'nullable']);
@@ -399,7 +399,7 @@ class ModuleController extends Controller
             'nama_module'   => 'required',
             'user'          => 'nullable',
             'tgl_mulai'     =>'required',
-            'deadline'      =>'required|after:tgl_mulai',
+            'deadline'      =>'required|after_or_equal:tgl_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    => 'nullable']);
