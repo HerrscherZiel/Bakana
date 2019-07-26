@@ -55,6 +55,7 @@
                 </div>
                 <div class="form-group">
                 <input type="color" value="#009688">
+                <label class="control-label">Pilih warna</label>
                 </div>
             </div>
             <div class="tile-footer">
