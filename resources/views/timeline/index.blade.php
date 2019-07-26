@@ -17,7 +17,7 @@
             {!! $calendar->calendar() !!}
         </div>
       </div>
-<script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/jquery-3.4.1.js')}}"></script>
 
 <script type="text/javascript">
     var events = [];
@@ -31,14 +31,14 @@
   });
 </script>
 <!-- Calendar-->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>--}}
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>--}}
-<script src="{{URL::asset('docs/js/mhmoment.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/mhfullcalendar.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/main.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
+{{--<script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>--}}
+{{--<script type="text/javascript" src="{{URL::asset('js/plugins/fullcalendar.min.js')}}"></script>--}}
+<script src="{{URL::asset('js/mhmoment.min.js')}}"></script>
+<script src="{{URL::asset('js/mhfullcalendar.min.js')}}"></script>
+<script src="{{URL::asset('js/main.js')}}"></script>
 
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
+{{--<script type="text/javascript" src="{{URL::asset('js/fullcalendar.min.js')}}"></script>--}}
 
 <!-- Option Ajax  -->
 <script type="text/javascript">
