@@ -70,6 +70,8 @@ class TimelineController extends Controller
 
     public function dropProject($id){
 
+        $val = Project::all();
+
         $events = Project::join('module','project.id_project','=','module.project_id')
             ->select('module.*')
             ->where('project.id_project','=',$id)
@@ -99,12 +101,12 @@ class TimelineController extends Controller
 
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        return response()->json([
-            'error' => false,
-            'calendar'  => $calendar,
-        ], 200);
+//        return response()->json([
+//            'error' => false,
+//            'calendar'  => $calendar,
+//        ], 200);
 
-//        return view('timeline.index,')->with('calendar', $calendar);
+        return view('timeline.indexBD', compact('calendar','val'))/*->with('calendar', $calendar)*/;
 
     }
 

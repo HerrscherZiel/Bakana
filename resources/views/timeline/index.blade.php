@@ -5,14 +5,39 @@
       <div class="tile row">
         <div class="col-md-12">
             <a href="/timelines/project" class="btn btn-primary">Show Project</a>
-            <a href="/timelines/job" class="btn btn-primary">Show Job</a><br><br>
+            <a href="/timelines/job" class="btn btn-primary">Show Job</a>
 
-            <select class="form-control" id="project" name="project">
-                <option disabled="" selected="">Select Project</option>
-                @foreach($val as $vals)
-                    <option value="{{$vals->id_project}}">{{$vals->nama_project}}</option>
-                @endforeach
-            </select>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Project
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach($val as $vals)
+                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Project
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    @foreach($val as $vals)
+                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
+                    @endforeach
+                </div>
+            </div>
+
+            <br><br>
+
+{{--            <select class="form-control" id="project" name="project">--}}
+{{--                <option disabled="" selected="">Select Project</option>--}}
+{{--                @foreach($val as $vals)--}}
+{{--                    <option value="{{$vals->id_project}}">{{$vals->nama_project}}</option>--}}
+{{--                @endforeach--}}
+{{--            </select>--}}
             <br>
             {!! $calendar->calendar() !!}
         </div>
@@ -42,40 +67,6 @@
 
 <!-- Option Ajax  -->
 <script type="text/javascript">
-    {{--$(document).ready(function($){--}}
-    {{--    $('#project').change(function(){--}}
-    {{--        $.get("{{ url('timelines/{id}')}}",--}}
-    {{--            { option: $(this).val() },--}}
-    {{--            function(data) {--}}
-    {{--                var model = $('#model');--}}
-    {{--                model.empty();--}}
-
-    {{--                $.each(data, function(index, element) {--}}
-    {{--                    model.append("<option value='"+ element.id +"'>" + element.name + "</option>");--}}
-    {{--                });--}}
-    {{--            });--}}
-    {{--    });--}}
-    {{--});--}}
-
-    // $('#project').on('change', function() {
-    //     if ($("#project").val() != "") {
-    //         $.ajax({
-    //             url: '/timelines/'+$(this).val(),
-    //             type: 'POST',
-    //             // data: {},
-    //             success: function (response){
-    //                 // $("#calendar").replaceWith(response);
-    //                 console.log('success');
-    //             },
-    //             error: function (xhr) {
-    //                 alert("Something went wrong, please try again");
-    //             }
-    //         });
-    //     }
-    //
-    // });
-
-    // var id = $("#project option:selected").val();
 
     $(document).ready(function($){
         $('#project').on('change', function() {
@@ -91,7 +82,23 @@
                     data: { id: $("#project").val() },
                     dataType: "json",
                     success: function (data){
-                        console.log('success');
+                        console.log('success')
+                        $('#calendar').fullCalendar( 'removeEvents' ,event );
+                        $('#calendar').fullCalendar(
+                            {"header":{
+                                    "left":"prev,next today",
+                                    "center":"title",
+                                    "right":"month,agendaWeek,agendaDay"
+                                },
+                                "eventLimit":true,
+                                "events":[]});
+
+{{--                        {!! $calendar->script() !!}--}}
+                        // $('#calendar').fullCalendar({
+                        //     events: function (start, end, timezone, callback) {
+                        //         callback(events);
+                        //     }
+                        // });
                     },
                     error: function (xhr) {
                         alert("Something went wrong, please try again");
@@ -100,8 +107,7 @@
         });
     });
 
-
-
 </script>
+</div>
 {!! $calendar->script() !!}
 @endsection
