@@ -54,7 +54,7 @@
                   <textarea class="form-control" rows="4" name="keterangan" placeholder="Keterangan"></textarea>
                 </div>
                 <div class="form-group">
-                <input type="color" value="#009688">
+                <input type="color" name="color" value="#009688">
                 <label class="control-label">Pilih warna</label>
                 </div>
             </div>
