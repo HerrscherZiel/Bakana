@@ -6,44 +6,24 @@
         <div class="col-md-12">
             <a href="/timelines/project" class="btn btn-primary">Show Project</a>
             <a href="/timelines/job" class="btn btn-primary">Show Job</a>
-
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Project
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       
+             <ul class="nav nav-pills mt-2 mb-5" >
+                <li class="nav-item dropdown">
+                  <a class="nav-link active dropdown-toggle btn btn-info" style="width: 215%" data-toggle="dropdown" href="#" role="button " aria-haspopup="true" aria-expanded="false">Project</a>
+                  <div class="dropdown-menu" style="width: 215%">
                     @foreach($val as $vals)
-                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
+                    <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
                     @endforeach
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Project
-                </a>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    @foreach($val as $vals)
-                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
-                    @endforeach
-                </div>
-            </div>
-
-            <br><br>
-
-{{--            <select class="form-control" id="project" name="project">--}}
-{{--                <option disabled="" selected="">Select Project</option>--}}
-{{--                @foreach($val as $vals)--}}
-{{--                    <option value="{{$vals->id_project}}">{{$vals->nama_project}}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-            <br>
+                  </div>
+                </li>
+            </ul>
+     
             {!! $calendar->calendar() !!}
         </div>
       </div>
-<script type="text/javascript" src="{{URL::asset('js/jquery-3.4.1.js')}}"></script>
-
+    <script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{URL::asset('js/popper.min.js')}}"></script>
+    <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
     var events = [];
   $.get('/events/get', function(result){
@@ -57,13 +37,11 @@
 </script>
 <!-- Calendar-->
 <script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
-{{--<script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>--}}
-{{--<script type="text/javascript" src="{{URL::asset('js/plugins/fullcalendar.min.js')}}"></script>--}}
 <script src="{{URL::asset('js/mhmoment.min.js')}}"></script>
 <script src="{{URL::asset('js/mhfullcalendar.min.js')}}"></script>
+
 <script src="{{URL::asset('js/main.js')}}"></script>
 
-{{--<script type="text/javascript" src="{{URL::asset('js/fullcalendar.min.js')}}"></script>--}}
 
 <!-- Option Ajax  -->
 <script type="text/javascript">
