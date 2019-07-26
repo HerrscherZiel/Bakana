@@ -6,32 +6,17 @@
         <div class="col-md-12">
             <a href="/timelines/project" class="btn btn-primary">Show Project</a>
             <a href="/timelines/job" class="btn btn-primary">Show Job</a>
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Project
-                </a>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            
+            <ul class="nav nav-pills mt-2 mb-5" >
+                <li class="nav-item dropdown">
+                  <a class="nav-link active dropdown-toggle btn btn-info" style="width: 215%" data-toggle="dropdown" href="#" role="button " aria-haspopup="true" aria-expanded="false">Project</a>
+                  <div class="dropdown-menu" style="width: 215%">
                     @foreach($val as $vals)
-                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
+                    <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
                     @endforeach
-                </div>
-            </div>
-
-{{--            <div class="dropdown">--}}
-{{--                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                    Project--}}
-{{--                </button>--}}
-{{--                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-{{--                    @foreach($val as $vals)--}}
-{{--                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-            <br><br>
-
-            <br>
+                  </div>
+                </li>
+            </ul>
             {!! $calendar->calendar() !!}
         </div>
       </div>
