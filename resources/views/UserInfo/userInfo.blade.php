@@ -2,14 +2,40 @@
 
 @section('content')
 
-<div class="row">
-{{--    <!-- <div class="tile">--}}
-{{--    @foreach($users as $user)--}}
-{{--    <h3>{{$user->name}} sebagai--}}
-{{--    {{$user->nama_role}}</h3>--}}
-{{--    @endforeach -->--}}
-    <div class="col-md-12">
-      <div class="tile">
+<div class="row user">
+  <div class="col-md-3">
+    <div class="tile p-0">
+      <ul class="nav flex-column nav-tabs user-tabs">
+        <li class="nav-item"><a class="nav-link active" href="#user-profile" data-toggle="tab">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="#user-timesheet" data-toggle="tab">Timesheet</a></li>
+        <li class="nav-item"><a class="nav-link" href="#user-project" data-toggle="tab">Project</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="tab-content">
+      <div class="col-md-7 tab-pane active" id="user-profile">
+        <div class="tile">
+          @foreach($users as $user)
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="text-muted">Username </h5>
+              <h5 class="text-muted">Email </h5>
+              <h5 class="text-muted">Role </h5>
+              <h5 class="text-muted">Password </h5>
+            </div>
+            <div class="col-md-6">
+              <h5>: {{$user->name}}</h5>
+              <h5>: {{$user->email}}</h5>
+              <h5>: {{$user->nama_role}}</h5>
+              : <a class="btn btn-outline-info btn-sm" href="/change/pass">Change Password</a>
+            </div>
+          </div>
+          @endforeach
+        </div>
+      </div>
+      <div class="tab-pane fade" id="user-timesheet">
+        <div class="tile">
         <div class="tile-body">
         <table class="table table-striped">
             <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
@@ -41,14 +67,15 @@
           <div class="row d-print-none mt-2">
              <div class="col-12 text-right"><a href="{{url('/timesheetss')}}" class="btn btn-warning pull-right">Show More</a></div>
           </div>
-            </div>
         </div>
-    </div>
-    @foreach($info as $infos)
-    <div class="col-md-6">
+        </div>
+      </div>
+      <div class="tab-pane fade" id="user-project">
+        @foreach($info as $infos)
         <div class="tile">
           <div class="tile-title-w-btn">
             <h3 class="title">{{$infos->nama_project}}</h3>
+            <a href="/userInfo/module/{{$infos->id_project}}" class="btn btn-primary">Show Modul</a>
           </div>
           <div class="tile-body">
            <div class="row">
@@ -76,11 +103,10 @@
              </div>
             </div>
           </div>
-           <div class="tile-footer">
-           <a href="/userInfo/module/{{$infos->id_project}}" class="btn btn-primary">Show Modul</a>
         </div>
-        </div>
-      </div>
       @endforeach
+      </div>
     </div>
+  </div>
+</div>
 @endsection
