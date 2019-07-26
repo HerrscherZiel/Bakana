@@ -7,6 +7,8 @@ use App\User;
 use Auth;
 use Hash;
 use Validator;
+use Illuminate\Support\Facades\Session;
+use App\Util\Utils;
 use App\Http\Controllers\Controller;
 
 class PasswordController extends Controller
@@ -17,6 +19,7 @@ class PasswordController extends Controller
      */
     public function change()
     {
+        Session::put('title', 'Change Password');
         return view('auth.passwords.change');
     }
 

@@ -36,7 +36,7 @@
             </label>
           </div>
            @if (Route::has('password.request'))
-          <p class="semibold-text mb-2"><a href="/password/reset" {{--data-toggle="flip"--}}>Forgot Password ?</a></p>
+          <p class="semibold-text mb-2"><a href="/password/reset">Forgot Password ?</a></p>
           @endif
         </div>
       </div>
@@ -45,25 +45,6 @@
         <p class="semibold-text mt-5"><a href="/register">Make account here</a></p>
       </div>
     </form>
-{{--    <form class="forget-form" method="POST" action="{{ route('password.email') }}">--}}
-{{--         @csrf--}}
-{{--      <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>--}}
-{{--      <div class="form-group">--}}
-{{--        <label class="control-label">EMAIL</label>--}}
-{{--        <input class="form-control @error('email') is-invalid @enderror" type="email" placeholder="Email" required autocomplete="email" autofocus>--}}
-{{--         @error('email')--}}
-{{--            <span class="invalid-feedback" role="alert">--}}
-{{--                <strong>{{ $message }}</strong>--}}
-{{--            </span>--}}
-{{--        @enderror--}}
-{{--      </div>--}}
-{{--      <div class="form-group btn-container">--}}
-{{--        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>--}}
-{{--      </div>--}}
-{{--      <div class="form-group mt-3">--}}
-{{--        <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>--}}
-{{--      </div>--}}
-{{--    </form>--}}
   </div>
 </section>
 @endsection

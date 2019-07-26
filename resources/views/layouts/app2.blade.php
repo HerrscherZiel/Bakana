@@ -12,7 +12,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -21,16 +21,16 @@
             @yield('content')
     </div>
  <!-- Essential javascripts for application to work-->
-<script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/main.js')}}"></script>
+<script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{URL::asset('js/popper.min.js')}}"></script>
+<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('js/main.js')}}"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
+<script src="{{URL::asset('js/plugins/pace.min.js')}}"></script>
 
 
-<script src="{{URL::asset('docs/js/moment.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>
+<script src="{{URL::asset('js/moment.min.js')}}"></script>
+<script src="{{URL::asset('js/fullcalendar.min.js')}}"></script>
 
 {{--Calendar--}}
 

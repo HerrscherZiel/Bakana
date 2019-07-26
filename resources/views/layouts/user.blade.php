@@ -10,7 +10,7 @@
     <title>Timeline</title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/app.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}">
 
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">

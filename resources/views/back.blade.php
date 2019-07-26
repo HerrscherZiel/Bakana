@@ -18,7 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -132,101 +132,125 @@
       </ul>
     </aside>
     <main class="app-content">
-      <div class="row user">
-        <div class="col-md-12">
-          <div class="profile">
-            <div class="info"><img class="user-img" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg">
-              <h4>John Doe</h4>
-              <p>FrontEnd Developer</p>
+      <div class="tile mb-4">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 class="mb-3 line-head" id="navs">Navs</h2>
             </div>
-            <div class="cover-image"></div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="tile p-0">
-            <ul class="nav flex-column nav-tabs user-tabs">
-              <li class="nav-item"><a class="nav-link active" href="#user-timeline" data-toggle="tab">Timeline</a></li>
-              <li class="nav-item"><a class="nav-link" href="#user-settings" data-toggle="tab">Settings</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="tab-content">
-            <div class="tab-pane active" id="user-timeline">
-              <div class="timeline-post">
-                <div class="post-media"><a href="#"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg"></a>
-                  <div class="content">
-                    <h5><a href="#">John Doe</a></h5>
-                    <p class="text-muted"><small>2 January at 9:30</small></p>
+        <div class="row" style="margin-bottom: 2rem;">
+          <div class="col-lg-6">
+            <h3>Tabs</h3>
+            <div class="bs-component">
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">Profile</a></li>
+                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a>
                   </div>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade active show" id="home">
+                  <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
                 </div>
-                <div class="post-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,	quis tion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div class="tab-pane fade" id="profile">
+                  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
                 </div>
-                <ul class="post-utility">
-                  <li class="likes"><a href="#"><i class="fa fa-fw fa-lg fa-thumbs-o-up"></i>Like</a></li>
-                  <li class="shares"><a href="#"><i class="fa fa-fw fa-lg fa-share"></i>Share</a></li>
-                  <li class="comments"><i class="fa fa-fw fa-lg fa-comment-o"></i> 5 Comments</li>
-                </ul>
-              </div>
-              <div class="timeline-post">
-                <div class="post-media"><a href="#"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg"></a>
-                  <div class="content">
-                    <h5><a href="#">John Doe</a></h5>
-                    <p class="text-muted"><small>2 January at 9:30</small></p>
-                  </div>
+                <div class="tab-pane fade" id="dropdown1">
+                  <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
                 </div>
-                <div class="post-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,	quis tion ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div class="tab-pane fade" id="dropdown2">
+                  <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
                 </div>
-                <ul class="post-utility">
-                  <li class="likes"><a href="#"><i class="fa fa-fw fa-lg fa-thumbs-o-up"></i>Like</a></li>
-                  <li class="shares"><a href="#"><i class="fa fa-fw fa-lg fa-share"></i>Share</a></li>
-                  <li class="comments"><i class="fa fa-fw fa-lg fa-comment-o"></i> 5 Comments</li>
-                </ul>
               </div>
             </div>
-            <div class="tab-pane fade" id="user-settings">
-              <div class="tile user-settings">
-                <h4 class="line-head">Settings</h4>
-                <form>
-                  <div class="row mb-4">
-                    <div class="col-md-4">
-                      <label>First Name</label>
-                      <input class="form-control" type="text">
-                    </div>
-                    <div class="col-md-4">
-                      <label>Last Name</label>
-                      <input class="form-control" type="text">
-                    </div>
+          </div>
+          <div class="col-lg-6">
+            <h3>Pills</h3>
+            <div class="bs-component">
+              <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a>
                   </div>
-                  <div class="row">
-                    <div class="col-md-8 mb-4">
-                      <label>Email</label>
-                      <input class="form-control" type="text">
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-8 mb-4">
-                      <label>Mobile No</label>
-                      <input class="form-control" type="text">
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-8 mb-4">
-                      <label>Office Phone</label>
-                      <input class="form-control" type="text">
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-8 mb-4">
-                      <label>Home Phone</label>
-                      <input class="form-control" type="text">
-                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+              </ul>
+            </div><br>
+            <div class="bs-component">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a>
                   </div>
-                  <div class="row mb-10">
-                    <div class="col-md-12">
-                      <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
-                    </div>
-                  </div>
-                </form>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <h2 class="mb-3 line-head" id="nav-breadcrumbs">Breadcrumbs</h2>
+            <div class="bs-component">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Home</li>
+              </ol>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Library</li>
+              </ol>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Library</a></li>
+                <li class="breadcrumb-item active">Data</li>
+              </ol>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h2 class="mb-3 line-head" id="pagination">Pagination</h2>
+            <div class="bs-component">
+              <div>
+                <ul class="pagination">
+                  <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+              </div>
+              <div>
+                <ul class="pagination pagination-lg">
+                  <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+              </div>
+              <div>
+                <ul class="pagination pagination-sm">
+                  <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -234,12 +258,12 @@
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
-    <script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
-    <script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
-    <script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
-    <script src="{{URL::asset('docs/js/main.js')}}"></script>
+    <script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{URL::asset('js/popper.min.js')}}"></script>
+    <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{URL::asset('js/main.js')}}"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
+    <script src="{{URL::asset('js/plugins/pace.min.js')}}"></script>
     <!-- Page specific javascripts-->
     <!-- Google analytics script-->
     <script type="text/javascript">

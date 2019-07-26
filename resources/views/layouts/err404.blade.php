@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('js/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{URL::asset('js/jquery.ui.timepicker.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('docs/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -94,14 +94,14 @@
     </main>
 </div>
 <!-- Essential javascripts for application to work-->
-<script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/jquery-ui.js')}}"></script>
-<script src="{{URL::asset('docs/js/popper.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/main.js')}}"></script>
+<script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/jquery-3.4.1.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/jquery-ui.js')}}"></script>
+<script src="{{URL::asset('js/popper.min.js')}}"></script>
+<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('js/main.js')}}"></script>
 <!-- The javascript plugin to display page loading on top-->
-<script src="{{URL::asset('docs/js/plugins/pace.min.js')}}"></script>
+<script src="{{URL::asset('js/plugins/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
 <script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.core.min.js')}}"></script>
@@ -111,12 +111,12 @@
 <script type="text/javascript" src="{{URL::asset('js/jquery.ui.timepicker.js?v=0.3.3')}}"></script>
 
 <!-- <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script> -->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/select2.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/select2.min.js')}}"></script>
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<script type="text/javascript" src="{{URL::asset('docs/js/bootstrap-datepicker.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/bootstrap-datepicker.js')}}"></script>
 <!-- delete -->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-notify.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/sweetalert.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
 <script type="text/javascript">
     $('button.delete-btn').on('click', function(e){
         event.preventDefault();
@@ -163,13 +163,13 @@
     });
 </script>
 <!-- Data table plugin-->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/dataTables.bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <!-- Calendar-->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/fullcalendar.min.js')}}"></script>
 {{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
 
 

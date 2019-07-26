@@ -14910,6 +14910,9 @@ be a descendant of the grid when it is being dragged.
   transition: all 0.5s ease-in-out;
 }
 
+.m-center{
+  text-align: center;
+}
 .login-content .login-box .login-head {
   margin-top: 0;
   margin-bottom: 20px;
