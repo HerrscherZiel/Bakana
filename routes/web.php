@@ -30,8 +30,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function() {
     // your routes
 
-    Route::get('password', 'Auth\PasswordController@change')->name('password.change');
-    Route::put('password', 'Auth\PasswordController@update')->name('password.update');
+    Route::get('change/pass', 'Auth\PasswordController@change')->name('password.change');
+    Route::put('change/pass', 'Auth\PasswordController@update')->name('password.updates');
 
     Route::resources([
 

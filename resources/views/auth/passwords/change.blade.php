@@ -11,7 +11,7 @@
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
 
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('password.update') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('password.updates') }}">
 
                             {{ csrf_field() }}
                             {{ method_field('put') }}
