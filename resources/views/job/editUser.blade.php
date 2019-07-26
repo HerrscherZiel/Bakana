@@ -24,7 +24,7 @@
                 @endforeach
             </select>
 
-            <h3 class="tile-title">Module {{$tittle}}</h3>
+            <h3 class="tile-title">Modul {{$tittle}}</h3>
 
             <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
@@ -43,11 +43,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Nama Job</label>
+                        <h5 class="control-label text-muted">Job: {{ $job->nama_job }}</h5>
+                      <h5 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($job->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($job->deadline))}}</h5>
                         <input class="form-control" type="hidden" name="nama_job" value={{ $job->nama_job }}>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">User</label>
                         <select class="form-control" style="display: none;" name="user" required="">
                             @foreach($user as $users)
                                 <option value="{{$users->name}}"
@@ -60,13 +60,11 @@
                     </div>
 
                     <div class="form-group input-group">
-                        <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                         <input id="date1" type="hidden" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
-                        <label class="control-label mt-2 ml-5 mr-2">Tanggal Deadline</label>
                         <input id="date2" type="hidden" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label class="control-label mt-2 ml-5 mr-2">Target Selesai</label>
+                        <label class="control-label mt-2 mr-2">Target Selesai</label>
                         <input id="date1" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
                     </div>
 

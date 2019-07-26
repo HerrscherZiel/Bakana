@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <div class="tile-body">
-          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+        <div class="tile-body table-responsive">
+          <table class="table table-hover table-bordered" id="sampleTable">
             <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
             <a href="{{url('/timesheetss')}}" class="btn btn-primary mb-3">My Timesheet</a>
             <thead>
@@ -17,6 +17,9 @@
                 <th>Jam Selesai</th>
                 <th>Total Waktu</th>
                 <th>Keterangan</th>
+                 @if(!Auth::user()->hasRole('Project Manager'))
+                 </tr>
+                 @endif
                 @if(Auth::user()->hasRole('Project Manager'))
                 <th>Action</th>
                  @endif

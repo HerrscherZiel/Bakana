@@ -34,7 +34,7 @@ class TimelineController extends Controller
                 $event->deadline,
                 $event->id_module,
                 [
-                    'color' => $event->colors,
+                    'color' => $event->color,
                     'url' => '/modules/'. $event->id_module,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'
@@ -43,7 +43,7 @@ class TimelineController extends Controller
         }
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        return view('timeline.index', compact('calendar','val'))/*->with('calendar', $calendar, 'val', $val)*/;
+        return view('timeline.index', compact('calendar','val', 'events'))/*->with('calendar', $calendar, 'val', $val)*/;
 
 //        return view('home', compact( 'module', 'calendar'));
     }
@@ -76,6 +76,8 @@ class TimelineController extends Controller
             ->getQuery()
             ->get();
 
+//        dd($events);
+
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
@@ -83,7 +85,13 @@ class TimelineController extends Controller
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
-                $event->id_module
+                $event->id_module,
+                [
+                    'color' => $event->color,
+                    'url' => '/modules/'. $event->id_module,
+                    'description' => $event->keterangan,
+                    'textColor' => '#0A0A0A'
+                ]
             );
         }
 
@@ -110,7 +118,13 @@ class TimelineController extends Controller
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
-                $event->id_job
+                $event->id_job,
+                [
+                    'color' => $event->color,
+                    'url' => '/modules/'. $event->id_job,
+                    'description' => $event->keterangan,
+                    'textColor' => '#0A0A0A'
+                ]
             );
         }
 

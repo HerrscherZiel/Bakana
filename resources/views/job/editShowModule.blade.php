@@ -24,7 +24,7 @@
                 @endforeach
             </select>
 
-            <h3 class="tile-title">Module {{$tittle}}</h3>
+            <h3 class="tile-title">Modul {{$tittle}}</h3>
 
             <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Nama Job</label>
-                        <input class="form-control" type="text" name="nama_job" value={{ $job->nama_job }}>
+                        <input class="form-control" type="text" name="nama_job" value="{{ $job->nama_job }}"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">User</label>

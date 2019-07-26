@@ -20,6 +20,7 @@ class Module extends Model implements \MaddHatter\LaravelFullcalendar\Event
         'deadline',
         'tgl_user',
         'status',
+        'color',
         'project_id',
         'keterangan',
     ];

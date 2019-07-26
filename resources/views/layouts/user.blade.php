@@ -78,106 +78,11 @@
 
         <main class="app-content">
           <div class="app-title">
-            <h1><a href="javascript:history.go(-3)"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
+            <h1><a href="javascript:history.back()"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
             @yield('content')
         </main>
     </div>
- <!-- Essential javascripts for application to work-->
-
-{{--<script src="{{URL::asset('docs/js/jquery-3.2.1.min.js')}}"></script>--}}
-<script type="text/javascript" src="{{URL::asset('docs/js/jquery-3.4.1.js')}}"></script>
-{!! $calendar->script() !!}
-<script type="text/javascript">
-    var events = [];
-  $.get('/events/get', function(result){
-      events = result;
-  });    
-  $('#calendar').fullCalendar({
-      events: function (start, end, timezone, callback) {
-          callback(events);
-      }
-  });
-</script>
-<!-- Calendar-->
-<script type="text/javascript" src="{{URL::asset('docs/js/plugins/jquery-ui.custom.min.js')}}"></script>
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/plugins/moment.min.js')}}"></script>--}}
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/plugins/fullcalendar.min.js')}}"></script>--}}
-<script src="{{URL::asset('docs/js/mhmoment.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/mhfullcalendar.min.js')}}"></script>
-<script src="{{URL::asset('docs/js/main.js')}}"></script>
-
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
-
-<!-- Option Ajax  -->
-<script type="text/javascript">
-    {{--$(document).ready(function($){--}}
-    {{--    $('#project').change(function(){--}}
-    {{--        $.get("{{ url('timelines/{id}')}}",--}}
-    {{--            { option: $(this).val() },--}}
-    {{--            function(data) {--}}
-    {{--                var model = $('#model');--}}
-    {{--                model.empty();--}}
-
-    {{--                $.each(data, function(index, element) {--}}
-    {{--                    model.append("<option value='"+ element.id +"'>" + element.name + "</option>");--}}
-    {{--                });--}}
-    {{--            });--}}
-    {{--    });--}}
-    {{--});--}}
-
-    // $('#project').on('change', function() {
-    //     if ($("#project").val() != "") {
-    //         $.ajax({
-    //             url: '/timelines/'+$(this).val(),
-    //             type: 'POST',
-    //             // data: {},
-    //             success: function (response){
-    //                 // $("#calendar").replaceWith(response);
-    //                 console.log('success');
-    //             },
-    //             error: function (xhr) {
-    //                 alert("Something went wrong, please try again");
-    //             }
-    //         });
-    //     }
-    //
-    // });
-
-    // var id = $("#project option:selected").val();
-
-    $(document).ready(function($){
-        $('#project').on('change', function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            if ($("#project").val() != "") {
-                $.ajax({
-                    type: "POST",
-                    url: '/timelines/' + $("#project option:selected").val(),
-                    data: { id: $("#project").val() },
-                    dataType: "json",
-                    success: function (data){
-                        console.log(data);
-
-                    },
-                    error: function (xhr) {
-                        alert("Something went wrong, please try again");
-                    }
-                }).done(function(response) { //successful response from the server
-                    $('#calendar').fullCalendar('renderEvent', data, true);
-                    $('#calendar').fullCalendar("unselect");
-                    // window.location.reload();
-                });
-            }
-        });
-    });
-
-
-
-</script>
 
 <!-- Full Calendar -->
 <script type="text/javascript">
@@ -273,18 +178,6 @@
   var ctxp = $("#pieChartDemo").get(0).getContext("2d");
   var pieChart = new Chart(ctxp).Pie(pdata);
 </script>
-
-
-<!-- autorefresh -->
-{{--<script>--}}
-{{--if(location.search.indexOf('php') < 0){--}}
-{{--  var hash = window.location.hash;--}}
-{{--  var loc = window.location.href.replace(hash, '');--}}
-{{--  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';--}}
-{{--  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):--}}
-{{--  setTimeout(function(){window.location.href = loc + hash;}, 5);--}}
-{{--}--}}
-{{--</script>--}}
 
 </body>
 </html>

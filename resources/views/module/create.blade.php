@@ -29,31 +29,33 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="user" required="">
-                        <option disabled="" selected="">Select User</option>
+                        <option disabled="" selected="">Pilih User</option>
                         @foreach($mod as $mods)
                             <option value="{{$mods->name}}">{{$mods->name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group input-group">
-                    <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" placeholder="Start Date" readonly="">
+                    <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" placeholder="Tanggal Mulai" readonly="">
                     <div class="mt-1 ml-3 mr-3">to</div>
-                    <input id="date4" data-provide="datepicker" class="form-control" name="deadline" placeholder="Finish Date" readonly="">
+                    <input id="date4" data-provide="datepicker" class="form-control" name="deadline" placeholder="Tanggal Deadline" readonly="">
                 </div>
                 <div class="form-group input-group">
-                    <input id="date5" data-provide="datepicker" class="form-control" name="tgl_user" placeholder="Selesai pada" readonly="">
+                    <input id="date5" data-provide="datepicker" class="form-control" name="tgl_user" placeholder="Target Selesai" readonly="">
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="status" required="">
                         <option disabled>Status</option>
                         <option value=1>Ongoing</option>
                         <option value=2>Queue</option>
-                        {{--                        <option value=3>Pending</option>--}}
-                        {{--                        <option value=4>Completed</option>--}}
                     </select>
                 </div>
                 <div class="form-group">
                   <textarea class="form-control" rows="4" name="keterangan" placeholder="Keterangan"></textarea>
+                </div>
+                <div class="form-group">
+                <input type="color" value="#009688">
+                <label class="control-label">Pilih warna</label>
                 </div>
             </div>
             <div class="tile-footer">
