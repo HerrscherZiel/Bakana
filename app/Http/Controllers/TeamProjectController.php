@@ -121,24 +121,18 @@ class TeamProjectController extends Controller
             $use = User::join('team_projects', 'users.id', '=', 'team_projects.user_id')
                         ->join('project', 'project.id_project', '=', 'team_projects.project_id')
                         ->select('users.*')
-                        ->where('team_projects.project_id', '=', $project->id_project)
+                        ->where('team_projects.project_id', '=', $id)
                         ->where('team_projects.user_id', '!=','users.id' )
                         ->getQuery()
                         ->get();
 
 //            $a = $use->id;
 
-            $user = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
-                    ->join('project', 'project.id_project', '=', 'team_projects.project_id')
-                    ->select('users.*')
-//                    ->where('team_projects.project_id', '=', $project->id_project)
-                    ->where('team_projects.user_id', '!=', $use->id  )
-                    ->getQuery()
-                    ->get();
+            $user = User::all();
 
-            dd($user);
+//            dd($use);
 
-            return view('team.creates', compact('user', 'project', 'role'));
+            return view('team.creates', compact('user', 'project', 'role', 'use'));
         }
 
         else{
@@ -159,6 +153,24 @@ class TeamProjectController extends Controller
         //
         $request->validate( [
             'user_id' => 'required',
+            'project_id' => 'required|unique:team_projects,user_id']);
+        /*|unique:team_projects,user_id*/
+
+        $team_projects = new TeamProject();
+        $team_projects->user_id = $request->input('user_id');
+        $team_projects->project_id = $request->input('project_id');
+        $team_projects->save();
+        return redirect('team/'.$team_projects->project_id)->with('success', 'User Ditambahkan');
+    }
+
+    public function storeFromShow(Request $request)
+    {
+        //
+
+        $request->validate( [
+
+
+            'user_id' => 'required|unique_with:team_projects,project_id',
             'project_id' => 'required']);
 
 

@@ -74,9 +74,18 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/team/creates/{project}','TeamProjectController@creates');
 
-    Route::get('/team/creates/{project}/project','TeamProjectController@stores');
+//
+//    Route::post('/team/creates/{project}/project','TeamProjectController@storeFromShow');
+//
+//    Route::post('/team/creates/{project}/project','TeamProjectController@storeFromShow');
+//
 
-    Route::post('/team/creates/{project}/project','TeamProjectController@stores');
+
+    Route::post('/team/creates/{project}','TeamProjectController@storeFromShow');
+
+    Route::post('/team/{project}','TeamProjectController@storeFromShow');
+
+
 
     Route::get('/team/{project}','TeamProjectController@indexes');
 
