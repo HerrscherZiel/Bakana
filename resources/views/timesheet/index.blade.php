@@ -53,9 +53,9 @@
                             </form>
                     </div>
                 </td>
-                @endif
+                      @endif
               </tr>
-               @endforeach
+              @endforeach
             </tbody>
           </table>
         </div>

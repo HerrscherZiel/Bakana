@@ -89,6 +89,10 @@
                         <label class="control-label">Keterangan</label>
                         <textarea class="form-control" rows="4" name="keterangan">{{ $module->keterangan }}</textarea>
                     </div>
+                    <div class="form-group">
+                        <input type="color" name="color" value="{{ $module->color }}">
+                        <label class="control-label">Pilih warna</label>
+                    </div>
                 </div>
                 <div class="tile-footer">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>

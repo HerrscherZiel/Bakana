@@ -117,10 +117,27 @@ class TeamProjectController extends Controller
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::find($id);
             $role = Role::all();
-            $user = User::all();
 
+            $use = User::join('team_projects', 'users.id', '=', 'team_projects.user_id')
+                        ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+                        ->select('users.*')
+                        ->where('team_projects.project_id', '=', $project->id_project)
+                        ->where('team_projects.user_id', '!=','users.id' )
+                        ->getQuery()
+                        ->get();
 
-//            dd($project);
+//            $a = $use->id;
+
+            $user = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
+                    ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+                    ->select('users.*')
+//                    ->where('team_projects.project_id', '=', $project->id_project)
+                    ->where('team_projects.user_id', '!=', $use->id  )
+                    ->getQuery()
+                    ->get();
+
+            dd($user);
+
             return view('team.creates', compact('user', 'project', 'role'));
         }
 

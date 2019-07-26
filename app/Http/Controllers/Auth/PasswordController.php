@@ -60,7 +60,7 @@ class PasswordController extends Controller
         $user->save();
 
         return redirect()
-            ->route('password.change')
+            ->route('home')
             ->withSuccess('Password has been updated.');
     }
 
