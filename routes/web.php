@@ -160,7 +160,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/timelines/job','TimelineController@indexJob');
 
-    Route::post('/timelines/{project}','TimelineController@dropProject');
+    Route::get('/timelines/{project}','TimelineController@dropProject');
 });
 
 
