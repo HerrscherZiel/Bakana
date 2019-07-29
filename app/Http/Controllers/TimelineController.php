@@ -22,7 +22,7 @@ class TimelineController extends Controller
     {
         //
 
-        $val = Project::all();
+        $val = Project::all()->where('status','!=',4);
 
         $events = Module::all();
         $event_list = [];
@@ -70,7 +70,7 @@ class TimelineController extends Controller
 
     public function dropProject($id){
 
-        $val = Project::all();
+        $val = Project::all()->where('status','!=',4);
 
         $events = Project::join('module','project.id_project','=','module.project_id')
             ->select('module.*')

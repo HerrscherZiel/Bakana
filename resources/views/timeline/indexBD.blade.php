@@ -4,8 +4,8 @@
 <div>
       <div class="tile row">
         <div class="col-md-12">
-            <a href="/timelines/project" class="btn btn-primary">Show Project</a>
-            <a href="/timelines/job" class="btn btn-primary">Show Job</a>
+{{--            <a href="/timelines/project" class="btn btn-primary">Show Project</a>--}}
+{{--            <a href="/timelines/job" class="btn btn-primary">Show Job</a>--}}
             
             <ul class="nav nav-pills mt-2 mb-5" >
                 <li class="nav-item dropdown">
