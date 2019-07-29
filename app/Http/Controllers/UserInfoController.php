@@ -144,8 +144,12 @@ class UserInfoController extends Controller
 
 //        dd($modulpro);
 
+//            foreach ($jobs as $i){
+//
+//            $i->nama_job;
+//                dd($i);
+//            }
 
-//            dd($modulpro);
         return view('UserInfo.userModule', compact('modulpro', 'project', 'jobs'));
     }
 

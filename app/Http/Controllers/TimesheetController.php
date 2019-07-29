@@ -219,7 +219,7 @@ class TimesheetController extends Controller
 
         $timesheet =  Timesheet::find($id);
         $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
-        $timesheet->project = $request->input('project');
+//        $timesheet->project = $request->input('project');
         $timesheet->jam_mulai = $request->input('jam_mulai');
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');

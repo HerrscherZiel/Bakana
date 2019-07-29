@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReminderEmail;
 use Illuminate\Http\Request;
 use App\User;
 use App\Project;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class HomeController extends Controller
@@ -30,6 +32,9 @@ class HomeController extends Controller
 
     }
 
+
+
+
     /**
      * Show the application dashboard.
      *
@@ -41,6 +46,15 @@ class HomeController extends Controller
 
 
 
+
+        $a = auth()->user()->email;
+
+//        dd($a);
+
+        Mail::to($a)->send(new ReminderEmail());
+
+
+
         if (Auth::user()->hasRole('Project Manager')) {
 
 //            $user = User::join('role', 'users.role_id', '=', 'role.id_role')
@@ -49,12 +63,16 @@ class HomeController extends Controller
 //                ->getQuery()
 //                ->get();
 
+
             return view('home');
         }
         else{
            // $name = auth()->user()->name;
 //            $user = User::find('id', 'name');
 //            $timesheetView = Timesheet::all();
+
+
+
 
 
             return view('home');

@@ -11,7 +11,7 @@
                   <a class="nav-link active dropdown-toggle btn btn-info" style="width: 215%" data-toggle="dropdown" href="#" role="button " aria-haspopup="true" aria-expanded="false">Project</a>
                   <div class="dropdown-menu" style="width: 215%">
                     @foreach($val as $vals)
-                    <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
+                        <a class="dropdown-item" href="/timelines/{{$vals->id_project}}">{{$vals->nama_project}}</a>
                     @endforeach
                   </div>
                 </li>
