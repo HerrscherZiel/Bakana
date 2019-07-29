@@ -24,6 +24,12 @@ class TimelineController extends Controller
 
         $val = Project::all()->where('status','!=',4);
 
+//        $eevee = Project::join('module','project.id_project','=','module.project_id')
+//            ->select('module.*', 'project.nama_project')
+//            ->where('project.id_project','=',$id)
+//            ->getQuery()
+//            ->get();
+
         $events = Module::all();
         $event_list = [];
         foreach ($events as $key => $event) {
@@ -73,7 +79,7 @@ class TimelineController extends Controller
         $val = Project::all()->where('status','!=',4);
 
         $events = Project::join('module','project.id_project','=','module.project_id')
-            ->select('module.*')
+            ->select('module.*', 'project.nama_project')
             ->where('project.id_project','=',$id)
             ->getQuery()
             ->get();
@@ -97,6 +103,12 @@ class TimelineController extends Controller
             );
         }
 
+        foreach($events as $i){
+
+            $ii = $i->nama_project;
+//            dd($ii);
+        }
+
 //        dd($event_list);
 
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
@@ -106,7 +118,7 @@ class TimelineController extends Controller
 //            'calendar'  => $calendar,
 //        ], 200);
 
-        return view('timeline.indexBD', compact('calendar','val'))/*->with('calendar', $calendar)*/;
+        return view('timeline.indexBD', compact('calendar','val', 'ii'))/*->with('eevee', $eevee)*/;
 
     }
 
