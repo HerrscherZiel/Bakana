@@ -25,6 +25,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Route::get('/sendMail','HomeController@index');
+
 
 
 Route::group(['middleware' => ['auth']], function() {
@@ -161,6 +163,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/timelines/job','TimelineController@indexJob');
 
     Route::get('/timelines/{project}','TimelineController@dropProject');
+
+
+    //Mail
+
+
+
 });
 
 
