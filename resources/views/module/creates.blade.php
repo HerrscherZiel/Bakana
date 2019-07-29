@@ -45,8 +45,6 @@
                     <option disabled>Select Project</option>
                     <option value=1>Ongoing</option>
                     <option value=2>Queue</option>
-                    {{--                        <option value=3>Pending</option>--}}
-                    {{--                        <option value=4>Completed</option>--}}
                 </select>
             </div>
                 <div class="form-group">
@@ -54,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <input type="color" name="color" value="#009688">
-                    <label class="control-label">Pilih warna</label>
+                    <label class="control-label">Pilih warna untuk timeline</label>
                 </div>
             </div>
             <div class="tile-footer">

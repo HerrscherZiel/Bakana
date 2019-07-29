@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <input type="color" name="color" value="{{ $module->color }}">
-                        <label class="control-label">Pilih warna</label>
+                        <label class="control-label">Pilih warna untuk timeline</label>
                     </div>
                 </div>
                 <div class="tile-footer">
