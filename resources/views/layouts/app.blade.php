@@ -72,7 +72,7 @@
         <li><a class="app-menu__item {{ request()->is('team*', 'teamprojects*', 'disbandedTeam*') ? 'active' : ''  }}" href="{{ url('/teamprojects') }}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Team</span></a>
         </li>
 
-          <li><a class="app-menu__item {{ request()->is('userInfo*','myCompletedProject*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-info-circle"></i><span class="app-menu__label">User Info</span></a>
+          <li><a class="app-menu__item {{ request()->is('userInfo*','myCompletedProject*','change*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-info-circle"></i><span class="app-menu__label">User Info</span></a>
           </li>
 
         <li><a class="app-menu__item {{ request()->is('timesheets*') ? 'active' : ''  }}" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-calendar-plus-o"></i><span class="app-menu__label">Timesheet</span></a>
@@ -86,6 +86,9 @@
         </div>
 
             @yield('content')
+            <!-- <div class="app-title mb-0" style="display: flex; bottom: 0;">
+              <span class="text-muted">Copyright  © 2019 <b> Mahasiswa Magang Universitas Gadjah Mada</b> - Yogyakarta, Indonesia.</span>
+            </div> -->
         </main>
     </div>
  <!-- Essential javascripts for application to work-->

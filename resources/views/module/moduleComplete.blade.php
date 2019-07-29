@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
-                <div class="tile-body">
-                    <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+                <div class="tile-body table-responsive">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
                         <thead>
                         <tr>

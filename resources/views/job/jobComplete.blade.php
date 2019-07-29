@@ -5,8 +5,8 @@
         <div class="col-md-12">
             <div class="tile">
                 <a href="{{url('/jobs/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Job</a>
-                <div class="tile-body">
-                    <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+                <div class="tile-body table-responsive">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
                             <th>Job</th>

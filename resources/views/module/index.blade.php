@@ -6,14 +6,14 @@
       <div class="tile">
         <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
           <a href="{{url('/completedModule')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Module</a>
-        <div class="tile-body">
-          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+        <div class="tile-body table-responsive">
+          <table class="table table-hover table-bordered" id="sampleTable">
               <thead>
               <tr>
                 <th>Modul</th>
                 <th>Tanggal Mulai</th>
                 <th>Deadline</th>
-                <th>Tanggal Selesai</th>
+                <th>Target Selesai</th>
                 <th>Sisa Waktu</th>
                 <th>Status</th>
                 <th>User</th>

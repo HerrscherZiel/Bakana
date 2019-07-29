@@ -4,10 +4,9 @@
 <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <div class="tile-body">
-            <div class="row">
+        <div class="row">
                 <div class="col-md-10">
-                    <h3>Project : {{$project->nama_project}}</h3>
+                    <h3>Project  {{$project->nama_project}}</h3>
                 </div>
                 @if(Auth::user()->hasRole('Project Manager'))
                 <div class="col-md-2">
@@ -15,13 +14,15 @@
                 </div>
                     @endif
             </div>
-          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+        <div class="tile-body  table-responsive">
+            
+          <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
               <tr>
                 <th>Modul</th>
                 <th>Tanggal Mulai</th>
                 <th>Deadline</th>
-                <th>Tanggal Selesai</th>
+                <th>Target Selesai</th>
                 <th>Sisa Waktu</th>
                 <th>Status</th>
                 <th>User</th>

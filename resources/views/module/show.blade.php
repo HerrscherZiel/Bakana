@@ -55,7 +55,7 @@
                     <th>Sisa Waktu</th>
                     <th>Status</th>
                     <th>Keterangan</th>
-                      <th>Action</th>
+                    <th>Action</th>
 
                   </tr>
                 </thead>

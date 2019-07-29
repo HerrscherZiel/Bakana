@@ -4,8 +4,7 @@
 <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <div class="tile-body">
-            <div class="row">
+        <div class="row">
                 <div class="col-md-10">
                     <h3>Project : {{$project->nama_project}}</h3>
                 </div>
@@ -15,7 +14,8 @@
              </div>
                     @endif
         </div>
-          <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+        <div class="tile-body table-responsive">
+          <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
               <tr>
                 <th>User</th>
