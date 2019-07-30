@@ -230,24 +230,28 @@
             <h2 class="line-head" style="text-align: center;  color: #6c757d !important;">Timeline Reminder</h2>
          </div>
           <div class="jumbotron">
-            <!-- 7 hari -->
-            <h1 class="display-3">7 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 7 hari. Lihat tabel di bawah.</p>
-            <!-- 3 hari -->
-            <h1 class="display-3">3 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 3 hari. Lihat tabel di bawah.</p>
-            <!-- 2 hari -->
-            <h1 class="display-3">2 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 2 hari. Lihat tabel di bawah.</p>
-            <!-- 1 hari -->
-            <h1 class="display-3">1 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 1 hari. Lihat tabel di bawah.</p>
-            <!-- hari ini -->
-            <h1 class="display-3">Hari ini !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan hari ini. Jangan sampai melewati deadline. Lihat tabel di bawah.</p>
-            <!-- lewat deadline -->
-            <h1 class="display-3">Deadline lewat !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah melewati deadline. Segera selesaikan. Lihat tabel di bawah.</p>
+              @if($dead = 0)
+                  <h1 class="display-3">Deadline lewat !</h1>
+                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah melewati deadline. Segera selesaikan. Lihat tabel di bawah.</p>
+              @else
+                  <h1 class="display-3">{{ $dead }} hari lagi !</h1>
+                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam {{ $dead }} hari. Lihat tabel di bawah.</p>
+              @endif
+{{--            <!-- 3 hari -->--}}
+{{--            <h1 class="display-3">3 hari lagi !</h1>--}}
+{{--            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 3 hari. Lihat tabel di bawah.</p>--}}
+{{--            <!-- 2 hari -->--}}
+{{--            <h1 class="display-3">2 hari lagi !</h1>--}}
+{{--            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 2 hari. Lihat tabel di bawah.</p>--}}
+{{--            <!-- 1 hari -->--}}
+{{--            <h1 class="display-3">1 hari lagi !</h1>--}}
+{{--            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 1 hari. Lihat tabel di bawah.</p>--}}
+{{--            <!-- hari ini -->--}}
+{{--            <h1 class="display-3">Hari ini !</h1>--}}
+{{--            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan hari ini. Jangan sampai melewati deadline. Lihat tabel di bawah.</p>--}}
+{{--            <!-- lewat deadline -->--}}
+{{--            <h1 class="display-3">Deadline lewat !</h1>--}}
+{{--            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah melewati deadline. Segera selesaikan. Lihat tabel di bawah.</p>--}}
           </div>
           <table class="table table-sm">
                 <thead>

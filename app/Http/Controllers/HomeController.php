@@ -63,30 +63,111 @@ class HomeController extends Controller
 
         $a = auth()->user()->email;
 
-        $seven  = Carbon::now()->addDay(6)->toDateString();
-        $third  = Carbon::now()->addDay(2)->toDateString();
-        $second = Carbon::now()->addDay(1)->toDateString();
+        $seven  = Carbon::now()->addDay(7)->toDateString();
+        $third  = Carbon::now()->addDay(3)->toDateString();
+        $second = Carbon::now()->addDay(2)->toDateString();
+        $first  = Carbon::now()->addDay(1)->toDateString();
         $today  = Carbon::now()->toDateString();
 
-        $d7 = Job::where('deadline','==', $seven)->get();
-        $d3 = Job::where('deadline','==', $third)->get();
-        $d2 = Job::where('deadline','==', $second)->get();
-        $d1 = Job::where('deadline','==', $today)->get();
+//        $d7 = Job::where('deadline','==', $seven)->get();
+//        $d3 = Job::where('deadline','==', $third)->get();
+//        $d2 = Job::where('deadline','==', $second)->get();
+//        $d1 = Job::where('deadline','==', $first)->get();
+//        $d0 = Job::where('deadline','==', $today)->get();
 
+        $d7 = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->join('module', 'project.id_project', '=', 'module.project_id')
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                , 'jobs.module_id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('jobs.user', '=',  auth()->user()->name)
+            ->where('jobs.status', '!=', 4)
+            ->where('jobs.deadline','=', $seven)
+            ->orderBy('module.nama_module')
+            ->groupBy('jobs.nama_job')
+            ->getQuery()
+            ->get();
+
+        $d3 = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->join('module', 'project.id_project', '=', 'module.project_id')
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                , 'jobs.module_id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('jobs.user', '=',  auth()->user()->name)
+            ->where('jobs.status', '!=', 4)
+            ->where('jobs.deadline','=', $third)
+            ->orderBy('module.nama_module')
+            ->groupBy('jobs.nama_job')
+            ->getQuery()
+            ->get();
+
+        $d2 = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->join('module', 'project.id_project', '=', 'module.project_id')
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                , 'jobs.module_id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('jobs.user', '=',  auth()->user()->name)
+            ->where('jobs.status', '!=', 4)
+            ->where('jobs.deadline','=', $second)
+            ->orderBy('module.nama_module')
+            ->groupBy('jobs.nama_job')
+            ->getQuery()
+            ->get();
+
+        $d1 = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->join('module', 'project.id_project', '=', 'module.project_id')
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                , 'jobs.module_id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('jobs.user', '=',  auth()->user()->name)
+            ->where('jobs.status', '!=', 4)
+            ->where('jobs.deadline','=', $first)
+            ->orderBy('module.nama_module')
+            ->groupBy('jobs.nama_job')
+            ->getQuery()
+            ->get();
+
+        $d0 = User::join('team_projects','users.id','=','team_projects.user_id')
+            ->join('project','team_projects.project_id','=','project.id_project')
+            ->join('module', 'project.id_project', '=', 'module.project_id')
+            ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+                , 'jobs.module_id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('jobs.user', '=',  auth()->user()->name)
+            ->where('jobs.status', '!=', 4)
+            ->where('jobs.deadline','=', $today)
+            ->orderBy('module.nama_module')
+            ->groupBy('jobs.nama_job')
+            ->getQuery()
+            ->get();
+
+//        $h = $jobs;
 
 //        dd($jobs);
 
-        if($d7){
-            Mail::to($a)->send(new ReminderEmail());
-        }elseif ($d3){
-            Mail::to($a)->send(new ReminderEmail());
-        }elseif ($d2){
-            Mail::to($a)->send(new ReminderEmail());
-        }elseif ($d1){
-            Mail::to($a)->send(new ReminderEmail());
-        }else{
-            Mail::to($a)->send(new ReminderEmail());
+        if($d0 != NULL){
+            Mail::to($a)->send(new ReminderEmail($q = 0));
+        }elseif ($d1 != NULL){
+            Mail::to($a)->send(new ReminderEmail($q = 1));
+        }elseif ($d2 != NULL){
+            Mail::to($a)->send(new ReminderEmail($q = 2));
+        }elseif ($d3 != NULL){
+            Mail::to($a)->send(new ReminderEmail($q = 3));
+        }elseif ($d7 != NULL){
+            Mail::to($a)->send(new ReminderEmail($q = 7));
         }
+//        else{
+//            Mail::to($a)->send(new ReminderEmail($q = 9));
+//        }
 
 //        Mail::to($a)->send(new ReminderEmail());
 
