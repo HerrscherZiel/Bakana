@@ -84,6 +84,8 @@ class HomeController extends Controller
             Mail::to($a)->send(new ReminderEmail());
         }elseif ($d1){
             Mail::to($a)->send(new ReminderEmail());
+        }else{
+            Mail::to($a)->send(new ReminderEmail());
         }
 
 //        Mail::to($a)->send(new ReminderEmail());
