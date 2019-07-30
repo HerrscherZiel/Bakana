@@ -73,7 +73,7 @@ class RoleController extends Controller
         ]);
         $role->save();
 
-        return redirect('roles')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('roles')->with('success', 'Role Berhasil Dibuat');
     }
 
 
@@ -138,7 +138,7 @@ class RoleController extends Controller
         $role->keterangan = $request->get('keterangan');
         $role->save();
 
-        return redirect('roles')->with('success', 'New support ticket has been updated!!');
+        return redirect('roles')->with('success', 'Role Berhasil Diubah');
 
     }
 
@@ -155,7 +155,7 @@ class RoleController extends Controller
             $role = Role::find($id);
             $role->delete();
 
-            return redirect()->back()->with('success', 'Stock has been deleted Successfully');
+            return redirect()->back();
 
         }
 

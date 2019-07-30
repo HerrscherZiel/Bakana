@@ -106,8 +106,8 @@ class ProjectController extends Controller
         ]);
 
         $project->save();
-        
-       return redirect('projects')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+
+        return redirect('projects')->with('success', 'Project Berhasil Dibuat ');
           
         
     }
@@ -124,7 +124,7 @@ class ProjectController extends Controller
         Session::put('title', 'Detail Project');
         // dd($id);
         //
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $module = Module::join('project', 'project_id', '=', 'id_project')
             ->select('module.*')
             ->where('project.id_project', '=', $id )
@@ -135,10 +135,10 @@ class ProjectController extends Controller
 
 //        dd($a);
 
-        if(count($module) < 1){
-            return view('home')->with(abort(404, 'Unauthorized action.'));
-
-        }
+//        if(count($module) < 1){
+//            return view('home')->with(abort(404, 'Unauthorized action.'));
+//
+//        }
 
 //            if(count($module) <= 0){
 //                exit();
@@ -216,7 +216,7 @@ class ProjectController extends Controller
         $project->ket = $request->get('ket');
         $project->save();
 
-        return redirect('projects')->with('success', 'New support ticket has been updated!!');
+        return redirect('projects')->with('success', 'Project Berhasil Diubah ');
     }
 
     /**
@@ -232,7 +232,7 @@ class ProjectController extends Controller
             $project = Project::find($id);
             $project->delete();
 
-            return redirect()->back()->with('success', 'Stock has been deleted Successfully');
+            return redirect()->back();
         }
 
         else{
