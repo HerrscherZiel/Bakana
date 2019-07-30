@@ -68,9 +68,9 @@
                      @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
                            @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
-                           Deadline
+                           <span class="badge badge-warning">Deadline</span>
                            @else
-                            Melewati<br>Deadline
+                            <span class="badge badge-danger">Melewati<br>Deadline</span>
                        @endif
                 </td>
                     <td> @if ($modules->status === 1 )

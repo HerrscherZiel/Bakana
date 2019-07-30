@@ -5,7 +5,7 @@
       <div class="tile row">
         <div class="col-md-12">
             <div class="row mb-4">
-             <div class="col-md-8">
+             <div class="col-md-4">
                <ul class="nav nav-pills" >
                 <li class="nav-item dropdown">
                   <a class="nav-link active dropdown-toggle btn btn-info" style="width: 215%" data-toggle="dropdown" href="#" role="button " aria-haspopup="true" aria-expanded="false">Project</a>
@@ -16,7 +16,11 @@
                   </div>
                 </li>
             </ul>
+             
             </div>
+             <div class="col-md-4 m-center">
+                <h3 class="line-head">{{$ii}}</h3>
+             </div>
             <div class="col-md-4">
               <a href="/timelines/job" class="btn btn-primary pull-right">Job Timeline</a>
               <a href="/timelines/project" class="btn btn-primary pull-right mr-2">Project Timeline</a>

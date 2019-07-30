@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Job;
 use App\Module;
 use App\Project;
+use App\Util\Utils;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -21,7 +22,7 @@ class TimelineController extends Controller
     public function index()
     {
         //
-
+        Session::put('title', 'Timeline All Modul');
         $val = Project::all()->where('status','!=',4);
 
 //        $eevee = Project::join('module','project.id_project','=','module.project_id')
@@ -55,7 +56,7 @@ class TimelineController extends Controller
     }
 
     public function indexProject(){
-
+        Session::put('title', 'Timeline Project');
         $events = Project::all();
         $event_list = [];
         foreach ($events as $key => $event) {
@@ -75,7 +76,7 @@ class TimelineController extends Controller
     }
 
     public function dropProject($id){
-
+        Session::put('title', 'Timeline Project > Modul');
         $val = Project::all()->where('status','!=',4);
 
         $events = Project::join('module','project.id_project','=','module.project_id')
@@ -123,7 +124,7 @@ class TimelineController extends Controller
     }
 
     public function indexJob(){
-
+        Session::put('title', 'Timeline Job');
         $events = Job::all();
         $event_list = [];
         foreach ($events as $key => $event) {
