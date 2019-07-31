@@ -225,14 +225,28 @@
               background-color: #1d2124;
             }
         </style>
+
+{{--        @foreach($jobs as $uu)--}}
+
+{{--        {{$a =  strtotime('today')}}--}}
+
+{{--        {{strtotime($selesai = $uu->deadline)}}--}}
+
+{{--        {{$tt = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}}--}}
+
+{{--            @if( $tt === 7)--}}
+
         <div class="tile">
          <div class="page-header">
             <h2 class="line-head" style="text-align: center;  color: #6c757d !important;">Timeline Reminder</h2>
          </div>
           <div class="jumbotron">
-              @if($dead == 0)
+              @if($dead == 9)
                   <h1 class="display-3">Deadline lewat !</h1>
                   <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah melewati deadline. Segera selesaikan. Lihat tabel di bawah.</p>
+              @elseif($dead == 0)
+                  <h1 class="display-3">Deadline !</h1>
+                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah mencapai deadline. Segera selesaikan. Lihat tabel di bawah.</p>
               @else
                   <h1 class="display-3">{{ $dead }} hari lagi !</h1>
                   <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam {{ $dead }} hari. Lihat tabel di bawah.</p>
@@ -295,6 +309,16 @@
                 </tbody>
           </table>
         </div>
+
+
+
+
+
+{{--                @if()--}}
+
+
+
+
 
       
         <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">© 2019 Mahasiswa Magang Universitas Gadjah Mada. Yogyakarta, Indonesia.</p>

@@ -153,8 +153,13 @@ class HomeController extends Controller
 //        $h = $jobs;
 
 //        dd($jobs);
+//        $t = count($d7);
+//        dd($t);
 
-        if($d0 != NULL){
+        if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
+
+
+            if($d0 != NULL){
             Mail::to($a)->send(new ReminderEmail($q = 0));
         }elseif ($d1 != NULL){
             Mail::to($a)->send(new ReminderEmail($q = 1));
@@ -164,6 +169,8 @@ class HomeController extends Controller
             Mail::to($a)->send(new ReminderEmail($q = 3));
         }elseif ($d7 != NULL){
             Mail::to($a)->send(new ReminderEmail($q = 7));
+        }
+
         }
 //        else{
 //            Mail::to($a)->send(new ReminderEmail($q = 9));
