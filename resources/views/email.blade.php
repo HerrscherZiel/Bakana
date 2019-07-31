@@ -230,7 +230,7 @@
             <h2 class="line-head" style="text-align: center;  color: #6c757d !important;">Timeline Reminder</h2>
          </div>
           <div class="jumbotron">
-              @if($dead = 0)
+              @if($dead == 0)
                   <h1 class="display-3">Deadline lewat !</h1>
                   <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah melewati deadline. Segera selesaikan. Lihat tabel di bawah.</p>
               @else
