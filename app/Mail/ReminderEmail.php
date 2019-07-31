@@ -35,7 +35,7 @@ class ReminderEmail extends Mailable
     public function build()
     {
 
-        $q = $this->q;
+        $this->q;
 
         $seven  = Carbon::now()->addDay(7)->toDateString();
         $third  = Carbon::now()->addDay(3)->toDateString();
@@ -96,7 +96,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','=', $third)
+            ->where('jobs.deadline','<=', $third)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -111,7 +111,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','=', $second)
+            ->where('jobs.deadline','<=', $second)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -126,7 +126,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','=', $first)
+            ->where('jobs.deadline','<=', $first)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -141,7 +141,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','=', $today)
+            ->where('jobs.deadline','<=', $today)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -163,6 +163,10 @@ class ReminderEmail extends Mailable
             ->get();
 
         $dead = 0 ;
+
+//        dd($this->q);
+
+        $i = $this->q;
 
 //        $d7 = $jobs::where('deadline','==', $seven)->get();
 //        $d3 = $jobs::where('deadline','==', $third)->get();
@@ -268,7 +272,7 @@ class ReminderEmail extends Mailable
 
 //        dd($q);
 
-        if ($q == 9){
+        if ($i == 9){
             return $this->from('PM@mail.com')
                 ->view('email')
                 ->with(
@@ -278,7 +282,7 @@ class ReminderEmail extends Mailable
                         'dead'  => 0,
 
                     ]);
-        }elseif ($q == 7){
+        }elseif ($i == 7){
             return $this->from('PM@mail.com')
                 ->view('email')
                 ->with(
@@ -288,7 +292,7 @@ class ReminderEmail extends Mailable
                         'dead'  => 7,
 
                     ]);
-        }elseif ($q == 3){
+        }elseif ($i == 3){
             return $this->from('PM@mail.com')
                 ->view('email')
                 ->with(
@@ -298,7 +302,7 @@ class ReminderEmail extends Mailable
                         'dead'  => 3,
 
                     ]);
-        }elseif ($q == 2){
+        }elseif ($i == 2){
             return $this->from('PM@mail.com')
                 ->view('email')
                 ->with(
@@ -308,7 +312,7 @@ class ReminderEmail extends Mailable
                         'dead'  => 2,
 
                     ]);
-        }elseif ($q == 1){
+        }elseif ($i == 1){
             return $this->from('PM@mail.com')
                 ->view('email')
                 ->with(
@@ -318,7 +322,7 @@ class ReminderEmail extends Mailable
                         'dead'  => 1,
 
                     ]);
-        }elseif ($q == 0){
+        }elseif ($i == 0){
             return $this->from('PM@mail.com')
                 ->view('email')
                 ->with(

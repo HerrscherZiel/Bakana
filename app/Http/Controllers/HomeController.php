@@ -46,6 +46,8 @@ class HomeController extends Controller
     {
         Session::put('title', 'Timeline');
 
+        $q = 0;
+
 
         $jobs = User::join('team_projects','users.id','=','team_projects.user_id')
             ->join('project','team_projects.project_id','=','project.id_project')
@@ -153,24 +155,21 @@ class HomeController extends Controller
 //        $h = $jobs;
 
 //        dd($jobs);
-//        $t = count($d7);
+//        $t = count($d1);
 //        dd($t);
 
         if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
-
-
-            if($d0 != NULL){
-            Mail::to($a)->send(new ReminderEmail($q = 0));
-        }elseif ($d1 != NULL){
-            Mail::to($a)->send(new ReminderEmail($q = 1));
-        }elseif ($d2 != NULL){
-            Mail::to($a)->send(new ReminderEmail($q = 2));
-        }elseif ($d3 != NULL){
-            Mail::to($a)->send(new ReminderEmail($q = 3));
-        }elseif ($d7 != NULL){
-            Mail::to($a)->send(new ReminderEmail($q = 7));
-        }
-
+            if(count($d0) != 0){
+                Mail::to($a)->send(new ReminderEmail(0));
+            }elseif (count($d1) != 0){
+                Mail::to($a)->send(new ReminderEmail(1));
+            }elseif (count($d2) != 0){
+                Mail::to($a)->send(new ReminderEmail(2));
+            }elseif (count($d3) != 0){
+                Mail::to($a)->send(new ReminderEmail(3));
+            }elseif (count($d7) != 0){
+                Mail::to($a)->send(new ReminderEmail(7));
+            }
         }
 //        else{
 //            Mail::to($a)->send(new ReminderEmail($q = 9));
