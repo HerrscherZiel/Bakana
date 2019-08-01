@@ -162,6 +162,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/timelines/job','TimelineController@indexJob');
 
+    Route::get('/timelines/job/{module}','TimelineController@dropJob');
+
     Route::get('/timelines/{project}','TimelineController@dropProject');
 
 

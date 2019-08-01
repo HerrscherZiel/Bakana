@@ -164,7 +164,7 @@ class ReminderEmail extends Mailable
 
         $dead = 0 ;
 
-//        dd($this->q);
+//        dd($d0);
 
         $i = $this->q;
 

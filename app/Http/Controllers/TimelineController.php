@@ -42,7 +42,7 @@ class TimelineController extends Controller
                 $event->id_module,
                 [
                     'color' => $event->color,
-                    'url' => '/modules/'. $event->id_module,
+                    'url' => '/timelines/job/'. $event->id_module,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'
                 ]
@@ -75,7 +75,28 @@ class TimelineController extends Controller
 
     }
 
+    public function indexJob(){
+        Session::put('title', 'Timeline Job');
+        $events = Job::all();
+        $event_list = [];
+        foreach ($events as $key => $event) {
+            $event_list[] = Calendar::event(
+                $event->nama_job,
+                true,
+                $event->tgl_mulai,
+                $event->tgl_selesai,
+                $event->id_job
+            );
+        }
+
+        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
+
+        return view('timeline.indexOfJobs')->with('calendar', $calendar);
+
+    }
+
     public function dropProject($id){
+
         Session::put('title', 'Timeline Project > Modul');
         $val = Project::all()->where('status','!=',4);
 
@@ -97,7 +118,7 @@ class TimelineController extends Controller
                 $event->id_module,
                 [
                     'color' => $event->color,
-                    'url' => '/modules/'. $event->id_module,
+                    'url' => '/timelines/job/'. $event->id_module,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'
                 ]
@@ -123,29 +144,40 @@ class TimelineController extends Controller
 
     }
 
-    public function indexJob(){
-        Session::put('title', 'Timeline Job');
-        $events = Job::all();
+    public function dropJob($id){
+        Session::put('title', 'Timeline Module > Job');
+
+        $val = Module::all()->where('status','!=',4);
+
+        $events = Module::join('jobs','module.id_module','=','jobs.module_id')
+            ->select('module.nama_module', 'jobs.*')
+            ->where('module.id_module','=',$id)
+            ->getQuery()
+            ->get();
+
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->nama_job,
+                $event->nama_job . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
                 $event->id_job,
                 [
                     'color' => $event->color,
-                    'url' => '/modules/'. $event->id_job,
                     'description' => $event->keterangan,
                     'textColor' => '#0A0A0A'
                 ]
             );
         }
 
+        foreach($events as $i){
+            $ii = $i->nama_module;
+        }
+
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        return view('timeline.indexOfJobs')->with('calendar', $calendar);
+        return view('timeline.indexMJ', compact('calendar','val', 'ii'));
 
     }
 
