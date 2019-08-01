@@ -172,7 +172,7 @@ class JobController extends Controller
         ]);
         $job->save();
 
-        return redirect('jobs')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('jobs')->with('success', 'Job Berhasil Dibuat');
 
 
 
@@ -187,7 +187,8 @@ class JobController extends Controller
             'nama_job'      =>'required',
             'user'          =>'nullable',
             'tgl_mulai'     =>'required',
-            'deadline'      =>'required|after_or_equal:tgl_mulai',
+            'module_mulai'  =>'nullable',
+            'deadline'      =>'required|after_or_equal:module_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'
@@ -206,7 +207,7 @@ class JobController extends Controller
         ]);
         $job->save();
 
-        return redirect('modules/'.$job->module_id)->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('modules/'.$job->module_id)->with('success', 'Job Berhasil Dibuat');
 
 
 
@@ -348,7 +349,7 @@ class JobController extends Controller
         $job->keterangan    = $request->get('keterangan');
         $job->save();
 
-        return redirect('jobs')->with('success', 'New support ticket has been updated!!');
+        return redirect('jobs')->with('success', 'Job Berhasil Diubah');
     }
 
     // Edit From Sow Module
@@ -379,7 +380,7 @@ class JobController extends Controller
         $job->keterangan    = $request->get('keterangan');
         $job->save();
 
-        return redirect('modules/'.$job->module_id)->with('success', 'New support ticket has been updated!!');
+        return redirect('modules/'.$job->module_id)->with('success', 'Job Berhasil Diubah');
     }
 
     /**

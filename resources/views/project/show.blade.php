@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
   <div class="row">
     <div class="col-md-12">
       <div class="tile">

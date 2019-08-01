@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="row">
+
+    @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
     <div class="col-md-12">
       <div class="tile">
         <div class="row">

@@ -122,7 +122,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
             /*dd($timesheet);*/
-            return redirect('timesheetss')->with('success', 'User Ditambahkan');
+            return redirect('timesheetss')->with('success', 'Timesheet Berhasil Ditambahkan');
 
         }
 
@@ -144,7 +144,7 @@ class TimesheetController extends Controller
             $timesheet->save();
 
 //            dd($timesheet);
-            return redirect('timesheetss')->with('success', 'User Ditambahkan');
+            return redirect('timesheetss')->with('success', 'Timesheet Berhasil Ditambahkan');
 
         }
     }
@@ -224,7 +224,7 @@ class TimesheetController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
-        return redirect('timesheetss')->with('success', 'User Diedit');
+        return redirect('timesheetss')->with('success', 'Timesheet Berhasil Diubah');
     }
 
     /**

@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
     @if(Auth::user()->hasRole('Project Manager'))
         <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
     @endif

@@ -219,12 +219,12 @@
             }
 
             .badge-dark {
-              color: #FFF;
-              background-color: #343a40;
-            }
+color: #FFF;
+background-color: #343a40;
+}
 
             .badge-dark[href]:hover, .badge-dark[href]:focus {
-              color: #FFF;
+color: #FFF;
               text-decoration: none;
               background-color: #1d2124;
             }
@@ -238,72 +238,401 @@
                 text-align: center;
             }
         </style>
+        {{$rekrusif = 0}}
+        {{$rekrusif1 = 0}}
+        {{$rekrusif2 = 0}}
+        {{$rekrusif3 = 0}}
+        {{$rekrusif7 = 0}}
+
+        {{--        @foreach($jobs as $uu)--}}
+
+        {{--        {{$a =  strtotime('today')}}--}}
+
+        {{--        {{strtotime($selesai = $uu->deadline)}}--}}
+
+        {{--        {{$tt = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}}--}}
+
+        {{--            @if( $tt === 7)--}}
+
         <div class="tile">
          <div class="page-header">
             <h2 class="line-head">Timeline Reminder</h2>
          </div>
-          <div class="jumbotron">
-            <!-- 7 hari -->
-            <h1 class="display-3">7 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 7 hari. Lihat tabel di bawah.</p>
-            <!-- 3 hari -->
-            <h1 class="display-3">3 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 3 hari. Lihat tabel di bawah.</p>
-            <!-- 2 hari -->
-            <h1 class="display-3">2 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 2 hari. Lihat tabel di bawah.</p>
-            <!-- 1 hari -->
-            <h1 class="display-3">1 hari lagi !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam 1 hari. Lihat tabel di bawah.</p>
-            <!-- hari ini -->
-            <h1 class="display-3">Hari ini !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan hari ini. Jangan sampai melewati deadline. Lihat tabel di bawah.</p>
-            <!-- lewat deadline -->
-            <h1 class="display-3">Deadline lewat !</h1>
-            <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah melewati deadline. Segera selesaikan. Lihat tabel di bawah.</p>
-          </div>
-          <table class="table table-sm">
-                <thead>
-                <tr>
-                    <th>Modul</th>
-                    <th>Job</th>
-                    <th>Deadline</th>
-                    <th>Sisa Waktu</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="jumbotron">
 
-                @foreach($jobs as $job)
+          @if($dead == 0)
+                  <h1 class="display-3">Deadline !</h1>
+                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah mencapai deadline. Segera selesaikan. Lihat tabel di bawah.</p>
+              @else
+                  <h1 class="display-3">{{ $dead }} hari lagi !</h1>
+                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam {{ $dead }} hari. Lihat tabel di bawah.</p>
+              @endif
+
+          </div>
+
+
+
+
+        @foreach($jobs as $jo)
+
+
+            @if((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) <= 0)
+
+
+                @if($rekrusif < 1)
+
+                <table class="table table-sm">
+                    <thead>
                         <tr>
-                            <td>{{$job->nama_module}}</td>
-                            <td>{{$job->nama_job}}</td>
-                            <td>{{date("d M Y", strtotime($selesai = $job->deadlineJob))}}</td>
-                            <td>
-                                @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
-                                    {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
-                                @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
-                                   <span class="badge badge-warning">Deadline</span>
-                                @else
-                                   <span class="badge badge-danger">Melewati Deadline</span>
-                                @endif
-                            </td>
-                            <td>@if ($job->status === 1 )
-                                    <span class="badge badge-pill badge-primary">Ongoing</span>
-                                @elseif($job->status === 2 )
-                                    <span class="badge badge-pill badge-secondary">Queue</span>
-                                @elseif($job->status === 3 )
-                                    <span class="badge badge-pill badge-warning">Pending</span>
-                                @elseif($job->status === 4 )
-                                    <span class="badge badge-pill badge-success">Completed</span>
-                                @elseif($projects->status === 5 )
-                                    <span class="badge badge-pill badge-dark">Canceled</span>
-                                @endif</td>
+                            <th>Modul</th>
+                            <th>Job</th>
+                            <th>Deadline</th>
+                            <th>Sisa Waktu</th>
+                            <th>Status</th>
                         </tr>
-                @endforeach
-                </tbody>
-          </table>
+                    </thead>
+                    <tbody>
+
+                        @foreach($jobs as $job)
+
+                            @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) <= 0)
+
+                                <tr>
+                                    <td>{{$job->nama_module}}</td>
+                                    <td>{{$job->nama_job}}</td>
+                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                                    <td>
+                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                           <span class="badge badge-warning">Deadline</span>
+                                        @else
+                                           <span class="badge badge-danger">Melewati Deadline</span>
+                                        @endif
+                                    </td>
+                                    <td>@if ($job->status === 1 )
+                                            <span class="badge badge-pill badge-primary">Ongoing</span>
+                                        @elseif($job->status === 2 )
+                                            <span class="badge badge-pill badge-secondary">Queue</span>
+                                        @elseif($job->status === 3 )
+                                            <span class="badge badge-pill badge-warning">Pending</span>
+                                        @elseif($job->status === 4 )
+                                            <span class="badge badge-pill badge-success">Completed</span>
+                                        @elseif($projects->status === 5 )
+                                            <span class="badge badge-pill badge-dark">Canceled</span>
+                                        @endif</td>
+                                </tr>
+
+
+                            @endif
+
+                        @endforeach
+                    </tbody>
+                </table>
+
+                    {{$re = 1}}
+                    {{$rekrusif += $re}}
+
+                    @endif
+
+                @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 1)
+
+                    @if($rekrusif1 < 1)
+
+
+                    <h3>Deadline dalam <b>1</b> hari</h3>
+                        <table class="table table-sm">
+                            <thead>
+                            <tr>
+                                <th>Modul</th>
+                                <th>Job</th>
+                                <th>Deadline</th>
+                                <th>Sisa Waktu</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach($jobs as $job)
+
+                                @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 1)
+
+                                <tr>
+                                    <td>{{$job->nama_module}}</td>
+                                    <td>{{$job->nama_job}}</td>
+                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                                    <td>
+                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                            <span class="badge badge-warning">Deadline</span>
+                                        @else
+                                            <span class="badge badge-danger">Melewati Deadline</span>
+                                        @endif
+                                    </td>
+                                    <td>@if ($job->status === 1 )
+                                            <span class="badge badge-pill badge-primary">Ongoing</span>
+                                        @elseif($job->status === 2 )
+                                            <span class="badge badge-pill badge-secondary">Queue</span>
+                                        @elseif($job->status === 3 )
+                                            <span class="badge badge-pill badge-warning">Pending</span>
+                                        @elseif($job->status === 4 )
+                                            <span class="badge badge-pill badge-success">Completed</span>
+                                        @elseif($projects->status === 5 )
+                                            <span class="badge badge-pill badge-dark">Canceled</span>
+                                        @endif</td>
+                                </tr>
+
+                                @endif
+
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        {{$re = 1}}
+                        {{$rekrusif1 += $re}}
+
+                        @endif
+
+
+                @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 2)
+
+                    @if($rekrusif2 < 1)
+
+                    <h3>Deadline dalam <b>2</b> hari</h3>
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>Modul</th>
+                            <th>Job</th>
+                            <th>Deadline</th>
+                            <th>Sisa Waktu</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($jobs as $job)
+
+                            @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 2)
+
+                                <tr>
+                                    <td>{{$job->nama_module}}</td>
+                                    <td>{{$job->nama_job}}</td>
+                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                                    <td>
+                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                            <span class="badge badge-warning">Deadline</span>
+                                        @else
+                                            <span class="badge badge-danger">Melewati Deadline</span>
+                                        @endif
+                                    </td>
+                                    <td>@if ($job->status === 1 )
+                                            <span class="badge badge-pill badge-primary">Ongoing</span>
+                                        @elseif($job->status === 2 )
+                                            <span class="badge badge-pill badge-secondary">Queue</span>
+                                        @elseif($job->status === 3 )
+                                            <span class="badge badge-pill badge-warning">Pending</span>
+                                        @elseif($job->status === 4 )
+                                            <span class="badge badge-pill badge-success">Completed</span>
+                                        @elseif($projects->status === 5 )
+                                            <span class="badge badge-pill badge-dark">Canceled</span>
+                                        @endif</td>
+                                </tr>
+
+                            @endif
+
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                        {{$re = 1}}
+                        {{$rekrusif2 += $re}}
+
+                        @endif
+
+                @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 3)
+
+                    @if($rekrusif3 < 1)
+
+                    <h3>Deadline dalam <b>3</b> hari</h3>
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>Modul</th>
+                            <th>Job</th>
+                            <th>Deadline</th>
+                            <th>Sisa Waktu</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($jobs as $job)
+
+                            @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 3)
+
+                                <tr>
+                                    <td>{{$job->nama_module}}</td>
+                                    <td>{{$job->nama_job}}</td>
+                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                                    <td>
+                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                            <span class="badge badge-warning">Deadline</span>
+                                        @else
+                                            <span class="badge badge-danger">Melewati Deadline</span>
+                                        @endif
+                                    </td>
+                                    <td>@if ($job->status === 1 )
+                                            <span class="badge badge-pill badge-primary">Ongoing</span>
+                                        @elseif($job->status === 2 )
+                                            <span class="badge badge-pill badge-secondary">Queue</span>
+                                        @elseif($job->status === 3 )
+                                            <span class="badge badge-pill badge-warning">Pending</span>
+                                        @elseif($job->status === 4 )
+                                            <span class="badge badge-pill badge-success">Completed</span>
+                                        @elseif($projects->status === 5 )
+                                            <span class="badge badge-pill badge-dark">Canceled</span>
+                                        @endif</td>
+                                </tr>
+
+                            @endif
+
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                        {{$re = 1}}
+                        {{$rekrusif3 += $re}}
+
+                    @endif
+
+                @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 7)
+
+                    @if($rekrusif7 < 1)
+
+
+                    <h3>Deadline dalam <b>7</b> hari</h3>
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>Modul</th>
+                            <th>Job</th>
+                            <th>Deadline</th>
+                            <th>Sisa Waktu</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($jobs as $job)
+
+                            @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 7)
+
+                                <tr>
+                                    <td>{{$job->nama_module}}</td>
+                                    <td>{{$job->nama_job}}</td>
+                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                                    <td>
+                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                            <span class="badge badge-warning">Deadline</span>
+                                        @else
+                                            <span class="badge badge-danger">Melewati Deadline</span>
+                                        @endif
+                                    </td>
+                                    <td>@if ($job->status === 1 )
+                                            <span class="badge badge-pill badge-primary">Ongoing</span>
+                                        @elseif($job->status === 2 )
+                                            <span class="badge badge-pill badge-secondary">Queue</span>
+                                        @elseif($job->status === 3 )
+                                            <span class="badge badge-pill badge-warning">Pending</span>
+                                        @elseif($job->status === 4 )
+                                            <span class="badge badge-pill badge-success">Completed</span>
+                                        @elseif($projects->status === 5 )
+                                            <span class="badge badge-pill badge-dark">Canceled</span>
+                                        @endif</td>
+                                </tr>
+
+                            @endif
+
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                        {{$re = 1}}
+                        {{$rekrusif7 += $re}}
+
+                    @endif
+
+{{--                    @else--}}
+
+{{--                        <table class="table table-sm">--}}
+{{--                            <thead>--}}
+{{--                            <tr>--}}
+{{--                                <th>Modul</th>--}}
+{{--                                <th>Job</th>--}}
+{{--                                <th>Deadline</th>--}}
+{{--                                <th>Sisa Waktu</th>--}}
+{{--                                <th>Status</th>--}}
+{{--                            </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+
+{{--                            @foreach($jobs as $job)--}}
+{{--                                <tr>--}}
+{{--                                    <td>{{$job->nama_module}}</td>--}}
+{{--                                    <td>{{$job->nama_job}}</td>--}}
+{{--                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>--}}
+{{--                                    <td>--}}
+{{--                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )--}}
+{{--                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari--}}
+{{--                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )--}}
+{{--                                            <span class="badge badge-warning">Deadline</span>--}}
+{{--                                        @else--}}
+{{--                                            <span class="badge badge-danger">Melewati Deadline</span>--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
+{{--                                    <td>@if ($job->status === 1 )--}}
+{{--                                            <span class="badge badge-pill badge-primary">Ongoing</span>--}}
+{{--                                        @elseif($job->status === 2 )--}}
+{{--                                            <span class="badge badge-pill badge-secondary">Queue</span>--}}
+{{--                                        @elseif($job->status === 3 )--}}
+{{--                                            <span class="badge badge-pill badge-warning">Pending</span>--}}
+{{--                                        @elseif($job->status === 4 )--}}
+{{--                                            <span class="badge badge-pill badge-success">Completed</span>--}}
+{{--                                        @elseif($projects->status === 5 )--}}
+{{--                                            <span class="badge badge-pill badge-dark">Canceled</span>--}}
+{{--                                        @endif</td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+
+                @endif
+
+                <br>
+                <hr>
+                    <br>
+
+            @endforeach
+
         </div>
+
+
+
+
+
+{{--                @if()--}}
+
+
+
+
 
       
         <p class="footer">© {{ date('Y') }} Mahasiswa Magang Universitas Gadjah Mada. Yogyakarta, Indonesia.</p>

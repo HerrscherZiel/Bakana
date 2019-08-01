@@ -192,7 +192,7 @@ class ModuleController extends Controller
 
         $module->save();
 
-        return redirect('modules')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('modules')->with('success', 'Module Berhasil Dibuat');
     }
 
 
@@ -228,7 +228,7 @@ class ModuleController extends Controller
 
         $module->save();
 
-        return redirect('projects/'.$module->project_id)->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        return redirect('projects/'.$module->project_id)->with('success', 'Module Berhasil Dibuat');
     }
     /**
      * Display the specified resource.
@@ -390,7 +390,7 @@ class ModuleController extends Controller
         $module->keterangan     = $request->get('keterangan');
         $module->save();
         
-        return redirect('/modules')->with('success', 'New support ticket has been updated!!');
+        return redirect('/modules')->with('success', 'Module Berhasil Diubah');
     }
 
 
@@ -422,7 +422,7 @@ class ModuleController extends Controller
         $module->keterangan     = $request->get('keterangan');
         $module->save();
 
-        return redirect('/projects/'.$module->project_id)->with('success', 'New support ticket has been updated!!');
+        return redirect('/projects/'.$module->project_id)->with('success', 'Module Berhasil Diubah');
     }
 
     /**
@@ -438,7 +438,7 @@ class ModuleController extends Controller
             $module = Module::find($id);
             $module->delete();
 
-            return redirect()->back()->with('success', 'job has been deleted Successfully');
+            return redirect()->back();
         }
 
         else{
