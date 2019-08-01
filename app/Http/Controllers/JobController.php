@@ -187,7 +187,8 @@ class JobController extends Controller
             'nama_job'      =>'required',
             'user'          =>'nullable',
             'tgl_mulai'     =>'required',
-            'deadline'      =>'required|after_or_equal:tgl_mulai',
+            'module_mulai'  =>'nullable',
+            'deadline'      =>'required|after_or_equal:module_mulai',
             'tgl_user'      =>'nullable',
             'status'        =>'required|integer',
             'keterangan'    =>'nullable'

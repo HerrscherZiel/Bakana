@@ -21,6 +21,11 @@
                         <option value="{{$module->id_module}}" selected>{{$module->nama_module}}</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <input class="form-control" type="hidden" name="module_mulai"  {{$h = $module->tgl_mulai}}value="{{$h}}">
+                </div>
+
                 <div class="form-group">
                   <input class="form-control" type="text" name="nama_job" placeholder="Nama Job">
                 </div>

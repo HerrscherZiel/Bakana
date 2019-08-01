@@ -59,6 +59,7 @@ class ReminderEmail extends Mailable
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
 //            ->where('users.id', '=', auth()->user()->id)
+            ->where('project.status', '!=', 4)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -81,6 +82,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
+            ->where('project.status', '!=', 4)
             ->where('jobs.deadline','=', $seven)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
@@ -96,7 +98,8 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','<=', $third)
+            ->where('project.status', '!=', 4)
+            ->where('jobs.deadline','=', $third)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -111,7 +114,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','<=', $second)
+            ->where('jobs.deadline','=', $second)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -126,7 +129,8 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-            ->where('jobs.deadline','<=', $first)
+            ->where('project.status', '!=', 4)
+            ->where('jobs.deadline','=', $first)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -141,6 +145,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
+            ->where('project.status', '!=', 4)
             ->where('jobs.deadline','<=', $today)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
@@ -156,6 +161,7 @@ class ReminderEmail extends Mailable
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
+            ->where('project.status', '!=', 4)
             ->where('jobs.deadline','<=', $today)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
@@ -270,7 +276,20 @@ class ReminderEmail extends Mailable
 //                    ]);
 //        }
 
-//        dd($q);
+//        dd($dn);
+
+        $min73 = array_merge($d3->toArray(), $d7->toArray() );
+//        dd($min73);
+
+        $min732 = array_merge($d2->toArray(), $d3->toArray(), $d7->toArray());
+//        dd($min732);
+
+        $min7321 = array_merge($d1->toArray(), $d2->toArray(), $d3->toArray(), $d7->toArray());
+//        dd($min7321);
+
+        $min73210 = array_merge($d0->toArray(), $d1->toArray(), $d2->toArray(), $d3->toArray(), $d7->toArray());
+//        dd($min73210);
+
 
         if ($i == 9){
             return $this->from('PM@mail.com')
@@ -298,7 +317,7 @@ class ReminderEmail extends Mailable
                 ->with(
                     [
                         'nama'  => auth()->user()->name,
-                        'jobs'  => $d3,
+                        'jobs'  => $min73,
                         'dead'  => 3,
 
                     ]);
@@ -308,7 +327,7 @@ class ReminderEmail extends Mailable
                 ->with(
                     [
                         'nama'  => auth()->user()->name,
-                        'jobs'  => $d2,
+                        'jobs'  => $min732,
                         'dead'  => 2,
 
                     ]);
@@ -318,7 +337,7 @@ class ReminderEmail extends Mailable
                 ->with(
                     [
                         'nama'  => auth()->user()->name,
-                        'jobs'  => $d1,
+                        'jobs'  => $min7321,
                         'dead'  => 1,
 
                     ]);
@@ -328,7 +347,7 @@ class ReminderEmail extends Mailable
                 ->with(
                     [
                         'nama'  => auth()->user()->name,
-                        'jobs'  => $d0,
+                        'jobs'  => $min73210,
                         'dead'  => 0,
 
                     ]);
