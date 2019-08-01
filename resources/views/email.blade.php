@@ -215,34 +215,39 @@
             }
 
             .badge-dark {
-              color: #FFF;
-              background-color: #343a40;
-            }
+color: #FFF;
+background-color: #343a40;
+}
 
             .badge-dark[href]:hover, .badge-dark[href]:focus {
-              color: #FFF;
+color: #FFF;
               text-decoration: none;
-              background-color: #1d2124;
-            }
+background-color: #1d2124;
+}
         </style>
+        {{$rekrusif = 0}}
+        {{$rekrusif1 = 0}}
+        {{$rekrusif2 = 0}}
+        {{$rekrusif3 = 0}}
+        {{$rekrusif7 = 0}}
 
-{{--        @foreach($jobs as $uu)--}}
+        {{--        @foreach($jobs as $uu)--}}
 
-{{--        {{$a =  strtotime('today')}}--}}
+        {{--        {{$a =  strtotime('today')}}--}}
 
-{{--        {{strtotime($selesai = $uu->deadline)}}--}}
+        {{--        {{strtotime($selesai = $uu->deadline)}}--}}
 
-{{--        {{$tt = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}}--}}
+        {{--        {{$tt = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}}--}}
 
-{{--            @if( $tt === 7)--}}
+        {{--            @if( $tt === 7)--}}
 
         <div class="tile">
-         <div class="page-header">
-            <h2 class="line-head" style="text-align: center;  color: #6c757d !important;">Timeline Reminder</h2>
+            <div class="page-header">
+             <h2 class="line-head" style="text-align: center;  color: #6c757d !important;">Timeline Reminder</h2>
          </div>
-          <div class="jumbotron">
+            <div class="jumbotron">
 
-              @if($dead == 0)
+          @if($dead == 0)
                   <h1 class="display-3">Deadline !</h1>
                   <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah mencapai deadline. Segera selesaikan. Lihat tabel di bawah.</p>
               @else
@@ -252,9 +257,16 @@
 
           </div>
 
-            @foreach($jobs as $jo)
+
+
+
+        @foreach($jobs as $jo)
+
 
             @if((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) <= 0)
+
+
+                @if($rekrusif < 1)
 
                 <table class="table table-sm">
                     <thead>
@@ -298,14 +310,22 @@
                                         @endif</td>
                                 </tr>
 
+
                             @endif
 
                         @endforeach
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
 
+                    {{$re = 1}}
+                    {{$rekrusif += $re}}
+
+                    @endif
 
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 1)
+
+                    @if($rekrusif1 < 1)
+
 
                     <h3>Deadline dalam <b>1</b> hari</h3>
                         <table class="table table-sm">
@@ -356,8 +376,15 @@
                             </tbody>
                         </table>
 
+                        {{$re = 1}}
+                        {{$rekrusif1 += $re}}
+
+                        @endif
+
 
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 2)
+
+                    @if($rekrusif2 < 1)
 
                     <h3>Deadline dalam <b>2</b> hari</h3>
                     <table class="table table-sm">
@@ -408,8 +435,14 @@
                         </tbody>
                     </table>
 
+                        {{$re = 1}}
+                        {{$rekrusif2 += $re}}
+
+                        @endif
 
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 3)
+
+                    @if($rekrusif3 < 1)
 
                     <h3>Deadline dalam <b>3</b> hari</h3>
                     <table class="table table-sm">
@@ -460,8 +493,15 @@
                         </tbody>
                     </table>
 
+                        {{$re = 1}}
+                        {{$rekrusif3 += $re}}
+
+                    @endif
 
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 7)
+
+                    @if($rekrusif7 < 1)
+
 
                     <h3>Deadline dalam <b>7</b> hari</h3>
                     <table class="table table-sm">
@@ -511,6 +551,11 @@
                         @endforeach
                         </tbody>
                     </table>
+
+                        {{$re = 1}}
+                        {{$rekrusif7 += $re}}
+
+                    @endif
 
 {{--                    @else--}}
 
