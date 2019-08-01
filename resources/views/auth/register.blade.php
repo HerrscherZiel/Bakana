@@ -11,7 +11,7 @@
   <div class="login-box">
     <form class="login-form" method="POST" action="{{ route('register') }}">
         @csrf
-      <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>REGISTER</h3>
+      <h3 class="login-head pb-2"><i class="fa fa-lg fa-fw fa-user"></i>REGISTER</h3>
       <div class="form-group">
         <input  id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nama">
         @error('name')
@@ -42,7 +42,7 @@
       <input type="hidden" value="2" name="role_id">
       <div class="form-group btn-container">
         <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>REGISTER</button>
-        <p class="semibold-text mt-2"><a href="/login">Login here</a></p>
+        <p class="semibold-text mt-2 m-center"><a href="/login">Login here<i class="fa fa-angle-right fa-fw"></i></a></p>
       </div>
     </form>
   </div>

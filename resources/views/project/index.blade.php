@@ -52,8 +52,8 @@
                </b></a>
              </div>
              <div class="col-md-6">
-               <a>dari: {{ date("d-m-Y", strtotime($mulai = $projects->tgl_mulai))}}</a><br>
-               <a>sampai: {{date("d-m-Y", strtotime($selesai = $projects->tgl_selesai))}}</a><br>
+               <a>dari: {{ date("d M Y", strtotime($mulai = $projects->tgl_mulai))}}</a><br>
+               <a>sampai: {{date("d M Y", strtotime($selesai = $projects->tgl_selesai))}}</a><br>
                <a>Total Waktu : <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} Hari</b></a><br>
                <a>Sisa Waktu: <b>
 

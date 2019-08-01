@@ -26,9 +26,9 @@
               <tr>
                 @foreach($module as $modules)
                 <td>{{$modules->nama_module}}</td>
-                <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
-                <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
-                <td>{{$modules->tgl_user ? date("d-m-Y", strtotime($modules->tgl_user)) : ''}}</td>
+                <td>{{date("d-M-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
+                <td>{{date("d-M-Y", strtotime($selesai = $modules->deadline))}}</td>
+                <td>{{$modules->tgl_user ? date("d-M-Y", strtotime($modules->tgl_user)) : ''}}</td>
                 <td>
                      @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari

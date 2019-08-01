@@ -83,12 +83,13 @@
         <main class="app-content">
           <div class="app-title">
             <h1><a href="javascript:history.back()"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
-        </div>
-
+          </div>
+          <div class="mb-5">
             @yield('content')
-            <!-- <div class="app-title mb-0" style="display: flex; bottom: 0;">
-              <span class="text-muted">Copyright  © 2019 <b> Mahasiswa Magang Universitas Gadjah Mada</b> - Yogyakarta, Indonesia.</span>
-            </div> -->
+          </div>
+            <footer class="footer m-center" style="display: block; ">
+              <span class="text-muted">Copyright  © 2019 <b>Mahasiswa Magang Universitas Gadjah Mada</b> - Yogyakarta, Indonesia.</span>
+            </footer>
         </main>
     </div>
  <!-- Essential javascripts for application to work-->
@@ -142,20 +143,43 @@
       });
     });
   </script>
+ <!--  <script type="text/javascript">
+    $(document).ready(function(){
+
+    $("#date6").datepicker({
+      date: $('input[name=date_project]').val();
+     
+    });
+     var minDate = new Date(selected.date.valueOf());
+      $('#date3').datepicker('setStartDate', minDate);
+    
+    
+    $("#date3").datepicker({
+      todayHighlight: true,
+        autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#date6').datepicker('setEndDate', minDate);
+        });
+
+});
+  </script> -->
 <script type="text/javascript">
   var date = new Date();
   date.setDate(date.getDate());
-
+// timesheet
   $('#date').datepicker({ 
       endDate: date,
       autoclose: true,
       todayHighlight: true
   });
+  // project
   $('#date1,#date2').datepicker({
   format: "yyyy-mm-dd",
   autoclose: true,
   todayHighlight: true
   });
+  // modul, job
   $('#date3,#date4,#date5').datepicker({
   startDate: date,
   autoclose: true,

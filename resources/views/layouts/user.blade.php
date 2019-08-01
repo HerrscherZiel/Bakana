@@ -84,7 +84,12 @@
           <div class="app-title">
             <h1><a href="javascript:history.back()"> <i class="fa fa-arrow-left mr-3"></i></a>{{ucwords(Session::get('title'))}}</h1>
         </div>
+        <div class="mb-5">
             @yield('content')
+          </div>
+          <footer class="footer m-center" style="display: block;">
+            <span class="text-muted">Copyright  © 2019 <b>Mahasiswa Magang Universitas Gadjah Mada</b> - Yogyakarta, Indonesia.</span>
+          </footer>
         </main>
     </div>
 

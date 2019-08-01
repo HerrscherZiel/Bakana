@@ -37,7 +37,7 @@
                     </b></address>
             </div>
             <div class="col-4">Dari
-              <address><strong>{{date("d-m-Y", strtotime($mulai = $project->tgl_mulai))}}</strong><br>sampai<br><strong>{{date("d-m-Y", strtotime($mulai = $project->tgl_selesai))}}</strong></address>
+              <address><strong>{{date("d M Y", strtotime($mulai = $project->tgl_mulai))}}</strong><br>sampai<br><strong>{{date("d M Y", strtotime($mulai = $project->tgl_selesai))}}</strong></address>
             </div>
             <div class="col-4">Keterangan:<br><b>{{$project->ket}}</b></div>
           </div>

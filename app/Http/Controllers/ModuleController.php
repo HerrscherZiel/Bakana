@@ -108,6 +108,7 @@ class ModuleController extends Controller
     {
         Session::put('title', 'Create Modul');
         //
+
         if (Auth::user()->hasRole('Project Manager')) {
             $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
                 ->join('users','team_projects.user_id','=','users.id')
@@ -136,8 +137,6 @@ class ModuleController extends Controller
         Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
-
-            $project = Project::find($id);
 
             $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
                 ->join('users','team_projects.user_id','=','users.id')
@@ -168,7 +167,6 @@ class ModuleController extends Controller
     public function store(Request $request)
     {
         //
-
         $request->validate( [
             'nama_module'   =>'required',
             'user'          =>'nullable',
@@ -204,6 +202,7 @@ class ModuleController extends Controller
     {
         //
 
+        $project = Project::findOrFail($tgl_mulai);
         $request->validate( [
             'nama_module'   =>'required',
             'user'          =>'nullable',

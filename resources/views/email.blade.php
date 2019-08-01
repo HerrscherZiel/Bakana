@@ -107,8 +107,12 @@
             }
 
             .line-head {
-              padding-bottom: 10px;
-              border-bottom: 1px solid #ddd;
+              padding: 10px;
+              border-radius: 3px;
+              /*border-bottom: 1px solid #ddd;*/
+            background-color: #009688;
+            text-align: center;
+            color: #FFF !important;
             }
             .badge {
               display: inline-block;
@@ -224,10 +228,19 @@
               text-decoration: none;
               background-color: #1d2124;
             }
+            .footer {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+                box-sizing: border-box;
+                line-height: 1.5em; 
+                margin-top: 0; 
+                color: #aeaeae; 
+                font-size: 12px; 
+                text-align: center;
+            }
         </style>
         <div class="tile">
          <div class="page-header">
-            <h2 class="line-head" style="text-align: center;  color: #6c757d !important;">Timeline Reminder</h2>
+            <h2 class="line-head">Timeline Reminder</h2>
          </div>
           <div class="jumbotron">
             <!-- 7 hari -->
@@ -265,7 +278,7 @@
                         <tr>
                             <td>{{$job->nama_module}}</td>
                             <td>{{$job->nama_job}}</td>
-                            <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                            <td>{{date("d M Y", strtotime($selesai = $job->deadlineJob))}}</td>
                             <td>
                                 @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                                     {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
@@ -293,7 +306,7 @@
         </div>
 
       
-        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">© 2019 Mahasiswa Magang Universitas Gadjah Mada. Yogyakarta, Indonesia.</p>
+        <p class="footer">© {{ date('Y') }} Mahasiswa Magang Universitas Gadjah Mada. Yogyakarta, Indonesia.</p>
            
     </body>
 </html>

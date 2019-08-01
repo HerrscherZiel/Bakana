@@ -42,7 +42,7 @@
       </div>
       <div class="form-group btn-container">
         <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
-        <p class="semibold-text mt-5"><a href="/register">Make account here</a></p>
+        <p class="semibold-text mt-5 m-center"><a href="/register">Make account here<i class="fa fa-angle-right fa-fw"></i></a></p>
       </div>
     </form>
   </div>
