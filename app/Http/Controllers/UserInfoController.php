@@ -130,6 +130,7 @@ class UserInfoController extends Controller
             ->getQuery()
             ->get();
 
+//        dd($jobs);
 //
 //            $jobs = Job::all()->select('jobs.user', '=', auth()->user()->name );
 //

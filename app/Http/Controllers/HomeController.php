@@ -151,7 +151,7 @@ class HomeController extends Controller
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
             ->where('project.status', '!=', 4)
-            ->where('jobs.deadline','=', $today)
+            ->where('jobs.deadline','<=', $today)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -163,7 +163,7 @@ class HomeController extends Controller
 //        $t = count($d1);
 //        dd($t);
 
-        if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
+//        if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
             if(count($d0) != 0){
                 Mail::to($a)->send(new ReminderEmail(0));
             }elseif (count($d1) != 0){
@@ -175,7 +175,7 @@ class HomeController extends Controller
             }elseif (count($d7) != 0){
                 Mail::to($a)->send(new ReminderEmail(7));
             }
-        }
+//        }
 //        else{
 //            Mail::to($a)->send(new ReminderEmail($q = 9));
 //        }
