@@ -53,7 +53,6 @@
 
                 <div class="form-group input-group">
                  
-                  <input id="startDate" name="startDate" readonly="">
                  
                     <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                     <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>

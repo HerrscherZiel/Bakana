@@ -18,14 +18,18 @@
                 @foreach($module as $modules)
                     <option value="{{$modules->id_module}}"
                             @if( $modules->id_module === $job->module_id)
-                            selected {{$tittle = $modules->nama_module}}
+                            selected 
+                            {{$title = $modules->nama_module}}
+                            {{$m = $modules->tgl_mulai}}
+                            {{$n = $modules->deadline}}
                         @endif
                     >{{$modules->nama_module}}</option>
                 @endforeach
             </select>
 
-            <h3 class="tile-title">Modul {{$tittle}}</h3>
-
+            <h3 class="tile-title mb-1">Job {{ $job->nama_job }}</h3>
+            <h6 class="control-label text-muted mb-1">Module: {{$title}}</h6>
+            <h6 class="control-label text-muted">Timeline job: {{date("d-m-Y", strtotime($job->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($job->deadline))}}</h6>
             <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
                 @csrf
@@ -43,8 +47,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <h5 class="control-label text-muted">Job: {{ $job->nama_job }}</h5>
-                      <h5 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($job->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($job->deadline))}}</h5>
                         <input class="form-control" type="hidden" name="nama_job" value={{ $job->nama_job }}>
                     </div>
                     <div class="form-group">
@@ -60,12 +62,14 @@
                     </div>
 
                     <div class="form-group input-group">
-                        <input id="date1" type="hidden" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
-                        <input id="date2" type="hidden" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
+                        <input type="hidden" id="startDate" name="startDate" value="{{$m}}">
+                        <input type="hidden" id="endDate" name="endDate" value="{{$n}}">
+                        <input id="date3" type="hidden" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
+                        <input id="date4" type="hidden" class="form-control" name="deadline" value="{{ $job->deadline }}" readonly>
                     </div>
                     <div class="form-group">
                         <label class="control-label mt-2 mr-2">Target Selesai</label>
-                        <input id="date1" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
+                        <input id="date5" class="form-control" name="tgl_user" value="{{ $job->tgl_user }}" readonly>
                     </div>
 
                     <div class="form-group">

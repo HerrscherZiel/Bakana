@@ -143,11 +143,11 @@
       });
     });
   </script>
-  <script type="text/javascript">
+ <!--  <script type="text/javascript">
     $("#ide").change(function() {
     $("#startDate").val($(this).val());
     }).change(); 
-  </script>
+  </script> -->
   <script type="text/javascript">
     $(document).ready(function(){
   

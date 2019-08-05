@@ -43,13 +43,13 @@
                         <table class="table table-hover mb-0">
                             <thead>
                             <tr>
-                                <th>Job</th>
-                                <th>Tanggal Mulai</th>
-                                <th>Deadline</th>
-                                <th>Sisa Waktu</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
-                                <th>Action</th>
+                                <th style="width: 20%">Job</th>
+                                <th style="width: 10%">Tanggal Mulai</th>
+                                <th style="width: 10%">Deadline</th>
+                                <th style="width: 10%">Sisa Waktu</th>
+                                <th style="width: 10%">Status</th>
+                                <th style="width: 10%">Keterangan</th>
+                                <th style="width: 10%">Action</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -13,18 +13,22 @@
         @endif
         <div class="tile">
 
-            <select class="form-control" name="tittle" required="" style="display: none">
+            <select class="form-control" name="title" required="" style="display: none">
                 @foreach($project as $projects)
 
                     <option value="{{$projects->id_project}}"
                             @if($projects->id_project === $module->project_id)
-                            selected {{$tittle = $projects->nama_project}}
+                            selected 
+                            {{$title = $projects->nama_project}}
+                            {{$m = $projects->tgl_mulai}}
+                            {{$n = $projects->tgl_selesai}}
                         @endif
                     >{{$projects->nama_project}}</option>
                 @endforeach
             </select>
 
-            <h3 class="tile-title">Project {{$tittle}}</h3>
+            <h3 class="tile-title mb-1">Project {{$title}}</h3>
+            <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($m))}}  sampai  {{date("d-m-Y", strtotime($n))}}</h6>
             <form method="post" action="{{ route('module.updates', $module->id_module) }}">
                 @method('PATCH')
                 @csrf
@@ -59,6 +63,8 @@
                         </select>
                     </div>
                     <div class="form-group input-group">
+                        <input type="hidden" id="startDate" name="startDate" value="{{$m}}">
+                        <input type="hidden" id="endDate" name="endDate" value="{{$n}}">
                         <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                         <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" value="{{ $module->tgl_mulai }}" readonly="">
                         <label class="control-label mt-2 ml-5 mr-2">Tanggal Deadline</label>

@@ -18,14 +18,17 @@
                 @foreach($module as $modules)
                     <option value="{{$modules->id_module}}"
                             @if( $modules->id_module === $job->module_id)
-                            selected {{$tittle = $modules->nama_module}}
+                            selected 
+                            {{$title = $modules->nama_module}}
+                            {{$m = $modules->tgl_mulai}}
+                            {{$n = $modules->deadline}}
                         @endif
                     >{{$modules->nama_module}}</option>
                 @endforeach
             </select>
 
-            <h3 class="tile-title">Modul {{$tittle}}</h3>
-
+            <h3 class="tile-title mb-1">Modul {{$title}}</h3>
+            <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($m))}}  sampai  {{date("d-m-Y", strtotime($n))}}</h6>
             <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
                 @csrf
@@ -60,6 +63,8 @@
                     </div>
 
                     <div class="form-group input-group">
+                        <input type="hidden" id="startDate" name="startDate" value="{{$m}}">
+                        <input type="hidden" id="endDate" name="endDate" value="{{$n}}">
                         <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                         <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
                         <label class="control-label mt-2 ml-5 mr-2">Tanggal Deadline</label>

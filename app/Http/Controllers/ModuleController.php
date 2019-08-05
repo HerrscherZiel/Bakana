@@ -124,7 +124,6 @@ class ModuleController extends Controller
             //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
-
     }
 
     public function creates($id)
@@ -132,7 +131,7 @@ class ModuleController extends Controller
         Session::put('title', 'Create Modul');
         //
         if (Auth::user()->hasRole('Project Manager')) {
-
+            $project = Project::find($id);
             $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
                 ->join('users','team_projects.user_id','=','users.id')
                 ->where('project.id_project', '=', $id)
@@ -141,7 +140,6 @@ class ModuleController extends Controller
                 ->getQuery()
                 ->get();
 
-                
             /*dd($project);*/
             return view('module.creates', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
         }

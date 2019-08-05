@@ -12,7 +12,8 @@
         </div><br />
     @endif
      <div class="tile">
-        <h3 class="tile-title">Project {{$project->nama_project}}</h3>
+        <h3 class="tile-title mb-1">Project {{$project->nama_project}}</h3>
+        <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($project->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($project->tgl_selesai))}}</h6>
         <form method="post" action="{{url('/module/creates/$project->id_project')}}">
             <div class="tile-body">
                 <div class="form-group">
@@ -33,6 +34,8 @@
                     </select>
                 </div>
                 <div class="form-group input-group">
+                    <input type="hidden" id="startDate" name="startDate" value="{{$project->tgl_mulai}}">
+                    <input type="hidden" id="endDate" name="endDate" value="{{$project->tgl_selesai}}">
                     <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" placeholder="Tanggal Mulai" readonly="">
                     <div class="mt-1 ml-3 mr-3">to</div>
                     <input id="date4" data-provide="datepicker" class="form-control" name="deadline" placeholder="Tanggal Deadline" readonly="">

@@ -307,6 +307,8 @@ class JobController extends Controller
                 ->getQuery()
                 ->get();
 
+                // dd($module);
+
             return view('job.editUser', compact('job', 'project', 'user', 'module'/*, 'aa', 'as'*/));
 
         }

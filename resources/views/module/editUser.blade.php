@@ -18,7 +18,10 @@
 
                     <option value="{{$projects->id_project}}"
                             @if($projects->id_project === $module->project_id)
-                            selected {{$tittle = $projects->nama_project}}
+                            selected 
+                            {{$tittle = $projects->nama_project}}
+                            {{$m = $projects->tgl_mulai}}
+                            {{$n = $projects->tgl_selesai}}
                         @endif
                     >{{$projects->nama_project}}</option>
                 @endforeach
@@ -43,8 +46,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                      <h5 class="control-label text-muted">Modul: {{ $module->nama_module }}</h5>
-                      <h5 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($module->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($module->deadline))}}</h5>
+                      <h6 class="control-label text-muted">Modul: {{ $module->nama_module }}</h6>
+                      <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($module->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($module->deadline))}}</h6>
                         <input class="form-control" type="hidden" name="nama_module" value="{{ $module->nama_module }}"/>
                     </div>
                     <div class="form-group">
@@ -59,6 +62,8 @@
                         </select>
                     </div>
                     <div class="form-group input-group">
+                        <input type="hidden" id="startDate" name="startDate" value="{{$m}}">
+                        <input type="hidden" id="endDate" name="endDate" value="{{$n}}">
                         <input id="date3" data-provide="datepicker" type="hidden" class="form-control" name="tgl_mulai" value="{{ $module->tgl_mulai }}" readonly="">
                         <input id="date4" data-provide="datepicker" type="hidden" class="form-control" name="deadline" value="{{ $module->deadline }}" readonly="">
                     </div>
