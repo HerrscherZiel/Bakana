@@ -35,7 +35,7 @@ class TimelineController extends Controller
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->nama_module,
+                $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
@@ -111,7 +111,7 @@ class TimelineController extends Controller
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->nama_module,
+                $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
