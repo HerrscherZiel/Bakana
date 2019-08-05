@@ -129,7 +129,17 @@ class TimelineController extends Controller
             ->getQuery()
             ->get();
 
-//        dd($events);
+        $eventss = Project::select('project.id_project', 'project.nama_project')
+            ->where('project.id_project','=',$id)
+            ->getQuery()
+            ->get();
+
+//        dd($eventss);
+        foreach($eventss as $i){
+
+            $ui = $i->id_project;
+            $ii = $i->nama_project;
+        }
 
         $event_list = [];
         foreach ($events as $key => $event) {
@@ -148,12 +158,7 @@ class TimelineController extends Controller
             );
         }
 
-        foreach($events as $i){
-
-            $ui = $i->id_project;
-            $ii = $i->nama_project;
-//            dd($ii);
-        }
+//        dd($events);
 
 //        dd($event_list);
 
@@ -179,6 +184,17 @@ class TimelineController extends Controller
             ->getQuery()
             ->get();
 
+        $eventss = Module::select('module.id_module', 'module.nama_module')
+            ->where('module.id_module','=',$id)
+            ->getQuery()
+            ->get();
+
+//        dd($events);
+
+        foreach($eventss as $i){
+            $ii = $i->nama_module;
+        }
+
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
@@ -195,9 +211,7 @@ class TimelineController extends Controller
             );
         }
 
-        foreach($events as $i){
-            $ii = $i->nama_module;
-        }
+
 
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
