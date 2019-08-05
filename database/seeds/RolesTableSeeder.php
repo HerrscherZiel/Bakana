@@ -23,8 +23,8 @@ class RolesTableSeeder extends Seeder
 
         DB::table('role')->insert(
             array(
-                'nama_role' => 'Unassigned',
-                'keterangan' => 'User belum di assign',
+                'nama_role' => 'Programmer',
+                'keterangan' => 'Programmer',
             )
         );
     }
