@@ -193,7 +193,7 @@ class HomeController extends Controller
 //                ->get();
 
 
-            return view('home');
+            return view('timeline.index');
         }
         else{
            // $name = auth()->user()->name;
@@ -204,7 +204,7 @@ class HomeController extends Controller
 
 
 
-            return view('home');
+            return view('timeline.index');
         }
 //        , compact('user', 'timesheetView'))
 //        ->with('timesheet', $timesheetView);
