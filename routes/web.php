@@ -156,11 +156,16 @@ Route::group(['middleware' => ['auth']], function() {
 
 //Timeline
 
-    Route::get('/timelines','TimelineController@index');
+//    Route::get('/home', 'HomeController@index')->name('home');
+
+
+    Route::get('/timelines','TimelineController@index')->name('timelines');
 
     Route::get('/timelines/project','TimelineController@indexProject');
 
     Route::get('/timelines/job','TimelineController@indexJob');
+
+    Route::get('/timelines/project/{project}','TimelineController@indexJob');
 
     Route::get('/timelines/job/{module}','TimelineController@dropJob');
 

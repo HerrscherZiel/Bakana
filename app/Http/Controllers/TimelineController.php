@@ -35,7 +35,7 @@ class TimelineController extends Controller
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->nama_module,
+                $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
@@ -75,23 +75,46 @@ class TimelineController extends Controller
 
     }
 
-    public function indexJob(){
+    public function indexJob($id){
         Session::put('title', 'Timeline Job');
-        $events = Job::all();
+        $val = Project::all()->where('status','!=',4);
+
+        $events = Project::join('module','project.id_project','=','module.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('jobs.*', 'module.id_module','module.nama_module', 'project.id_project','project.nama_project')
+            ->where('project.id_project','=',$id)
+//            ->where('module.id_module', '=', 'jobs.module_id')
+            ->getQuery()
+            ->get();
+
+//        dd($events);
+
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->nama_job,
+                $event->nama_job . ' : ' . $event->nama_module,
                 true,
                 $event->tgl_mulai,
-                $event->tgl_selesai,
-                $event->id_job
+                $event->deadline,
+                $event->id_job,
+                [
+                    'color' => $event->color,
+                    'description' => $event->keterangan,
+                    'textColor' => '#0A0A0A'
+                ]
             );
+        }
+
+        foreach($events as $i){
+
+            $ui = $i->id_project;
+            $ii = $i->nama_project;
+
         }
 
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        return view('timeline.indexOfJobs')->with('calendar', $calendar);
+        return view('timeline.indexBD', compact('calendar','val', 'ii', 'ui'));
 
     }
 
@@ -101,7 +124,7 @@ class TimelineController extends Controller
         $val = Project::all()->where('status','!=',4);
 
         $events = Project::join('module','project.id_project','=','module.project_id')
-            ->select('module.*', 'project.nama_project')
+            ->select('module.*','project.id_project', 'project.nama_project')
             ->where('project.id_project','=',$id)
             ->getQuery()
             ->get();
@@ -111,7 +134,7 @@ class TimelineController extends Controller
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
-                $event->nama_module,
+                $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
                 $event->deadline,
@@ -127,6 +150,7 @@ class TimelineController extends Controller
 
         foreach($events as $i){
 
+            $ui = $i->id_project;
             $ii = $i->nama_project;
 //            dd($ii);
         }
@@ -140,7 +164,7 @@ class TimelineController extends Controller
 //            'calendar'  => $calendar,
 //        ], 200);
 
-        return view('timeline.indexBD', compact('calendar','val', 'ii'))/*->with('eevee', $eevee)*/;
+        return view('timeline.indexBD', compact('calendar','val', 'ii', 'ui'))/*->with('eevee', $eevee)*/;
 
     }
 
