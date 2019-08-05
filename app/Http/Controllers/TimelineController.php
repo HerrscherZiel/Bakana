@@ -65,7 +65,12 @@ class TimelineController extends Controller
                 true,
                 $event->tgl_mulai,
                 $event->tgl_selesai,
-                $event->id_project
+                $event->id_project,
+                [
+                    'color' => $event->color,
+                    'url' => '/timelines/'. $event->id_project,
+                    'textColor' => '#0A0A0A'
+                ]
             );
         }
 
