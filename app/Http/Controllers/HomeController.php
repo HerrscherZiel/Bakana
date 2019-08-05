@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Job;
 use App\Mail\ReminderEmail;
+use App\Module;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
@@ -12,6 +13,7 @@ use App\Util\Utils;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use MaddHatter\LaravelFullcalendar\Calendar;
 
 
 class HomeController extends Controller
@@ -182,6 +184,34 @@ class HomeController extends Controller
 
 //        Mail::to($a)->send(new ReminderEmail());
 
+        Session::put('title', 'Timeline All Modul');
+        $val = Project::all()->where('status','!=',4);
+
+//        $eevee = Project::join('module','project.id_project','=','module.project_id')
+//            ->select('module.*', 'project.nama_project')
+//            ->where('project.id_project','=',$id)
+//            ->getQuery()
+//            ->get();
+
+        $events = Module::all();
+        $event_list = [];
+        foreach ($events as $key => $event) {
+            $event_list[] = Calendar::event(
+                $event->nama_module . ' : ' .$event->user,
+                true,
+                $event->tgl_mulai,
+                $event->deadline,
+                $event->id_module,
+                [
+                    'color' => $event->color,
+                    'url' => '/timelines/job/'. $event->id_module,
+                    'description' => $event->keterangan,
+                    'textColor' => '#0A0A0A'
+                ]
+            );
+        }
+        $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
+
 
 
         if (Auth::user()->hasRole('Project Manager')) {
@@ -193,7 +223,7 @@ class HomeController extends Controller
 //                ->get();
 
 
-            return view('timeline.index');
+            return view('timeline.index', compact('calendar','val', 'events'));
         }
         else{
            // $name = auth()->user()->name;
@@ -204,7 +234,7 @@ class HomeController extends Controller
 
 
 
-            return view('timeline.index');
+            return view('timeline.index', compact('calendar','val', 'events'));
         }
 //        , compact('user', 'timesheetView'))
 //        ->with('timesheet', $timesheetView);
