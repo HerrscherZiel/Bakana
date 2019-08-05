@@ -69,15 +69,15 @@
                                         <span class="badge badge-danger">Melewati<br>Deadline</span>
                                     @endif
                                 </td>
-                                <td>@if ($job->status === 1 )
+                                <td>@if ($job->statusJob === 1 )
                                         <span class="badge badge-pill badge-primary">Ongoing</span>
-                                    @elseif($job->status === 2 )
+                                    @elseif($job->statusJob === 2 )
                                         <span class="badge badge-pill badge-secondary">Queue</span>
-                                    @elseif($job->status === 3 )
+                                    @elseif($job->statusJob === 3 )
                                         <span class="badge badge-pill badge-warning">Pending</span>
-                                    @elseif($job->status === 4 )
+                                    @elseif($job->statusJob === 4 )
                                         <span class="badge badge-pill badge-success">Completed</span>
-                                    @elseif($job->status === 5 )
+                                    @elseif($job->statusJob === 5 )
                                         <span class="badge badge-pill badge-dark">Canceled</span>
                                     @endif</td>
                                 <td>{{$job->keterangan}}</td>
