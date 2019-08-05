@@ -15,7 +15,6 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="{{URL::asset('docs/css/mhfullcalendar.min.css')}}"/> -->
 </head>
 <body class="app sidebar-mini rtl">
 <div id="app">
@@ -92,101 +91,6 @@
           </footer>
         </main>
     </div>
-
-<!-- Full Calendar -->
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    $('#external-events .fc-event').each(function() {
-
-      // store data so the calendar knows to render an event upon drop
-      $(this).data('event', {
-        title: $.trim($(this).text()), // use the element's text as the event title
-        stick: true // maintain when user navigates (see docs on the renderEvent method)
-      });
-
-      // make the event draggable using jQuery UI
-      $(this).draggable({
-        zIndex: 999,
-        revert: true,      // will cause the event to go back to its
-        revertDuration: 0  //  original position after the drag
-      });
-
-    });
-
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar
-      drop: function() {
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
-        }
-      }
-    });
-
-
-  });
-</script>
-<script type="text/javascript">
-    $('.input-daterange input').each(function() {
-        $(this).datepicker('clearDates');
-    });
-</script>
-
-<script type="text/javascript">
-  var data = {
-    labels: ["Januari", "Februari", "Maret", "April", "Mei"],
-    datasets: [
-        {
-            label: "My First timeline",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56]
-        },
-        {
-            label: "My Second timeline",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86]
-        }
-    ]
-  };
-  var pdata = [
-    {
-        value: 300,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Complete"
-    },
-    {
-        value: 50,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "In-Progress"
-    }
-  ]
-
-  var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-  var lineChart = new Chart(ctxl).Line(data);
-
-  var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-  var pieChart = new Chart(ctxp).Pie(pdata);
-</script>
 
 </body>
 </html>

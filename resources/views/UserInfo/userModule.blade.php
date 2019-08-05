@@ -28,11 +28,11 @@
                 </div>
                     <div class="row invoice-info mb-2 text-secondary">
                         <div class="col-4">
-                               <strong>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</strong> sampai 
-                                <strong>{{date("d-m-Y", strtotime($mulai = $modules->deadline))}}</strong>
+                               <strong>{{date("d M Y", strtotime($mulai = $modules->tgl_mulai))}}</strong> sampai 
+                                <strong>{{date("d M Y", strtotime($mulai = $modules->deadline))}}</strong>
                         </div>
                         <div class="col-3">
-                           Target: <b>{{$modules->tgl_user ? date("d-m-Y", strtotime($mulai = $modules->tgl_user)) : " "}}</b>
+                           Target: <b>{{$modules->tgl_user ? date("d M Y", strtotime($mulai = $modules->tgl_user)) : " "}}</b>
                        </div>
                        <div class="col-5">
                         Keterangan: <strong>{{$modules->keterangan}}</strong>

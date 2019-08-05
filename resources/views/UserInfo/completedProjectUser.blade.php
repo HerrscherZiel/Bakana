@@ -23,13 +23,21 @@
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif
                                     </b></a><br>
-                                <a>dari: {{ date("d-m-Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
-                                <a>sampai: {{date("d-m-Y", strtotime($selesai = $infos->tgl_selesai))}}</a>
+                                <a>dari: {{ date("d M Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
+                                <a>sampai: {{date("d M Y", strtotime($selesai = $infos->tgl_selesai))}}</a>
                             </div>
                             <div class="col-md-6">
+                                <a>Total Waktu : <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} Hari</b></a><br>
+                                 <a>Sisa Waktu: <b>
+                                   @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
+                                       {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
+                                       @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
+                                       <span class="badge badge-warning">Deadline</span>
+                                       @else
+                                        <span class="badge badge-danger">Melewati Deadline</span>
+                                   @endif
 
-                                <a>Total Waktu (Hari): <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }}</b></a><br>
-                                <a>Sisa Waktu (Hari): <b>{{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) }}</b></a>
+                               </b></a>
                             </div>
                         </div>
                     </div>

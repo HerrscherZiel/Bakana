@@ -24,6 +24,7 @@
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
+        <!-- <li><a class="app-nav__item" href="#" id="btnFullscreen"><i class="fa fa-user fa-lg"></i></a></li> -->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="{!! url('/userInfo') !!}"><i class="fa fa-user fa-lg"></i> Profile</a></li>
@@ -94,7 +95,6 @@
     </div>
  <!-- Essential javascripts for application to work-->
 <script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
-
 <script type="text/javascript" src="{{URL::asset('js/jquery-3.4.1.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/jquery-ui.js')}}"></script>
@@ -110,13 +110,10 @@
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.tabs.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.position.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/jquery.ui.timepicker.js?v=0.3.3')}}"></script>
-
-<!-- <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script> -->
-<script type="text/javascript" src="{{URL::asset('js/plugins/select2.min.js')}}"></script>
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+  <script type="text/javascript" src="{{URL::asset('js/plugins/select2.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/bootstrap-datepicker.js')}}"></script>
-<!-- delete -->
-<script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
+  <!-- delete -->
+  <script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
   <script type="text/javascript">
       $('button.delete-btn').on('click', function(e){
@@ -148,6 +145,8 @@
     $("#startDate").val($(this).val());
     }).change(); 
   </script> -->
+
+  <!-- datepicker -->
   <script type="text/javascript">
     $(document).ready(function(){
   
@@ -217,7 +216,6 @@
 <script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/fullcalendar.min.js')}}"></script>
-{{--<script type="text/javascript" src="{{URL::asset('js/fullcalendar.min.js')}}"></script>--}}
 
 
 <!-- Full Calendar -->
@@ -247,15 +245,8 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar
-      drop: function() {
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
-        }
-      }
+      editable: true
+      
     });
   
   
@@ -266,68 +257,6 @@
         $(this).datepicker('clearDates'); 
     });
 </script>
-<script type="text/javascript">
-  $('#sl').click(function(){
-    $('#tl').loadingBtn();
-    $('#tb').loadingBtn({ text : "Signing In"});
-  });
-  
-  $('#el').click(function(){
-    $('#tl').loadingBtnComplete();
-    $('#tb').loadingBtnComplete({ html : "Sign In"});
-  });
-  
-  $('#demoSelect').select2();
-</script>
-
-<script type="text/javascript">
-  var data = {
-    labels: ["Januari", "Februari", "Maret", "April", "Mei"],
-    datasets: [
-        {
-            label: "My First timeline",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56]
-        },
-        {
-            label: "My Second timeline",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86]
-        }
-    ]
-  };
-  var pdata = [
-    {
-        value: 300,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Complete"
-    },
-    {
-        value: 50,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "In-Progress"
-    }
-  ]
-  
-  var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-  var lineChart = new Chart(ctxl).Line(data);
-  
-  var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-  var pieChart = new Chart(ctxp).Pie(pdata);
-</script>
-
 <script type="text/javascript">
     $(document).ready(function() {
         $('#timepicker_start').timepicker({
@@ -378,23 +307,7 @@
       return confirm("Are you sure want to delete?");
   });
 </script> -->
-
-<!-- Fullscreen -->
-<!-- <script>
-  var elem = document.getElementById("fullscreen");
-  function openFullscreen() {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  }
-</script>
- --><!-- Show more -->
+<!-- Show more -->
 <script type="text/javascript">
   $(".show-more a").on("click", function() {
     var $this = $(this); 
@@ -412,15 +325,6 @@
     $this.text(linkText);
   });
 </script>
-<!-- autorefresh -->
-{{--<script>--}}
-{{--if(location.search.indexOf('php') < 0){--}}
-{{--  var hash = window.location.hash;--}}
-{{--  var loc = window.location.href.replace(hash, '');--}}
-{{--  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';--}}
-{{--  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):--}}
-{{--  setTimeout(function(){window.location.href = loc + hash;}, 5);--}}
-{{--}--}}
-{{--</script>--}}
+
 </body>
 </html>

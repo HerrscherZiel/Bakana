@@ -27,12 +27,12 @@
             <thead>
               <tr>
                 <th>Modul</th>
+                <th>User</th>
                 <th>Tanggal Mulai</th>
                 <th>Deadline</th>
                 <th>Target Selesai</th>
                 <th>Sisa Waktu</th>
                 <th>Status</th>
-                <th>User</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -41,6 +41,7 @@
               <tr>
                 @foreach($module as $modules)
                 <td>{{$modules->nama_module}}</td>
+                <td>{{$modules->user}}</td>
                  <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
                 <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
                 <td>{{$modules->tgl_user ? date("d-m-Y", strtotime($modules->tgl_user)) : " "}}</td>
@@ -63,8 +64,7 @@
                         <span class="badge badge-pill badge-success">Completed</span>
                     @elseif($modules->status === 5 )
                         <span class="badge badge-pill badge-dark">Canceled</span>
-                    @endif</td></td>
-                <td>{{$modules->user}}</td>
+                    @endif</td>
                 <td>{{$modules->keterangan}}</td>
                 <td>
                     <div class="btn-group">

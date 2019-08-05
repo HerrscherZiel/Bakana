@@ -28,7 +28,7 @@
             </select>
 
             <h3 class="tile-title mb-1">Project {{$title}}</h3>
-            <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($m))}}  sampai  {{date("d-m-Y", strtotime($n))}}</h6>
+            <h6 class="control-label text-muted">Timeline: {{date("d M Y", strtotime($m))}}  sampai  {{date("d M Y", strtotime($n))}}</h6>
             <form method="post" action="{{ route('module.updates', $module->id_module) }}">
                 @method('PATCH')
                 @csrf

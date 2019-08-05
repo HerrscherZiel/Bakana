@@ -29,9 +29,9 @@
             <div class="col-4">
               <address>Project: <strong>{{$modules->nama_project}}</strong><br>
 
-                  <br>Tanggal Mulai: <strong>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</strong>
-                  <br>Deadline: <strong>{{date("d-m-Y", strtotime($mulai = $modules->deadline))}}</strong>
-                  <br>Target Selesai: <strong>{{$modules->tgl_user ? date("d-m-Y", strtotime($mulai = $modules->tgl_user)) : " "}}</strong></address>
+                  <br>Tanggal Mulai: <strong>{{date("d M Y", strtotime($mulai = $modules->tgl_mulai))}}</strong>
+                  <br>Deadline: <strong>{{date("d M Y", strtotime($mulai = $modules->deadline))}}</strong>
+                  <br>Target Selesai: <strong>{{$modules->tgl_user ? date("d M Y", strtotime($mulai = $modules->tgl_user)) : " "}}</strong></address>
             </div>
             <div class="col-4">Status: <b>@if ($modules->status === 1 )
                         <span class="badge badge-pill badge-primary">Ongoing</span>
@@ -54,11 +54,10 @@
                 <thead>
                   <tr>
                     <th>Job</th>
-                    <th>Module</th>
                     <th>User</th>
                     <th>Tanggal Mulai</th>
                     <th>Deadline</th>
-                    <th>Tanggal Target</th>
+                    <th>Target Selesai</th>
                     <th>Sisa Waktu</th>
                     <th>Status</th>
                     <th>Keterangan</th>
@@ -70,7 +69,6 @@
                 @foreach($job as $jobs)
                   <tr>
                     <td>{{$jobs->nama_job}}</td>
-                    <td>{{$jobs->nama_module}}</td>
                     <td>{{$jobs->user}}</td>
                       <td>{{date("d-m-Y", strtotime($mulai = $jobs->tgl_mulai))}}</td>
                       <td>{{date("d-m-Y", strtotime($selesai = $jobs->deadline))}}</td>

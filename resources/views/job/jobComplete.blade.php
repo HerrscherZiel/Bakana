@@ -9,9 +9,9 @@
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
-                            <th>Job</th>
-                            <th>Modul</th>
                             <th>Project</th>
+                            <th>Modul</th>
+                            <th>Job</th>
                             <th>User</th>
                             <th>Status</th>
                             <th>Keterangan</th>
@@ -21,9 +21,9 @@
                         <tbody>
                         <tr>
                             @foreach($job as $jobs)
-                                <td>{{$jobs->nama_job}}</td>
-                                <td>{{$jobs->nama_module}}</td>
                                 <td>{{$jobs->nama_project}}</td>
+                                <td>{{$jobs->nama_module}}</td>
+                                <td>{{$jobs->nama_job}}</td>
                                 <td>{{$jobs->user}}</td>
                                 <td>@if ($jobs->status === 1 )
                                         <span class="badge badge-pill badge-primary">Ongoing</span>
@@ -36,7 +36,7 @@
                                     @elseif($jobs->status === 5 )
                                         <span class="badge badge-pill badge-dark">Canceled</span>    
 
-                                    @endif</td></td>
+                                    @endif</td>
                                 <td>{{$jobs->keterangan}}</td>
                                 <td>
                                     @if(Auth::user()->hasRole('Project Manager'))

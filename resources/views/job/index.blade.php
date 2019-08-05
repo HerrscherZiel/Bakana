@@ -17,13 +17,13 @@
           <table class="table table-hover table-bordered" id="sampleTable">
               <thead>
               <tr>
-                <th>Job</th>
-                <th>Modul</th>
                 <th>Project</th>
+                <th>Modul</th>
+                <th>Job</th>
                 <th>User</th>
                 <th>Tanggal Mulai</th>
                 <th>Deadline</th>
-                <th>Tanggal Target</th>
+                <th>Target Selesai</th>
                 <th>Sisa Waktu</th>
                 <th>Status</th>
                 <th>Keterangan</th>
@@ -33,9 +33,9 @@
             <tbody>
               <tr>
                 @foreach($job as $jobs)
-                <td>{{$jobs->nama_job}}</td>
-                <td>{{$jobs->nama_module}}</td>
                 <td>{{$jobs->nama_project}}</td>
+                <td>{{$jobs->nama_module}}</td>
+                <td>{{$jobs->nama_job}}</td>
                 <td>{{$jobs->user}}</td>
                 <td>{{date("d-m-Y", strtotime($mulai = $jobs->tgl_mulai))}}</td>
                 <td>{{date("d-m-Y", strtotime($selesai = $jobs->deadline))}}</td>

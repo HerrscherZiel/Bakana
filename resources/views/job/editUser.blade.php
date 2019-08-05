@@ -29,7 +29,7 @@
 
             <h3 class="tile-title mb-1">Job {{ $job->nama_job }}</h3>
             <h6 class="control-label text-muted mb-1">Module: {{$title}}</h6>
-            <h6 class="control-label text-muted">Timeline job: {{date("d-m-Y", strtotime($job->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($job->deadline))}}</h6>
+            <h6 class="control-label text-muted">Timeline job: {{date("d M Y", strtotime($job->tgl_mulai))}}  sampai  {{date("d M Y", strtotime($job->deadline))}}</h6>
             <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
                 @csrf

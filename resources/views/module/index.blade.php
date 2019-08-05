@@ -17,14 +17,14 @@
           <table class="table table-hover table-bordered" id="sampleTable">
               <thead>
               <tr>
+                <th>Project</th>
                 <th>Modul</th>
+                <th>User</th>
                 <th>Tanggal Mulai</th>
                 <th>Deadline</th>
                 <th>Target Selesai</th>
                 <th>Sisa Waktu</th>
                 <th>Status</th>
-                <th>User</th>
-                <th>Project</th>
                 <th>Keterangan</th>
                 <th>Action</th>
               </tr>
@@ -32,7 +32,9 @@
             <tbody>
               <tr>
                 @foreach($module as $modules)
+                <td>{{$modules->nama_project}}</td>
                 <td>{{$modules->nama_module}}</td>
+                <td>{{$modules->user}}</td>
                 <td>{{date("d-M-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
                 <td>{{date("d-M-Y", strtotime($selesai = $modules->deadline))}}</td>
                 <td>{{$modules->tgl_user ? date("d-M-Y", strtotime($modules->tgl_user)) : ''}}</td>
@@ -56,8 +58,6 @@
                      @elseif($modules->status === 5 )
                         <span class="badge badge-pill badge-dark">Canceled</span>
                     @endif</td>
-                <td>{{$modules->user}}</td>
-                <td>{{$modules->nama_project}}</td>
                 <td>{{$modules->keterangan}}</td>
                 <td>
                     <div class="btn-group">

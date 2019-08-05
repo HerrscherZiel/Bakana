@@ -47,9 +47,7 @@
     <script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
     <script src="{{URL::asset('js/mhmoment.min.js')}}"></script>
     <script src="{{URL::asset('js/mhfullcalendar.min.js')}}"></script>
-
     <script src="{{URL::asset('js/main.js')}}"></script>
-
 
     <!-- Option Ajax  -->
     <script type="text/javascript">
@@ -78,13 +76,6 @@
                                     },
                                     "eventLimit":true,
                                     "events":[]});
-
-                            {{--                        {!! $calendar->script() !!}--}}
-                            // $('#calendar').fullCalendar({
-                            //     events: function (start, end, timezone, callback) {
-                            //         callback(events);
-                            //     }
-                            // });
                         },
                         error: function (xhr) {
                             alert("Something went wrong, please try again");

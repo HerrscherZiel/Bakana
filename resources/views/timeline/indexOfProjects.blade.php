@@ -59,11 +59,6 @@
                                 },
                                 "eventLimit":true,
                                 "events":[]});
-                        // $('#calendar').fullCalendar({
-                        //     events: function (start, end, timezone, callback) {
-                        //         callback(events);
-                        //     }
-                        // });
                     },
                     error: function (xhr) {
                         alert("Something went wrong, please try again");

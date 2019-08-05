@@ -9,14 +9,14 @@
                         <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
                         <thead>
                         <tr>
+                            <th>Project</th>
                             <th>Modul</th>
+                            <th>User</th>
                             <th>Tanggal Mulai</th>
                             <th>Deadline</th>
                             <th>Tanggal Selesai</th>
-                            <th>Status</th>
                             <th>Sisa Waktu</th>
-                            <th>User</th>
-                            <th>Project</th>
+                            <th>Status</th>
                             <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
@@ -24,7 +24,9 @@
                         <tbody>
                         <tr>
                             @foreach($module as $modules)
+                                <td>{{$modules->nama_project}}</td>
                                 <td>{{$modules->nama_module}}</td>
+                                <td>{{$modules->user}}</td>
                                 <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
                                 <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
                                 <td>{{$modules->tgl_user ? date("d-m-Y", strtotime($modules->tgl_user)) : " "}}</td>
@@ -46,9 +48,7 @@
                                         <span class="badge badge-pill badge-success">Completed</span>
                                      @elseif($modules->status === 5 )
                                         <span class="badge badge-pill badge-dark">Canceled</span>
-                                    @endif</td></td>
-                                <td>{{$modules->user}}</td>
-                                <td>{{$modules->nama_project}}</td>
+                                    @endif</td>
                                 <td>{{$modules->keterangan}}</td>
                                 <td>
                                     <div class="btn-group">

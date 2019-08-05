@@ -54,12 +54,12 @@
                 <thead>
                   <tr>
                     <th>Modul</th>
+                    <th>User</th>
                     <th>Tanggal Mulai</th>
                     <th>Deadline</th>
                     <th>Tanggal Selesai</th>
                     <th>Sisa Waktu</th>
                     <th>Status</th>
-                    <th>User</th>
                     <th>Keterangan</th>
                     <th>Action</th>
                   </tr>
@@ -68,6 +68,7 @@
                 @foreach($module as $modules)
                   <tr>
                     <td>{{$modules->nama_module}}</td>
+                    <td>{{$modules->user}}</td>
                     <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
                     <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
                     <td>{{$modules->tgl_user ? date("d-m-Y", strtotime($modules->tgl_user)) : " "}}</td>
@@ -91,7 +92,6 @@
                         @elseif($modules->status === 5 )
                             <span class="badge badge-pill badge-dark">Canceled</span>
                         @endif</td>
-                    <td>{{$modules->user}}</td>
                     <td>{{$modules->keterangan}}</td>
                     <td>
                         <div class="btn-group">
@@ -99,15 +99,9 @@
                             <i class="fa fa-lg fa-eye">
                             </i>
                         </a>
-{{--                            @if(Auth::user()->hasRole('Project Manager'))--}}
                             <a class="btn btn-info" href="/module/{{$modules->id_module}}/edit">
                             <i class="fa fa-lg fa-edit">
                             </i>
-                           {{--     @elseif( $aa = $as)
-                                    <a class="btn btn-info" href="/module/{{$modules->id_module}}/edit">
-                                        <i class="fa fa-lg fa-edit">
-                                        </i>
-                                @endif--}}
                         </a>
                                 @if(Auth::user()->hasRole('Project Manager'))
                                 <form class="delete" action="{{ route('modules.destroy', $modules->id_module)}}" method="post">

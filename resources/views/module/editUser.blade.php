@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                       <h6 class="control-label text-muted">Modul: {{ $module->nama_module }}</h6>
-                      <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($module->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($module->deadline))}}</h6>
+                      <h6 class="control-label text-muted">Timeline: {{date("d M Y", strtotime($module->tgl_mulai))}}  sampai  {{date("d M Y", strtotime($module->deadline))}}</h6>
                         <input class="form-control" type="hidden" name="nama_module" value="{{ $module->nama_module }}"/>
                     </div>
                     <div class="form-group">

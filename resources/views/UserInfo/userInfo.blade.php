@@ -113,8 +113,8 @@
                     <span class="badge badge-pill badge-dark">Canceled</span>
                 @endif
                </b></a><br>
-               <a>dari: {{ date("d-m-Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
-               <a>sampai: {{date("d-m-Y", strtotime($selesai = $infos->tgl_selesai))}}</a>
+               <a>dari: {{ date("d M Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
+               <a>sampai: {{date("d M Y", strtotime($selesai = $infos->tgl_selesai))}}</a>
              </div>
              <div class="col-md-6">
                
