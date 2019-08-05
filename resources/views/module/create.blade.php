@@ -36,12 +36,12 @@
                     </select>
                 </div>
                 <div class="form-group input-group">
-                    <input  type="date" min="{{$projects->tgl_mulai}}" class="form-control" name="tgl_mulai" placeholder="Tanggal Mulai">
+                    <input data-provide="datepicker" id="date3" class="form-control" name="tgl_mulai" placeholder="Tanggal Mulai" readonly>
                     <div class="mt-1 ml-3 mr-3">sampai</div>
-                    <input id="date4" data-provide="datepicker" class="form-control" name="deadline" placeholder="Tanggal Deadline" readonly="">
+                    <input data-provide="datepicker" id="date4" class="form-control" name="deadline" placeholder="Tanggal Deadline" readonly>
                 </div>
                 <div class="form-group input-group">
-                    <input id="date5" data-provide="datepicker" class="form-control" name="tgl_user" placeholder="Target Selesai" readonly="">
+                    <input data-provide="datepicker" id="date5" class="form-control" name="tgl_user" placeholder="Target Selesai" readonly>
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="status" required="">

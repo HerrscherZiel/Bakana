@@ -160,8 +160,8 @@ class HomeController extends Controller
 //        $h = $jobs;
 
 //        dd($jobs);
-//        $t = count($d1);
-//        dd($t);
+       // $t = count($d7);
+       // dd($t);
 
         if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
             if(count($d0) != 0){

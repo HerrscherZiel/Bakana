@@ -114,6 +114,13 @@
             text-align: center;
             color: #FFF !important;
             }
+            .line-head2 {
+            padding: 10px;
+            background-color: #e9ecef;
+            text-align: center;
+            margin: 0;
+            color: ##555 !important;
+            }
             .badge {
               display: inline-block;
               padding: 0.25em 0.4em;
@@ -219,12 +226,12 @@
             }
 
             .badge-dark {
-color: #FFF;
-background-color: #343a40;
-}
+              color: #FFF;
+              background-color: #343a40;
+              }
 
             .badge-dark[href]:hover, .badge-dark[href]:focus {
-color: #FFF;
+              color: #FFF;
               text-decoration: none;
               background-color: #1d2124;
             }
@@ -238,28 +245,16 @@ color: #FFF;
                 text-align: center;
             }
         </style>
-        {{$rekrusif = 0}}
-        {{$rekrusif1 = 0}}
-        {{$rekrusif2 = 0}}
-        {{$rekrusif3 = 0}}
-        {{$rekrusif7 = 0}}
-
-        {{--        @foreach($jobs as $uu)--}}
-
-        {{--        {{$a =  strtotime('today')}}--}}
-
-        {{--        {{strtotime($selesai = $uu->deadline)}}--}}
-
-        {{--        {{$tt = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}}--}}
-
-        {{--            @if( $tt === 7)--}}
-
+        <input type="hidden" value=" {{$rekrusif = 0}}"/>
+        <input type="hidden" value=" {{$rekrusif1 = 0}}"/>
+        <input type="hidden" value=" {{$rekrusif2 = 0}}"/>
+        <input type="hidden" value=" {{$rekrusif3 = 0}}"/>
+        <input type="hidden" value=" {{$rekrusif7 = 0}}"/>
         <div class="tile">
          <div class="page-header">
             <h2 class="line-head">Timeline Reminder</h2>
          </div>
             <div class="jumbotron">
-
           @if($dead == 0)
                   <h1 class="display-3">Deadline !</h1>
                   <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah mencapai deadline. Segera selesaikan. Lihat tabel di bawah.</p>
@@ -267,20 +262,10 @@ color: #FFF;
                   <h1 class="display-3">{{ $dead }} hari lagi !</h1>
                   <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam {{ $dead }} hari. Lihat tabel di bawah.</p>
               @endif
-
           </div>
-
-
-
-
         @foreach($jobs as $jo)
-
-
             @if((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) <= 0)
-
-
                 @if($rekrusif < 1)
-
                 <table class="table table-sm">
                     <thead>
                         <tr>
@@ -292,11 +277,8 @@ color: #FFF;
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach($jobs as $job)
-
                             @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) <= 0)
-
                                 <tr>
                                     <td>{{$job->nama_module}}</td>
                                     <td>{{$job->nama_job}}</td>
@@ -322,25 +304,18 @@ color: #FFF;
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif</td>
                                 </tr>
-
-
                             @endif
-
                         @endforeach
                     </tbody>
                 </table>
-
-                    {{$re = 1}}
-                    {{$rekrusif += $re}}
-
+                <input type="hidden" value="{{$re = 1}}"/>
+                <input type="hidden" value="{{$rekrusif += $re}}"/>
                     @endif
-
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 1)
-
                     @if($rekrusif1 < 1)
-
-
-                    <h3>Deadline dalam <b>1</b> hari</h3>
+                     <div class="page-header">
+                        <h3 class="line-head2">Deadline dalam 1 hari</h3>
+                     </div>
                         <table class="table table-sm">
                             <thead>
                             <tr>
@@ -352,11 +327,8 @@ color: #FFF;
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach($jobs as $job)
-
                                 @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 1)
-
                                 <tr>
                                     <td>{{$job->nama_module}}</td>
                                     <td>{{$job->nama_job}}</td>
@@ -382,24 +354,19 @@ color: #FFF;
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif</td>
                                 </tr>
-
                                 @endif
-
                             @endforeach
                             </tbody>
                         </table>
-
-                        {{$re = 1}}
-                        {{$rekrusif1 += $re}}
-
+                        <input type="hidden" value="{{$re = 1}}"/>
+                        <input type="hidden" value="{{$rekrusif1 += $re}}"/>
                         @endif
 
-
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 2)
-
                     @if($rekrusif2 < 1)
-
-                    <h3>Deadline dalam <b>2</b> hari</h3>
+                    <div class="page-header">
+                        <h3 class="line-head2">Deadline dalam 2 hari</h3>
+                     </div>
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -413,9 +380,7 @@ color: #FFF;
                         <tbody>
 
                         @foreach($jobs as $job)
-
                             @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 2)
-
                                 <tr>
                                     <td>{{$job->nama_module}}</td>
                                     <td>{{$job->nama_job}}</td>
@@ -441,23 +406,20 @@ color: #FFF;
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif</td>
                                 </tr>
-
                             @endif
-
                         @endforeach
                         </tbody>
                     </table>
-
-                        {{$re = 1}}
-                        {{$rekrusif2 += $re}}
-
-                        @endif
+                    <input type="hidden" value="{{$re = 1}}"/>
+                    <input type="hidden" value="{{$rekrusif2 += $re}}"/>
+                @endif
 
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 3)
 
                     @if($rekrusif3 < 1)
-
-                    <h3>Deadline dalam <b>3</b> hari</h3>
+                    <div class="page-header">
+                        <h3 class="line-head2">Deadline dalam 3 hari</h3>
+                     </div>
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -469,11 +431,8 @@ color: #FFF;
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach($jobs as $job)
-
                             @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 3)
-
                                 <tr>
                                     <td>{{$job->nama_module}}</td>
                                     <td>{{$job->nama_job}}</td>
@@ -499,24 +458,20 @@ color: #FFF;
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif</td>
                                 </tr>
-
                             @endif
-
                         @endforeach
                         </tbody>
                     </table>
-
-                        {{$re = 1}}
-                        {{$rekrusif3 += $re}}
-
+                    <input type="hidden" value="{{$re = 1}}"/>
+                    <input type="hidden" value="{{$rekrusif3 += $re}}"/>
                     @endif
 
                 @elseif((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 7)
 
                     @if($rekrusif7 < 1)
-
-
-                    <h3>Deadline dalam <b>7</b> hari</h3>
+                    <div class="page-header">
+                        <h3 class="line-head2">Deadline dalam 7 hari</h3>
+                     </div>
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -530,9 +485,7 @@ color: #FFF;
                         <tbody>
 
                         @foreach($jobs as $job)
-
                             @if((strtotime($job->deadlineJob) - strtotime('today')) / (60 * 60 * 24) == 7)
-
                                 <tr>
                                     <td>{{$job->nama_module}}</td>
                                     <td>{{$job->nama_job}}</td>
@@ -558,85 +511,18 @@ color: #FFF;
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif</td>
                                 </tr>
-
                             @endif
-
                         @endforeach
                         </tbody>
                     </table>
-
-                        {{$re = 1}}
-                        {{$rekrusif7 += $re}}
-
+                    <input type="hidden" value="{{$re = 1}}"/>
+                    <input type="hidden" value="{{$rekrusif7 += $re}}"/>
                     @endif
-
-{{--                    @else--}}
-
-{{--                        <table class="table table-sm">--}}
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                <th>Modul</th>--}}
-{{--                                <th>Job</th>--}}
-{{--                                <th>Deadline</th>--}}
-{{--                                <th>Sisa Waktu</th>--}}
-{{--                                <th>Status</th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-{{--                            <tbody>--}}
-
-{{--                            @foreach($jobs as $job)--}}
-{{--                                <tr>--}}
-{{--                                    <td>{{$job->nama_module}}</td>--}}
-{{--                                    <td>{{$job->nama_job}}</td>--}}
-{{--                                    <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )--}}
-{{--                                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari--}}
-{{--                                        @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )--}}
-{{--                                            <span class="badge badge-warning">Deadline</span>--}}
-{{--                                        @else--}}
-{{--                                            <span class="badge badge-danger">Melewati Deadline</span>--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
-{{--                                    <td>@if ($job->status === 1 )--}}
-{{--                                            <span class="badge badge-pill badge-primary">Ongoing</span>--}}
-{{--                                        @elseif($job->status === 2 )--}}
-{{--                                            <span class="badge badge-pill badge-secondary">Queue</span>--}}
-{{--                                        @elseif($job->status === 3 )--}}
-{{--                                            <span class="badge badge-pill badge-warning">Pending</span>--}}
-{{--                                        @elseif($job->status === 4 )--}}
-{{--                                            <span class="badge badge-pill badge-success">Completed</span>--}}
-{{--                                        @elseif($projects->status === 5 )--}}
-{{--                                            <span class="badge badge-pill badge-dark">Canceled</span>--}}
-{{--                                        @endif</td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
-{{--                            </tbody>--}}
-{{--                        </table>--}}
-
                 @endif
-
-                <br>
-                <hr>
-                    <br>
-
+               
             @endforeach
-
         </div>
-
-
-
-
-
-{{--                @if()--}}
-
-
-
-
-
-      
         <p class="footer">© {{ date('Y') }} Mahasiswa Magang Universitas Gadjah Mada. Yogyakarta, Indonesia.</p>
-           
     </body>
 </html>
 

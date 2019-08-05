@@ -24,7 +24,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Module</label>
-                    <select class="form-control" name="module_id" required="">
+                    <select id="ide" class="form-control" name="module_id" required="">
                        @foreach($module as $modules)
                         <option value="{{$modules->id_module}}"
                                 @if($modules->id_module === $job->module_id)
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Nama Job</label>
-                  <input class="form-control" type="text" name="nama_job" value='{{ $job->nama_job }}'/>
+                  <input class="form-control" type="text" name="nama_job" value='{{ $job->nama_job }}' />
                 </div>
                 <div class="form-group">
                     <label class="control-label">User</label>
@@ -52,6 +52,9 @@
                 </div>
 
                 <div class="form-group input-group">
+                 
+                  <input id="startDate" name="startDate" readonly="">
+                 
                     <label class="control-label mt-2 mr-2">Tanggal Mulai</label>
                     <input id="date3" data-provide="datepicker" class="form-control" name="tgl_mulai" value="{{ $job->tgl_mulai }}" readonly>
                     <label class="control-label mt-2 ml-5 mr-2">Tanggal Deadline</label>

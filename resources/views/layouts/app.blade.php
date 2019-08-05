@@ -143,27 +143,49 @@
       });
     });
   </script>
- <!--  <script type="text/javascript">
+  <script type="text/javascript">
+    $("#ide").change(function() {
+    $("#startDate").val($(this).val());
+    }).change(); 
+  </script>
+  <script type="text/javascript">
     $(document).ready(function(){
-
-    $("#date6").datepicker({
-      date: $('input[name=date_project]').val();
-     
-    });
-     var minDate = new Date(selected.date.valueOf());
-      $('#date3').datepicker('setStartDate', minDate);
-    
-    
-    $("#date3").datepicker({
-      todayHighlight: true,
+  
+    $("input[name='tgl_mulai']").datepicker({
+        todayBtn:  1,
         autoclose: true,
-        }).on('changeDate', function (selected) {
+    }).on('changeDate', function (selected) {
+        var minDate = new Date(selected.date.valueOf());
+        $("input[name='tgl_selesai']").datepicker('setStartDate', minDate);
+    });
+    
+    $("input[name='tgl_selesai']").datepicker()
+        .on('changeDate', function (selected) {
             var minDate = new Date(selected.date.valueOf());
-            $('#date6').datepicker('setEndDate', minDate);
+            $("input[name='tgl_mulai']").datepicker('setEndDate', minDate);
         });
 
 });
-  </script> -->
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+  
+    $("input[name='tgl_mulai']").datepicker({
+        todayBtn:  1,
+        autoclose: true,
+    }).on('changeDate', function (selected) {
+        var minDate = new Date(selected.date.valueOf());
+        $("input[name='deadline']").datepicker('setStartDate', minDate);
+    });
+    
+    $("input[name='deadline']").datepicker()
+        .on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $("input[name='tgl_mulai']").datepicker('setEndDate', minDate);
+        });
+
+});
+  </script>
 <script type="text/javascript">
   var date = new Date();
   date.setDate(date.getDate());
@@ -181,7 +203,8 @@
   });
   // modul, job
   $('#date3,#date4,#date5').datepicker({
-  startDate: date,
+  startDate: $("#startDate").val(),
+  endDate: $("#endDate").val(),
   autoclose: true,
   todayHighlight: true
   });

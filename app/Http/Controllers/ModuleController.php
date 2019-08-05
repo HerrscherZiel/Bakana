@@ -58,9 +58,6 @@ class ModuleController extends Controller
             ->where('project.id_project', '=', $id )
             ->getQuery()
             ->get();
-
-//        dd($project);
-
         return view('module.indexproject', compact('project', 'module'));
 
 
@@ -87,8 +84,6 @@ class ModuleController extends Controller
 
             return view('module.moduleComplete')->with('module', $module);
         }
-
-//        dd($module);
 
 
     else{
@@ -146,7 +141,7 @@ class ModuleController extends Controller
                 ->getQuery()
                 ->get();
 
-
+                
             /*dd($project);*/
             return view('module.creates', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
         }
@@ -200,9 +195,7 @@ class ModuleController extends Controller
 
     public function stores(Request $request)
     {
-        //
-
-        $project = Project::findOrFail($tgl_mulai);
+        
         $request->validate( [
             'nama_module'   =>'required',
             'user'          =>'nullable',
