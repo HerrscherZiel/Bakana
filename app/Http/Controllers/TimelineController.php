@@ -92,6 +92,11 @@ class TimelineController extends Controller
             ->getQuery()
             ->get();
 
+        $eventss = Project::select('project.id_project', 'project.nama_project')
+            ->where('project.id_project','=',$id)
+            ->getQuery()
+            ->get();
+
 //        dd($events);
 
         $event_list = [];
@@ -110,7 +115,7 @@ class TimelineController extends Controller
             );
         }
 
-        foreach($events as $i){
+        foreach($eventss as $i){
 
             $ui = $i->id_project;
             $ii = $i->nama_project;
@@ -138,7 +143,6 @@ class TimelineController extends Controller
             ->where('project.id_project','=',$id)
             ->getQuery()
             ->get();
-
 //        dd($eventss);
         foreach($eventss as $i){
 
