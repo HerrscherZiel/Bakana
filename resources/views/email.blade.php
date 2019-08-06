@@ -255,13 +255,13 @@
             <h2 class="line-head">Timeline Reminder</h2>
          </div>
             <div class="jumbotron">
-          @if($dead == 0)
-                  <h1 class="display-3">Deadline !</h1>
-                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah mencapai deadline. Segera selesaikan. Lihat tabel di bawah.</p>
-              @else
-                  <h1 class="display-3">{{ $dead }} hari lagi !</h1>
-                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam {{ $dead }} hari. Lihat tabel di bawah.</p>
-              @endif
+	          	@if($dead == 0)
+	                  <h1 class="display-3">Deadline !</h1>
+	                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang sudah mencapai deadline. Segera selesaikan. Lihat tabel di bawah.</p>
+	              @else
+	                  <h1 class="display-3">{{ $dead }} hari lagi !</h1>
+	                  <p>Halo, {{ $nama }} ! Anda memiliki beberapa job yang harus segera diselesaikan dalam {{ $dead }} hari. Lihat tabel di bawah.</p>
+	              @endif
           </div>
         @foreach($jobs as $jo)
             @if((strtotime($jo->deadlineJob) - strtotime('today')) / (60 * 60 * 24) <= 0)
@@ -269,11 +269,11 @@
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th>Modul</th>
-                            <th>Job</th>
-                            <th>Deadline</th>
-                            <th>Sisa Waktu</th>
-                            <th>Status</th>
+                            <th style="width: 20%">Modul</th>
+                            <th style="width: 30%">Job</th>
+                            <th style="width: 10%">Deadline</th>
+                            <th style="width: 10%">Sisa Waktu</th>
+                            <th style="width: 10%">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -319,11 +319,11 @@
                         <table class="table table-sm">
                             <thead>
                             <tr>
-                                <th>Modul</th>
-                                <th>Job</th>
-                                <th>Deadline</th>
-                                <th>Sisa Waktu</th>
-                                <th>Status</th>
+                                <th style="width: 20%">Modul</th>
+                                <th style="width: 30%">Job</th>
+                                <th style="width: 10%">Deadline</th>
+                                <th style="width: 10%">Sisa Waktu</th>
+                                <th style="width: 10%">Status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -370,11 +370,11 @@
                     <table class="table table-sm">
                         <thead>
                         <tr>
-                            <th>Modul</th>
-                            <th>Job</th>
-                            <th>Deadline</th>
-                            <th>Sisa Waktu</th>
-                            <th>Status</th>
+                            <th style="width: 20%">Modul</th>
+                            <th style="width: 30%">Job</th>
+                            <th style="width: 10%">Deadline</th>
+                            <th style="width: 10%">Sisa Waktu</th>
+                            <th style="width: 10%">Status</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -423,11 +423,11 @@
                     <table class="table table-sm">
                         <thead>
                         <tr>
-                            <th>Modul</th>
-                            <th>Job</th>
-                            <th>Deadline</th>
-                            <th>Sisa Waktu</th>
-                            <th>Status</th>
+                            <th style="width: 20%">Modul</th>
+                            <th style="width: 30%">Job</th>
+                            <th style="width: 10%">Deadline</th>
+                            <th style="width: 10%">Sisa Waktu</th>
+                            <th style="width: 10%">Status</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -475,11 +475,11 @@
                     <table class="table table-sm">
                         <thead>
                         <tr>
-                            <th>Modul</th>
-                            <th>Job</th>
-                            <th>Deadline</th>
-                            <th>Sisa Waktu</th>
-                            <th>Status</th>
+                            <th style="width: 20%">Modul</th>
+                            <th style="width: 30%">Job</th>
+                            <th style="width: 10%">Deadline</th>
+                            <th style="width: 10%">Sisa Waktu</th>
+                            <th style="width: 10%">Status</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -96,6 +96,10 @@
                         <label class="control-label">Keterangan</label>
                         <textarea class="form-control" rows="4" name="keterangan">{{ $job->keterangan }}</textarea>
                     </div>
+                    <div class="form-group">
+                        <input type="color" name="color" value="{{ $job->color }}">
+                        <label class="control-label">Pilih warna untuk timeline</label>
+                    </div>
                 </div>
                 <div class="tile-footer">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
