@@ -292,7 +292,7 @@ class ReminderEmail extends Mailable
 
 
         if ($i == 9){
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [
@@ -302,7 +302,7 @@ class ReminderEmail extends Mailable
 
                     ]);
         }elseif ($i == 7){
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [
@@ -312,7 +312,7 @@ class ReminderEmail extends Mailable
 
                     ]);
         }elseif ($i == 3){
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [
@@ -322,7 +322,7 @@ class ReminderEmail extends Mailable
 
                     ]);
         }elseif ($i == 2){
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [
@@ -332,7 +332,7 @@ class ReminderEmail extends Mailable
 
                     ]);
         }elseif ($i == 1){
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [
@@ -342,7 +342,7 @@ class ReminderEmail extends Mailable
 
                     ]);
         }elseif ($i == 0){
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [
@@ -352,7 +352,7 @@ class ReminderEmail extends Mailable
 
                     ]);
         }else{
-            return $this->from('PM@mail.com')
+            return $this->from('magangbtv@gmail.com')
                 ->view('email')
                 ->with(
                     [

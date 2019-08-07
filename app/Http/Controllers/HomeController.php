@@ -50,6 +50,8 @@ class HomeController extends Controller
 
         $q = 0;
 
+        $cek = 0;
+
 
         $jobs = User::join('team_projects','users.id','=','team_projects.user_id')
             ->join('project','team_projects.project_id','=','project.id_project')
@@ -166,6 +168,11 @@ class HomeController extends Controller
        // dd($t);
 
 //        if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
+
+//        $tes = $cek;
+//        $tes+=$cek;
+//
+//        if()
             if(count($d0) != 0){
                 Mail::to($a)->send(new ReminderEmail(0));
             }elseif (count($d1) != 0){
