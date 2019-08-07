@@ -5,7 +5,6 @@
       <div class="tile row">
         <div class="col-md-12">
             <a href="/timelines" class="btn btn-primary">Modul Timeline</a>
-            <a href="/timelines/job" class="btn btn-primary">Job Timeline</a><br><br>
 
                {!! $calendar->calendar() !!}
         </div>
