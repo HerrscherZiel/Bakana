@@ -32,11 +32,11 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Nama</label>
-                  <input class="form-control" type="text" name="name" value={{ $user->name }}>
+                  <input class="form-control" type="text" name="name" value="{{ $user->name }}">
                 </div>
                <div class="form-group">
                 <label class="control-label">Email</label>
-                  <input class="form-control" type="text" name="email" value={{ $user->email }}>
+                  <input class="form-control" type="text" name="email" value="{{ $user->email }}">
                 </div>
             </div>
             <div class="tile-footer">

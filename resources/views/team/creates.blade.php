@@ -24,13 +24,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" name="user_id" required="">
-                                    <option value="" disabled="" selected="">User</option>
-
+                                <select class="form-control" name="user_id" required="" id="demoSelect" multiple="">
+                                    <!-- <option value="" disabled="" selected="">User</option> -->
+                                    <optgroup label="Pilih User"> 
                                 @foreach($user as $users)
-{{----}}
-                                                <option value="{{$users->id}}">{{$users->name}}</option>
+                                        <option value="{{$users->id}}">{{$users->name}}</option>
                                 @endforeach
+                            </optgroup>
                     </select>
                 </div>
             </div>

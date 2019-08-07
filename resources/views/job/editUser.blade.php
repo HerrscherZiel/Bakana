@@ -20,15 +20,15 @@
                             @if( $modules->id_module === $job->module_id)
                             selected 
                             {{$title = $modules->nama_module}}
-                            {{$m = $modules->tgl_mulai}}
-                            {{$n = $modules->deadline}}
+                            {{$m = $job->tgl_mulai}}
+                            {{$n = $job->deadline}}
                         @endif
                     >{{$modules->nama_module}}</option>
                 @endforeach
             </select>
 
             <h3 class="tile-title mb-1">Job {{ $job->nama_job }}</h3>
-            <h6 class="control-label text-muted mb-1">Module: {{$title}}</h6>
+            <h6 class="control-label text-muted mb-1">Modul: {{$title}}</h6>
             <h6 class="control-label text-muted">Timeline job: {{date("d M Y", strtotime($job->tgl_mulai))}}  sampai  {{date("d M Y", strtotime($job->deadline))}}</h6>
             <form method="post" action="{{ route('job.update', $job->id_job) }}">
                 @method('PATCH')
@@ -47,7 +47,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="hidden" name="nama_job" value={{ $job->nama_job }}>
+                        <input class="form-control" type="hidden" name="nama_job" value="{{ $job->nama_job }}">
                     </div>
                     <div class="form-group">
                         <select class="form-control" style="display: none;" name="user" required="">

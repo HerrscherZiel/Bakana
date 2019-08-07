@@ -46,10 +46,11 @@
                                 <th style="width: 20%">Job</th>
                                 <th style="width: 10%">Tanggal Mulai</th>
                                 <th style="width: 10%">Deadline</th>
+                                <th style="width: 10%">Target</th>
                                 <th style="width: 10%">Sisa Waktu</th>
                                 <th style="width: 10%">Status</th>
-                                <th style="width: 10%">Keterangan</th>
-                                <th style="width: 10%">Action</th>
+                                <th style="width: 20%">Keterangan</th>
+                                <th style="width: 5%">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -60,6 +61,7 @@
                                 <td>{{$job->nama_job}}</td>
                                 <td>{{date("d-m-Y", strtotime($mulai = $job->jobMulai))}}</td>
                                 <td>{{date("d-m-Y", strtotime($selesai = $job->deadlineJob))}}</td>
+                                <td>{{$job->target ? date("d-m-Y", strtotime($job->target)) : ''}}</td>
                                 <td>
                                     @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                                         {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari

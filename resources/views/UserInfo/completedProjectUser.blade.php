@@ -10,6 +10,12 @@
                     <div class="tile-body">
                         <div class="row">
                             <div class="col-md-6">
+                                <a>dari: {{ date("d M Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
+                                <a>sampai: {{date("d M Y", strtotime($selesai = $infos->tgl_selesai))}}</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a>Total Waktu : <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} Hari</b></a>
+                                <br>
                                 <a>Status: <b>
                                         @if ($infos->status === 1 )
                                             <span class="badge badge-pill badge-primary">Ongoing</span>
@@ -22,23 +28,9 @@
                                         @elseif($infos->status === 5 )
                                             <span class="badge badge-pill badge-dark">Canceled</span>
                                         @endif
-                                    </b></a><br>
-                                <a>dari: {{ date("d M Y", strtotime($mulai = $infos->tgl_mulai))}}</a><br>
-                                <a>sampai: {{date("d M Y", strtotime($selesai = $infos->tgl_selesai))}}</a>
+                                    </b></a>
                             </div>
-                            <div class="col-md-6">
-                                <a>Total Waktu : <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} Hari</b></a><br>
-                                 <a>Sisa Waktu: <b>
-                                   @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
-                                       {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
-                                       @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
-                                       <span class="badge badge-warning">Deadline</span>
-                                       @else
-                                        <span class="badge badge-danger">Melewati Deadline</span>
-                                   @endif
 
-                               </b></a>
-                            </div>
                         </div>
                     </div>
                     <div class="tile-footer">

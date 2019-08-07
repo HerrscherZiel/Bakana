@@ -14,6 +14,8 @@
         <div class="tile-body table-responsive">
           <table class="table table-hover table-bordered" id="sampleTable">
             <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
+
+            
             <a href="{{url('/timesheetss')}}" class="btn btn-primary mb-3">My Timesheet</a>
             <thead>
               <tr>
@@ -37,9 +39,9 @@
                  @foreach($timesheetView as $timesheets)
                 <td>{{$timesheets->name}}</td>
                 <td>{{$timesheets->project}}</td>
-                <td>{{date("d-m-Y", strtotime($timesheets->tgl_timesheet))}}</td>
-                <td>{{$mulai = $timesheets->jam_mulai}}</td>
-                <td>{{$selesai = $timesheets->jam_selesai}}</td>
+                <td>{{date("d M Y", strtotime($timesheets->tgl_timesheet))}}</td>
+                <td>{{date("H:i", strtotime($mulai = $timesheets->jam_mulai))}}</td>
+                <td>{{date("H:i", strtotime($selesai = $timesheets->jam_selesai))}}</td>
                 <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }} menit</td>
                 <td>{{$timesheets->keterangan_timesheet}}</td>
                  @if(Auth::user()->hasRole('Project Manager'))

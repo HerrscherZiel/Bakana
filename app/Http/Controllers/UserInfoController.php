@@ -121,7 +121,7 @@ class UserInfoController extends Controller
             ->join('project','team_projects.project_id','=','project.id_project')
             ->join('module', 'project.id_project', '=', 'module.project_id')
             ->join('jobs', 'module.id_module', '=' ,'jobs.module_id')
-            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
+            ->select( 'module.*', 'jobs.nama_job', 'jobs.id_job', 'jobs.tgl_mulai as jobMulai','jobs.deadline as deadlineJob', 'jobs.tgl_user as target', 'jobs.status as statusJob', 'jobs.keterangan as ketJobs'
                 , 'jobs.module_id')
             ->where(['users.id' => auth()->user()->id, 'project.id_project' => $id, 'jobs.user' => auth()->user()->name])
 //            ->where('users.id', '=', auth()->user()->id)

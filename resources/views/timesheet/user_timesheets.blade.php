@@ -31,9 +31,9 @@
                 <tr>
                     <td>{{$timesheets->name}}</td>
                     <td>{{$timesheets->project}}</td>
-                    <td>{{date("d-m-Y", strtotime($timesheets->tgl_timesheet))}}</td>
-                    <td>{{$mulai = $timesheets->jam_mulai}}</td>
-                    <td>{{$selesai = $timesheets->jam_selesai}}</td>
+                    <td>{{date("d M Y", strtotime($timesheets->tgl_timesheet))}}</td>
+                    <td>{{date("H:i", strtotime($mulai = $timesheets->jam_mulai))}}</td>
+                    <td>{{date("H:i", strtotime($selesai = $timesheets->jam_selesai))}}</td>
                     <td>{{$total = (strtotime($selesai) - strtotime($mulai))/60 }} menit</td>
                     <td>{{$timesheets->keterangan_timesheet}}</td>
                     <td>

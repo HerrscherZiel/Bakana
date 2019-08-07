@@ -12,7 +12,7 @@
     <div class="col-md-12">
       <div class="tile">
         <a href="{{url('/modules/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i>Create Modul</a>
-          <a href="{{url('/completedModule')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Module</a>
+          <a href="{{url('/completedModule')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Modul</a>
         <div class="tile-body table-responsive">
           <table class="table table-hover table-bordered" id="sampleTable">
               <thead>
@@ -35,9 +35,9 @@
                 <td>{{$modules->nama_project}}</td>
                 <td>{{$modules->nama_module}}</td>
                 <td>{{$modules->user}}</td>
-                <td>{{date("d-M-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
-                <td>{{date("d-M-Y", strtotime($selesai = $modules->deadline))}}</td>
-                <td>{{$modules->tgl_user ? date("d-M-Y", strtotime($modules->tgl_user)) : ''}}</td>
+                <td>{{date("d-m-Y", strtotime($mulai = $modules->tgl_mulai))}}</td>
+                <td>{{date("d-m-Y", strtotime($selesai = $modules->deadline))}}</td>
+                <td>{{$modules->tgl_user ? date("dd-m-Y", strtotime($modules->tgl_user)) : ''}}</td>
                 <td>
                      @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari

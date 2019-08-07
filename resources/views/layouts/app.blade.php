@@ -116,6 +116,7 @@
   <script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
   <script type="text/javascript">
+    $('#demoSelect').select2();
       $('button.delete-btn').on('click', function(e){
       event.preventDefault();
       var self = $(this);
@@ -186,6 +187,10 @@
 });
   </script>
 <script type="text/javascript">
+  let today = new Date().toISOString().substr(0, 10);
+document.querySelector("#date").value = today;
+</script>
+<script type="text/javascript">
   var date = new Date();
   date.setDate(date.getDate());
 // timesheet
@@ -194,6 +199,7 @@
       autoclose: true,
       todayHighlight: true
   });
+
   // project
   $('#date1,#date2').datepicker({
   format: "yyyy-mm-dd",

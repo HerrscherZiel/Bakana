@@ -14,7 +14,7 @@
      <div class="tile">
 
 
-        <h3 class="tile-title">Edit Module {{ $module->nama_module }} </h3>
+        <h3 class="tile-title">Edit Modul {{ $module->nama_module }} </h3>
 
 
         <form method="post" action="{{ route('modules.update', $module->id_module) }}">

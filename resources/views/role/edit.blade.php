@@ -19,7 +19,7 @@
             <div class="tile-body">
                 <div class="form-group">
                     <label class="control-label">Nama Role</label>
-                  <input class="form-control" type="text" name="nama_role"  value={{ $role->nama_role }}>
+                  <input class="form-control" type="text" name="nama_role"  value="{{ $role->nama_role }}">
                 </div>
                 <div class="form-group">
                     <label class="control-label">Keterangan</label>

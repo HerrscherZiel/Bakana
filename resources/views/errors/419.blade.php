@@ -6,7 +6,7 @@
         <br>
         <h2><p>Session Expired</p></h2>
         <br>
-        <p><a class="btn btn-primary mr-3" href="{{url('/home')}}">Go to Home</a>
+        <p><a class="btn btn-primary mr-3" href="{{url('/timelines')}}">Go to Home</a>
             <a class="btn btn-secondary ml-3" href="javascript:window.history.back();">Go Back</a></p>
     </div>
 @endsection

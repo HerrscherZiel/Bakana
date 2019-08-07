@@ -12,7 +12,7 @@
         </div><br />
     @endif
      <div class="tile">
-        <h3 class="tile-title mb-1">Module {{$module->nama_module}}</h3>
+        <h3 class="tile-title mb-1">Modul {{$module->nama_module}}</h3>
         <h6 class="control-label text-muted">Timeline: {{date("d-m-Y", strtotime($module->tgl_mulai))}}  sampai  {{date("d-m-Y", strtotime($module->deadline))}}</h6>
 
         <form method="post" action="{{url('/jobs/creates/$module->id_module')}}">
@@ -58,7 +58,7 @@
                   <textarea class="form-control" rows="4" name="keterangan" placeholder="Keterangan"></textarea>
                 </div>
                 <div class="form-group">
-                <input type="color" name="color" value="#009688">
+                <input type="color" name="color" value="{{$module->color}}">
                 <label class="control-label">Pilih warna untuk timeline</label>
                 </div>
             </div>
