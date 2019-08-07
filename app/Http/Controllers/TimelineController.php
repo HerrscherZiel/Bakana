@@ -38,7 +38,8 @@ class TimelineController extends Controller
                 $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
-                $event->deadline,
+                /*$event->deadline . */
+                Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_module,
                 [
                     'color' => $event->color,
@@ -64,7 +65,8 @@ class TimelineController extends Controller
                 $event->nama_project,
                 true,
                 $event->tgl_mulai,
-                $event->tgl_selesai,
+//                $event->tgl_selesai,
+                Carbon::parse($event->tgl_selesai)->addDay(1)->toDateString(),
                 $event->id_project,
                 [
                     'color' => $event->color,
@@ -110,7 +112,8 @@ class TimelineController extends Controller
                 $event->nama_job . ' : ' . $event->nama_module,
                 true,
                 $event->tgl_mulai,
-                $event->deadline,
+//                $event->deadline,
+                Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_job,
                 [
                     'color' => $event->color,
@@ -166,7 +169,8 @@ class TimelineController extends Controller
                 $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
-                $event->deadline,
+//                $event->deadline,
+                Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_module,
                 [
                     'color' => $event->color,
@@ -225,7 +229,8 @@ class TimelineController extends Controller
                 $event->nama_job . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
-                $event->deadline,
+//                $event->deadline,
+                Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_job,
                 [
                     'color' => $event->color,
