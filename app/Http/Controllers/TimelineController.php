@@ -144,6 +144,11 @@ class TimelineController extends Controller
             ->getQuery()
             ->get();
 //        dd($eventss);
+
+        if(count($eventss) == NULL){
+
+            return view('errors.404');
+        }
         foreach($eventss as $i){
 
             $ui = $i->id_project;
