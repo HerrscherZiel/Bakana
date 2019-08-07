@@ -23,7 +23,7 @@ class TimelineController extends Controller
     {
         //
         Session::put('title', 'Timeline All Modul');
-        $val = Project::all()->where('status','!=',4);
+//        $val = Project::all()->where('status','!=',4);
 
 //        $eevee = Project::join('module','project.id_project','=','module.project_id')
 //            ->select('module.*', 'project.nama_project')
@@ -31,7 +31,27 @@ class TimelineController extends Controller
 //            ->getQuery()
 //            ->get();
 
-        $events = Module::all();
+//        $events = Module::all();
+
+        $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
+            ->select('project.*')
+            ->where('project.status','!=',4)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
+
+        $events =  Module::join('project','module.project_id','=','project.id_project')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('module.*')
+            ->where('project.status','!=',4)
+            ->where('jobs.user','=',auth()->user()->name)
+            ->groupBy('module.id_module')
+            ->getQuery()
+            ->get();
+
+//        dd($events);
+
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
@@ -84,13 +104,30 @@ class TimelineController extends Controller
 
     public function indexJob($id){
         Session::put('title', 'Timeline Job');
-        $val = Project::all()->where('status','!=',4);
+
+        /*PM Only*/
+//        $val = Project::all()->where('status','!=',4);
+
+        /*$events = Project::join('module','project.id_project','=','module.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('jobs.*', 'module.id_module','module.nama_module', 'project.id_project','project.nama_project')
+            ->where('project.id_project','=',$id)
+//            ->where('module.id_module', '=', 'jobs.module_id')
+            ->getQuery()
+            ->get();*/
+
+        $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
+            ->select('project.*')
+            ->where('project.status','!=',4)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
 
         $events = Project::join('module','project.id_project','=','module.project_id')
             ->join('jobs','module.id_module','=','jobs.module_id')
             ->select('jobs.*', 'module.id_module','module.nama_module', 'project.id_project','project.nama_project')
             ->where('project.id_project','=',$id)
-//            ->where('module.id_module', '=', 'jobs.module_id')
+            ->where('jobs.user','=',auth()->user()->name)
             ->getQuery()
             ->get();
 
@@ -139,11 +176,31 @@ class TimelineController extends Controller
     public function dropProject($id){
 
         Session::put('title', 'Timeline Project > Modul');
-        $val = Project::all()->where('status','!=',4);
 
-        $events = Project::join('module','project.id_project','=','module.project_id')
+        /*PM Only*/
+
+//        $val = Project::all()->where('status','!=',4);
+
+        /*$events = Project::join('module','project.id_project','=','module.project_id')
             ->select('module.*','project.id_project', 'project.nama_project')
             ->where('project.id_project','=',$id)
+            ->getQuery()
+            ->get();*/
+
+        $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
+            ->select('project.*')
+            ->where('project.status','!=',4)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
+
+        $events =  Module::join('project','module.project_id','=','project.id_project')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('module.*','project.id_project', 'project.nama_project')
+            ->where('project.id_project','=',$id)
+            ->where('jobs.user','=',auth()->user()->name)
+            ->groupBy('module.id_module')
             ->getQuery()
             ->get();
 
@@ -199,13 +256,37 @@ class TimelineController extends Controller
     public function dropJob($id){
         Session::put('title', 'Timeline Module > Job');
 
-        $val = Module::all()->where('status','!=',4);
+        /*PM Only*/
+        $val = Module::join('jobs','module.id_module','=','jobs.module_id')
+          ->select('module.*')
+          ->where('module.status','!=',4)
+          ->where('jobs.user','=',auth()->user()->name)
+          ->getQuery()
+          ->get();;
 
         $events = Module::join('jobs','module.id_module','=','jobs.module_id')
             ->select('module.nama_module', 'jobs.*')
             ->where('module.id_module','=',$id)
+            ->where('jobs.user','=',auth()->user()->name)
             ->getQuery()
             ->get();
+
+//        dd($val);
+
+        /*$val =  Module::join('team_projects','project.id_project','=','team_projects.project_id')
+            ->select('project.*')
+            ->where('project.status','!=',4)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();*/
+
+        /*$events = Project::join('module','project.id_project','=','module.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('module.nama_module', 'jobs.*')
+            ->where('module.id_module','=',$id)
+            ->where('jobs.user','=',auth()->user()->name)
+            ->getQuery()
+            ->get();*/
 
         $eventss = Module::select('module.id_module', 'module.nama_module')
             ->where('module.id_module','=',$id)

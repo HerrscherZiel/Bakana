@@ -185,15 +185,24 @@ class HomeController extends Controller
 //        Mail::to($a)->send(new ReminderEmail());
 
         Session::put('title', 'Timeline All Modul');
-        $val = Project::all()->where('status','!=',4);
 
-//        $eevee = Project::join('module','project.id_project','=','module.project_id')
-//            ->select('module.*', 'project.nama_project')
-//            ->where('project.id_project','=',$id)
-//            ->getQuery()
-//            ->get();
+        $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
+            ->select('project.*')
+            ->where('project.status','!=',4)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+            ->getQuery()
+            ->get();
 
-        $events = Module::all();
+        $events =  Module::join('project','module.project_id','=','project.id_project')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('module.*')
+            ->where('project.status','!=',4)
+            ->where('jobs.user','=',auth()->user()->name)
+            ->groupBy('module.id_module')
+            ->getQuery()
+            ->get();
+
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
