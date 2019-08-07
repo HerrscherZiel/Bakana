@@ -45,7 +45,8 @@ class TimelineController extends Controller
             ->join('jobs','module.id_module','=','jobs.module_id')
             ->select('module.*')
             ->where('project.status','!=',4)
-            ->where('jobs.user','=',auth()->user()->name)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+//            ->where('jobs.user','=',auth()->user()->name)
             ->groupBy('module.id_module')
             ->getQuery()
             ->get();
@@ -125,9 +126,11 @@ class TimelineController extends Controller
 
         $events = Project::join('module','project.id_project','=','module.project_id')
             ->join('jobs','module.id_module','=','jobs.module_id')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
             ->select('jobs.*', 'module.id_module','module.nama_module', 'project.id_project','project.nama_project')
             ->where('project.id_project','=',$id)
-            ->where('jobs.user','=',auth()->user()->name)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+//            ->where('jobs.user','=',auth()->user()->name)
             ->getQuery()
             ->get();
 
@@ -199,7 +202,8 @@ class TimelineController extends Controller
             ->join('jobs','module.id_module','=','jobs.module_id')
             ->select('module.*','project.id_project', 'project.nama_project')
             ->where('project.id_project','=',$id)
-            ->where('jobs.user','=',auth()->user()->name)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+//            ->where('jobs.user','=',auth()->user()->name)
             ->groupBy('module.id_module')
             ->getQuery()
             ->get();
@@ -257,17 +261,26 @@ class TimelineController extends Controller
         Session::put('title', 'Timeline Module > Job');
 
         /*PM Only*/
-        $val = Module::join('jobs','module.id_module','=','jobs.module_id')
-          ->select('module.*')
-          ->where('module.status','!=',4)
-          ->where('jobs.user','=',auth()->user()->name)
-          ->getQuery()
-          ->get();;
+        $val = Module::join('project','project.id_project','=','module.project_id')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
+            ->select('module.*')
+            ->where('module.status','!=',4)
+            ->where('team_projects.user_id','=',auth()->user()->id)
+            ->groupBy('module.id_module')
+//            ->where('jobs.user','=',auth()->user()->id)
+            ->getQuery()
+            ->get();;
 
-        $events = Module::join('jobs','module.id_module','=','jobs.module_id')
+
+        $events = Module::join('project','project.id_project','=','module.project_id')
+            ->join('team_projects','project.id_project','=','team_projects.project_id')
+            ->join('jobs','module.id_module','=','jobs.module_id')
             ->select('module.nama_module', 'jobs.*')
+//            ->where('team_projects.user_id','=',auth()->user()->id)
             ->where('module.id_module','=',$id)
-            ->where('jobs.user','=',auth()->user()->name)
+            ->groupBy('jobs.id_job')
+//            ->where('jobs.user','=',auth()->user()->name)
             ->getQuery()
             ->get();
 
@@ -329,6 +342,7 @@ class TimelineController extends Controller
 
     }
 
+
     /*public function addEvent(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -359,6 +373,7 @@ class TimelineController extends Controller
      */
     public function create()
     {
+
         //
     }
 
