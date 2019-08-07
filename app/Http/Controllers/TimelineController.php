@@ -97,6 +97,11 @@ class TimelineController extends Controller
             ->getQuery()
             ->get();
 
+        if(count($eventss) == NULL){
+
+            return view('errors.404');
+        }
+
 //        dd($events);
 
         $event_list = [];
@@ -202,6 +207,11 @@ class TimelineController extends Controller
             ->where('module.id_module','=',$id)
             ->getQuery()
             ->get();
+
+        if(count($eventss) == NULL){
+
+            return view('errors.404');
+        }
 
 //        dd($events);
 
