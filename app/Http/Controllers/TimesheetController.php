@@ -176,11 +176,11 @@ class TimesheetController extends Controller
                 'keterangan_timesheet' => 'required']);
 
         $form_data = array(
-            'tgl_timesheet'        =>  $request->tgl_timesheet,
-            'jam_mulai'         =>  $request->jam_mulai,
-            'jam_selesai'         =>  $request->jam_selesai,
-            'keterangan_timesheet'         =>  $request->keterangan_timesheet,
-            'user_id'         =>  auth()->user()->id
+            'tgl_timesheet'             =>  $request->tgl_timesheet,
+            'jam_mulai'                 =>  $request->jam_mulai,
+            'jam_selesai'               =>  $request->jam_selesai,
+            'keterangan_timesheet'      =>  $request->keterangan_timesheet,
+            'user_id'                   =>  auth()->user()->id
         );
 
         Timesheet::create($form_data);
@@ -286,15 +286,15 @@ class TimesheetController extends Controller
 //            'keterangan_timesheet' => 'required']);
 
         $form_data = array(
-            'id_timesheets'        =>  $request->id_timesheets,
-            'tgl_timesheet'        =>  $request->tgl_timesheet,
-            'jam_mulai'         =>  $request->jam_mulai,
-            'jam_selesai'         =>  $request->jam_selesai,
+//            'id_timesheets'         =>  $request->id_timesheets,
+            'tgl_timesheet'         =>  $request->tgl_timesheet,
+            'jam_mulai'             =>  $request->jam_mulai,
+            'jam_selesai'           =>  $request->jam_selesai,
             'keterangan_timesheet'  =>  $request->keterangan_timesheet,
-            'user_id'         =>  auth()->user()->id
+            'user_id'               =>  auth()->user()->id
         );
 
-        Timesheet::whereId($request->hidden_id)->update($form_data);
+        Timesheet::where('id_timesheets','=',$request->id_timesheets)->update($form_data);
 
         return response()->json(['success' => 'Data is successfully updated']);
 
@@ -318,6 +318,7 @@ class TimesheetController extends Controller
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
+
         return redirect('timesheetss')->with('success', 'Timesheet Berhasil Diubah');
 
 
