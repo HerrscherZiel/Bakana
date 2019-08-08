@@ -36,6 +36,8 @@
                     <div class="btn-group">
 
                         <a href="/team/{{$teams->project_id}}" class="btn btn-primary">Show Team</a>
+                        <a href="/team/experimental/{{$teams->project_id}}" class="btn btn-success">Experimental</a>
+{{--                        <a onclick="showTeam();" href="#" class="btn btn-success" data-toggle="modal">Experimental</a>--}}
                         @if(Auth::user()->hasRole('Project Manager'))
                             <form class="delete" action="{{ route('teamprojects.destroy', $teams->id_team_projects)}}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">

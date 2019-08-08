@@ -332,5 +332,36 @@ document.querySelector("#date").value = today;
   });
 </script>
 
+<script type="text/javascript">
+    function showTeam() {
+        $(document).ready(function() {
+            /*event.preventDefault();*/
+            $("#add-error-bag").hide();
+            $('#showModal').modal('show');
+        });
+    }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+</script>
+{{--<script>
+    $('#showModal').DataTable({
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('table.user') }}",
+        columns: [
+            {data: 'DT_Row_Index', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'action', name: 'action'}
+        ]
+    });
+</script>--}}
+
 </body>
 </html>

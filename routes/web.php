@@ -82,14 +82,13 @@ Route::group(['middleware' => ['auth']], function() {
 //    Route::post('/team/creates/{project}/project','TeamProjectController@storeFromShow');
 //
 
-
     Route::post('/team/creates/{project}','TeamProjectController@storeFromShow');
 
     Route::post('/team/{project}','TeamProjectController@storeFromShow');
 
-
-
     Route::get('/team/{project}','TeamProjectController@indexes');
+
+    Route::get('/team/{project}',['uses' => 'TeamProjectController@show', 'as' => 'team.show' ]);
 
     Route::get('/team/{project}/edit','TeamProjectController@editTeamProject');
 
