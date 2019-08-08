@@ -180,6 +180,10 @@ return [
 
         Felixkiss\UniqueWithValidator\ServiceProvider::class,
 
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
+
+
 
     ],
 
@@ -233,6 +237,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
+
 
 
     ],

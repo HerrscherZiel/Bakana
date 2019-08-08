@@ -145,6 +145,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/timesheetss','TimesheetController@UserTimesheets');
 
 
+    Route::get('/timesheetsAjax','TimesheetController@test')->name('timesheets.test');
+    Route::post('/timesheetsAjax/update', 'TimesheetController@upAjax')->name('timesheetsAjax.update');
+    Route::get('/timesheetsAjax/destroy/{id}', 'TimesheetController@destroyAjax')->name('timesheetsAjax.destroy');
+    Route::get('/timesheetsAjax/{id_timesheets}/edit', 'TimesheetController@editAjax')->name('timesheetsAjax.edit');
+
+
+
 // User Info
 
     Route::get('/userInfo','UserInfoController@index');

@@ -8,7 +8,7 @@ use App\Timesheet;
 use App\Util\Utils;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
+use Yajra\DataTables\Facades\DataTables;
 
 class TimesheetController extends Controller
 {
@@ -66,6 +66,8 @@ class TimesheetController extends Controller
 
 
         return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
+
+
     }
 
     /**
@@ -102,51 +104,88 @@ class TimesheetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function test(){
+        if(request()->ajax())
+        {
+            return datatables()->of(Timesheet::latest()->get())
+                ->addColumn('action', function($data){
+                    $button = '<button type="button" name="edit" id="'.$data->id_timesheets.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" name="delete" id="'.$data->id_timesheets.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('timesheet.timesheets');
+    }
+
+
+
     public function store(Request $request)
     {
-        //
-        if (Auth::user()->hasRole('Project Manager')) {
-            $request->validate([
+//        //
+//        if (Auth::user()->hasRole('Project Manager')) {
+//            $request->validate([
+//                'tgl_timesheet' => 'required|date',
+//                'jam_mulai' => 'required',
+//                'jam_selesai' => 'required|after:jam_mulai',
+//                'keterangan_timesheet' => 'required']);
+//
+//            $timesheet = new Timesheet();
+//            $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+//            $timesheet->project = $request->input('project');
+//            $timesheet->jam_mulai = $request->input('jam_mulai');
+//            $timesheet->jam_selesai = $request->input('jam_selesai');
+//            $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
+//            $timesheet->user_id = auth()->user()->id;
+//            $timesheet->save();
+//
+//            /*dd($timesheet);*/
+//            return redirect('timesheetss')->with('success', 'Timesheet Berhasil Ditambahkan');
+//
+//        }
+//
+//        else  {
+//            $request->validate([
+//                'tgl_timesheet' => 'required|date',
+//                'jam_mulai' => 'required',
+//                'jam_selesai' => 'required|after:jam_mulai',
+//                'keterangan_timesheet' => 'required']);
+//
+//
+//            $timesheet = new Timesheet();
+//            $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
+//            $timesheet->project = $request->input('project');
+//            $timesheet->jam_mulai = $request->input('jam_mulai');
+//            $timesheet->jam_selesai = $request->input('jam_selesai');
+//            $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
+//            $timesheet->user_id = auth()->user()->id;
+//            $timesheet->save();
+//
+////            dd($timesheet);
+//            return redirect('timesheetss')->with('success', 'Timesheet Berhasil Ditambahkan');
+//
+//        }
+        $request->validate([
                 'tgl_timesheet' => 'required|date',
                 'jam_mulai' => 'required',
                 'jam_selesai' => 'required|after:jam_mulai',
                 'keterangan_timesheet' => 'required']);
 
-            $timesheet = new Timesheet();
-            $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
-            $timesheet->project = $request->input('project');
-            $timesheet->jam_mulai = $request->input('jam_mulai');
-            $timesheet->jam_selesai = $request->input('jam_selesai');
-            $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
-            $timesheet->user_id = auth()->user()->id;
-            $timesheet->save();
+        $form_data = array(
+            'tgl_timesheet'        =>  $request->tgl_timesheet,
+            'jam_mulai'         =>  $request->jam_mulai,
+            'jam_selesai'         =>  $request->jam_selesai,
+            'keterangan_timesheet'         =>  $request->keterangan_timesheet,
+            'user_id'         =>  auth()->user()->id
+        );
 
-            /*dd($timesheet);*/
-            return redirect('timesheetss')->with('success', 'Timesheet Berhasil Ditambahkan');
+        Timesheet::create($form_data);
 
-        }
-
-        else  {
-            $request->validate([
-                'tgl_timesheet' => 'required|date',
-                'jam_mulai' => 'required',
-                'jam_selesai' => 'required|after:jam_mulai',
-                'keterangan_timesheet' => 'required']);
-
-
-            $timesheet = new Timesheet();
-            $timesheet->tgl_timesheet = $request->input('tgl_timesheet');
-            $timesheet->project = $request->input('project');
-            $timesheet->jam_mulai = $request->input('jam_mulai');
-            $timesheet->jam_selesai = $request->input('jam_selesai');
-            $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
-            $timesheet->user_id = auth()->user()->id;
-            $timesheet->save();
-
-//            dd($timesheet);
-            return redirect('timesheetss')->with('success', 'Timesheet Berhasil Ditambahkan');
-
-        }
+        return response()->json(['success' => 'Data Added successfully.']);
     }
 
     /**
@@ -166,10 +205,23 @@ class TimesheetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function editAjax($id){
+
+
+        if(request()->ajax())
+        {
+            $data = Timesheet::findOrFail($id);
+            return response()->json(['data' => $data]);
+        }
+
+    }
+
+
     public function edit($id)
     {
         Session::put('title', 'Edit Timesheet');
-        //
+
         $user = User::all();
 
         $cek = Timesheet::findOrFail($id)->user_id;
@@ -198,6 +250,7 @@ class TimesheetController extends Controller
 
         }
 
+
 //        return view('timesheet.edit', compact('timesheet','user'));
     }
 
@@ -208,6 +261,47 @@ class TimesheetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function upAjax(Request $request){
+
+//        $rules = array(
+//
+//            'tgl_timesheet' => 'required|date',
+//            'jam_mulai' => 'required',
+//            'jam_selesai' => 'required|after:jam_mulai',
+//            'keterangan_timesheet' => 'required'
+//        );
+//
+//        $error = Validator::make($request->all(), $rules);
+//
+//        if($error->fails())
+//        {
+//            return response()->json(['errors' => $error->errors()->all()]);
+//        }
+//        $request->validate([
+////            'id_timesheets'        =>  $request->tgl_timesheet,
+//            'tgl_timesheet' => 'required|date',
+//            'jam_mulai' => 'required',
+//            'jam_selesai' => 'required|after:jam_mulai',
+//            'keterangan_timesheet' => 'required']);
+
+        $form_data = array(
+            'id_timesheets'        =>  $request->id_timesheets,
+            'tgl_timesheet'        =>  $request->tgl_timesheet,
+            'jam_mulai'         =>  $request->jam_mulai,
+            'jam_selesai'         =>  $request->jam_selesai,
+            'keterangan_timesheet'  =>  $request->keterangan_timesheet,
+            'user_id'         =>  auth()->user()->id
+        );
+
+        Timesheet::whereId($request->hidden_id)->update($form_data);
+
+        return response()->json(['success' => 'Data is successfully updated']);
+
+    }
+
+
+
     public function update(Request $request, $id)
     {
         //
@@ -225,6 +319,11 @@ class TimesheetController extends Controller
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
         $timesheet->save();
         return redirect('timesheetss')->with('success', 'Timesheet Berhasil Diubah');
+
+
+
+
+
     }
 
     /**
@@ -233,6 +332,15 @@ class TimesheetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+    public function destroyAjax($id){
+
+        $data = Timesheet::findOrFail($id);
+        $data->delete();
+    }
+
+
     public function destroy($id)
     {
         //
@@ -261,4 +369,7 @@ class TimesheetController extends Controller
 
 
     }
+
+
+
 }

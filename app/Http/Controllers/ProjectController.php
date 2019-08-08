@@ -28,6 +28,8 @@ class ProjectController extends Controller
 
         $project = Project::all()->where('status','!=', 4);
 
+//        $projects = Project::where('status','!=', 4)->where('')
+
 //        dd($project);
 
             return view('project.index')->with('project', $project);
