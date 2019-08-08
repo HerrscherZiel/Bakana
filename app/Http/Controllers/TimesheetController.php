@@ -118,7 +118,13 @@ class TimesheetController extends Controller
         if(request()->ajax())
 
         {
-            return datatables()->of(Timesheet::latest()->get())
+            return datatables()->of(Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+//            ->join('team_projects','team_projects.user_id','=','users.id')
+//            ->join('project','project.id_project','=','team_projects.project_id')
+                ->select('timesheets.*')
+                ->where('users.id','=',auth()->user()->id)
+                ->getQuery()
+                ->get())
                 ->addColumn('action', function($data){
                     $button = '<button type="button" name="edit" id="'.$data->id_timesheets.'" class="edit btn btn-primary btn-sm">Edit</button>';
                     $button .= '&nbsp;&nbsp;';

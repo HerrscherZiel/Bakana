@@ -60,18 +60,16 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-4">Project </label>
-                        <select class="form-control" id="test" required>
+                        <select class="form-control"  required>
                             @foreach($usher as $ushers)
-                                <option name="project" id="project" value="{{$aa = $ushers->nama_project}}">
-                                            {{$ushers->nama_project}}
+                                <option value="{{$aa = $ushers->nama_project}}">{{$ushers->nama_project}}
                                     </option>
                             @endforeach
-
-{{--                                <div class="col-md-8">--}}
-{{--                                    <input type="hidden"  id="project" value="test" class="form-control" />--}}
-{{--                                </div>--}}
-
                         </select>
+
+                        <div class="col-md-8">
+                            <input type="hidden" name="project" id="project" value="{{$aa}}" class="form-control" />
+                        </div>
 
                     </div>
 
