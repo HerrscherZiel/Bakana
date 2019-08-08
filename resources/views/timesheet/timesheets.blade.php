@@ -205,7 +205,7 @@
             if($('#action').val() == "Edit")
             {
                 $.ajax({
-                    url:"{{ route('ajax-crud.update') }}",
+                    url:"{{ route('timesheetsAjax.update') }}",
                     method:"POST",
                     data:new FormData(this),
                     contentType: false,
@@ -250,7 +250,7 @@
                     $('#jam_mulai').val(html.data.jam_mulai);
                     $('#jam_selesai').val(html.data.jam_selesai);
                     $('#keterangan_timesheet').val(html.data.keterangan_timesheet);
-                    $('#hidden_id').val(html.data.id);
+                    $('#hidden_id').val(html.data.id_timesheets);
                     $('.modal-title').text("Edit New Record");
                     $('#action_button').val("Edit");
                     $('#action').val("Edit");
