@@ -77,6 +77,7 @@ class UserController extends Controller
 
         //$request->user()->authorizeRoles(['Project Manager']);
         //if (Auth::user()->hasRole('Project Manager')) {
+
             $request->validate([
                 'name' => 'required',
                 'email' => 'required',

@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <br />
-    <h3 align="center">Laravel 5.8 Ajax Crud Tutorial - Delete or Remove Data</h3>
+    <h3 align="center">Timesheet</h3>
     <br />
     <div align="right">
         <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create Record</button>

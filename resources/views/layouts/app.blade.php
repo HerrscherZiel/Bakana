@@ -116,7 +116,10 @@
   <script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
   <script type="text/javascript">
-    $('#demoSelect').select2();
+    $('#user_id').select2({
+      placeholder: 'Pilih User',
+      allowClear: true
+    });
       $('button.delete-btn').on('click', function(e){
       event.preventDefault();
       var self = $(this);

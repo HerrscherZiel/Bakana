@@ -150,10 +150,10 @@ class TeamProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate( [
-            'user_id' => 'required',
-            'project_id' => 'required|unique:team_projects,user_id']);
+        // //
+        // $request->validate( [
+        //     'user_id' => 'required',
+        //     'project_id' => 'required|unique:team_projects,user_id']);
         /*|unique:team_projects,user_id*/
 
         $team_projects = new TeamProject();
