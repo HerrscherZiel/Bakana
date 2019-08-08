@@ -40,9 +40,9 @@ class NewProjectMail extends Mailable
             ->view('emailProject')
             ->with(
                 [
-                    'nama'  => auth()->user()->name,
-                    'project'  => $pro,
-                    'dead'  => 0,
+                    'nama'      => auth()->user()->name,
+                    'project'   => $pro,
+                    'dead'      => 0,
 
                 ]);
     }
