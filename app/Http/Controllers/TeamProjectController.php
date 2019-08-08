@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewProjectMail;
+use App\Mail\ReminderEmail;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 use App\TeamProject;
 use App\Project;
 use App\Util\Utils;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -99,6 +102,7 @@ class TeamProjectController extends Controller
             $project = Project::all()->where('status', '!=', 4);
             $role = Role::all();
 
+
             return view('team.create', compact('user', 'project', 'role'));
         }
 
@@ -106,6 +110,9 @@ class TeamProjectController extends Controller
             //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
+
+
+
     }
 
     //Show Project Creates
@@ -150,16 +157,39 @@ class TeamProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // //
-        // $request->validate( [
-        //     'user_id' => 'required',
-        //     'project_id' => 'required|unique:team_projects,user_id']);
+        //
+        $request->validate( [
+            'user_id' => 'required',
+            'project_id' => 'required']);
         /*|unique:team_projects,user_id*/
 
         $team_projects = new TeamProject();
         $team_projects->user_id = $request->input('user_id');
         $team_projects->project_id = $request->input('project_id');
         $team_projects->save();
+
+
+        $useremail = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
+            ->select('users.email')
+            ->where('users.id' , '=', $request->input('user_id'))
+            ->groupBy('users.email')
+            ->getQuery()
+            ->get();
+
+//        dd($useremail);
+
+        $projects = Project::join('team_projects', 'team_projects.project_id', '=', 'project.id_project')
+            ->select('project.nama_project')
+            ->where('project.id_project' , '=', $request->input('project_id'))
+            ->groupBy('project.nama_project')
+            ->getQuery()
+            ->get();
+
+//        dd($projects);
+
+        Mail::to($useremail)->send(new NewProjectMail($projects));
+
+
         return redirect('team/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
     }
 
@@ -178,6 +208,30 @@ class TeamProjectController extends Controller
         $team_projects->user_id = $request->input('user_id');
         $team_projects->project_id = $request->input('project_id');
         $team_projects->save();
+
+
+        $useremail = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
+            ->select('users.email')
+            ->where('users.id' , '=', $request->input('user_id'))
+            ->groupBy('users.email')
+            ->getQuery()
+            ->get();
+
+//        dd($useremail);
+
+        $projects = Project::join('team_projects', 'team_projects.project_id', '=', 'project.id_project')
+            ->select('project.nama_project')
+            ->where('project.id_project' , '=', $request->input('project_id'))
+            ->groupBy('project.nama_project')
+            ->getQuery()
+            ->get();
+
+//        dd($projects);
+
+
+        Mail::to($useremail)->send(new NewProjectMail($projects));
+
+
         return redirect('team/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
     }
 
