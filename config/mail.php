@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('magangbtv@gmail.com'),
+    'username' => 'magangbtv@gmail.com',
 
-    'password' => env('magangbtv2019'),
+    'password' => 'ctzrrcsopzragfbo',
 
     /*
     |--------------------------------------------------------------------------

@@ -270,7 +270,7 @@ class TimelineController extends Controller
             ->groupBy('module.id_module')
 //            ->where('jobs.user','=',auth()->user()->id)
             ->getQuery()
-            ->get();;
+            ->get();
 
 
         $events = Module::join('project','project.id_project','=','module.project_id')
