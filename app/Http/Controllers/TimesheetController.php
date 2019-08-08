@@ -119,8 +119,6 @@ class TimesheetController extends Controller
 
         {
             return datatables()->of(Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
-//            ->join('team_projects','team_projects.user_id','=','users.id')
-//            ->join('project','project.id_project','=','team_projects.project_id')
                 ->select('timesheets.*')
                 ->where('users.id','=',auth()->user()->id)
                 ->getQuery()
