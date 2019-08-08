@@ -51,8 +51,8 @@ class TimesheetController extends Controller
 
         Session::put('title', 'My Timesheet');
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
-            /*->join('team_projects','team_projects.user_id','=','users.id')*/
-            /*->join('project','project.id_project','=','team_projects.project_id')*/
+//            ->join('team_projects','team_projects.user_id','=','users.id')
+//            ->join('project','project.id_project','=','team_projects.project_id')
             ->select('timesheets.*', 'users.name')
             ->where('users.id','=',auth()->user()->id)
             ->getQuery()
@@ -106,7 +106,17 @@ class TimesheetController extends Controller
      */
 
     public function test(){
+
+        $usher = User::join('team_projects','team_projects.user_id','=','users.id')
+            ->join('project','project.id_project','=','team_projects.project_id')
+            ->select('users.*','project.nama_project')
+            ->where('users.id','=',auth()->user()->id)
+            ->groupBy('project.nama_project')
+            ->getQuery()
+            ->get();
+
         if(request()->ajax())
+
         {
             return datatables()->of(Timesheet::latest()->get())
                 ->addColumn('action', function($data){
@@ -119,7 +129,7 @@ class TimesheetController extends Controller
                 ->make(true);
         }
 
-        return view('timesheet.timesheets');
+        return view('timesheet.timesheets', compact('usher'));
     }
 
 
@@ -180,6 +190,7 @@ class TimesheetController extends Controller
             'jam_mulai'                 =>  $request->jam_mulai,
             'jam_selesai'               =>  $request->jam_selesai,
             'keterangan_timesheet'      =>  $request->keterangan_timesheet,
+            'project'      =>  $request->project,
             'user_id'                   =>  auth()->user()->id
         );
 
@@ -317,6 +328,7 @@ class TimesheetController extends Controller
         $timesheet->jam_mulai = $request->input('jam_mulai');
         $timesheet->jam_selesai = $request->input('jam_selesai');
         $timesheet->keterangan_timesheet = $request->input('keterangan_timesheet');
+        $timesheet->project = $request->input('project');
         $timesheet->save();
 
         return redirect('timesheetss')->with('success', 'Timesheet Berhasil Diubah');

@@ -23,7 +23,7 @@
             <thead>
             <tr>
                 <th width="10%">id</th>
-{{--                <th width="35%">Project Name</th>--}}
+                <th width="35%">Project Name</th>
                 <th width="35%">tgl</th>
                 <th width="35%">jam mulai</th>
                 <th width="35%">jam selesai </th>
@@ -54,16 +54,26 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" >ID timesheet</label>
                         <div class="col-md-8">
-                            <input type="text" name="id_timesheets" id="id_timesheets" class="form-control" />
+                            <input type="hidden" name="id_timesheets" id="id_timesheets" class="form-control" />
                         </div>
                     </div>
 
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-4">Project </label>--}}
-{{--                        <div class="col-md-8">--}}
-{{--                            <input type="text" name="tgl_timesheet" id="tgl_timesheet" class="form-control" />--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Project </label>
+                        <select class="form-control" id="test" required>
+                            @foreach($usher as $ushers)
+                                <option name="project" id="project" value="{{$aa = $ushers->nama_project}}">
+                                            {{$ushers->nama_project}}
+                                    </option>
+                            @endforeach
+
+{{--                                <div class="col-md-8">--}}
+{{--                                    <input type="hidden"  id="project" value="test" class="form-control" />--}}
+{{--                                </div>--}}
+
+                        </select>
+
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-4">Tgl Timesheet </label>
@@ -80,7 +90,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-4">Jam Mulai </label>
+                        <label class="control-label col-md-4">Jam Lesai </label>
                         <div class="col-md-8">
                             <input type="time" name="jam_selesai" id="jam_selesai" class="form-control" />
                         </div>
@@ -89,6 +99,8 @@
                     <div class="form-group">
                         <textarea class="form-control" rows="4" name="keterangan_timesheet"  id="keterangan_timesheet" placeholder="Keterangan" required autofocus></textarea>
                     </div>
+
+
 
                     <br />
                     <div class="form-group" align="center">
@@ -135,6 +147,10 @@
                 {
                     data: 'id_timesheets',
                     name: 'id_timesheets'
+                },
+                {
+                    data: 'project',
+                    name: 'project'
                 },
                 {
                     data: 'tgl_timesheet',
@@ -246,6 +262,7 @@
                 dataType:"json",
                 success:function(html){
                     $('#id_timesheets').val(html.data.id_timesheets);
+                    $('#project').val(html.data.project);
                     $('#tgl_timesheet').val(html.data.tgl_timesheet);
                     $('#jam_mulai').val(html.data.jam_mulai);
                     $('#jam_selesai').val(html.data.jam_selesai);
