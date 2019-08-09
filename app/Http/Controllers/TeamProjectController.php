@@ -282,7 +282,7 @@ class TeamProjectController extends Controller
                 ->addColumn('action', function($data){
                     $button /*.*/= '<button type="button" name="delete" id="'.$data->id_team_projects.'" class="delete btn btn-danger btn-sm">Delete</button>';
 
-                    return $button; }
+                    return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
