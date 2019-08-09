@@ -11,8 +11,6 @@
                         @endif
                         <thead>
                         <tr>
-                            {{--                <th>User</th>--}}
-                            {{--                <th>Role</th>--}}
                             <th>Project</th>
                             @if(Auth::user()->hasRole('Project Manager'))
                                 <th>Action</th>
@@ -22,8 +20,6 @@
                         <tbody>
                         <tr>
                             @foreach($team_projects as $teams)
-                                {{--                <td>{{$teams->name}}</td>--}}
-                                {{--                <td>{{$teams->nama_role}}</td>--}}
                                 <td>{{$teams->nama_project}}</td>
                                 @if(Auth::user()->hasRole('Project Manager'))
                                     <td>

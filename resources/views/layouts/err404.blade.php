@@ -317,26 +317,5 @@ document.querySelector("#date").value = today;
         $this.text(linkText);
     });
 </script>
-<!-- autorefresh -->
-{{--<script>--}}
-{{--if(location.search.indexOf('php') < 0){--}}
-{{--  var hash = window.location.hash;--}}
-{{--  var loc = window.location.href.replace(hash, '');--}}
-{{--  loc += (loc.indexOf('?') < 0? '?' : '&') + 'php';--}}
-{{--  // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):--}}
-{{--  setTimeout(function(){window.location.href = loc + hash;}, 5);--}}
-{{--}--}}
-{{--</script>--}}
-<!-- Google analytics script-->
-<script type="text/javascript">
-    if(document.location.hostname == 'pratikborsadiya.in') {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-72504830-1', 'auto');
-        ga('send', 'pageview');
-    }
-</script>
 </body>
 </html>

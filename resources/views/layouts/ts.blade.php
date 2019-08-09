@@ -510,12 +510,6 @@ document.querySelector("#date").value = today;
     }
     
 </script>
-<!-- Delete Alert -->
-<!-- <script>
-  $(".delete").on("submit", function(){
-      return confirm("Are you sure want to delete?");
-  });
-</script> -->
 <!-- Show more -->
 <script type="text/javascript">
   $(".show-more a").on("click", function() {

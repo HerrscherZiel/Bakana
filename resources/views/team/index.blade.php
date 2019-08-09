@@ -19,8 +19,6 @@
           <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
               <tr>
-{{--                <th>User</th>--}}
-{{--                <th>Role</th>--}}
                 <th>Project</th>
 
                   <th>Action</th>
@@ -29,8 +27,6 @@
             <tbody>
               <tr>
                 @foreach($team_projects as $teams)
-{{--                <td>{{$teams->name}}</td>--}}
-{{--                <td>{{$teams->nama_role}}</td>--}}
                 <td>{{$teams->nama_project}}</td>
                       <td>
                     <div class="btn-group">

@@ -22,7 +22,6 @@
                         <h3 class="line-head">{{$ii}}</h3>
                     </div>
                     <div class="col-md-4">
-{{--                        <a href="/timelines/job" class="btn btn-primary pull-right">Job Timeline</a>--}}
                         <a href="/timelines/project" class="btn btn-primary pull-right mr-2">Project Timeline</a>
                     </div>
                 </div>

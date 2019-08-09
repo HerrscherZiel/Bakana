@@ -11,7 +11,6 @@
             </ul>
         </div><br />
     @endif
-{{--        {{ dd($errors) }}--}}
 
       <div class="tile">
         <h3 class="tile-title">Create Project</h3>

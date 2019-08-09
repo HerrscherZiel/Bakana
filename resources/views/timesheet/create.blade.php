@@ -11,36 +11,6 @@
         </ul>
     </div><br />
 @endif
- <!--  <div class="tile">
-    <h3 class="tile-title">Add Timesheet</h3>
-    <form method="post" action="{{url('/timesheets/create')}}" autocomplete="off">
-        <div class="tile-body">
-            <div class="form-group">
-                <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                <select class="form-control" name="project">
-                        @foreach($usher as $ushers)
-                            <option value="{{$ushers->nama_project}}">{{$ushers->nama_project}}</option>
-                        @endforeach
-                    </select>
-            </div>
-            <div class="form-group">
-              <input type="text" id="date" data-provide="datepicker" class="form-control" name="tgl_timesheet" readonly="">
-            </div>
-            <div class="form-group input-group ">
-                <input type="text" id="timepicker_start"  class="form-control" name="jam_mulai" value="08:30" placeholder="Jam Mulai">
-                <div class="mt-2 ml-3 mr-2">sampai</div>
-                <input type="text" id="timepicker_end"  class="form-control" name="jam_selesai" value="17:00" placeholder="Jam Selesai">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" rows="4" name="keterangan_timesheet" placeholder="Keterangan" autofocus></textarea>
-            </div>
-        </div>
-        <div class="tile-footer">
-          <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Create</button>
-          <a class="btn btn-secondary" href="{{URL::previous()}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-        </div>
-    </form>
-  </div> -->
 </div>
  <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2" data-toggle="modal" data-target="#timesheetModal"> <i class="fa fa-plus"></i>Add Timesheet</a>
 <!-- MOdal -->

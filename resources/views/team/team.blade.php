@@ -24,9 +24,10 @@
                     <tr>
                         <th>User</th>
                         <th>Role</th>
-        {{--                @if(Auth::user()->hasRole('Project Manager'))--}}
+            @if(Auth::user()->hasRole('Project Manager'))
+
                             <th style="width: 10%">Action</th>
-        {{--                @endif--}}
+                            @endif
                     </tr>
                     </thead>
                 </table>
