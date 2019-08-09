@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\TeamProject;
 use Illuminate\Http\Request;
 use App\User;
 use App\Timesheet;
@@ -38,6 +40,93 @@ class TimesheetController extends Controller
         return view('timesheet.index')->with('timesheetView', $timesheetView);
     }
 
+//    public function indexes(Request $request)
+//    {
+//        Session::put('title', 'Dashboard Timesheet');
+//        //
+//
+//        $project = Project::join('team_projects','team_projects.project_id','=','project.id_project')
+//            ->join('users', 'users.id', '=', 'team_projects.user_id')
+//            ->select('project.nama_project','project.id_project')
+//            ->where('users.id','=', auth()->user()->id)
+//            ->getQuery()
+//            ->get();
+//
+//        $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+//            ->join('team_projects','team_projects.user_id','=','users.id')
+//            ->join('project','project.id_project','=','team_projects.project_id')
+//            ->select('timesheets.*', 'users.name')
+////            ->where('project.id_project','=',$id)
+//            ->getQuery()
+//            ->get();
+//
+//
+//        if(request()->ajax())
+//
+//        {
+//            return datatables()->of($timesheet)
+//                ->addColumn('action', function($data){
+//                    $button = '<button type="button" name="show" id="'.$data->id_timesheets.'" class="edit btn btn-primary btn-sm">Show</button>';
+//                    return $button;
+//                })
+//                ->rawColumns(['action'])
+//                ->make(true);
+//        }
+//
+//
+//
+//        /*dd($timesheet);*/
+//
+//        return view('timesheet.pm_index', compact( 'project'));
+//    }
+
+//    public function indexesView()
+//    {
+//        Session::put('title', 'Dashboard Timesheet');
+//        //
+////        $query = $request->get('query');
+//
+//        $project = Project::join('team_projects','team_projects.project_id','=','project.id_project')
+//            ->join('users', 'users.id', '=', 'team_projects.user_id')
+//            ->select('project.nama_project','project.id_project')
+//            ->where('users.id','=', auth()->user()->id)
+//            ->getQuery()
+//            ->get();
+//
+//        $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+//            ->join('team_projects','team_projects.user_id','=','users.id')
+//            ->join('project','project.id_project','=','team_projects.project_id')
+//            ->select('timesheets.*', 'users.name')
+//            ->where('project.id_project','=',request()->id)
+//            ->getQuery()
+//            ->get();
+//
+//        /*$data = Dtr::where('fempidno', '=', request()->id)
+//            ->get();*/
+//
+//        if(request()->ajax())
+//
+//        {
+//            return datatables()->of($timesheet)
+//                ->addColumn('action', function($data){
+//                    $button = '<button type="button" name="show" id="'.$data->id_timesheets.'" class="edit btn btn-primary btn-sm">Show</button>';
+//                    return $button;
+//                })
+//                ->rawColumns(['action'])
+//                ->make(true);
+//        }
+//
+//
+//
+//        /*dd($timesheet);*/
+//
+////        return view('timesheet.pm_index', compact( 'project'));
+//
+////        return Response::json($data);
+//
+//        return response()->json(['success' => 'Data Added successfully.', $timesheet, $project]);
+//    }
+
 
     //Timesheets User
 
@@ -65,6 +154,25 @@ class TimesheetController extends Controller
         return view('timesheet.user_timesheets')->with('timesheetView', $timesheetView, 'id', $id);
 
 
+    }
+
+    public function indexTeam()
+    {
+        Session::put('title', 'Dashboard Team Timesheet');
+        //
+
+        $team_projects = TeamProject::join('project', 'project.id_project', '=', 'team_projects.project_id')
+            ->join('users', 'users.id', '=', 'team_projects.user_id')
+            ->select('team_projects.*', /*'users.name',*/ 'project.nama_project'/*,'role.nama_role'*/)
+            ->where('project.status', '!=', 4)
+            ->groupBy('team_projects.project_id')
+            ->getQuery()
+            ->get();
+
+//        dd($team_projects);
+
+
+        return view('timesheet.team_timesheets')->with('team_projects', $team_projects);
     }
 
     /**
@@ -298,6 +406,7 @@ class TimesheetController extends Controller
 
         $form_data = array(
             'id_timesheets'         =>  $request->id_timesheets,
+            'project'               =>  $request->project,
             'tgl_timesheet'         =>  $request->tgl_timesheet,
             'jam_mulai'             =>  $request->jam_mulai,
             'jam_selesai'           =>  $request->jam_selesai,

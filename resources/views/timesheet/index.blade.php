@@ -17,6 +17,8 @@
 
             
             <a href="{{url('/timesheetss')}}" class="btn btn-primary mb-3">My Timesheet</a>
+
+            <a href="{{url('/timesheets/team')}}" class="btn btn-primary mb-3">Team Timesheet</a>
             <thead>
               <tr>
                 <th>User</th>

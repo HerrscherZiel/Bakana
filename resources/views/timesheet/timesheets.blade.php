@@ -6,6 +6,8 @@
             <div class="tile-body table-responsive">
                 <table class="table table-hover table-bordered" id="user_table">
                     <a name="create_record" id="create_record" class="btn btn-primary mb-3 mr-2" style="color: #FFF"> <i class="fa fa-plus"></i>Add Timesheet</a>
+                    &nbsp;
+                    <a href="{{url('/teamTimesheets')}}" class="btn btn-primary mb-3 mr-2" style="color: #FFF"> <i class="fa fa-plus"></i>Team Timesheet</a>
                     <thead>
                     <tr>
                         <th>Project</th>
@@ -39,7 +41,7 @@
                             <input type="hidden" name="id_timesheets" id="id_timesheets" class="form-control" />
                             <select class="form-control" name="project" id="project" required>
                                 @foreach($usher as $ushers)
-                                    <option value="{{$aa = $ushers->nama_project}}">{{$ushers->nama_project}}</option>
+                                    <option value="{{$ushers->nama_project}}">{{$ushers->nama_project}}</option>
                                 @endforeach
                             </select>
                         </div>

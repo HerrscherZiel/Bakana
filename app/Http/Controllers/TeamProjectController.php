@@ -205,6 +205,17 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
+        $username = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
+            ->select('users.name')
+            ->where('users.id' , '=',$umail)
+            ->groupBy('users.email')
+            ->getQuery()
+            ->get();
+
+        foreach ($username as $pross){
+            $ii = $pross->name;
+        }
+
 //        dd($useremail);
 
         $projects = Project::join('team_projects', 'team_projects.project_id', '=', 'project.id_project')
@@ -214,9 +225,13 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
-//        dd($projects);
+        foreach ($projects as $pros){
+            $i = $pros->nama_project;
+        }
 
-        Mail::to($umail)->send(new NewProjectMail($pro));
+//        dd($i);
+
+        Mail::to($useremail)->send(new NewProjectMail($ii, $i));
 
 
 
