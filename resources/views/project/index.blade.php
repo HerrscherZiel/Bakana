@@ -92,7 +92,7 @@
           </div>
            <div class="tile-footer">
            <a href="/module/{{$projects->id_project}}" class="btn btn-primary">Show Modul</a>
-          <a href="/team/{{$projects->id_project}}" class="btn btn-primary">Show Team</a>
+          <a href="/teamAjax/{{$projects->id_project}}" class="btn btn-primary">Show Team</a>
         </div>
         </div>
       </div>
