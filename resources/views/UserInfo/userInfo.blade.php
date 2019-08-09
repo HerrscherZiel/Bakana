@@ -84,9 +84,6 @@
                @endforeach
             </tbody>
           </table>
-          <div class="row d-print-none mt-2">
-             <div class="col-12 text-right"><a href="{{url('/timesheetAjax')}}" class="btn btn-warning pull-right">Show More</a></div>
-          </div>
         </div>
         </div>
       </div>

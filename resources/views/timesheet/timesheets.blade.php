@@ -2,14 +2,20 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         <div class="tile">
             <div class="tile-body table-responsive">
                 <table class="table table-hover table-bordered" id="user_table">
                     <a name="create_record" id="create_record" class="btn btn-primary mb-3 mr-2" style="color: #FFF"> <i class="fa fa-plus"></i>Add Timesheet</a>
                     &nbsp;
-                    @if(Auth::user()->hasRole('Project Manager'))
-                    <a href="{{url('/timesheets')}}" class="btn btn-primary mb-3 mr-2" style="color: #FFF"> <i class="fa fa-plus"></i>Team Timesheet</a>
-                    @endif
+                    <a href="{{url('/timesheets')}}" class="btn btn-primary mb-3 mr-2" style="color: #FFF"> <i class="fa fa-users"></i>Team Timesheet</a>
                     <thead>
                     <tr>
                         <th>Project</th>

@@ -77,7 +77,7 @@
           <li><a class="app-menu__item {{ request()->is('userInfo*','myCompletedProject*','change*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-info-circle"></i><span class="app-menu__label">User Info</span></a>
           </li>
 
-        <li><a class="app-menu__item {{ request()->is('timesheet*') ? 'active' : ''  }}" href="{{ url('/timesheetsAjax') }}"><i class="app-menu__icon fa fa-calendar-plus-o"></i><span class="app-menu__label">Timesheet</span></a>
+        <li><a class="app-menu__item {{ request()->is('timesheet*') ? 'active' : ''  }}" href="{{ url('/timesheetAjax') }}"><i class="app-menu__icon fa fa-calendar-plus-o"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
       </ul>
     </aside>

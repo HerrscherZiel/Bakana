@@ -277,7 +277,7 @@ class TeamProjectController extends Controller
         $a = $request->user_id;
         $b = $request->project_id;
 
-        // $this->email($a, $b);
+        $this->email($a, $b);
 
 
 
