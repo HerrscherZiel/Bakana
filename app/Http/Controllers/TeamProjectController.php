@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewProjectMail;
-use App\Mail\ReminderEmail;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
@@ -516,7 +515,7 @@ class TeamProjectController extends Controller
 
             $team_projects = TeamProject::find($id);
             $team_projects->delete();
-            return redirect()->back()->with('success', 'Post Removed');
+            return redirect()->back()->with('success', 'Team Dihapus');
 
         }
 

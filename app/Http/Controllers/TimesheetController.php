@@ -23,21 +23,28 @@ class TimesheetController extends Controller
     {
         Session::put('title', 'Dashboard Timesheet');
         //
-        $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
-            /*->join('team_projects','team_projects.user_id','=','users.id')*/
-            /*->join('project','project.id_project','=','team_projects.project_id')*/
-            ->select('timesheets.*', 'users.name')
-            ->getQuery()
-            ->get();
 
-        
-        $timesheetView =  $timesheet;
+        if (Auth::user()->hasRole('Project Manager')) {
 
+            $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
+                /*->join('team_projects','team_projects.user_id','=','users.id')*/
+                /*->join('project','project.id_project','=','team_projects.project_id')*/
+                ->select('timesheets.*', 'users.name')
+                ->getQuery()
+                ->get();
 
+            $timesheetView = $timesheet;
+            /*dd($timesheet);*/
 
-        /*dd($timesheet);*/
+            return view('timesheet.index')->with('timesheetView', $timesheetView);
+        }
 
-        return view('timesheet.index')->with('timesheetView', $timesheetView);
+        else{
+
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+
+        }
+
     }
 
 //    public function indexes(Request $request)
@@ -458,8 +465,18 @@ class TimesheetController extends Controller
 
     public function destroyAjax($id){
 
-        $data = Timesheet::findOrFail($id);
-        $data->delete();
+        if (Auth::user()->hasRole('Project Manager')) {
+            $data = Timesheet::findOrFail($id);
+            $data->delete();
+        }
+
+        else{
+
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+
+        }
+
+
     }
 
 
