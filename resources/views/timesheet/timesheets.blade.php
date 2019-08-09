@@ -10,6 +10,7 @@
                     @endforeach
                 </ul>
             </div>
+        @endif
         <div class="tile">
             <div class="tile-body table-responsive">
                 <table class="table table-hover table-bordered" id="user_table">
