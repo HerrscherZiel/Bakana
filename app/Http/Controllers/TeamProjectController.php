@@ -243,8 +243,38 @@ class TeamProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
 
+        $team_projects = TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
+            ->distinct('users.id')
+            ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+            ->join('role', 'role.id_role', '=', 'users.role_id')
+            ->select('team_projects.*', 'users.name' ,'users.role_id', 'project.nama_project','role.nama_role')
+            ->where('project.id_project', '=', $id )
+            ->groupBy('users.name')
+            ->getQuery()
+            ->get();
+
+        return view('team.show', compact('project', 'team_projects'));
+
+//        return response()->json([
+//            'project'       => $project,
+//            'team_projects' => $team_projects,
+//        ], 200);
+
+        $team_projects = TeamProject::query();
+        return DataTables::of($team_projects)
+            ->addColumn('action', function ($model) {
+                return view('layouts._action', [
+                    'model' => $model,
+                    'url_show' => route('user.show', $model->id),
+                    'url_edit' => route('user.edit', $model->id),
+                    'url_destroy' => route('user.destroy', $model->id)
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     /**

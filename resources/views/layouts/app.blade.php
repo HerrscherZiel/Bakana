@@ -76,7 +76,7 @@
           <li><a class="app-menu__item {{ request()->is('userInfo*','myCompletedProject*','change*') ? 'active' : ''  }}" href="{{ url('/userInfo') }}"><i class="app-menu__icon fa fa-info-circle"></i><span class="app-menu__label">User Info</span></a>
           </li>
 
-        <li><a class="app-menu__item {{ request()->is('timesheets*') ? 'active' : ''  }}" href="{{ url('/timesheets') }}"><i class="app-menu__icon fa fa-calendar-plus-o"></i><span class="app-menu__label">Timesheet</span></a>
+        <li><a class="app-menu__item {{ request()->is('timesheetsAjax*') ? 'active' : ''  }}" href="{{ url('/timesheetsAjax') }}"><i class="app-menu__icon fa fa-calendar-plus-o"></i><span class="app-menu__label">Timesheet</span></a>
         </li>
       </ul>
     </aside>
@@ -342,6 +342,37 @@ document.querySelector("#date").value = today;
     $this.text(linkText);
   });
 </script>
+
+<script type="text/javascript">
+    function showTeam() {
+        $(document).ready(function() {
+            /*event.preventDefault();*/
+            $("#add-error-bag").hide();
+            $('#showModal').modal('show');
+        });
+    }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+</script>
+{{--<script>
+    $('#showModal').DataTable({
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('table.user') }}",
+        columns: [
+            {data: 'DT_Row_Index', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'action', name: 'action'}
+        ]
+    });
+</script>--}}
 
 </body>
 </html>
