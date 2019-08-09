@@ -110,11 +110,19 @@
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.tabs.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.position.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/jquery.ui.timepicker.js?v=0.3.3')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/list.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/plugins/select2.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/bootstrap-datepicker.js')}}"></script>
   <!-- delete -->
   <script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
+  <script type="text/javascript">
+    var options = {
+      valueNames: [ 'name', 'status', 'sisa' ]
+    };
+
+    var userList = new List('projects', options);
+  </script>
   <script type="text/javascript">
     $('#user_id').select2({
       placeholder: 'Pilih User',

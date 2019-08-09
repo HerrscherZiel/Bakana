@@ -23,11 +23,9 @@ class ProjectController extends Controller
     {
         Session::put('title', 'Dashboard Project');
         //
-//        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
-
-        $project = Project::all()->where('status','!=', 4);
-
+        $project = Project::all();
+        $project = Project::where('status','!=', 4)->orderBy('id_project','desc')->paginate(20);
 //        $projects = Project::where('status','!=', 4)->where('')
 
 //        dd($project);
@@ -46,7 +44,8 @@ class ProjectController extends Controller
         //
 //        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
-        $project = Project::all()->where('status','=', 4);
+        $project = Project::all();
+        $project = Project::where('status','=', 4)->orderBy('id_project','desc')->paginate(20);
 
 //        dd($project);
 

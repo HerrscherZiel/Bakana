@@ -1,9 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(Auth::user()->hasRole('Project Manager'))
-        <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
-    @endif
+     <div class="row">
+      <div class="col-md-6"> 
+      @if(Auth::user()->hasRole('Project Manager'))
+          <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
+      @endif
+      </div>
+      <div class="col-md-6 ">
+        <input class="app-search__input search pull-right" placeholder="Search" >
+        <div class="btn-group pull-right mr-3" role="group">
+          <button class="btn btn-secondary btn-sm sort" type="button" data-sort="name">by name</button>
+          <button class="btn btn-secondary btn-sm sort" type="button" data-sort="sisa">by Sisa Waktu</button>
+        </div>
+      </div>
+    </div>
     <div class="row">
         @foreach($project as $projects)
             <div class="col-md-6">

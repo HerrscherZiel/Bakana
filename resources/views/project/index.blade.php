@@ -1,23 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div id="projects">
     @if(Session::has('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
         </div>
     @endif
-
-    @if(Auth::user()->hasRole('Project Manager'))
-        <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
-    @endif
-    <a href="{{url('/completedProject')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Project</a>
     <div class="row">
+      <div class="col-md-6"> 
+      @if(Auth::user()->hasRole('Project Manager'))
+          <a href="{{url('/projects/create')}}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create Project</a>
+      @endif
+          <a href="{{url('/completedProject')}}" class="btn btn-success mb-3"><i class="fa fa-check"></i> Completed Project</a>
+      </div>
+      <div class="col-md-6 ">
+        <input class="app-search__input search pull-right" placeholder="Search" >
+        <div class="btn-group pull-right mr-3" role="group">
+          <button class="btn btn-secondary btn-sm sort" type="button" data-sort="name">by name</button>
+          <button class="btn btn-secondary btn-sm sort" type="button" data-sort="status">by status</button>
+          <button class="btn btn-secondary btn-sm sort" type="button" data-sort="sisa">by Sisa Waktu</button>
+        </div>
+      </div>
+    </div>
+    <div class="row list">
   @foreach($project as $projects)
       <div class="col-md-6">
         <div class="tile">
           <div class="tile-title-w-btn">
-            <h3 class="title">{{$projects->nama_project}}</h3>
+            <h3 class="title name">{{$projects->nama_project}}</h3>
               
           <div class="btn-group ">
               <a class="btn btn-primary" href="/projects/{{$projects->id_project}}">
@@ -44,7 +55,7 @@
            <div class="row">
             <div class="col-md-6">
               <a>Project Code: <b>{{$projects->kode_project}}</b></a><br>
-               <a>Status: <b>
+               <a>Status: <b class="status">
                @if ($projects->status === 1 )
                          <span class="badge badge-pill badge-primary">Ongoing</span>
                      @elseif($projects->status === 2 )
@@ -62,8 +73,7 @@
                <a>dari: {{ date("d M Y", strtotime($mulai = $projects->tgl_mulai))}}</a><br>
                <a>sampai: {{date("d M Y", strtotime($selesai = $projects->tgl_selesai))}}</a><br>
                <a>Total Waktu : <b>{{$total = (strtotime($selesai) - strtotime($mulai)) / (60 * 60 * 24) }} Hari</b></a><br>
-               <a>Sisa Waktu: <b>
-
+               <a>Sisa Waktu: <b class="sisa">
                        @if($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) > 0 )
                            {{$stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24)}} Hari
                            @elseif($stotal = (strtotime($selesai) - strtotime('today')) / (60 * 60 * 24) == 0 )
@@ -88,4 +98,6 @@
       </div>
   @endforeach
 </div>
+</div>
+ {{ $project->links() }}
 @endsection
