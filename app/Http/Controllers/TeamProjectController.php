@@ -176,6 +176,17 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
+        $username = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
+            ->select('users.name')
+            ->where('users.id' , '=',$request->input('user_id'))
+            ->groupBy('users.email')
+            ->getQuery()
+            ->get();
+
+        foreach ($username as $pross){
+            $ii = $pross->name;
+        }
+
 //        dd($useremail);
 
         $projects = Project::join('team_projects', 'team_projects.project_id', '=', 'project.id_project')
@@ -185,9 +196,13 @@ class TeamProjectController extends Controller
             ->getQuery()
             ->get();
 
+        foreach ($projects as $pros){
+            $i = $pros->nama_project;
+        }
+
 //        dd($projects);
 
-        Mail::to($useremail)->send(new NewProjectMail($projects));
+        Mail::to($useremail)->send(new NewProjectMail($ii, $i));
 
 
         return redirect('team/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
@@ -284,8 +299,9 @@ class TeamProjectController extends Controller
 
         TeamProject::create($form_data);
 
-        return response()->json(['success' => 'Data Added successfully.']
-    );
+//        return redirect('teamAjax/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
+
+        return response()->json(['success' => 'Data Added successfully.']);
 
     }
 
