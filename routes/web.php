@@ -152,7 +152,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 //    Route::get('/timesheetpm','TimesheetController@indexes')->name('timesheets.pm');
 
-    Route::get('/timesheets/team','TimesheetController@indexTeam')->name('timesheets.team');
+    Route::get('/teamTimesheets','TimesheetController@indexTeam')->name('timesheets.team');
 
 //    Route::get('/timesheetpm/{project?}','TimesheetController@indexesView')->name('timesheets.view');
 

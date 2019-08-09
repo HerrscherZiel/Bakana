@@ -16,10 +16,11 @@ class NewProjectMail extends Mailable
      *
      * @return void
      */
-    public function __construct($projects)
+    public function __construct($user , $projects)
     {
         //
         $this->projects = $projects;
+        $this->user = $user;
     }
 
     /**
@@ -30,8 +31,15 @@ class NewProjectMail extends Mailable
     public function build()
     {
         $this->projects;
+        $this->user;
 
-        $pro = $this->projects;
+        $pro    = $this->projects;
+        $usher  = $this->user;
+
+        /*$ulser = User::all()->where('id','=', $usher);
+            ->select('name')
+            ->getQuery()
+            ->get();*/
 
 
 //        dd($pro);
@@ -40,7 +48,7 @@ class NewProjectMail extends Mailable
             ->view('emailProject')
             ->with(
                 [
-                    'nama'      => auth()->user()->name,
+                    'nama'      => $usher,
                     'project'   => $pro,
                     'dead'      => 0,
 
