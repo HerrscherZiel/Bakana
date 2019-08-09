@@ -26,17 +26,12 @@ class JobController extends Controller
             $job = Job::join('module', 'module_id', '=', 'id_module')
                 ->join('project', 'project_id', '=', 'id_project')
                 ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
-//                ->where(function($q) {
-//                    $q->where('jobs.status', !4);
-////                        ->orWhere('project.status', !4);
-//                })
                 ->where('project.status', '!=', 4)
                 ->where('module.status', '!=', 4)
                 ->where('jobs.status', '!=', 4)
                 ->getQuery()
                 ->get();
-                
-            /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
+
             return view('job.index')->with('job', $job);
         }
         else{
@@ -56,7 +51,6 @@ class JobController extends Controller
             $job = Job::join('module', 'module_id', '=', 'id_module')
                 ->join('project', 'project_id', '=', 'id_project')
                 ->select('jobs.*', 'module.id_module', 'module.nama_module', 'project.nama_project')
-//                ->where('jobs.status', '=', 4)
                 ->where(function($q) {
                     $q->where('jobs.status', 4)
                         ->orWhere('project.status', 4)
@@ -65,8 +59,6 @@ class JobController extends Controller
                 ->getQuery()
                 ->get();
 
-//            dd($job);
-            /*$job = Job::orderBy('id_job', 'asc')->paginate(10);*/
             return view('job.jobComplete')->with('job', $job);
         }
         else{
@@ -94,7 +86,6 @@ class JobController extends Controller
             ->getQuery()
             ->get();
 
-            /*dd($mod);*/
             $module = Module::join('project', 'project.id_project', '=', 'module.project_id')
                 ->select('module.*')
                 ->where('project.status', '!=', 4)
@@ -128,8 +119,6 @@ class JobController extends Controller
                 ->get();
 
             $project = Project::all();
-
-//            dd($module);
 
             return view('job.creates', compact('module', 'project','mod'))/*->with('module', $module)*/ ;
         }
@@ -234,8 +223,6 @@ class JobController extends Controller
     {
         Session::put('title', 'Edit Job');
         //
-
-
         if (Auth::user()->hasRole('Project Manager')) {
             $job = Job::findOrFail($id);
             $module = Module::join('project', 'project.id_project', '=', 'module.project_id')
@@ -245,8 +232,6 @@ class JobController extends Controller
                 ->get();;
             $project = Project::all();
             $user = \App\User::all();
-
-//            dd($module);
 
             return view('job.edit', compact('job', 'module', 'project','user'));
 
@@ -269,8 +254,6 @@ class JobController extends Controller
 
         $as = auth()->user()->name;
 
-//        dd($aa);
-
         if (Auth::user()->hasRole('Project Manager')) {
             $module = Module::all();
             $project = Project::all();
@@ -291,9 +274,6 @@ class JobController extends Controller
 
         elseif ( $aa === $as){
 
-
-//            $aa = Module::find($id)->user;
-//            $as = auth()->user()->name;
             $module = Module::all();
             $project    = Project::all();
             $job     = Job::find($id);
@@ -306,8 +286,6 @@ class JobController extends Controller
                 ->groupBy('users.name')
                 ->getQuery()
                 ->get();
-
-                // dd($module);
 
             return view('job.editUser', compact('job', 'project', 'user', 'module'/*, 'aa', 'as'*/));
 
@@ -404,6 +382,5 @@ class JobController extends Controller
             //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
-
     }
 }

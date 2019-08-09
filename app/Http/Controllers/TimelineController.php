@@ -21,17 +21,7 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        //
         Session::put('title', 'Timeline All Modul');
-//        $val = Project::all()->where('status','!=',4);
-
-//        $eevee = Project::join('module','project.id_project','=','module.project_id')
-//            ->select('module.*', 'project.nama_project')
-//            ->where('project.id_project','=',$id)
-//            ->getQuery()
-//            ->get();
-
-//        $events = Module::all();
 
         $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
             ->select('project.*')
@@ -46,12 +36,9 @@ class TimelineController extends Controller
             ->select('module.*')
             ->where('project.status','!=',4)
             ->where('team_projects.user_id','=',auth()->user()->id)
-//            ->where('jobs.user','=',auth()->user()->name)
             ->groupBy('module.id_module')
             ->getQuery()
             ->get();
-
-//        dd($events);
 
         $event_list = [];
         foreach ($events as $key => $event) {
@@ -59,7 +46,6 @@ class TimelineController extends Controller
                 $event->nama_module . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
-                /*$event->deadline . */
                 Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_module,
                 [
@@ -72,9 +58,8 @@ class TimelineController extends Controller
         }
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-        return view('timeline.index', compact('calendar','val', 'events'))/*->with('calendar', $calendar, 'val', $val)*/;
+        return view('timeline.index', compact('calendar','val', 'events'));
 
-//        return view('home', compact( 'module', 'calendar'));
     }
 
     public function indexProject(){
@@ -86,7 +71,6 @@ class TimelineController extends Controller
                 $event->nama_project,
                 true,
                 $event->tgl_mulai,
-//                $event->tgl_selesai,
                 Carbon::parse($event->tgl_selesai)->addDay(1)->toDateString(),
                 $event->id_project,
                 [
@@ -106,17 +90,6 @@ class TimelineController extends Controller
     public function indexJob($id){
         Session::put('title', 'Timeline Job');
 
-        /*PM Only*/
-//        $val = Project::all()->where('status','!=',4);
-
-        /*$events = Project::join('module','project.id_project','=','module.project_id')
-            ->join('jobs','module.id_module','=','jobs.module_id')
-            ->select('jobs.*', 'module.id_module','module.nama_module', 'project.id_project','project.nama_project')
-            ->where('project.id_project','=',$id)
-//            ->where('module.id_module', '=', 'jobs.module_id')
-            ->getQuery()
-            ->get();*/
-
         $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
             ->select('project.*')
             ->where('project.status','!=',4)
@@ -130,7 +103,6 @@ class TimelineController extends Controller
             ->select('jobs.*', 'module.id_module','module.nama_module', 'project.id_project','project.nama_project')
             ->where('project.id_project','=',$id)
             ->where('team_projects.user_id','=',auth()->user()->id)
-//            ->where('jobs.user','=',auth()->user()->name)
             ->getQuery()
             ->get();
 
@@ -143,16 +115,12 @@ class TimelineController extends Controller
 
             return view('errors.404');
         }
-
-//        dd($events);
-
         $event_list = [];
         foreach ($events as $key => $event) {
             $event_list[] = Calendar::event(
                 $event->nama_job . ' : ' . $event->nama_module,
                 true,
                 $event->tgl_mulai,
-//                $event->deadline,
                 Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_job,
                 [
@@ -180,16 +148,6 @@ class TimelineController extends Controller
 
         Session::put('title', 'Timeline Project > Modul');
 
-        /*PM Only*/
-
-//        $val = Project::all()->where('status','!=',4);
-
-        /*$events = Project::join('module','project.id_project','=','module.project_id')
-            ->select('module.*','project.id_project', 'project.nama_project')
-            ->where('project.id_project','=',$id)
-            ->getQuery()
-            ->get();*/
-
         $val =  Project::join('team_projects','project.id_project','=','team_projects.project_id')
             ->select('project.*')
             ->where('project.status','!=',4)
@@ -203,7 +161,6 @@ class TimelineController extends Controller
             ->select('module.*','project.id_project', 'project.nama_project')
             ->where('project.id_project','=',$id)
             ->where('team_projects.user_id','=',auth()->user()->id)
-//            ->where('jobs.user','=',auth()->user()->name)
             ->groupBy('module.id_module')
             ->getQuery()
             ->get();
@@ -212,7 +169,6 @@ class TimelineController extends Controller
             ->where('project.id_project','=',$id)
             ->getQuery()
             ->get();
-//        dd($eventss);
 
         if(count($eventss) == NULL){
 
@@ -242,25 +198,15 @@ class TimelineController extends Controller
             );
         }
 
-//        dd($events);
-
-//        dd($event_list);
-
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-//        return response()->json([
-//            'error' => false,
-//            'calendar'  => $calendar,
-//        ], 200);
-
-        return view('timeline.indexBD', compact('calendar','val', 'ii', 'ui'))/*->with('eevee', $eevee)*/;
+        return view('timeline.indexBD', compact('calendar','val', 'ii', 'ui'));
 
     }
 
     public function dropJob($id){
         Session::put('title', 'Timeline Module > Job');
 
-        /*PM Only*/
         $val = Module::join('project','project.id_project','=','module.project_id')
             ->join('team_projects','project.id_project','=','team_projects.project_id')
             ->join('jobs','module.id_module','=','jobs.module_id')
@@ -268,7 +214,6 @@ class TimelineController extends Controller
             ->where('module.status','!=',4)
             ->where('team_projects.user_id','=',auth()->user()->id)
             ->groupBy('module.id_module')
-//            ->where('jobs.user','=',auth()->user()->id)
             ->getQuery()
             ->get();
 
@@ -277,29 +222,10 @@ class TimelineController extends Controller
             ->join('team_projects','project.id_project','=','team_projects.project_id')
             ->join('jobs','module.id_module','=','jobs.module_id')
             ->select('module.nama_module', 'jobs.*')
-//            ->where('team_projects.user_id','=',auth()->user()->id)
             ->where('module.id_module','=',$id)
             ->groupBy('jobs.id_job')
-//            ->where('jobs.user','=',auth()->user()->name)
             ->getQuery()
             ->get();
-
-//        dd($val);
-
-        /*$val =  Module::join('team_projects','project.id_project','=','team_projects.project_id')
-            ->select('project.*')
-            ->where('project.status','!=',4)
-            ->where('team_projects.user_id','=',auth()->user()->id)
-            ->getQuery()
-            ->get();*/
-
-        /*$events = Project::join('module','project.id_project','=','module.project_id')
-            ->join('jobs','module.id_module','=','jobs.module_id')
-            ->select('module.nama_module', 'jobs.*')
-            ->where('module.id_module','=',$id)
-            ->where('jobs.user','=',auth()->user()->name)
-            ->getQuery()
-            ->get();*/
 
         $eventss = Module::select('module.id_module', 'module.nama_module')
             ->where('module.id_module','=',$id)
@@ -311,8 +237,6 @@ class TimelineController extends Controller
             return view('errors.404');
         }
 
-//        dd($events);
-
         foreach($eventss as $i){
             $ii = $i->nama_module;
         }
@@ -323,7 +247,6 @@ class TimelineController extends Controller
                 $event->nama_job . ' : ' .$event->user,
                 true,
                 $event->tgl_mulai,
-//                $event->deadline,
                 Carbon::parse($event->deadline)->addDay(1)->toDateString(),
                 $event->id_job,
                 [
@@ -334,37 +257,11 @@ class TimelineController extends Controller
             );
         }
 
-
-
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
         return view('timeline.indexMJ', compact('calendar','val', 'ii'));
 
     }
-
-
-    /*public function addEvent(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'event_name' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            Session::flash('warnning','Please enter the valid details');
-            return Redirect::to('/events')->withInput()->withErrors($validator);
-        }
-
-        $event = new Event;
-        $event->event_name = $request['event_name'];
-        $event->start_date = $request['start_date'];
-        $event->end_date = $request['end_date'];
-        $event->save();
-
-        Session::flash('success','Event added successfully.');
-        return Redirect::to('/timeline');
-    }*/
 
     /**
      * Show the form for creating a new resource.

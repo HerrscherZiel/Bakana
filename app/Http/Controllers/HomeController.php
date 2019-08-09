@@ -52,7 +52,6 @@ class HomeController extends Controller
 
         $cek = 0;
 
-
         $jobs = User::join('team_projects','users.id','=','team_projects.user_id')
             ->join('project','team_projects.project_id','=','project.id_project')
             ->join('module', 'project.id_project', '=', 'module.project_id')
@@ -61,7 +60,6 @@ class HomeController extends Controller
             ->where('users.id', '=', auth()->user()->id)
             ->where('jobs.user', '=',  auth()->user()->name)
             ->where('jobs.status', '!=', 4)
-//            ->where('users.id', '=', auth()->user()->id)
             ->orderBy('module.nama_module')
             ->groupBy('jobs.nama_job')
             ->getQuery()
@@ -74,12 +72,6 @@ class HomeController extends Controller
         $second = Carbon::now()->addDay(2)->toDateString();
         $first  = Carbon::now()->addDay(1)->toDateString();
         $today  = Carbon::now()->toDateString();
-
-//        $d7 = Job::where('deadline','==', $seven)->get();
-//        $d3 = Job::where('deadline','==', $third)->get();
-//        $d2 = Job::where('deadline','==', $second)->get();
-//        $d1 = Job::where('deadline','==', $first)->get();
-//        $d0 = Job::where('deadline','==', $today)->get();
 
         $d7 = User::join('team_projects','users.id','=','team_projects.user_id')
             ->join('project','team_projects.project_id','=','project.id_project')
@@ -161,18 +153,6 @@ class HomeController extends Controller
             ->getQuery()
             ->get();
 
-//        $h = $jobs;
-
-//        dd($jobs);
-       // $t = count($d7);
-       // dd($t);
-
-//        if(count($d0) || count($d1) || count($d2) || count($d3) || count($d7) != NULL){
-
-//        $tes = $cek;
-//        $tes+=$cek;
-//
-//        if()
             if(count($d0) != 0){
                 Mail::to($a)->send(new ReminderEmail(0));
             }elseif (count($d1) != 0){
@@ -184,12 +164,6 @@ class HomeController extends Controller
             }elseif (count($d7) != 0){
                 Mail::to($a)->send(new ReminderEmail(7));
             }
-//        }
-//        else{
-//            Mail::to($a)->send(new ReminderEmail($q = 9));
-//        }
-
-//        Mail::to($a)->send(new ReminderEmail());
 
         Session::put('title', 'Timeline All Modul');
 
@@ -228,34 +202,12 @@ class HomeController extends Controller
         }
         $calendar = \MaddHatter\LaravelFullcalendar\Facades\Calendar::addEvents($event_list);
 
-
-
         if (Auth::user()->hasRole('Project Manager')) {
-
-//            $user = User::join('role', 'users.role_id', '=', 'role.id_role')
-//                ->select('users.name','role.name')
-//                ->where('users.name','=',auth()->user()->name)
-//                ->getQuery()
-//                ->get();
-
 
             return view('timeline.index', compact('calendar','val', 'events'));
         }
         else{
-           // $name = auth()->user()->name;
-//            $user = User::find('id', 'name');
-//            $timesheetView = Timesheet::all();
-
-
-
-
-
             return view('timeline.index', compact('calendar','val', 'events'));
         }
-//        , compact('user', 'timesheetView'))
-//        ->with('timesheet', $timesheetView);
-
     }
-
-
 }

@@ -17,8 +17,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-
     public function index()
     {
         Session::put('title', 'Dashboard User');
@@ -29,16 +27,12 @@ class UserController extends Controller
                 ->getQuery()
                 ->get();
 
-            /*$user =  User::orderBy('id', 'asc')->paginate(10);*/
-
             $user = $users;
-            /*dd($user);*/
 
             return view('user.index')->with('user', $user);
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -59,7 +53,6 @@ class UserController extends Controller
             return view('user.create')->with('role', $role);
         }
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -73,17 +66,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-        //$request->user()->authorizeRoles(['Project Manager']);
-        //if (Auth::user()->hasRole('Project Manager')) {
 
             $request->validate([
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required',
                 'role_id' => 'required']);
-
 
             $user = new User;
             $user->name = $request->input('name');
@@ -92,15 +80,6 @@ class UserController extends Controller
             $user->role_id = $request->input('role_id');
             $user->save();
             return redirect('users')->with('success', 'User Ditambahkan');
-
-
-       // }
-
-//        else{
-//        //Tambah warning
-//            abort(403, 'Unauthorized action.');
-//            return view('home');
-//        }
 
     }
 
@@ -126,7 +105,7 @@ class UserController extends Controller
     public function edit($id)
     {
         Session::put('title', 'Edit User');
-        //
+
         if (Auth::user()->hasRole('Project Manager')) {
             $role = Role::all();
 
@@ -149,7 +128,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
         $request->validate( [
             'name' => 'required',
             'email' => 'required|email',
@@ -173,7 +152,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
         if (Auth::user()->hasRole('Project Manager')) {
             $user = User::find($id);
             $user->delete();
@@ -181,7 +160,6 @@ class UserController extends Controller
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
     }
