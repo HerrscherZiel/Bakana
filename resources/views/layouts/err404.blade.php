@@ -93,9 +93,10 @@
 
     </main>
 </div>
-<!-- Essential javascripts for application to work-->
+ <!-- Essential javascripts for application to work-->
 <script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/jquery-3.4.1.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/jquery-ui.js')}}"></script>
 <script src="{{URL::asset('js/popper.min.js')}}"></script>
 <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
@@ -103,114 +104,295 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{URL::asset('js/plugins/pace.min.js')}}"></script>
 <!-- Page specific javascripts-->
-<script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.core.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.widget.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.tabs.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.position.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/jquery.ui.timepicker.js?v=0.3.3')}}"></script>
 
-<!-- <script type="text/javascript" src="{{URL::asset('docs/js/plugins/bootstrap-datepicker.min.js')}}"></script> -->
-<script type="text/javascript" src="{{URL::asset('js/plugins/select2.min.js')}}"></script>
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<script type="text/javascript" src="{{URL::asset('js/bootstrap-datepicker.js')}}"></script>
-<!-- delete -->
-<script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
-<script type="text/javascript">
-    $('button.delete-btn').on('click', function(e){
-        event.preventDefault();
-        var self = $(this);
-        swal({
-            title: "Anda yakin?",
-            text: "Anda tidak akan bisa mengembalikannya lagi",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        }, function(isConfirm) {
-            if (isConfirm) {
-                swal("Terhapus!", "Berhasil terhapus dari database.", "success");
-                setTimeout(function() {
-                    self.parents(".delete").submit();
-                }, 500);
-            } else {
-                swal("Batal dihapus!", "Data aman di database.", "error");
-            }
-        });
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.core.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.widget.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.tabs.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/include/ui-1.10.0/jquery.ui.position.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/jquery.ui.timepicker.js?v=0.3.3')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/list.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/plugins/select2.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/bootstrap-datepicker.js')}}"></script>
+  <!-- delete -->
+  <script type="text/javascript" src="{{URL::asset('js/plugins/bootstrap-notify.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/plugins/sweetalert.min.js')}}"></script>
+  <script type="text/javascript">
+    var options = {
+      valueNames: [ 'name', 'status', 'sisa' ]
+    };
+
+    var userList = new List('projects', options);
+  </script>
+  <script type="text/javascript">
+    $('#user_id').select2({
+      placeholder: 'Pilih User',
+      allowClear: true
     });
+      $('button.delete-btn').on('click', function(e){
+      event.preventDefault();
+      var self = $(this);
+      swal({
+        title: "Anda yakin?",
+        text: "Anda tidak akan bisa mengembalikannya lagi",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      }, function(isConfirm) {
+        if (isConfirm) {
+          swal("Terhapus!", "Berhasil terhapus dari database.", "success");
+         setTimeout(function() {
+                  self.parents(".delete").submit();
+              }, 500);
+        } else {
+          swal("Batal dihapus!", "Data aman di database.", "error");
+        }
+      });
+    });
+  </script>
+  <!-- datepicker -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+  
+    $("input[name='tgl_mulai']").datepicker({
+        todayBtn:  1,
+        autoclose: true,
+    }).on('changeDate', function (selected) {
+        var minDate = new Date(selected.date.valueOf());
+        $("input[name='tgl_selesai']").datepicker('setStartDate', minDate);
+    });
+    
+    $("input[name='tgl_selesai']").datepicker()
+        .on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $("input[name='tgl_mulai']").datepicker('setEndDate', minDate);
+        });
+
+});
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+  
+    $("input[name='tgl_mulai']").datepicker({
+        todayBtn:  1,
+        autoclose: true,
+    }).on('changeDate', function (selected) {
+        var minDate = new Date(selected.date.valueOf());
+        $("input[name='deadline']").datepicker('setStartDate', minDate);
+    });
+    
+    $("input[name='deadline']").datepicker()
+        .on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $("input[name='tgl_mulai']").datepicker('setEndDate', minDate);
+        });
+
+});
+  </script>
+<script type="text/javascript">
+  let today = new Date().toISOString().substr(0, 10);
+document.querySelector("#date").value = today;
 </script>
 <script type="text/javascript">
-    var date = new Date();
-    date.setDate(date.getDate());
+  var date = new Date();
+  date.setDate(date.getDate());
+// timesheet
+  $('#date').datepicker({ 
+      endDate: date,
+      autoclose: true,
+      todayHighlight: true
+  });
 
-    $('#date').datepicker({
-        endDate: date,
-        autoclose: true,
-        todayHighlight: true
-    });
-    $('#date1,#date2').datepicker({
-        format: "yyyy-mm-dd",
-        autoclose: true,
-        todayHighlight: true
-    });
-    $('#date3,#date4,#date5').datepicker({
-        startDate: date,
-        autoclose: true,
-        todayHighlight: true
-    });
+  // project
+  $('#date1,#date2').datepicker({
+  format: "yyyy-mm-dd",
+  autoclose: true,
+  todayHighlight: true
+  });
+  // modul, job
+  $('#date3,#date4,#date5').datepicker({
+  startDate: $("#startDate").val(),
+  endDate: $("#endDate").val(),
+  autoclose: true,
+  todayHighlight: true
+  });
 </script>
 <!-- Data table plugin-->
 <script type="text/javascript" src="{{URL::asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <!-- Calendar-->
 <script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/fullcalendar.min.js')}}"></script>
-{{--<script type="text/javascript" src="{{URL::asset('docs/js/fullcalendar.min.js')}}"></script>--}}
 
+<script>
+    $(document).ready(function(){
 
-<!-- Full Calendar -->
-<script type="text/javascript">
-    $(document).ready(function() {
+        $('#team_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax:{
+                url: "{{ route('team.ajax', ['id' => $project->id_project] ) }}",
+            },
 
-        $('#external-events .fc-event').each(function() {
+            columns:[
 
-            // store data so the calendar knows to render an event upon drop
-            $(this).data('event', {
-                title: $.trim($(this).text()), // use the element's text as the event title
-                stick: true // maintain when user navigates (see docs on the renderEvent method)
-            });
-
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 999,
-                revert: true,      // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
-            });
+                // {
+                //     data: 'id_team_projects',
+                //     name: 'id_team_projects'
+                // },
+                // {
+                //     data: 'nama_project',
+                //     name: 'project_id',
+                // },
+                {
+                    data: 'name',
+                    name: 'user_id'
+                },
+                {
+                    data: 'nama_role',
+                    name: 'user_id'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                }
+            ]
 
         });
 
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar
-            drop: function() {
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
+
+        $('#create_team').click(function(){
+            $('.modal-titl').text("Add to Team");
+            $('#action_butto').val("Add");
+            $('#actio').val("Add");
+            $('#formModa').modal('show');
+        });
+
+        $('#sample_for').on('submit', function(event){
+            event.preventDefault();
+            if($('#actio').val() == 'Add')
+            {
+                $.ajax({
+                    url:"{{ route('teamAjax.store', ['id' => $project->id_project]) }}) }}",
+                    // url:"/teamAjax/"+id,
+                    method:"POST",
+                    data: new FormData(this),
+                    contentType: false,
+                    cache:false,
+                    processData: false,
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        var html = '';
+                        if(data.errors)
+                        {
+                            html = '<div class="alert alert-danger">';
+                            for(var count = 0; count < data.errors.length; count++)
+                            {
+                                html += '<p>' + data.errors[count] + '</p>';
+                            }
+                            html += '</div>';
+                        }
+                        if(data.success)
+                        {
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#sample_fo')[0].reset();
+                            $('#team_table').DataTable().ajax.reload();
+                        }
+                        $('#form_resul').html(html);
+                    }
+                })
+            }
+
+            if($('#actio').val() == "Edit")
+            {
+                $.ajax({
+                    url:"{{ route('teamAjax.update') }}",
+                    method:"POST",
+                    data:new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        var html = '';
+                        if(data.errors)
+                        {
+                            html = '<div class="alert alert-danger">';
+                            for(var count = 0; count < data.errors.length; count++)
+                            {
+                                html += '<p>' + data.errors[count] + '</p>';
+                            }
+                            html += '</div>';
+                        }
+                        if(data.success)
+                        {
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#sample_fo')[0].reset();
+                            // $('#store_image').html('');
+                            $('#team_table').DataTable().ajax.reload();
+                        }
+                        $('#form_resul').html(html);
+                    }
+                });
             }
         });
 
+        $(document).on('click', '.edit', function(){
+            var id = $(this).attr('id');
+            console.log(id);
+            $('#form_resul').html('');
+            $.ajax({
+                url:"/teamAjax/"+id+"/edit",
+                dataType:"json",
+                success:function(html){
+                    $('#id_team_projects').val(html.data.id_team_projects);
+                    $('#project_id').val(html.data.project_id);
+                    $('#user_id').val(html.data.user_id);
+                    $('#hidden_id').val(html.data.id_team_projects);
+                    $('.modal-titl').text("Edit New Record");
+                    $('#action_butto').val("Edit");
+                    $('#actio').val("Edit");
+                    $('#formModa').modal('show');
+                }
+            })
+        });
+
+        var user_id;
+
+        $(document).on('click', '.delete', function(){
+            id_team_projects = $(this).attr('id');
+            $('#confirmModa').modal('show');
+        });
+
+        $('#ok_butto').click(function(){
+            $.ajax({
+                url:"/teamAjax/destroy/"+id_team_projects,
+                beforeSend:function(){
+                    $('#ok_butto').text('OK');
+                },
+                success:function(data)
+                {
+                    setTimeout(function(){
+                        $('#confirmModa').modal('hide');
+                        $('#team_table').DataTable().ajax.reload();
+                    }, 20);
+                }
+            })
+        });
 
     });
 </script>
@@ -231,54 +413,6 @@
     });
 
     $('#demoSelect').select2();
-</script>
-
-<script type="text/javascript">
-    var data = {
-        labels: ["Januari", "Februari", "Maret", "April", "Mei"],
-        datasets: [
-            {
-                label: "My First timeline",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56]
-            },
-            {
-                label: "My Second timeline",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86]
-            }
-        ]
-    };
-    var pdata = [
-        {
-            value: 300,
-            color: "#46BFBD",
-            highlight: "#5AD3D1",
-            label: "Complete"
-        },
-        {
-            value: 50,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
-            label: "In-Progress"
-        }
-    ]
-
-    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(data);
-
-    var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-    var pieChart = new Chart(ctxp).Pie(pdata);
 </script>
 
 <script type="text/javascript">
@@ -325,29 +459,7 @@
     }
 
 </script>
-<!-- Delete Alert -->
-<!-- <script>
-  $(".delete").on("submit", function(){
-      return confirm("Are you sure want to delete?");
-  });
-</script> -->
 
-<!-- Fullscreen -->
-<!-- <script>
-  var elem = document.getElementById("fullscreen");
-  function openFullscreen() {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  }
-</script>
- --><!-- Show more -->
 <script type="text/javascript">
     $(".show-more a").on("click", function() {
         var $this = $(this);

@@ -12,7 +12,7 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body table-responsive">
-          <table class="table table-hover table-bordered" id="sampleTable">
+          <table class="table table-hover table-bordered" id="timesheet_table">
             <a href="{{url('/timesheets/create')}}" class="btn btn-primary mb-3 mr-2"> <i class="fa fa-plus"></i>Add Timesheet</a>
 
             

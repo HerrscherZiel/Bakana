@@ -153,12 +153,6 @@
       });
     });
   </script>
- <!--  <script type="text/javascript">
-    $("#ide").change(function() {
-    $("#startDate").val($(this).val());
-    }).change(); 
-  </script> -->
-
   <!-- datepicker -->
   <script type="text/javascript">
     $(document).ready(function(){
@@ -237,6 +231,33 @@ document.querySelector("#date").value = today;
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script type="text/javascript">$('#timesheet_table').DataTable({
+  dom: 'Bfrtip',
+            buttons: [
+                 'excel', 'pdf', 'print'
+            ],
+            initComplete: function () {
+            this.api().columns([0,1]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.header() ))
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+            "order": [[ 2, "desc" ]]
+});</script>
 <!-- Calendar-->
 <script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/jquery-ui.custom.min.js')}}"></script>
@@ -286,8 +307,29 @@ document.querySelector("#date").value = today;
             serverSide: true,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'excel', 'pdf', 'print'
+                 'excel', 'pdf', 'print'
             ],
+            initComplete: function () {
+            this.api().columns([0]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.header() ))
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+            "order": [[ 1, "desc" ]],
             ajax:{
                 url: "{{ route('timesheets.test') }}",
             },
@@ -412,7 +454,7 @@ document.querySelector("#date").value = today;
                 success:function(html){
                     $('#id_timesheets').val(html.data.id_timesheets);
                     $('#project').val(html.data.project);
-                    $(date("d M Y", strtotime('#tgl_timesheet').val(html.data.tgl_timesheet)));
+                    $('#tgl_timesheet').val(html.data.tgl_timesheet);
                     $('#jam_mulai').val(html.data.jam_mulai);
                     $('#jam_selesai').val(html.data.jam_selesai);
                     $('#keterangan_timesheet').val(html.data.keterangan_timesheet);
