@@ -280,9 +280,20 @@ class TeamProjectController extends Controller
                 ->getQuery()
                 ->get())
                 ->addColumn('action', function($data){
-                    $button /*.*/= '<button type="button" name="delete" id="'.$data->id_team_projects.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                    if (Auth::user()->hasRole('Project Manager')) {
 
-                    return $button;
+                        $button /*.*/ = '<button type="button" name="delete" id="' . $data->id_team_projects . '" class="delete btn btn-danger btn-sm">Delete</button>';
+                        return $button;
+                    }
+
+                    else {
+
+                        $button /*.*/ = '<button type="button" name="delete" id="' . $data->id_team_projects . '" class="delete btn btn-danger btn-sm" disabled>Delete</button>';
+                        return $button;
+
+                    }
+
+
                 })
                 ->rawColumns(['action'])
                 ->make(true);

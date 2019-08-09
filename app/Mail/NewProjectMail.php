@@ -36,13 +36,7 @@ class NewProjectMail extends Mailable
         $pro    = $this->projects;
         $usher  = $this->user;
 
-        /*$ulser = User::all()->where('id','=', $usher);
-            ->select('name')
-            ->getQuery()
-            ->get();*/
 
-
-//        dd($pro);
 
         return $this->from('magangbtv19@gmail.com')
             ->view('emailProject')

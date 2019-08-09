@@ -18,18 +18,14 @@ class RoleController extends Controller
     public function index()
     {
         Session::put('title', 'Dashboard Role');
-        //
-//        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
         if (Auth::user()->hasRole('Project Manager')) {
             $role = Role::orderBy('id_role', 'asc')->paginate(10);
             return view('role.index')->with('role', $role);
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
-
 
     }
 
@@ -41,13 +37,11 @@ class RoleController extends Controller
     public function create()
     {
         Session::put('title', 'Create Role');
-        //
         if (Auth::user()->hasRole('Project Manager')) {
             return view('role.create');
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
     }
@@ -66,7 +60,6 @@ class RoleController extends Controller
             'ket' => 'nullable'
         ]);
 
-        // $this->user_id = auth()->user()->id;
         $role = new Role([
             'nama_role' => $request->get('nama_role'),
             'keterangan'=> $request->get('keterangan')
@@ -99,10 +92,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         Session::put('title', 'Edit Role');
-        //
-        /*$ticket = Ticket::where('user_id', auth()->user()->id)
-            ->where('id', $id)
-            ->first();*/
+
         if (Auth::user()->hasRole('Project Manager')) {
             $role = Role::findOrFail($id);
             return view('role.edit')->with('role', $role);
@@ -110,7 +100,6 @@ class RoleController extends Controller
 
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -160,7 +149,6 @@ class RoleController extends Controller
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
     }

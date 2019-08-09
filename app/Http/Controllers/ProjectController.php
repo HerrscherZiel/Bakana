@@ -26,9 +26,7 @@ class ProjectController extends Controller
 
         $project = Project::all();
         $project = Project::where('status','!=', 4)->orderBy('id_project','desc')->paginate(20);
-//        $projects = Project::where('status','!=', 4)->where('')
 
-//        dd($project);
 
             return view('project.index')->with('project', $project);
 
@@ -41,18 +39,11 @@ class ProjectController extends Controller
     public function completedProject()
     {
         Session::put('title', 'Completed Project');
-        //
-//        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
 
         $project = Project::all();
         $project = Project::where('status','=', 4)->orderBy('id_project','desc')->paginate(20);
 
-//        dd($project);
-
         return view('project.projectComplete')->with('project', $project);
-
-
-//        return view('project.index', compact('project', 'module'));
     }
 
     /**
@@ -63,15 +54,12 @@ class ProjectController extends Controller
     public function create()
     {
         Session::put('title', 'Create Project');
-        // replace the point from the european date format with a dash
-        
-        //
+
         if (Auth::user()->hasRole('Project Manager')) {
             return view('project.create');
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
     }
@@ -85,7 +73,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
             $request->validate( [
             'kode_project'=>'required',
             'nama_project'=>'required',
@@ -94,9 +81,7 @@ class ProjectController extends Controller
             'status'=>'required|integer',
             'ket' => 'nullable'
         ]);
-//        dd($request->all());
 
-        // $this->user_id = auth()->user()->id;
         $project = new Project([
             'kode_project' => $request->get('kode_project'),
             'nama_project'=> $request->get('nama_project'),
@@ -123,8 +108,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         Session::put('title', 'Detail Project');
-        // dd($id);
-        //
+
         $project = Project::findOrFail($id);
         $module = Module::join('project', 'project_id', '=', 'id_project')
             ->select('module.*')
@@ -132,24 +116,7 @@ class ProjectController extends Controller
             ->getQuery()
             ->get();
 
-
-
-//        dd($a);
-
-//        if(count($module) < 1){
-//            return view('home')->with(abort(404, 'Unauthorized action.'));
-//
-//        }
-
-//            if(count($module) <= 0){
-//                exit();
-//            }
-
-//        dd($module);
-
             return view('project.show', compact('project', 'module'));
-
-
     }
 
     /**
@@ -161,27 +128,14 @@ class ProjectController extends Controller
     public function edit($id)
     {
         Session::put('title', 'Edit Project');
-        //
         $a = false;
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::findOrFail($id);
 
-//            $aa = Project::findOrFail($id)->id_project;
-
-//            dd($aa);
-
-//            $b = 0;
-//            if($aa < $b){ $a = true;}
-
-//            if($aa <= $b){
-//                return view('home')->with(abort(404, 'Unauthorized action.'));
-//
-//            }
             return view('project.edit')->with('project', $project);
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
     }
@@ -228,7 +182,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::find($id);
             $project->delete();
@@ -237,7 +190,6 @@ class ProjectController extends Controller
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -246,7 +198,6 @@ class ProjectController extends Controller
     {
 
             return view('back');
-
 
     }
 

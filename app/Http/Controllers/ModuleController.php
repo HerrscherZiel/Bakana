@@ -34,12 +34,10 @@ class ModuleController extends Controller
                 ->where('module.status', '!=', 4)
                 ->getQuery()
                 ->get();
-//            dd($module);
             return view('module.index')->with('module', $module);
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -50,7 +48,6 @@ class ModuleController extends Controller
     public function indexes($id)
     {
         Session::put('title', 'Dashboard Modul');
-        //
         $project = Project::findOrFail($id);
 
         $module = Module::join('project', 'project_id', '=', 'id_project')
@@ -64,13 +61,10 @@ class ModuleController extends Controller
     }
 
 
-    // Completed Module
-
     public function completedModule()
     {
         Session::put('title', 'Completed Module');
-        //
-//        $project =  Project::orderBy('id_project', 'asc')->paginate(10);
+
         if (Auth::user()->hasRole('Project Manager')) {
 
             $module = Module::join('project', 'project_id', '=', 'id_project')
@@ -87,10 +81,8 @@ class ModuleController extends Controller
 
 
     else{
-        //Tambah warning
         return view('home')->with(abort(403, 'Unauthorized action.'));
     }
-
 
     }
 
@@ -112,7 +104,6 @@ class ModuleController extends Controller
                 ->getQuery()
                 ->get();
 
-//            dd($mod);
 
             $project = Project::all()->where('status', '!=', 4)
             ;
@@ -121,7 +112,6 @@ class ModuleController extends Controller
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
     }
@@ -129,7 +119,7 @@ class ModuleController extends Controller
     public function creates($id)
     {
         Session::put('title', 'Create Modul');
-        //
+
         if (Auth::user()->hasRole('Project Manager')) {
             $project = Project::find($id);
             $mod = Project::join('team_projects','project.id_project','=','team_projects.project_id')
@@ -140,12 +130,10 @@ class ModuleController extends Controller
                 ->getQuery()
                 ->get();
 
-            /*dd($project);*/
             return view('module.creates', compact('project','mod'))/*->with('project', $project, 'mod', $mod)*/;
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -187,9 +175,6 @@ class ModuleController extends Controller
 
         return redirect('modules')->with('success', 'Module Berhasil Dibuat');
     }
-
-
-    // stores
 
     public function stores(Request $request)
     {
@@ -236,27 +221,17 @@ class ModuleController extends Controller
             ->getQuery()
             ->get();
 
-        /*$modules = $module;*/
-        /*$project = Project::all();*/
         $job = Job::join('module', 'module_id', '=', 'id_module')
             ->select('jobs.*','module.nama_module')
             ->where('module.id_module', '=', $id )
             ->getQuery()
             ->get();
-        /*$job = Job::all();*/
-        /*dd($job);*/
 
         $mod = Module::findOrFail($id);
-//
-//        if($mod < 1){
-//            return view('home')->with(abort(404, 'Unauthorized action.'));
-//
-//        }
 
             return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
 
 
-//        return view('module.show', compact('module','job','mod'))/*->with('module',$module)*//*->with('module', $job)*/;
     }
 
     /**
@@ -274,36 +249,24 @@ class ModuleController extends Controller
             $module     = Module::findOrFail($id);
             $user       = User::all();
 
-//            if($module < 1){
-//                return view('home')->with(abort(404, 'Unauthorized action.'));
-//
-//            }
+
             return view('module.edit', compact('module', 'project', 'user'));
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
     }
 
-    //Edit Show Project
-
     public function editShowProject($id)
     {
         Session::put('title', 'Edit Modul');
-        //
 
 
         $aa = Module::findOrFail($id)->user;
 
         $as = auth()->user()->name;
-
-//        $as = $mo->user;
-
-//        dd($aa);
-
 
         if (Auth::user()->hasRole('Project Manager')) {
             $project    = Project::all();
@@ -323,9 +286,6 @@ class ModuleController extends Controller
 
         elseif ( $aa === $as){
 
-
-//            $aa = Module::find($id)->user;
-//            $as = auth()->user()->name;
             $project    = Project::all();
             $module     = Module::find($id);
             $user       = User::join('team_projects','users.id','=','team_projects.user_id')
@@ -337,12 +297,11 @@ class ModuleController extends Controller
                 ->getQuery()
                 ->get();
 
-            return view('module.editUser', compact('module', 'project', 'user'/*, 'aa', 'as'*/));
+            return view('module.editUser', compact('module', 'project', 'user'));
 
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
@@ -385,7 +344,6 @@ class ModuleController extends Controller
     }
 
 
-    // updates
 
     public function updates(Request $request, $id)
     {
@@ -424,7 +382,7 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+
         if (Auth::user()->hasRole('Project Manager')) {
             $module = Module::find($id);
             $module->delete();
@@ -433,7 +391,6 @@ class ModuleController extends Controller
         }
 
         else{
-            //Tambah warning
             return view('home')->with(abort(403, 'Unauthorized action.'));
         }
 
