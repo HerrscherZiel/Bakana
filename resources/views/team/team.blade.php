@@ -45,22 +45,21 @@
             </div>
             <div class="modal-body">
                 <span id="form_resul"></span>
-                <form method="post" id="sample_fo" class="form-horizontal" enctype="multipart/form-data">
+                <form method="post" id="sample_form" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
+                    <div class="tile-body">
                     <div class="form-group">
                             <input type="hidden" name="id_team_projects" id="id_team_projects" class="form-control" />
                             <select style="display: none;" class="form-control" name="project_id" id="project_id" required="">
                                 <option value="{{$project->id_project}}" selected>{{$project->nama_project}}</option>
                             </select>
-                    </div>
-
-                    <div class="form-group">
-                        <select class="form-control" name="user_id" id="user_id" required>
+                        <select class="form-control" name="user_id" id="user_id" style="width: 100%" required>
                             @foreach($user as $users)
                                 <option value="{{$users->id}}">{{$users->name}}</option>
                             @endforeach
                         </select>
                     </div>
+                </div>
                      <div class="modal-footer">
                         <input type="hidden" name="actio" id="actio" />
                         <input type="hidden" name="hidden_id" id="hidden_id" />

@@ -28,7 +28,7 @@
                   <input class="form-control" type="text" name="nama_job" placeholder="Nama Job">
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="user" required="">
+                    <select id="user_id" class="form-control" name="user" required="">
                         <option value="" disabled selected="">Select User</option>
                        @foreach($mod as $mods)
                         <option value="{{$mods->name}}">{{$mods->name}}</option>

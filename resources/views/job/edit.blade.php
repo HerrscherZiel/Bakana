@@ -24,7 +24,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Module</label>
-                    <select id="ide" class="form-control" name="module_id" required="">
+                    <select id="select_modul" class="form-control" name="module_id" required="">
                        @foreach($module as $modules)
                         <option value="{{$modules->id_module}}"
                                 @if($modules->id_module === $job->module_id)
@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">User</label>
-                    <select class="form-control" name="user" required="">
+                    <select id="user_id" class="form-control" name="user" required="">
                        @foreach($user as $users)
                         <option value="{{$users->name}}"
                                 @if($job->user === $users->name)

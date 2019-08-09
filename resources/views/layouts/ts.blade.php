@@ -305,6 +305,7 @@ document.querySelector("#date").value = today;
         $('#team_table').DataTable({
             processing: true,
             serverSide: true,
+            "searching": false,
             ajax:{
                 url: "{{ route('team.ajax', ['id' => $project->id_project] ) }}",
             },
@@ -344,7 +345,7 @@ document.querySelector("#date").value = today;
             $('#formModa').modal('show');
         });
 
-        $('#sample_for').on('submit', function(event){
+        $('#sample_form').on('submit', function(event){
             event.preventDefault();
             if($('#actio').val() == 'Add')
             {
@@ -372,7 +373,7 @@ document.querySelector("#date").value = today;
                         if(data.success)
                         {
                             html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#sample_fo')[0].reset();
+                            $('#sample_form')[0].reset();
                             $('#team_table').DataTable().ajax.reload();
                         }
                         $('#form_resul').html(html);
@@ -405,7 +406,7 @@ document.querySelector("#date").value = today;
                         if(data.success)
                         {
                             html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#sample_fo')[0].reset();
+                            $('#sample_form')[0].reset();
                             // $('#store_image').html('');
                             $('#team_table').DataTable().ajax.reload();
                         }

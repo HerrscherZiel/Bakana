@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">User</label>
-                        <select class="form-control" name="user" required="">
+                        <select id="user_id" class="form-control" name="user" required="">
                             @foreach($user as $users)
                                 <option value="{{$users->name}}"
                                         @if($job->user === $users->name)

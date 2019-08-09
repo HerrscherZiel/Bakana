@@ -129,6 +129,14 @@
       placeholder: 'Pilih User',
       allowClear: true
     });
+    $('#select_modul').select2({
+      placeholder: 'Pilih Modul',
+      allowClear: true
+    });
+    $('#select_project').select2({
+      placeholder: 'Pilih Project',
+      allowClear: true
+    });
       $('button.delete-btn').on('click', function(e){
       event.preventDefault();
       var self = $(this);

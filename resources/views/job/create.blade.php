@@ -17,7 +17,7 @@
             <div class="tile-body">
                 <div class="form-group">
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <select class="form-control" name="module_id" required="">
+                    <select id="select_modul" class="form-control" name="module_id" required="">
                         <option disabled="" selected="">Pilih Modul</option>
                         @foreach($module as $modules)
                         <option value="{{$modules->id_module}}">{{$modules->nama_module}}</option>
@@ -28,7 +28,7 @@
                   <input class="form-control" type="text" name="nama_job" placeholder="Nama Job">
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="user" required="">
+                    <select class="form-control" name="user" id="user_id" required="">
                         <option value="" disabled selected="">Pilih User</option>
                     @foreach($mod as $mods)
                         <option value="{{$mods->name}}">{{$mods->name}}</option>

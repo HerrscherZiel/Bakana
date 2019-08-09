@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="control-label">Project</label>
                     <input type="hidden" value="{{csrf_token()}}" name="_token" />
-                    <select class="form-control" name="project_id" required="">
+                    <select id="select_project" class="form-control" name="project_id" required="">
                         <option value="" disabled>Select Project</option>
                         @foreach($project as $projects)
                             <option value="{{$projects->id_project}}"
@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">User</label>
-                    <select class="form-control" name="user" required="">
+                    <select id="user_id" class="form-control" name="user" required="">
                         @foreach($user as $users)
                             <option value="{{$users->name}}"
                             @if($users->name === $module->user)
