@@ -35,7 +35,7 @@
                       <td>
                     <div class="btn-group">
 
-                        <a href="/team/{{$teams->project_id}}" class="btn btn-primary">Show Team</a>
+                        <a href="/teamAjax/{{$teams->project_id}}" class="btn btn-primary">Show Team</a>
 
                         @if(Auth::user()->hasRole('Project Manager'))
                             <form class="delete" action="{{ route('teamprojects.destroy', $teams->id_team_projects)}}" method="post">
