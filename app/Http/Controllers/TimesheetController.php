@@ -406,6 +406,7 @@ class TimesheetController extends Controller
 
         $form_data = array(
             'id_timesheets'         =>  $request->id_timesheets,
+            'project'               =>  $request->project,
             'tgl_timesheet'         =>  $request->tgl_timesheet,
             'jam_mulai'             =>  $request->jam_mulai,
             'jam_selesai'           =>  $request->jam_selesai,

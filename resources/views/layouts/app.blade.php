@@ -412,7 +412,7 @@ document.querySelector("#date").value = today;
                 success:function(html){
                     $('#id_timesheets').val(html.data.id_timesheets);
                     $('#project').val(html.data.project);
-                    $(date("d M Y", strtotime('#tgl_timesheet').val(html.data.tgl_timesheet)));
+                    $('#tgl_timesheet').val(html.data.tgl_timesheet);
                     $('#jam_mulai').val(html.data.jam_mulai);
                     $('#jam_selesai').val(html.data.jam_selesai);
                     $('#keterangan_timesheet').val(html.data.keterangan_timesheet);
