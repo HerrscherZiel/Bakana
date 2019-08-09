@@ -84,5 +84,4 @@
       </div>
     </div>
 </div>
-<!-- <script type="text/javascript" src="{{URL::asset('js/include/jquery-1.9.0.min.js')}}"></script> -->
 @endsection

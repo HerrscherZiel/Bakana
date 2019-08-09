@@ -13,6 +13,7 @@
     
     <link rel="stylesheet" type="text/css" href="{{URL::asset('js/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{URL::asset('js/jquery.ui.timepicker.css')}}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/font-awesome.min.css')}}">
@@ -228,6 +229,13 @@ document.querySelector("#date").value = today;
 <!-- Data table plugin-->
 <script type="text/javascript" src="{{URL::asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <!-- Calendar-->
 <script type="text/javascript" src="{{URL::asset('js/plugins/moment.min.js')}}"></script>
@@ -269,6 +277,180 @@ document.querySelector("#date").value = today;
   
   });
 </script>
+
+<script>
+    $(document).ready(function(){
+
+        $('#user_table').DataTable({
+            processing: true,
+            serverSide: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf', 'print'
+            ],
+            ajax:{
+                url: "{{ route('timesheets.test') }}",
+            },
+            columns:[
+
+                // {
+                //     data: 'id_timesheets',
+                //     name: 'id_timesheets'
+                // },
+                {
+                    data: 'project',
+                    name: 'project'
+                },
+                {
+                    data: 'tgl_timesheet',
+                    name: 'tgl_timesheet'
+                },
+                {
+                    data: 'jam_mulai',
+                    name: 'jam_mulai'
+                },
+                {
+                    data: 'jam_selesai',
+                    name: 'jam_selesai'
+                },
+                {
+                    data: 'keterangan_timesheet',
+                    name: 'keterangan_timesheet'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                }
+            ]
+        });
+
+        $('#create_record').click(function(){
+            $('.modal-title').text("Add Time");
+            $('#action_button').val("Add");
+            $('#action').val("Add");
+            $('#formModal').modal('show');
+        });
+
+        $('#sample_form').on('submit', function(event){
+            event.preventDefault();
+            if($('#action').val() == 'Add')
+            {
+                $.ajax({
+                    url:"{{ route('timesheets.store') }}",
+                    method:"POST",
+                    data: new FormData(this),
+                    contentType: false,
+                    cache:false,
+                    processData: false,
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        var html = '';
+                        if(data.errors)
+                        {
+                            html = '<div class="alert alert-danger">';
+                            for(var count = 0; count < data.errors.length; count++)
+                            {
+                                html += '<p>' + data.errors[count] + '</p>';
+                            }
+                            html += '</div>';
+                        }
+                        if(data.success)
+                        {
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#sample_form')[0].reset();
+                            $('#user_table').DataTable().ajax.reload();
+                        }
+                        $('#form_result').html(html);
+                    }
+                })
+            }
+
+            if($('#action').val() == "Edit")
+            {
+                $.ajax({
+                    url:"{{ route('timesheetsAjax.update') }}",
+                    method:"POST",
+                    data:new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        var html = '';
+                        if(data.errors)
+                        {
+                            html = '<div class="alert alert-danger">';
+                            for(var count = 0; count < data.errors.length; count++)
+                            {
+                                html += '<p>' + data.errors[count] + '</p>';
+                            }
+                            html += '</div>';
+                        }
+                        if(data.success)
+                        {
+                            html = '<div class="alert alert-success">' + data.success + '</div>';
+                            $('#sample_form')[0].reset();
+                            // $('#store_image').html('');
+                            $('#user_table').DataTable().ajax.reload();
+                        }
+                        $('#form_result').html(html);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '.edit', function(){
+            var id = $(this).attr('id');
+            console.log(id);
+            $('#form_result').html('');
+            $.ajax({
+                url:"/timesheetsAjax/"+id+"/edit",
+                dataType:"json",
+                success:function(html){
+                    $('#id_timesheets').val(html.data.id_timesheets);
+                    $('#project').val(html.data.project);
+                    $(date("d M Y", strtotime('#tgl_timesheet').val(html.data.tgl_timesheet)));
+                    $('#jam_mulai').val(html.data.jam_mulai);
+                    $('#jam_selesai').val(html.data.jam_selesai);
+                    $('#keterangan_timesheet').val(html.data.keterangan_timesheet);
+                    $('#hidden_id').val(html.data.id_timesheets);
+                    $('.modal-title').text("Edit Timesheet");
+                    $('#action_button').val("Edit");
+                    $('#action').val("Edit");
+                    $('#formModal').modal('show');
+                }
+            })
+        });
+
+        var user_id;
+
+        $(document).on('click', '.delete', function(){
+            id_timesheets = $(this).attr('id');
+            $('#confirmModal').modal('show');
+        });
+
+        $('#ok_button').click(function(){
+            $.ajax({
+                url:"timesheetsAjax/destroy/"+id_timesheets,
+                beforeSend:function(){
+                    $('#ok_button').text('OK');
+                },
+                success:function(data)
+                {
+                    setTimeout(function(){
+                        $('#confirmModal').modal('hide');
+                        $('#user_table').DataTable().ajax.reload();
+                    }, 2000);
+                }
+            })
+        });
+
+    });
+</script>
+
 <script type="text/javascript">
     $('.input-daterange input').each(function() {
         $(this).datepicker('clearDates'); 

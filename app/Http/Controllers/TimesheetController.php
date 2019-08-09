@@ -21,9 +21,6 @@ class TimesheetController extends Controller
     {
         Session::put('title', 'Dashboard Timesheet');
         //
-
-
-
         $timesheet = Timesheet::join('users', 'users.id', '=', 'timesheets.user_id')
             /*->join('team_projects','team_projects.user_id','=','users.id')*/
             /*->join('project','project.id_project','=','team_projects.project_id')*/
@@ -94,8 +91,6 @@ class TimesheetController extends Controller
         /*dd($timesheet);*/
 
         return view('timesheet.create', compact(/*'user',*/'usher'/*,'date'*/));
-
-
     }
 
     /**
@@ -106,6 +101,7 @@ class TimesheetController extends Controller
      */
 
     public function test(){
+        Session::put('title', 'Dashboard Timesheet');
 
         $usher = User::join('team_projects','team_projects.user_id','=','users.id')
             ->join('project','project.id_project','=','team_projects.project_id')
@@ -124,9 +120,9 @@ class TimesheetController extends Controller
                 ->getQuery()
                 ->get())
                 ->addColumn('action', function($data){
-                    $button = '<button type="button" name="edit" id="'.$data->id_timesheets.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" id="'.$data->id_timesheets.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                    $button = '<a name="edit" id="'.$data->id_timesheets.'" class="edit btn btn-info btn-sm" style="color: #FFF" value="Edit"><i class="fa fa-lg fa-edit" style="margin:0">
+                            </i></a>';
+                    $button .= '<a name="delete" id="'.$data->id_timesheets.'" class="delete btn btn-danger btn-sm" style="color: #FFF;margin-left: -2px" value="Delete"><i class="fa fa-lg fa-trash" style="margin:0"></a>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -194,13 +190,13 @@ class TimesheetController extends Controller
             'jam_mulai'                 =>  $request->jam_mulai,
             'jam_selesai'               =>  $request->jam_selesai,
             'keterangan_timesheet'      =>  $request->keterangan_timesheet,
-            'project'      =>  $request->project,
+            'project'                   =>  $request->project,
             'user_id'                   =>  auth()->user()->id
         );
 
         Timesheet::create($form_data);
 
-        return response()->json(['success' => 'Data Added successfully.']);
+        return response()->json(['success' => 'Timesheet berhasil ditambahkan.']);
     }
 
     /**

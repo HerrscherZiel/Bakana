@@ -1,122 +1,78 @@
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel 5.8 - DataTables Server Side Processing using Ajax</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <br />
-    <h3 align="center">Timesheet</h3>
-    <br />
-    <div align="right">
-        <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create Record</button>
+@extends('layouts.app')
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body table-responsive">
+                <table class="table table-hover table-bordered" id="user_table">
+                    <a name="create_record" id="create_record" class="btn btn-primary mb-3 mr-2" style="color: #FFF"> <i class="fa fa-plus"></i>Add Timesheet</a>
+                    <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Tanggal</th>
+                        <th>Jam Mulai</th>
+                        <th>Jam Selesai</th>
+                        <th>Keterangan</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
-    <br />
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped" id="user_table">
-            <thead>
-            <tr>
-                <th width="10%">id</th>
-                <th width="35%">Project Name</th>
-                <th width="35%">tgl</th>
-                <th width="35%">jam mulai</th>
-                <th width="35%">jam selesai </th>
-                <th width="35%">keterangan timesheet</th>
-{{--                <th width="35%">User </th>--}}
-                <th width="30%">Action</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
-    <br />
-    <br />
 </div>
-</body>
-</html>
-
+ 
+<!-- Modal -->
 <div id="formModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Record</h4>
+              <h5 class="modal-title" >Add Timesheet</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
                 <span id="form_result"></span>
                 <form method="post" id="sample_form" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label class="control-label col-md-4" >ID timesheet</label>
-                        <div class="col-md-8">
+                    <div class="tile-body">
+                        <div class="form-group">
                             <input type="hidden" name="id_timesheets" id="id_timesheets" class="form-control" />
+                            <select class="form-control" name="project" id="project" required>
+                                @foreach($usher as $ushers)
+                                    <option value="{{$aa = $ushers->nama_project}}">{{$ushers->nama_project}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Project </label>
-                        <select class="form-control" name="project" id="project" required>
-                            @foreach($usher as $ushers)
-                                <option value="{{$aa = $ushers->nama_project}}">{{$ushers->nama_project}}</option>
-                            @endforeach
-                        </select>
-
-                        {{--<div class="col-md-8">
-                            <input type="hidden" name="project" id="project" value="{{$aa}}" class="form-control" />
-                        </div>--}}
-
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Tgl Timesheet </label>
-                        <div class="col-md-8">
-                            <input type="date" name="tgl_timesheet" id="tgl_timesheet" class="form-control" />
+                        <div class="form-group">
+                            <input type="text" id="date" data-provide="datepicker" class="form-control" name="tgl_timesheet" readonly="" required>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Jam Mulai </label>
-                        <div class="col-md-8">
-                            <input type="time" name="jam_mulai" id="jam_mulai" class="form-control" />
+                        <div class="form-group input-group">
+                            <input type="text" name="jam_mulai" id="timepicker_start" class="form-control" value="08:30" placeholder="Jam Mulai" required/>
+                            <div class="mt-2 ml-3 mr-2">sampai</div>
+                            <input type="text" name="jam_selesai" id="timepicker_end" class="form-control" value="17:00" placeholder="Jam Selesai" required/>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Jam Lesai </label>
-                        <div class="col-md-8">
-                            <input type="time" name="jam_selesai" id="jam_selesai" class="form-control" />
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" name="keterangan_timesheet"  id="keterangan_timesheet" placeholder="Keterangan" required autofocus></textarea>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" rows="4" name="keterangan_timesheet"  id="keterangan_timesheet" placeholder="Keterangan" required autofocus></textarea>
-                    </div>
-
-
-
-                    <br />
-                    <div class="form-group" align="center">
+                </div>
+                    <div class="modal-footer">
                         <input type="hidden" name="action" id="action" />
                         <input type="hidden" name="hidden_id" id="hidden_id" />
-                        <input type="submit" name="action_button" id="action_button" class="btn btn-warning" value="Add" />
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</button>
+                        <button name="action_button" id="action_button" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
+                        
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 <div id="confirmModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
+                <h3 class="modal-title">Confirmation</h3>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title">Confirmation</h2>
             </div>
             <div class="modal-body">
                 <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
@@ -128,173 +84,4 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function(){
-
-        $('#user_table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax:{
-                url: "{{ route('timesheets.test') }}",
-            },
-            columns:[
-
-                {
-                    data: 'id_timesheets',
-                    name: 'id_timesheets'
-                },
-                {
-                    data: 'project',
-                    name: 'project'
-                },
-                {
-                    data: 'tgl_timesheet',
-                    name: 'tgl_timesheet'
-                },
-                {
-                    data: 'jam_mulai',
-                    name: 'jam_mulai'
-                },
-                {
-                    data: 'jam_selesai',
-                    name: 'jam_selesai'
-                },
-                {
-                    data: 'keterangan_timesheet',
-                    name: 'keterangan_timesheet'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false
-                }
-            ]
-        });
-
-        $('#create_record').click(function(){
-            $('.modal-title').text("Add New Record");
-            $('#action_button').val("Add");
-            $('#action').val("Add");
-            $('#formModal').modal('show');
-        });
-
-        $('#sample_form').on('submit', function(event){
-            event.preventDefault();
-            if($('#action').val() == 'Add')
-            {
-                $.ajax({
-                    url:"{{ route('timesheets.store') }}",
-                    method:"POST",
-                    data: new FormData(this),
-                    contentType: false,
-                    cache:false,
-                    processData: false,
-                    dataType:"json",
-                    success:function(data)
-                    {
-                        var html = '';
-                        if(data.errors)
-                        {
-                            html = '<div class="alert alert-danger">';
-                            for(var count = 0; count < data.errors.length; count++)
-                            {
-                                html += '<p>' + data.errors[count] + '</p>';
-                            }
-                            html += '</div>';
-                        }
-                        if(data.success)
-                        {
-                            html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#sample_form')[0].reset();
-                            $('#user_table').DataTable().ajax.reload();
-                        }
-                        $('#form_result').html(html);
-                    }
-                })
-            }
-
-            if($('#action').val() == "Edit")
-            {
-                $.ajax({
-                    url:"{{ route('timesheetsAjax.update') }}",
-                    method:"POST",
-                    data:new FormData(this),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    dataType:"json",
-                    success:function(data)
-                    {
-                        var html = '';
-                        if(data.errors)
-                        {
-                            html = '<div class="alert alert-danger">';
-                            for(var count = 0; count < data.errors.length; count++)
-                            {
-                                html += '<p>' + data.errors[count] + '</p>';
-                            }
-                            html += '</div>';
-                        }
-                        if(data.success)
-                        {
-                            html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#sample_form')[0].reset();
-                            // $('#store_image').html('');
-                            $('#user_table').DataTable().ajax.reload();
-                        }
-                        $('#form_result').html(html);
-                    }
-                });
-            }
-        });
-
-        $(document).on('click', '.edit', function(){
-            var id = $(this).attr('id');
-            console.log(id);
-            $('#form_result').html('');
-            $.ajax({
-                url:"/timesheetsAjax/"+id+"/edit",
-                dataType:"json",
-                success:function(html){
-                    $('#id_timesheets').val(html.data.id_timesheets);
-                    $('#project').val(html.data.project);
-                    $('#tgl_timesheet').val(html.data.tgl_timesheet);
-                    $('#jam_mulai').val(html.data.jam_mulai);
-                    $('#jam_selesai').val(html.data.jam_selesai);
-                    $('#keterangan_timesheet').val(html.data.keterangan_timesheet);
-                    $('#hidden_id').val(html.data.id_timesheets);
-                    $('.modal-title').text("Edit New Record");
-                    $('#action_button').val("Edit");
-                    $('#action').val("Edit");
-                    $('#formModal').modal('show');
-                }
-            })
-        });
-
-        var user_id;
-
-        $(document).on('click', '.delete', function(){
-            id_timesheets = $(this).attr('id');
-            $('#confirmModal').modal('show');
-        });
-
-        $('#ok_button').click(function(){
-            $.ajax({
-                url:"timesheetsAjax/destroy/"+id_timesheets,
-                beforeSend:function(){
-                    $('#ok_button').text('Deleting...');
-                },
-                success:function(data)
-                {
-                    setTimeout(function(){
-                        $('#confirmModal').modal('hide');
-                        $('#user_table').DataTable().ajax.reload();
-                    }, 2000);
-                }
-            })
-        });
-
-    });
-</script>
+@endsection
