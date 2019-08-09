@@ -302,62 +302,30 @@ document.querySelector("#date").value = today;
 <script>
     $(document).ready(function(){
 
-        $('#user_table').DataTable({
+        $('#team_table').DataTable({
             processing: true,
             serverSide: true,
-            dom: 'Bfrtip',
-            buttons: [
-                 'excel', 'pdf', 'print'
-            ],
-            initComplete: function () {
-            this.api().columns([0]).every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.header() ))
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        },
-            "order": [[ 1, "desc" ]],
             ajax:{
-                url: "{{ route('timesheets.test') }}",
+                url: "{{ route('team.ajax', ['id' => $project->id_project] ) }}",
             },
+
             columns:[
 
                 // {
-                //     data: 'id_timesheets',
-                //     name: 'id_timesheets'
+                //     data: 'id_team_projects',
+                //     name: 'id_team_projects'
+                // },
+                // {
+                //     data: 'nama_project',
+                //     name: 'project_id',
                 // },
                 {
-                    data: 'project',
-                    name: 'project'
+                    data: 'name',
+                    name: 'user_id'
                 },
                 {
-                    data: 'tgl_timesheet',
-                    name: 'tgl_timesheet'
-                },
-                {
-                    data: 'jam_mulai',
-                    name: 'jam_mulai'
-                },
-                {
-                    data: 'jam_selesai',
-                    name: 'jam_selesai'
-                },
-                {
-                    data: 'keterangan_timesheet',
-                    name: 'keterangan_timesheet'
+                    data: 'nama_role',
+                    name: 'user_id'
                 },
                 {
                     data: 'action',
@@ -365,21 +333,24 @@ document.querySelector("#date").value = today;
                     orderable: false
                 }
             ]
+
         });
 
-        $('#create_record').click(function(){
-            $('.modal-title').text("Add Time");
-            $('#action_button').val("Add");
-            $('#action').val("Add");
-            $('#formModal').modal('show');
+
+        $('#create_team').click(function(){
+            $('.modal-titl').text("Add to Team");
+            $('#action_butto').val("Add");
+            $('#actio').val("Add");
+            $('#formModa').modal('show');
         });
 
-        $('#sample_form').on('submit', function(event){
+        $('#sample_for').on('submit', function(event){
             event.preventDefault();
-            if($('#action').val() == 'Add')
+            if($('#actio').val() == 'Add')
             {
                 $.ajax({
-                    url:"{{ route('timesheets.store') }}",
+                    url:"{{ route('teamAjax.store', ['id' => $project->id_project]) }}) }}",
+                    // url:"/teamAjax/"+id,
                     method:"POST",
                     data: new FormData(this),
                     contentType: false,
@@ -401,18 +372,18 @@ document.querySelector("#date").value = today;
                         if(data.success)
                         {
                             html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#sample_form')[0].reset();
-                            $('#user_table').DataTable().ajax.reload();
+                            $('#sample_fo')[0].reset();
+                            $('#team_table').DataTable().ajax.reload();
                         }
-                        $('#form_result').html(html);
+                        $('#form_resul').html(html);
                     }
                 })
             }
 
-            if($('#action').val() == "Edit")
+            if($('#actio').val() == "Edit")
             {
                 $.ajax({
-                    url:"{{ route('timesheetsAjax.update') }}",
+                    url:"{{ route('teamAjax.update') }}",
                     method:"POST",
                     data:new FormData(this),
                     contentType: false,
@@ -434,11 +405,11 @@ document.querySelector("#date").value = today;
                         if(data.success)
                         {
                             html = '<div class="alert alert-success">' + data.success + '</div>';
-                            $('#sample_form')[0].reset();
+                            $('#sample_fo')[0].reset();
                             // $('#store_image').html('');
-                            $('#user_table').DataTable().ajax.reload();
+                            $('#team_table').DataTable().ajax.reload();
                         }
-                        $('#form_result').html(html);
+                        $('#form_resul').html(html);
                     }
                 });
             }
@@ -447,22 +418,19 @@ document.querySelector("#date").value = today;
         $(document).on('click', '.edit', function(){
             var id = $(this).attr('id');
             console.log(id);
-            $('#form_result').html('');
+            $('#form_resul').html('');
             $.ajax({
-                url:"/timesheetsAjax/"+id+"/edit",
+                url:"/teamAjax/"+id+"/edit",
                 dataType:"json",
                 success:function(html){
-                    $('#id_timesheets').val(html.data.id_timesheets);
-                    $('#project').val(html.data.project);
-                    $('#tgl_timesheet').val(html.data.tgl_timesheet);
-                    $('#jam_mulai').val(html.data.jam_mulai);
-                    $('#jam_selesai').val(html.data.jam_selesai);
-                    $('#keterangan_timesheet').val(html.data.keterangan_timesheet);
-                    $('#hidden_id').val(html.data.id_timesheets);
-                    $('.modal-title').text("Edit Timesheet");
-                    $('#action_button').val("Edit");
-                    $('#action').val("Edit");
-                    $('#formModal').modal('show');
+                    $('#id_team_projects').val(html.data.id_team_projects);
+                    $('#project_id').val(html.data.project_id);
+                    $('#user_id').val(html.data.user_id);
+                    $('#hidden_id').val(html.data.id_team_projects);
+                    $('.modal-titl').text("Edit New Record");
+                    $('#action_butto').val("Edit");
+                    $('#actio').val("Edit");
+                    $('#formModa').modal('show');
                 }
             })
         });
@@ -470,29 +438,28 @@ document.querySelector("#date").value = today;
         var user_id;
 
         $(document).on('click', '.delete', function(){
-            id_timesheets = $(this).attr('id');
-            $('#confirmModal').modal('show');
+            id_team_projects = $(this).attr('id');
+            $('#confirmModa').modal('show');
         });
 
-        $('#ok_button').click(function(){
+        $('#ok_butto').click(function(){
             $.ajax({
-                url:"timesheetsAjax/destroy/"+id_timesheets,
+                url:"/teamAjax/destroy/"+id_team_projects,
                 beforeSend:function(){
-                    $('#ok_button').text('OK');
+                    $('#ok_butto').text('OK');
                 },
                 success:function(data)
                 {
                     setTimeout(function(){
-                        $('#confirmModal').modal('hide');
-                        $('#user_table').DataTable().ajax.reload();
-                    }, 2000);
+                        $('#confirmModa').modal('hide');
+                        $('#team_table').DataTable().ajax.reload();
+                    }, 20);
                 }
             })
         });
 
     });
 </script>
-
 <script type="text/javascript">
     $('.input-daterange input').each(function() {
         $(this).datepicker('clearDates'); 

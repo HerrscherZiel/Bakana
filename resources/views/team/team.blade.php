@@ -1,4 +1,4 @@
-@extends('layouts.err404')
+@extends('layouts.ts')
 @section('content')
 <div class="row">
     <div class="col-md-12">
