@@ -63,6 +63,7 @@ class TeamProjectController extends Controller
         return view('team.teamindex', compact('project', 'team_projects'));
     }
 
+//    public function indexAjax()
 
 
     // Disbanded Team
@@ -193,26 +194,13 @@ class TeamProjectController extends Controller
         return redirect('team/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
     }
 
-    public function storeFromShow(Request $request)
-    {
-        //
 
-        $request->validate( [
-
-
-            'user_id' => 'required|unique_with:team_projects,project_id',
-            'project_id' => 'required']);
-
-
-        $team_projects = new TeamProject();
-        $team_projects->user_id = $request->input('user_id');
-        $team_projects->project_id = $request->input('project_id');
-        $team_projects->save();
+    public function email($umail, $pro){
 
 
         $useremail = User::join('team_projects', 'team_projects.user_id', '=', 'users.id')
             ->select('users.email')
-            ->where('users.id' , '=', $request->input('user_id'))
+            ->where('users.id' , '=',$umail)
             ->groupBy('users.email')
             ->getQuery()
             ->get();
@@ -221,18 +209,70 @@ class TeamProjectController extends Controller
 
         $projects = Project::join('team_projects', 'team_projects.project_id', '=', 'project.id_project')
             ->select('project.nama_project')
-            ->where('project.id_project' , '=', $request->input('project_id'))
+            ->where('project.id_project' , '=', $pro)
             ->groupBy('project.nama_project')
             ->getQuery()
             ->get();
 
 //        dd($projects);
 
+        Mail::to($umail)->send(new NewProjectMail($pro));
 
-        Mail::to($useremail)->send(new NewProjectMail($projects));
 
 
-        return redirect('team/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
+    }
+
+    public function storeFromShow(Request $request)
+    {
+        //
+
+//        $request->validate( [
+//
+//
+//            'user_id' => 'required|unique_with:team_projects,project_id',
+//            'project_id' => 'required']);
+//
+//
+//        $team_projects = new TeamProject();
+//        $team_projects->user_id = $request->input('user_id');
+//        $team_projects->project_id = $request->input('project_id');
+//        $team_projects->save();
+//
+//
+        $request->validate( [
+
+
+            'user_id' => 'required|unique_with:team_projects,project_id',
+            'project_id' => 'required']);
+
+        $a = $request->user_id;
+        $b = $request->project_id;
+
+        $this->email($a, $b);
+
+
+
+
+//        return redirect('team/'.$team_projects->project_id)->with('success', 'Team Berhasil Ditambah');
+
+
+
+
+        $form_data = array(
+            'project_id'             =>  $request->project_id,
+            'user_id'                 =>  $request->user_id,
+
+        );
+
+
+
+
+
+        TeamProject::create($form_data);
+
+        return response()->json(['success' => 'Data Added successfully.']
+    );
+
     }
 
     /**
@@ -241,6 +281,43 @@ class TeamProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function showAjax($id){
+
+        $project = Project::findOrFail($id);
+//        $project = Project::find($id);
+        $role = Role::all();
+        $user = User::all();
+
+
+        if(request()->ajax())
+
+        {
+            return datatables()->of(TeamProject::join('users', 'users.id', '=', 'team_projects.user_id')
+                ->distinct('users.id')
+                ->join('project', 'project.id_project', '=', 'team_projects.project_id')
+                ->join('role', 'role.id_role', '=', 'users.role_id')
+                ->select('team_projects.*', 'users.name' ,'users.role_id', 'project.nama_project','role.nama_role')
+                ->where('project.id_project', '=', $id )
+                ->groupBy('users.name')
+                ->getQuery()
+                ->get())
+                ->addColumn('action', function($data){
+//                    $button = '<button type="button" name="edit" id="'.$data->id_team_projects.'" class="edit btn btn-primary btn-sm">Edit</button>';
+//                    $button .= '&nbsp;&nbsp;';
+
+
+                    $button /*.*/= '<button type="button" name="delete" id="'.$data->id_team_projects.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('team.team', compact('project', 'role', 'user'));
+
+    }
+
     public function show($id)
     {
         $project = Project::findOrFail($id);
@@ -257,24 +334,6 @@ class TeamProjectController extends Controller
 
         return view('team.show', compact('project', 'team_projects'));
 
-//        return response()->json([
-//            'project'       => $project,
-//            'team_projects' => $team_projects,
-//        ], 200);
-
-        $team_projects = TeamProject::query();
-        return DataTables::of($team_projects)
-            ->addColumn('action', function ($model) {
-                return view('layouts._action', [
-                    'model' => $model,
-                    'url_show' => route('user.show', $model->id),
-                    'url_edit' => route('user.edit', $model->id),
-                    'url_destroy' => route('user.destroy', $model->id)
-                ]);
-            })
-            ->addIndexColumn()
-            ->rawColumns(['action'])
-            ->make(true);
     }
 
     /**
@@ -306,6 +365,35 @@ class TeamProjectController extends Controller
     }
 
     //Edit from TeamProject
+
+    public function editAjax($id){
+
+        Session::put('title', 'Edit Team');
+        //
+        if (Auth::user()->hasRole('Project Manager')) {
+
+//            $user = User::all();
+//            $project = Project::all();
+//            $role = Role::all();
+
+            if(request()->ajax())
+            {
+                $data = TeamProject::findOrFail($id);
+                return response()->json(['data' => $data]);
+            }
+
+
+//            $team_projects = TeamProject::findOrFail($id);
+//            return view('team.edit_team_project_index', compact('team_projects', 'user', 'project', 'role'));
+
+        }
+
+        else{
+            //Tambah warning
+            return view('home')->with(abort(403, 'Unauthorized action.'));
+        }
+
+    }
 
     public function editTeamProject($id)
     {
@@ -355,6 +443,24 @@ class TeamProjectController extends Controller
 
     //Update editTeamProject
 
+    public function updateAjax(Request $request){
+
+        $request->validate( [
+            'project_id' => 'required|date',
+            'user_id' => 'required',
+        ]);
+
+        $form_data = array(
+//            'id_timesheets'         =>  $request->id_timesheets,
+            'project_id'         =>  $request->project_id,
+            'user_id'             =>  $request->user_id,
+        );
+
+        TeamProject::where('id_team_projects','=',$request->id_team_projects)->update($form_data);
+
+        return response()->json(['success' => 'Data is successfully updated']);
+    }
+
     public function updateTeamProject(Request $request, $id)
     {
         //
@@ -376,6 +482,18 @@ class TeamProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function destroyAjax($id){
+
+
+
+
+            $data = TeamProject::findOrFail($id);
+            $data->delete();
+
+    }
+
+
     public function destroy($id)
     {
         //

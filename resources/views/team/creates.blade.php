@@ -25,10 +25,10 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="user_id" id="user_id" required="">
-                        <optgroup label="Pilih User"> 
+                        <optgroup label="Pilih User">
                             @foreach($user as $users)
                                     <option value="{{$users->id}}">{{$users->name}}</option>
-                                    
+
                             @endforeach
                         </optgroup>
                     </select>

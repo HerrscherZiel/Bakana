@@ -88,13 +88,20 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/team/{project}','TeamProjectController@indexes');
 
-    Route::get('/team/{project}',['uses' => 'TeamProjectController@show', 'as' => 'team.show' ]);
+//    Route::get('/team/{project}',['uses' => 'TeamProjectController@show', 'as' => 'team.show' ]);
 
     Route::get('/team/{project}/edit','TeamProjectController@editTeamProject');
 
     Route::put('/team/{project}','TeamProjectController@updateTeamProject');
 
     Route::get('/disbandedTeam','TeamProjectController@disbandedTeam');
+
+
+    Route::get('/teamAjax/{project}','TeamProjectController@showAjax')->name('team.ajax');
+    Route::post('/teamAjax/{project}','TeamProjectController@storeFromShow')->name('teamAjax.store');
+    Route::get('/teamAjax/{team}/edit', 'TeamProjectController@editAjax')->name('teamAjax.edit');
+    Route::post('/teamAjax/update', 'TeamProjectController@updateAjax')->name('teamAjax.update');
+    Route::get('/teamAjax/destroy/{id}', 'TeamProjectController@destroyAjax')->name('teamAjax.destroy');
 
 
 // Module
